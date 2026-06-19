@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>თბილისის A კლასის საოფისე შენობები</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #0f1c2e;
+      --navy-light:  #162336;
+      --navy-mid:    #1a2b42;
+      --navy-border: #1e3a5f;
+      --navy-deep:   #0a1420;
+      --gold:        #c9a84c;
+      --gold-light:  #dfc278;
+      --gold-dim:    #8a6e2f;
+      --white:       #ffffff;
+      --text-primary:   #e8edf3;
+      --text-secondary: #8fa3bc;
+      --text-muted:     #5c7a96;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--navy);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 1px solid var(--navy-border);
+      padding: 52px 0 44px;
+    }
+
+    .header-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    header h1 {
+      font-size: clamp(22px, 4vw, 36px);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    header h1 span { color: var(--gold); }
+
+    .header-divider {
+      width: 48px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin: 14px 0;
+    }
+
+    .header-subtitle { font-size: 15px; color: var(--text-secondary); }
+
+    /* ── Main ── */
+    main { padding: 48px 0 80px; }
+
+    .section-eyebrow {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 20px;
+    }
+
+    /* ── KPI ── */
+    .kpi-section { margin-bottom: 40px; }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .kpi-card {
+      background: var(--navy-light);
+      border: 1px solid var(--navy-border);
+      border-top: 3px solid var(--gold);
+      border-radius: 6px;
+      padding: 28px 24px 24px;
+      transition: background 0.18s;
+    }
+
+    .kpi-card:hover { background: var(--navy-mid); }
+
+    .kpi-label { font-size: 12px; font-weight: 500; color: var(--text-secondary); margin-bottom: 8px; }
+
+    .kpi-value {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .kpi-unit { font-size: 13px; color: var(--gold-light); margin-top: 5px; }
+
+    /* ── View Tabs ── */
+    .view-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--navy-border);
+      padding-bottom: 0;
+    }
+
+    .tab-btn {
+      padding: 10px 22px;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-secondary);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      margin-bottom: -1px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .tab-btn:hover { color: var(--text-primary); }
+
+    .tab-btn.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    /* ── Cards Grid ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+
+    /* ── Building Card ── */
+    .card {
+      background: var(--navy-light);
+      border: 1px solid var(--navy-border);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      border-color: #2a527a;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    .card-image {
+      position: relative;
+      padding-bottom: 56.25%;
+      overflow: hidden;
+      background: #1a2d45;
+      flex-shrink: 0;
+    }
+
+    .card-image img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+
+    .card:hover .card-image img { transform: scale(1.04); }
+
+    .img-fallback {
+      position: absolute;
+      inset: 0;
+      background: #1a2d45;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .img-fallback span { color: var(--gold); font-size: 14px; font-weight: 600; line-height: 1.4; }
+
+    .card-body { padding: 22px 22px 20px; display: flex; flex-direction: column; flex: 1; }
+    .card-name { font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 5px; line-height: 1.3; }
+    .card-address { font-size: 13px; color: var(--text-secondary); margin-bottom: 14px; }
+    .card-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .card-notes { font-size: 13px; color: var(--text-muted); line-height: 1.65; flex: 1; margin-bottom: 10px; }
+    .card-offering { font-size: 12px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px; padding: 10px 12px; background: rgba(30,58,95,0.45); border-left: 2px solid var(--gold-dim); border-radius: 0 4px 4px 0; }
+    .card-offering-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 4px; }
+    .card-criteria { margin-bottom: 14px; }
+    .card-criteria-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 6px; }
+    .criteria-list { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 6px; }
+    .criteria-item { display: flex; align-items: baseline; gap: 4px; font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+    .crit-icon { flex-shrink: 0; width: 13px; font-size: 11px; }
+    .crit-icon.met { color: #4cba82; }
+    .crit-icon.notmet { color: #e05555; }
+    .crit-icon.nc { color: var(--text-muted); opacity: 0.45; }
+    .card-phone { font-size: 12px; color: var(--text-muted); margin-bottom: 14px; }
+    .card-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    /* ── Badges (shared) ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 11px;
+      border-radius: 20px;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .badge-district {
+      background: rgba(30,58,95,0.7);
+      color: var(--text-secondary);
+      border: 1px solid var(--navy-border);
+    }
+
+    .badge-aplus  { background: #e6b800; color: #1a1200; border: 1px solid #c9a200; }
+    .badge-a-premium { background: rgba(223,194,120,0.09); color: var(--gold-light); border: 1px solid rgba(223,194,120,0.24); }
+    .badge-a      { background: rgba(201,168,76,0.14); color: var(--gold); border: 1px solid rgba(201,168,76,0.35); }
+    .badge-aminus { background: rgba(160,140,90,0.13); color: #b0a070; border: 1px solid rgba(160,140,90,0.28); }
+    .badge-ba     { background: rgba(92,122,150,0.14); color: var(--text-secondary); border: 1px solid rgba(92,122,150,0.28); }
+
+    /* table badge: square corners */
+    .badge-sq { border-radius: 3px; }
+
+    .btn-gallery {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.15s;
+      align-self: flex-start;
+      text-decoration: none;
+    }
+
+    .btn-gallery:hover { background: rgba(201,168,76,0.11); }
+
+    .btn-website {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      background: transparent;
+      border: 1px solid var(--navy-border);
+      color: var(--text-secondary);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      align-self: flex-start;
+      text-decoration: none;
+    }
+
+    .btn-website:hover { background: rgba(30,58,95,0.6); border-color: #2a527a; color: var(--text-primary); }
+
+    /* ── Table View ── */
+    #view-table { display: none; }
+
+    .table-wrapper {
+      border-top: 1px solid var(--navy-border);
+      border-bottom: 1px solid var(--navy-border);
+      overflow: hidden;
+    }
+
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      table-layout: fixed;
+    }
+
+    col.col-building  { width: 13%; }
+    col.col-address   { width: 15%; }
+    col.col-district  { width: 9%; }
+    col.col-class     { width: 7%; }
+    col.col-notes     { width: 18%; }
+    col.col-web       { width: 11%; }
+    col.col-criteria  { width: 27%; }
+
+    thead {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background-color: var(--navy-deep);
+    }
+
+    thead th {
+      padding: 15px 20px;
+      text-align: left;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border-bottom: 2px solid var(--gold-dim);
+      white-space: nowrap;
+    }
+
+    thead th:first-child { padding-left: 32px; }
+    thead th:last-child  { padding-right: 32px; }
+
+    tbody tr:nth-child(odd)  { background-color: var(--navy); }
+    tbody tr:nth-child(even) { background-color: var(--navy-light); }
+
+    tbody tr {
+      border-bottom: 1px solid var(--navy-border);
+      transition: background 0.12s;
+    }
+
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background-color: rgba(201,168,76,0.06) !important; }
+
+    tbody td {
+      padding: 16px 20px;
+      color: var(--text-primary);
+      vertical-align: top;
+    }
+
+    tbody td:first-child { padding-left: 32px; }
+    tbody td:last-child  { padding-right: 32px; }
+
+    .td-building { font-weight: 600; color: var(--white); font-size: 14px; word-break: break-word; }
+    .td-address  { color: var(--text-secondary); font-size: 13px; word-break: break-word; }
+    .td-district { color: var(--text-secondary); font-size: 13px; word-break: break-word; }
+    .td-notes    { color: var(--text-secondary); font-size: 13px; line-height: 1.6; word-break: break-word; }
+    .td-web a { color: var(--gold-dim); font-size: 12px; text-decoration: none; word-break: break-all; }
+    .td-web a:hover { color: var(--gold); text-decoration: underline; }
+    .td-web span { color: var(--text-muted); font-size: 12px; }
+
+    /* ── Market Note ── */
+    .market-note {
+      background: var(--navy-light);
+      border: 1px solid var(--navy-border);
+      border-left: 3px solid var(--navy-border);
+      border-radius: 4px;
+      padding: 18px 22px;
+      margin-top: 48px;
+    }
+
+    .market-note p { font-size: 12.5px; color: var(--text-muted); line-height: 1.75; }
+    .market-note strong { color: var(--text-secondary); font-weight: 500; }
+
+    /* ── Criteria Section ── */
+    #view-criteria { display: none; padding: 0 0 48px; }
+
+    .criteria-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .criteria-card {
+      background: var(--navy-light);
+      border: 1px solid var(--navy-border);
+      border-radius: 8px;
+      padding: 24px;
+      transition: background 0.18s;
+    }
+
+    .criteria-card:hover { background: var(--navy-mid); }
+
+    .criteria-icon {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .criteria-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 10px;
+      letter-spacing: 0.01em;
+    }
+
+    .criteria-body {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .criteria-body ul { padding-left: 16px; }
+    .criteria-body li { margin-bottom: 4px; }
+
+    .criteria-intro {
+      background: var(--navy-light);
+      border: 1px solid var(--navy-border);
+      border-left: 3px solid var(--gold);
+      border-radius: 4px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+
+    .criteria-source {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* ── Modal ── */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.active { display: flex; }
+
+    .modal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      cursor: pointer;
+    }
+
+    .modal-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      max-width: 95vw;
+    }
+
+    .modal-center {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: -48px;
+      right: 0;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.22);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+    }
+
+    .modal-close:hover { background: rgba(255,255,255,0.18); }
+
+    .modal-img-wrap {
+      background: #0a111a;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+    }
+
+    #modal-img { display: block; max-height: 70vh; max-width: 78vw; object-fit: contain; }
+
+    .modal-img-fallback {
+      display: none;
+      width: 480px;
+      max-width: 78vw;
+      min-height: 270px;
+      align-items: center;
+      justify-content: center;
+      background: #1a2d45;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .modal-nav {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.16);
+      color: #fff;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      font-size: 26px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s;
+    }
+
+    .modal-nav:hover:not(:disabled) { background: rgba(255,255,255,0.16); }
+    .modal-nav:disabled { opacity: 0.25; cursor: default; }
+
+    .modal-meta { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .modal-caption { font-size: 14px; font-weight: 600; color: var(--white); }
+    .modal-counter { font-size: 12px; color: var(--text-muted); }
+
+    /* ── Footer ── */
+    footer { border-top: 1px solid var(--navy-border); padding: 28px 0; margin-top: 0; }
+    footer p { font-size: 12px; color: var(--text-muted); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .kpi-grid { grid-template-columns: 1fr; gap: 14px; }
+      .kpi-card { border-top: none; border-left: 3px solid var(--gold); }
+    }
+
+    @media (max-width: 720px) {
+      .container { padding: 0 16px; }
+      header h1 { font-size: 22px; }
+      .cards-grid { grid-template-columns: 1fr; }
+      #modal-img { max-width: 88vw; max-height: 60vh; }
+      .modal-img-fallback { width: 88vw; }
+      .modal-nav { width: 36px; height: 36px; font-size: 20px; }
+      table { table-layout: auto; }
+      thead th, tbody td { padding: 12px 14px; font-size: 12px; }
+      thead th:first-child, tbody td:first-child { padding-left: 16px; }
+      thead th:last-child,  tbody td:last-child  { padding-right: 16px; }
+      .criteria-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <p class="header-eyebrow">Real Estate Intelligence &mdash; Tbilisi, Georgia</p>
+      <h1>თბილისის <span>A კლასის</span> საოფისე შენობები</h1>
+      <div class="header-divider"></div>
+      <p class="header-subtitle">კომერციული უძრავი ქონების კატალოგი &middot; 2025</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <!-- KPI Cards -->
+      <section class="kpi-section">
+        <p class="section-eyebrow">ბაზრის ძირითადი მაჩვენებლები</p>
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <p class="kpi-label">საშუალო ქირა</p>
+            <p class="kpi-value">$22 &ndash; $25</p>
+            <p class="kpi-unit">მ&sup2; / თვე</p>
+          </div>
+          <div class="kpi-card">
+            <p class="kpi-label">ყიდვის ფასი (A კლასი)</p>
+            <p class="kpi-value">~$3,000</p>
+            <p class="kpi-unit">მ&sup2;</p>
+          </div>
+          <div class="kpi-card">
+            <p class="kpi-label">A-კლასის სეგმენტი</p>
+            <p class="kpi-value">14 ობიექტი</p>
+            <p class="kpi-unit">2025 წ. მონაცემი</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab switcher -->
+      <div class="view-tabs">
+        <button class="tab-btn active" id="tab-cards"    onclick="switchTab('cards')">ბარათები</button>
+        <button class="tab-btn"        id="tab-table"    onclick="switchTab('table')">ცხრილი</button>
+        <button class="tab-btn"        id="tab-criteria" onclick="switchTab('criteria')">A კლასის კრიტერიუმები</button>
+      </div>
+
+    </div><!-- /container -->
+
+    <!-- Cards View -->
+    <div id="view-cards">
+      <div class="container">
+        <div class="cards-grid" id="cards-grid"></div>
+      </div>
+    </div>
+
+    <!-- Table View — full width -->
+    <div id="view-table">
+      <div class="table-wrapper">
+        <div class="table-scroll">
+          <table id="buildings-table">
+            <colgroup>
+              <col class="col-building">
+              <col class="col-address">
+              <col class="col-district">
+              <col class="col-class">
+              <col class="col-notes">
+              <col class="col-web">
+              <col class="col-criteria">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>შენობა</th>
+                <th>მისამართი</th>
+                <th>რაიონი</th>
+                <th>კლასი</th>
+                <th>შენიშვნა</th>
+                <th>ვებსაიტი</th>
+                <th>A-კლ. კრიტ.</th>
+              </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Criteria View -->
+    <div id="view-criteria">
+      <div class="container">
+
+        <div class="criteria-intro">
+          <strong style="color:var(--text-primary)">რა არის A კლასის საოფისე შენობა?</strong><br>
+          საერთაშორისო კლასიფიკაცია (CBRE / Cushman &amp; Wakefield) განსაზღვრავს A კლასს შენობის ადგილმდებარეობის, ტექნიკური სპეციფიკაციების, მართვის ხარისხის და ტენანტური გარემოს კომბინაციით. ქვემოთ მოცემულია ძირითადი კრიტერიუმები, რომლებსაც A კლასის შენობა უნდა აკმაყოფილებდეს.
+          <p class="criteria-source">წყარო: CBRE Georgia Office Market Report 2024 &middot; Cushman &amp; Wakefield Global Office Classification Standards &middot; BOMA International</p>
+        </div>
+
+        <div class="criteria-grid">
+
+          <div class="criteria-card">
+            <div class="criteria-icon">📍</div>
+            <div class="criteria-title">ადგილმდებარეობა და ხელმისაწვდომობა</div>
+            <div class="criteria-body">
+              <ul>
+                <li>ძირითადი ბიზნეს-დერეფანი ან CBD (Central Business District)</li>
+                <li>მეტროსადგურამდე ≤ 10 წუთი ფეხით ან პირდაპირი სატრანსპ. კავშირი</li>
+                <li>მთავარ სატრანზიტო კვანძთან სიახლოვე</li>
+                <li>ადვილად ხილული და საერთ. ბრენდებისთვის შესაბამისი მისამართი</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="criteria-card">
+            <div class="criteria-icon">📐</div>
+            <div class="criteria-title">სართულის ფართობი და სიმაღლე</div>
+            <div class="criteria-body">
+              <ul>
+                <li>ერთი სართულის ფართი: მინ. <strong>1,000 მ²</strong> (A); 500–999 მ² (A-)</li>
+                <li>ჭერის სიმაღლე: მინ. <strong>2.7 მ</strong> სუფთა (A); 3.0 მ+ (A+)</li>
+                <li>სართული-სართულ სიმაღლე: 3.6–4.2 მ</li>
+                <li>სიღრმე ბირთვიდან ფანჯრამდე: მაქს. 12–14 მ</li>
+                <li>მოქნილი ოფისის განაწილება (open-plan + ბოქსი)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="criteria-card">
+            <div class="criteria-icon">❄️</div>
+            <div class="criteria-title">HVAC — კლიმატური სისტემა</div>
+            <div class="criteria-body">
+              <ul>
+                <li>ცენტრალური ან ინდივიდუალური VRF/VRV კლიმატ-კონტროლი</li>
+                <li>ახალი ჰაერის მიწოდება: მინ. 10 ლ/წმ პირზე (EN 15251)</li>
+                <li>4 მილის სისტემა გათბობა + გაგრილება ცალ-ცალკე</li>
+                <li>24/7 ოპერაცია, BMS (Building Management System) კონტროლი</li>
+                <li>ტემპ. სტაბილიზ.: 21–23°C ± 1°C; ტენიანობა: 40–60%</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="criteria-card">
+            <div class="criteria-icon">🛗</div>
+            <div class="criteria-title">ლიფტები და ვერტიკალური ტრანსპ.</div>
+            <div class="criteria-body">
+              <ul>
+                <li>ლიფტის სიჩქარე: მინ. 1.6 მ/წმ (A); 2.5 მ/წმ+ (A+)</li>
+                <li>1 ლიფტი: ≤ 3,500–5,000 მ² ოფისზე</li>
+                <li>მოლოდინის დრო: ≤ 30 წმ (A); ≤ 20 წმ (A+)</li>
+                <li>ევროპული/ამერ. სტანდ. მწარმოებელი (KONE, Otis, Schindler, Kleemann)</li>
+                <li>სატვირთო ლიფტი + სასერვისო ლიფტი ცალ-ცალკე</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="criteria-card">
+            <div class="criteria-icon">🅿️</div>
+            <div class="criteria-title">პარკინგი</div>
+            <div class="criteria-body">
+              <ul>
+                <li>კოეფ.: მინ. <strong>1 ადგილი / 50 მ²</strong> ოფისზე (A-)</li>
+                <li>A კლასი: 1 ადგ. / 30–40 მ²; A+: 1 ადგ. / 25 მ²</li>
+                <li>მიწისქვეშა ან სახურავის სტრუქტ. პარკინგი (არა ქუჩის)</li>
+                <li>24/7 CCTV ვიდეო მეთვალყ.; ANPR კარიბჭე</li>
+                <li>სასარგებლო: EV დამტენები, ველოსიპედის სადგომი</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="criteria-card">
+            <div class="criteria-icon">⚡</div>
+            <div class="criteria-title">ელ. ენერგია და სარეზერვო სისტემა</div>
+            <div class="criteria-body">
+              <ul>
+                <li>ორი დამოუკიდებელი ელ. მიწოდების წყარო (Dual Feed)</li>
+                <li>UPS სისტემა: ≥ 15–30 წუთი სრული დატვირთვისთვის</li>
+                <li>დიზელ-გენერატორი: 100% back-up (გამომავალი ≥ 2 MVA A+-ისთვის)</li>
+                <li>სართულ-მოდულური ელ. განაწილება (100–150 VA/მ²)</li>
+                <li>ლოდინის დრო გენ. ჩართვამდე: ≤ 15 წმ</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="criteria-card">
+            <div class="criteria-icon">🔒</div>
+            <div class="criteria-title">უსაფრთხოება და კონტ. შესვლა</div>
+            <div class="criteria-body">
+              <ul>
+                <li>24/7 ფიზიკური დაცვა + CCTV სრული პერიმეტრი</li>
+                <li>მაგნიტური/RFID ბარათი ან ბიომეტ. წვდომა</li>
+                <li>მოძრაობის სენს. + ხანძარსაწინ. სპრინკლ. ყოველ სართ.</li>
+                <li>ვიდეო ჩანაწ. შენახვა: მინ. 30 დღე</li>
+                <li>ვიზიტორთა დარეგ. სისტემა (VMS)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="criteria-card">
+            <div class="criteria-icon">🌐</div>
+            <div class="criteria-title">ტელეკომ. და IT ინფრასტრუქტურა</div>
+            <div class="criteria-body">
+              <ul>
+                <li>2+ დამოუკ. ოპტ. ბოჭკოს შემოყვანა შენობაში</li>
+                <li>ბოჭკოვანი სისტ. ყოველ სართ. (Cat 6A minimum)</li>
+                <li>სრული მობ. გაფარება (4G/5G Repeater) შიგნით</li>
+                <li>სერვ. ოთახი (MDF/IDF) ყოველ სართ.</li>
+                <li>ენერ. მართვ. სისტ. (EMS/BMS) ონლაინ მონიტ.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="criteria-card">
+            <div class="criteria-icon">🌿</div>
+            <div class="criteria-title">ენერგო-ეფექტ. და სერტ.</div>
+            <div class="criteria-body">
+              <ul>
+                <li>A+ / A: LEED Silver+ ან BREEAM Very Good+ (სასურველი)</li>
+                <li>ენ. კლ. B ან A ეროვ. სტანდ. მიხედვით</li>
+                <li>მაღ. ენ. ეფ. მინდვრ.: Low-E მინა, ორმ./სამმ. ბარიერი</li>
+                <li>LED განათება ≥ 95% + DALI/DALI-2 კონტ.</li>
+                <li>სვლის ენ. ყოველ ბინაზე ± 5 kWh/მ²/წ ზუსტ. ეფ.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="criteria-card">
+            <div class="criteria-icon">🏛️</div>
+            <div class="criteria-title">ლობი, სერვისი და ინფრასტ.</div>
+            <div class="criteria-body">
+              <ul>
+                <li>წარმომადგ. ლობი: ≥ 100 მ², სადღ. პ./ღამ. მეკარე</li>
+                <li>კომ. ინფრ.: კაფე/რესტ., ბანკ., ფიტნ., კონფ. ცენტრი</li>
+                <li>ბიზნეს ლაუნჯი/რეცეფცია ყოველ სართ.</li>
+                <li>ხელმისაწვდ. ინვ. პირთ.: პანდ. + ინვ. ტ. + ბრ.</li>
+                <li>სასერვ. ზონ.: გამოყ. სატვ. კარ., ა/ნ. ოთ.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="criteria-card">
+            <div class="criteria-icon">🏢</div>
+            <div class="criteria-title">მართვა და სტანდარტი</div>
+            <div class="criteria-body">
+              <ul>
+                <li>პროფ. Property Management კომ. (ISO 41001 სასურვ.)</li>
+                <li>SLA: ავარ. გამოძ. ≤ 4 სთ; ჩვ. სამ. ≤ 48 სთ</li>
+                <li>სამ. ოთ. / სერვ. ოთ. ყოვ. სართ.</li>
+                <li>მართვ. კომ. გამოცდ. საერთ. კომ. (CBRE, C&amp;W, Savills და სხვ.)</li>
+                <li>წლ. სრ. ინსპ. + ტექ. აუდ. ანგ.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="criteria-card">
+            <div class="criteria-icon">📊</div>
+            <div class="criteria-title">კლასების შედარება</div>
+            <div class="criteria-body">
+              <ul>
+                <li><strong style="color:var(--gold)">A+:</strong> ყველა A-კრ. + LEED/BREEAM + ≥ 1,500 მ² სართ. + ≤ 5% ვაკ.</li>
+                <li><strong style="color:var(--gold)">A:</strong> ძირ. კრ. + HVAC + ≥ 1,000 მ² + 1:30 პარკ.</li>
+                <li><strong style="color:var(--gold-dim)">A-:</strong> A-ს უმეტ. კრ., ნაწ. გამონაკლ. (ადგ., ასაკი)</li>
+                <li><strong style="color:var(--text-muted)">B/A:</strong> გარდამ. ობ. — A-ს ზოგ. მახ., B-ს სხვ.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Market Note -->
+    <div class="container" id="market-note-wrap">
+      <div class="market-note">
+        <p>
+          <strong>შენიშვნა.</strong>
+          A კლასის კლასიფიკაცია ეფუძნება საბაზრო კვლევებს და ოპერატორების ინფორმაციას.
+          2025 წ. მონაცემები:
+          <strong>CBRE Market Report Q3 2025</strong>,
+          <strong>TBC Capital</strong>,
+          <strong>PB Services Georgia</strong>,
+          <strong>Cushman &amp; Wakefield</strong>.
+          ✱ — ნიშნავს: კლასი ვერ დადასტურდა ოფიციალური წყაროდან; ★ — ვებსაიტი ვერ მოიძებნა.
+          მოცემული მონაცემები საინფორმაციო მიზნებს ემსახურება.
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Lightbox Modal -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="ფოტო გალერეა">
+    <div class="modal-overlay" onclick="closeModal()"></div>
+    <div class="modal-content">
+      <button class="modal-nav" id="btn-prev" onclick="navigate(-1)" aria-label="წინა">&#8249;</button>
+      <div class="modal-center">
+        <button class="modal-close" onclick="closeModal()" aria-label="დახურვა">&#215;</button>
+        <div class="modal-img-wrap">
+          <img id="modal-img" src="" alt="" onerror="onModalImgError(this)">
+          <div class="modal-img-fallback" id="modal-fallback">ფოტო მიუწვდომელია</div>
+        </div>
+        <div class="modal-meta">
+          <p class="modal-caption" id="modal-caption"></p>
+          <p class="modal-counter" id="modal-counter"></p>
+        </div>
+      </div>
+      <button class="modal-nav" id="btn-next" onclick="navigate(1)" aria-label="შემდეგი">&#8250;</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>წყარო: Tbilisi A-Class Office Report 2025 &middot; Google Places &middot; Cushman &amp; Wakefield &middot; CBRE Georgia &middot; Tiflis Business Group</p>
+    </div>
+  </footer>
+
+  <script>
+    var W = 'https://upload.wikimedia.org/wikipedia/commons/';
+
+    var IMG = {
+      axisMain: W + 'd/d2/Buildings_on_Chavchavadze_Ave_37%2C_Tbilisi.jpg',
+      axisTower:W + 'c/c3/Axis_Towers_%2828466110226%29.jpg',
+      chav1:    W + '5/57/Ilia_Chavchavadze_Avenue%2C_Tbilisi_%2850503677141%29.jpg',
+      chav2:    W + '4/4e/Ilia_Chavchavadze_Avenue%2C_Tbilisi_%2850503808537%29.jpg',
+      sab1:     W + '6/62/Construction_boom_in_Saburtalo%2C_Tbilisi.jpg',
+      sab2:     W + 'e/e4/Tbilisi._Saburtalo._Chikovani_street._Foto_by_Victor_Belousov._-_panoramio.jpg',
+      vake:     W + '2/2a/Vake_District%2C_Tbilisi%2C_Georgia.jpg',
+      freedom:  W + 'f/f2/Geb%C3%A4ude_am_Freiheitsplatz_Tiflis.jpg',
+      aghmash:  W + '1/14/Aghmashenebeli_Avenue%2C_Tbilisi.jpg'
+    };
+
+    // web     = official website URL (null = not found ★)
+    // offering= tenant services (null = not verified)
+    // facade  = null triggers placeholder card (no unofficial photos)
+    // ✱ = class not confirmed from official source; ★ = website not found
+    var buildings = [
+      {
+        name:'Axis Towers',
+        address:'ილია ჭავჭავაძის გამზ. 37მ',
+        district:'ვაკე',
+        cls:'A+',
+        notes:'World Trade Center Tbilisi · Pullman 5★ · ორ-კოშკიანი კომპლექსი',
+        web:'https://axistowers.ge/en',
+        offering:'დაახლ. 17,000 მ² საოფ. სივ. ორ კოშ.; ბინ. 60 მ²-დ. · 7 საკონფ. ოთ. · საფიტნ.+საცურ. აუზი · კაფე-რ. · 24/7 ფიზ. დ. · Pullman 5★ · World Trade Center Tbilisi',
+        criteria:['met','nc','met','nc','nc','nc','met','nc','nc','met','nc'],
+        phone:null,
+        facade:'https://app.axistowers.ge/static/desktop/media/202402152709-uyqbp9u4eaa2uivujs8n9szapjcla88hxwice4hu.webp',
+        gallery:[
+          'https://app.axistowers.ge/static/desktop/media/202402152650-szxh4pripjxahgjpkquenqjursdl0hbfokptk0pk.webp',
+          'https://app.axistowers.ge/static/desktop/media/202402152628-64jvqfe66nbrtahed7xpa0rxwru77o1dctzual1z.webp',
+          'https://app.axistowers.ge/static/media/202411144413-untitled-panorama-1-min.webp'
+        ]
+      },
+      {
+        name:'ILIYARD',
+        address:'ილია ჭავჭავაძის გამზ. 39ა',
+        district:'ვაკე',
+        cls:'A+',
+        notes:'A+ კლასი · 17-სართ. · 6,126 მ² · 2024',
+        web:'https://www.iliyard.com/',
+        offering:'17-სართ. კოშ. (2024), 6,126 მ² სულ · 600 მ² საკონფ./ღ. სივ. · ბიზ.-ლ. · გარე ტ. · 50 მ² LED ეკ. · პრემ. მართვა',
+        criteria:['met','nc','nc','nc','nc','nc','nc','nc','nc','met','met'],
+        phone:'+995 510 10 01 00',
+        facade:'https://georgiatoday.ge/wp-content/uploads/2025/12/GT-WhatsApp-Image-2025-11-14-at-19.22.39.jpg',
+        gallery:[
+          'https://georgiatoday.ge/wp-content/uploads/2025/12/GT-7022-1.jpg',
+          'https://georgiatoday.ge/wp-content/uploads/2025/12/GT-715-1.jpg',
+          'https://georgiatoday.ge/wp-content/uploads/2025/12/GT-WhatsApp-Image-2025-11-14-at-19.20.11-1.jpg'
+        ]
+      },
+      {
+        name:'City Tower',
+        address:'ვაჟა-ფშაველას გამზ. 70',
+        district:'საბურთალო',
+        cls:'A',
+        notes:'City Mall-თან გადასასვლ. · Deloitte · 2020 · კლასი ✱',
+        web:null,
+        offering:'2020 წ. საოფ. კოშ. · City Mall-თ. პ. გ. · Deloitte Georgia ტ. · ოფ. შ. დ. ვ. დ.',
+        criteria:['met','nc','nc','nc','nc','nc','nc','nc','nc','nc','nc'],
+        phone:null,
+        facade:'https://bellemaison.ge/storage/ywz1zohhfqsP0fbWzIptzqOVOxxDeE9fJa1F6qjE.webp',
+        gallery:[
+          'https://bellemaison.ge/storage/HXvHAHsoloh5klQdmqiFzd4ziicMKuamx3oQK1zI.webp',
+          'https://bellemaison.ge/storage/AUdZfoNLofXbZriBwmzLXomd4Qms8IAfzk7umUrc.webp',
+          'https://bellemaison.ge/storage/HaBV52KnZganTBbMvyzgfRBYvHLtuCrlMkwxS1dr.webp'
+        ]
+      },
+      {
+        name:'Mziuri Business Center',
+        address:'ჭ. ამირეჯიბის გზ. 2',
+        district:'ვაკე / საბურთალო',
+        cls:'A',
+        notes:'Cushman & Wakefield მართვა · $15M ინვ. · 10,000 მ² · 300 პარკ. · 2023',
+        web:null,
+        offering:'10,000 მ² · 300 სადგ. (1:33 მ²) · კაფე-რ. · Oktopus Gym · ეკო · Cushman & Wakefield-ის მართვა',
+        criteria:['nc','nc','nc','nc','met','nc','nc','nc','nc','met','met'],
+        phone:'+995 32 219 28 00',
+        facade:'https://www.lamberts.info/fileadmin/_processed_/1/d/csm_Mziuri_Business_Center_LAMBERTS_01_cceb49f0ab.jpg',
+        gallery:[
+          'https://www.lamberts.info/fileadmin/_processed_/8/7/csm_Mziuri_Business_Center_LAMBERTS_02_fc71d19451.jpg',
+          'https://www.lamberts.info/fileadmin/_processed_/f/c/csm_Mziuri_Business_Center_LAMBERTS_04_ad4d0f9dea.jpg',
+          'https://www.lamberts.info/fileadmin/_processed_/c/e/csm_Mziuri_Business_Center_LAMBERTS_07_205990cfd8.jpg'
+        ]
+      },
+      {
+        name:'King David Business Center',
+        address:'მ. ალექსიძის ქ. 12',
+        district:'საბურთალო',
+        cls:'A',
+        notes:'PwC Georgia · Rezid Holding · 73–681 მ² · Kleemann ლიფ.',
+        web:'https://kdr.ge/',
+        offering:'ბინ. 73–681 მ², 5-★ სპ. · ც. HVAC · 6 Kleemann ლ. · PricewaterhouseCoopers Georgia ტ. · Rezid Holding',
+        criteria:['nc','nc','met','met','nc','nc','nc','nc','nc','nc','nc'],
+        phone:null,
+        facade:'https://kdr.ge/wp-content/uploads/2025/08/King-David-3-2-1-scaled.jpg',
+        gallery:[
+          'https://kdr.ge/wp-content/uploads/2025/08/DJI_0893-1-scaled.jpg',
+          'https://kdr.ge/wp-content/uploads/2025/08/Business-Center-1024x336.jpg',
+          'https://kdr.ge/wp-content/uploads/2025/08/d1.jpg'
+        ]
+      },
+      {
+        name:'Inoffice Kvernadze',
+        address:'კვერნაძის ქ. 10',
+        district:'საბურთალო',
+        cls:'A',
+        notes:'EPAM Georgia · Tiflis Business Group',
+        web:'https://www.officerent.ge/en/',
+        offering:'7,000 მ² 6-სართ. (≈1,167 მ²/სართ.) · 200 სადგ. (1:35 მ²) · საკონფ. დ. · კაფე-რ. · ტ. · HVAC · EPAM Georgia ტ. · Tiflis Business Group',
+        criteria:['nc','met','met','nc','met','nc','nc','nc','nc','met','met'],
+        phone:null,
+        facade:'https://www.officerent.ge/wp-content/uploads/2019/05/1.-Inoffice_kostava_Kvernadze_Cover-min.jpg',
+        gallery:[
+          'https://www.officerent.ge/wp-content/uploads/2019/05/2.-Inoffice_kostava_Kvernadze-min.jpg',
+          'https://www.officerent.ge/wp-content/uploads/2019/05/9.-Inoffice_kostava_kvernadze_Reception-min.jpg',
+          'https://www.officerent.ge/wp-content/uploads/2019/05/8.-Inoffice_Entrance_Night-min.jpg'
+        ]
+      },
+      {
+        name:'Regus — Freedom Square',
+        address:'გ. ლეონიძის ქ. 1 (ტაბიძე 1)',
+        district:'სოლოლაკი',
+        cls:'A',
+        notes:'Regus საერთ. ოპ. · 9,105 მ² · Redix Group შენ.',
+        web:'https://www.regus.com/offices/georgia/tbilisi/office-space/tbilisi-freedom-square',
+        offering:'Regus/IWG ც. (9,105 მ², Redix Group) · კ. მ. ოფ. · კოვ. · სასხდ. ოთ. · ადმ. მ. · ინტ. ჩ. · 24/7 CCTV · პ.',
+        criteria:['met','nc','nc','nc','nc','nc','met','nc','nc','met','met'],
+        phone:null,
+        facade:'https://assets.iwgplc.com/image/upload/c_fill,f_auto,q_auto,w_768,h_400,g_auto:subject//CentreImagery/4227/4227_8.jpg',
+        gallery:[
+          'https://assets.iwgplc.com/image/upload/c_fill,f_auto,q_auto,w_768,h_400,g_auto:subject//CentreImagery/4227/4227_1.jpg',
+          'https://assets.iwgplc.com/image/upload/c_fill,f_auto,q_auto,w_768,h_400,g_auto:subject//CentreImagery/4227/4227_2.jpg',
+          'https://assets.iwgplc.com/image/upload/c_fill,f_auto,q_auto,w_768,h_400,g_auto:subject//CentreImagery/4227/4227_3.jpg'
+        ]
+      },
+      {
+        name:'Inoffice Kostava 43',
+        address:'მ. კოსტავის ქ. 43',
+        district:'ვერა',
+        cls:'A',
+        notes:'Tiflis Business Group · Vere Park-ი',
+        web:'https://www.officerent.ge/en/',
+        offering:'5-სართ. · ბინ. 300 მ²-დ. · საკონფ. დ. · HVAC · პ. · Vere Park-ს. · Tiflis Business Group',
+        criteria:['met','nc','met','nc','nc','nc','nc','nc','nc','nc','met'],
+        phone:null,
+        facade:'https://www.officerent.ge/wp-content/uploads/2019/05/1.-Inoffice-Kosrava-43-min.jpg',
+        gallery:[
+          'https://www.officerent.ge/wp-content/uploads/2019/05/2.-Inoffice-Kostava-43-min-1.jpg',
+          'https://www.officerent.ge/wp-content/uploads/2019/05/5.-Inoffice-Kostava-43-min.jpg',
+          'https://www.officerent.ge/wp-content/uploads/2019/05/10-Inoffice-Kostava_Tiflis-Business-Group-min.jpg'
+        ]
+      },
+      {
+        name:'Business Center Europe',
+        address:'მ. კოსტავის ქ. 45გ',
+        district:'ვერა',
+        cls:'A-',
+        notes:'Tiflis Business Group · 9-სართ. · 2,400 მ²',
+        web:'https://www.officerent.ge/en/project/kostava45g/',
+        offering:'9-სართ. · 2,400 მ² სულ · ბინ. 20 მ²-დ. · ც. HVAC · კ.-რ. · პ. · Fit-out · Tiflis Business Group',
+        criteria:['met','notmet','met','nc','nc','nc','nc','nc','nc','met','met'],
+        phone:null,
+        facade:'https://www.officerent.ge/wp-content/uploads/2020/01/DSC9637.jpg',
+        gallery:[
+          'https://www.officerent.ge/wp-content/uploads/2020/01/DSC10964564.jpg',
+          'https://www.officerent.ge/wp-content/uploads/2020/01/DSC0891-HDR1530.jpg',
+          'https://www.officerent.ge/wp-content/uploads/2020/01/DSC0897-HDR-1.jpg'
+        ]
+      },
+      {
+        name:'Inoffice Chovelidze',
+        address:'კ. ჩოველიძის ქ. 10ა',
+        district:'ვერა / ცენტრი',
+        cls:'A',
+        notes:'Tiflis Business Group · 9-სართ. · 200 მ²-დან',
+        web:'https://www.officerent.ge/en/project/belinski/',
+        offering:'9-სართ. · ბინ. 200 მ²-დ. · HVAC · მ.ქ.+ღ. პ. · საკონფ. · რ. · ტ. · Tiflis Business Group',
+        criteria:['met','nc','met','nc','met','nc','nc','nc','nc','met','met'],
+        phone:null,
+        facade:'https://www.officerent.ge/wp-content/uploads/2019/05/8.-Inoffice-_-Chovelidze-min-2.jpg',
+        gallery:[
+          'https://www.officerent.ge/wp-content/uploads/2019/05/1.-Inoffice-On-Chovelidze-min-1-2.jpg',
+          'https://www.officerent.ge/wp-content/uploads/2019/05/2.-Inoffice-on-Chovelidze-min-2.jpg',
+          'https://www.officerent.ge/wp-content/uploads/2019/05/7.-Inoffice_Chovelidze_Reception-min-2.jpg',
+          'https://www.officerent.ge/wp-content/uploads/2019/05/11_01.-Inoffice_Terrace-min-2.jpg'
+        ]
+      },
+      {
+        name:'Vake Plaza',
+        address:'ჭავჭავაძის გამზ. 72ა',
+        district:'ვაკე',
+        cls:'A',
+        notes:'HVAC VRF · 230+ პარკ. · 2,000kW გენ. · EV დამტ. · კონფ. · ბოქსი · 24/7 დ. · კლასი ✱',
+        web:'https://vakeplaza.ge/',
+        offering:'≈22,000 მ² · Mitsubishi VRF HVAC · 230+ სადგ. · EV დ. · 2,000 kW გენ. · საკონფ. · ბოქ. კლ. · 24/7 CCTV+ფიზ. დ.',
+        criteria:['met','nc','met','nc','nc','met','met','nc','nc','met','nc'],
+        phone:'+995 595 59 43 42',
+        facade:'https://vakeplaza.ge/Photos/DJI_1759.jpg',
+        gallery:[
+          'https://vakeplaza.ge/spaces/lobby1.jpg',
+          'https://vakeplaza.ge/spaces/lobby.jpg',
+          'https://vakeplaza.ge/spaces/reception.jpg'
+        ]
+      },
+      {
+        name:'BCV',
+        address:'ვაჟა-ფშაველას გამზ. 71',
+        district:'საბურთალო',
+        cls:'A',
+        notes:'Redix Group · 12,000 მ² · OTIS ლიფ. · მ.ქ. პარკ. · 20 მ. მეტრ. · კლასი ✱',
+        web:'https://www.redix.ge/ka/rent/2',
+        offering:'12,000 მ² (ოფ.+კ.) · მ.ქ. პ. · OTIS ლ. · HVAC · კ.-რ.+სუპ. · საფიტნ. · 24/7 უსაფ. · გენ.+წყ. რ. · 20 მ. მ-სდ.',
+        criteria:['met','nc','met','met','met','met','met','nc','nc','met','nc'],
+        phone:'+995 577 22 77 20',
+        facade:'https://www.redix.ge/uploads/images/5d4980d2d2e95.jpg',
+        gallery:[]
+      },
+      {
+        name:'Business Center Shardeni (BCM)',
+        address:'შარდენის ქ., ძველი თბილისი',
+        district:'ძვ. თბილისი',
+        cls:'B/A',
+        notes:'Redix Group · 3-სართ. · 813 მ² · ისტ. ფასადი · კლასი ✱',
+        web:'https://www.redix.ge/ka/rent/3',
+        offering:'813 მ², 3-სართ. ისტ. შ. შ. ქ. · კ.-რ. I სართ-ზ. · ფინ./სამ./საინვ. კ-ების ოფ. კ.',
+        criteria:['nc','notmet','nc','nc','nc','nc','nc','nc','nc','met','nc'],
+        phone:'+995 577 22 77 20',
+        facade:'https://www.redix.ge/uploads/images/5d56966abf31d.jpg',
+        gallery:[]
+      },
+      {
+        name:'CH64',
+        address:'ილია ჭავჭავაძის გამზ. 64',
+        district:'ვაკე',
+        cls:'A',
+        notes:'Redix Group · 13,400 მ² ოფ. · 4-სართ. · KONE ლიფ. · HVAC · NFPA სტ.',
+        web:'https://www.redix.ge/ka/rent/4',
+        offering:'13,400 მ² ოფ.+124 მ² კ. · 4-სართ.+მ.ქ. პ. · KONE ლ. · HVAC · NFPA/ASHRAE სახ.-უ. · გენ.+წყ. რ. · ტ. პ.+ოფ. მ.',
+        criteria:['met','met','met','met','met','met','nc','nc','nc','nc','nc'],
+        phone:'+995 577 55 51 77',
+        facade:'https://www.redix.ge/uploads/images/5d497d9b44ea5.jpg',
+        gallery:[]
+      }
+    ];
+
+    var CRITERIA_LABELS = [
+      'ადგილმდებარეობა',
+      'სართ. / სიმ.',
+      'HVAC',
+      'ლიფტები',
+      'პარკინგი',
+      'ელ. / სარეზ.',
+      'უსაფრთხ.',
+      'ტელეკომ. / IT',
+      'ენ.-ეფ. / სერტ.',
+      'ლობი / სერვ.',
+      'მართვა'
+    ];
+
+    function clsToCSS(cls) {
+      if (cls === 'A+')                       return 'badge-aplus';
+      if (cls.indexOf('პრემიუმ') !== -1) return 'badge-a-premium';
+      if (cls === 'A')                        return 'badge-a';
+      if (cls === 'A-')                       return 'badge-aminus';
+      if (cls === 'B/A')                      return 'badge-ba';
+      return 'badge-ba';
+    }
+
+    /* ── Render Cards ── */
+    function renderCards() {
+      var grid = document.getElementById('cards-grid');
+      buildings.forEach(function(b, i) {
+        var ph = b.phone ? '<p class="card-phone">' + b.phone + '</p>' : '';
+        var offering = b.offering
+          ? '<div class="card-offering"><div class="card-offering-label">შეთავაზება და სერვ.</div>' + b.offering + '</div>'
+          : '';
+        var criteriaHtml = '';
+        if (b.criteria && b.criteria.length) {
+          var items = b.criteria.map(function(s, idx) {
+            var icon = s === 'met' ? '✓' : s === 'notmet' ? '✗' : '—';
+            return '<span class="criteria-item"><span class="crit-icon ' + s + '">' + icon + '</span><span>' + CRITERIA_LABELS[idx] + '</span></span>';
+          }).join('');
+          criteriaHtml = '<div class="card-criteria"><div class="card-criteria-label">A-კლასის კრიტ.</div><div class="criteria-list">' + items + '</div></div>';
+        }
+        var webBtn = b.web
+          ? '<a class="btn-website" href="' + b.web + '" target="_blank" rel="noopener">ვებსაიტი &#8599;</a>'
+          : '';
+        var imgBlock = b.facade
+          ? '<img src="' + b.facade + '" alt="' + b.name + '" loading="lazy" onerror="onFacadeError(this)">' +
+            '<div class="img-fallback"><span>' + b.name + '</span></div>'
+          : '<div class="img-fallback" style="display:flex"><span>' + b.name + '<br><small style="font-size:11px;font-weight:400;color:var(--text-muted)">ოფ. ფოტო მიუწვდომელია</small></span></div>';
+        var galBtn = b.gallery && b.gallery.length
+          ? '<button class="btn-gallery" onclick="openGallery(' + i + ')">ფოტოები &#8594;</button>'
+          : '';
+        var el = document.createElement('div');
+        el.className = 'card';
+        el.innerHTML =
+          '<div class="card-image">' + imgBlock + '</div>' +
+          '<div class="card-body">' +
+            '<h2 class="card-name">' + b.name + '</h2>' +
+            '<p class="card-address">' + b.address + '</p>' +
+            '<div class="card-badges">' +
+              '<span class="badge badge-district">' + b.district + '</span>' +
+              '<span class="badge ' + clsToCSS(b.cls) + '">' + b.cls + '</span>' +
+            '</div>' +
+            '<p class="card-notes">' + b.notes + '</p>' +
+            offering +
+            criteriaHtml +
+            ph +
+            '<div class="card-actions">' + galBtn + webBtn + '</div>' +
+          '</div>';
+        grid.appendChild(el);
+      });
+    }
+
+    /* ── Render Table ── */
+    function renderTable() {
+      var tbody = document.getElementById('table-body');
+      buildings.forEach(function(b) {
+        var tr = document.createElement('tr');
+        var webCell = b.web
+          ? '<a href="' + b.web + '" target="_blank" rel="noopener">' + b.web.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '') + '</a>'
+          : '<span>—</span>';
+        var critCell = '';
+        if (b.criteria && b.criteria.length) {
+          var items = b.criteria.map(function(s, idx) {
+            var icon = s === 'met' ? '✓' : s === 'notmet' ? '✗' : '—';
+            return '<span class="criteria-item"><span class="crit-icon ' + s + '">' + icon + '</span><span>' + CRITERIA_LABELS[idx] + '</span></span>';
+          }).join('');
+          critCell = '<div class="criteria-list">' + items + '</div>';
+        } else {
+          critCell = '<span style="color:var(--text-muted);font-size:12px">—</span>';
+        }
+        tr.innerHTML =
+          '<td class="td-building">' + b.name + '</td>' +
+          '<td class="td-address">'  + b.address + '</td>' +
+          '<td class="td-district">' + b.district + '</td>' +
+          '<td><span class="badge badge-sq ' + clsToCSS(b.cls) + '">' + b.cls + '</span></td>' +
+          '<td class="td-notes">'    + b.notes + (b.phone ? ' · ' + b.phone : '') + '</td>' +
+          '<td class="td-web">'      + webCell + '</td>' +
+          '<td>'                     + critCell + '</td>';
+        tbody.appendChild(tr);
+      });
+    }
+
+    /* ── Tab Switch ── */
+    function switchTab(view) {
+      ['cards','table','criteria'].forEach(function(v) {
+        document.getElementById('tab-' + v).classList.toggle('active', v === view);
+      });
+      document.getElementById('view-cards').style.display    = view === 'cards'    ? 'block' : 'none';
+      document.getElementById('view-table').style.display    = view === 'table'    ? 'block' : 'none';
+      document.getElementById('view-criteria').style.display = view === 'criteria' ? 'block' : 'none';
+      document.getElementById('market-note-wrap').style.display = view === 'criteria' ? 'none' : 'block';
+    }
+
+    /* ── Modal ── */
+    var currentBuilding = -1, currentIndex = 0;
+
+    function openGallery(idx) {
+      currentBuilding = idx; currentIndex = 0;
+      showImage();
+      document.getElementById('modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function showImage() {
+      var b = buildings[currentBuilding], total = b.gallery.length;
+      var img = document.getElementById('modal-img');
+      img.style.display = 'block';
+      document.getElementById('modal-fallback').style.display = 'none';
+      img.src = b.gallery[currentIndex];
+      img.alt = b.name;
+      document.getElementById('modal-caption').textContent = b.name;
+      document.getElementById('modal-counter').textContent = (currentIndex + 1) + ' / ' + total;
+      document.getElementById('btn-prev').disabled = currentIndex === 0;
+      document.getElementById('btn-next').disabled = currentIndex === total - 1;
+    }
+
+    function navigate(dir) {
+      if (currentBuilding < 0) return;
+      var total = buildings[currentBuilding].gallery.length;
+      currentIndex = Math.max(0, Math.min(total - 1, currentIndex + dir));
+      showImage();
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('active');
+      document.body.style.overflow = '';
+      currentBuilding = -1;
+    }
+
+    function onFacadeError(img) {
+      img.style.display = 'none';
+      img.nextElementSibling.style.display = 'flex';
+    }
+
+    function onModalImgError(img) {
+      img.style.display = 'none';
+      document.getElementById('modal-fallback').style.display = 'flex';
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (!document.getElementById('modal').classList.contains('active')) return;
+      if (e.key === 'Escape')     closeModal();
+      if (e.key === 'ArrowLeft')  navigate(-1);
+      if (e.key === 'ArrowRight') navigate(1);
+    });
+
+    renderCards();
+    renderTable();
+  </script>
+</body>
+</html>
