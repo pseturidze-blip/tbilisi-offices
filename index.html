@@ -548,6 +548,47 @@
     .modal-caption { font-size: 14px; font-weight: 600; color: var(--white); }
     .modal-counter { font-size: 12px; color: var(--text-muted); }
 
+    /* ── Criteria inner class-tabs ── */
+    .criteria-class-tabs { display: flex; gap: 6px; margin-bottom: 28px; }
+    .crit-cls-btn {
+      padding: 8px 22px;
+      background: transparent;
+      border: 1px solid var(--navy-border);
+      color: var(--text-secondary);
+      font-family: 'Inter', sans-serif;
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .crit-cls-btn:hover { color: var(--text-primary); border-color: #2a527a; }
+    .crit-cls-btn.active { background: rgba(201,168,76,0.10); color: var(--gold); border-color: var(--gold-dim); }
+
+    /* ── Criteria tier labels ── */
+    .crit-tier { margin-bottom: 14px; }
+    .crit-tier:last-child { margin-bottom: 0; }
+    .tier-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 3px;
+      margin-bottom: 7px;
+    }
+    .tier-req  { background: rgba(201,168,76,0.12); color: var(--gold);          border: 1px solid rgba(201,168,76,0.32); }
+    .tier-pref { background: rgba(92,122,150,0.10); color: var(--text-secondary); border: 1px solid rgba(92,122,150,0.26); }
+    .crit-tier ul { padding-left: 14px; margin: 0; }
+    .crit-tier li { margin-bottom: 4px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.65; }
+
+    /* B-class card left accent */
+    .criteria-card.b-cls { border-left: 2px solid #3d5c7a; }
+
     /* ── Card — clickable ── */
     .card { cursor: pointer; }
 
@@ -759,7 +800,7 @@
       <div class="view-tabs">
         <button class="tab-btn active" id="tab-cards"    onclick="switchTab('cards')">ბარათები</button>
         <button class="tab-btn"        id="tab-table"    onclick="switchTab('table')">ცხრილი</button>
-        <button class="tab-btn"        id="tab-criteria" onclick="switchTab('criteria')">A კლასის კრიტერიუმები</button>
+        <button class="tab-btn"        id="tab-criteria" onclick="switchTab('criteria')">კლასიფიკაციის კრიტერიუმები</button>
       </div>
 
     </div><!-- /container -->
@@ -806,181 +847,583 @@
     <div id="view-criteria">
       <div class="container">
 
-        <div class="criteria-intro">
-          <strong style="color:var(--text-primary)">რა არის A კლასის საოფისე შენობა?</strong><br>
-          საერთაშორისო კლასიფიკაცია (CBRE / Cushman &amp; Wakefield) განსაზღვრავს A კლასს შენობის ადგილმდებარეობის, ტექნიკური სპეციფიკაციების, მართვის ხარისხის და ტენანტური გარემოს კომბინაციით. ქვემოთ მოცემულია ძირითადი კრიტერიუმები, რომლებსაც A კლასის შენობა უნდა აკმაყოფილებდეს.
-          <p class="criteria-source">წყარო: CBRE Georgia Office Market Report 2024 &middot; Cushman &amp; Wakefield Global Office Classification Standards &middot; BOMA International</p>
+        <div class="criteria-class-tabs">
+          <button class="crit-cls-btn active" id="crit-tab-a" onclick="switchCriteriaClass('a')">A კლასი</button>
+          <button class="crit-cls-btn"        id="crit-tab-b" onclick="switchCriteriaClass('b')">B კლასი</button>
         </div>
 
-        <div class="criteria-grid">
+        <!-- ══ A-CLASS ══ -->
+        <div id="crit-view-a">
 
-          <div class="criteria-card">
-            <div class="criteria-icon">📍</div>
-            <div class="criteria-title">ადგილმდებარეობა და ხელმისაწვდომობა</div>
-            <div class="criteria-body">
-              <ul>
-                <li>ძირითადი ბიზნეს-დერეფანი ან CBD (Central Business District)</li>
-                <li>მეტროსადგურამდე ≤ 10 წუთი ფეხით ან პირდაპირი სატრანსპ. კავშირი</li>
-                <li>მთავარ სატრანზიტო კვანძთან სიახლოვე</li>
-                <li>ადვილად ხილული და საერთ. ბრენდებისთვის შესაბამისი მისამართი</li>
-              </ul>
-            </div>
+          <div class="criteria-intro">
+            <strong style="color:var(--text-primary)">A კლასის საოფისე შენობა — კლასიფიკაციის სტანდარტი</strong><br>
+            საერთაშ. კლასიფიკაცია (CBRE / Cushman &amp; Wakefield / BOMA) A კლასს განსაზღვრავს ადგილმდებ., ტექ. სპეციფ., მართვის ხარისხ. და ტენ. გარემოს კომბინაციით. ყოველი კრიტ. იყოფა ორ დონედ: <strong style="color:var(--gold)">სავალდებულო</strong> — A კლასის მინ. პირობა, და <strong style="color:var(--text-secondary)">სასურველი</strong> — A+ კლასი ან საუკეთ. საერთ. პრაქტიკა.
+            <p class="criteria-source">წყარო: CBRE Georgia Office Market Report 2024 &middot; Cushman &amp; Wakefield Global Office Classification Standards &middot; BOMA International</p>
           </div>
 
-          <div class="criteria-card">
-            <div class="criteria-icon">📐</div>
-            <div class="criteria-title">სართულის ფართობი და სიმაღლე</div>
-            <div class="criteria-body">
-              <ul>
-                <li>ერთი სართულის ფართი: მინ. <strong>1,000 მ²</strong> (A); 500–999 მ² (A-)</li>
-                <li>ჭერის სიმაღლე: მინ. <strong>2.7 მ</strong> სუფთა (A); 3.0 მ+ (A+)</li>
-                <li>სართული-სართულ სიმაღლე: 3.6–4.2 მ</li>
-                <li>სიღრმე ბირთვიდან ფანჯრამდე: მაქს. 12–14 მ</li>
-                <li>მოქნილი ოფისის განაწილება (open-plan + ბოქსი)</li>
-              </ul>
+          <div class="criteria-grid">
+
+            <div class="criteria-card">
+              <div class="criteria-icon">📍</div>
+              <div class="criteria-title">ადგილმდებარეობა და ხელმისაწვდომობა</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>ძირითადი ბიზნეს-დერეფანი ან CBD (Central Business District)</li>
+                    <li>მეტროსადგურამდე ≤ 10 წ. ფეხით ან პირდ. საზ. ტრანსპ. კავშირი</li>
+                    <li>მთავარ სატრანზიტო კვანძთან სიახლოვე</li>
+                    <li>ადვ. ხილ. მისამ., საერთ. ბრენდებისა და მულტ. კომპ.-ებისთვის შ.</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>პრემ. ბიზ.-კვ. ცენტ. — CEO კ.-ებისთვის პრეფ. მისამართი</li>
+                    <li>5★ სასტ., ბანკ. ოფ. და ბიზ. სერვ. სიახლოვე</li>
+                    <li>ANPR-კარიბჭე + ვალეტ-პარ. სერვისი</li>
+                  </ul>
+                </div>
+              </div>
             </div>
+
+            <div class="criteria-card">
+              <div class="criteria-icon">📐</div>
+              <div class="criteria-title">სართულის ფართობი და ჭერის სიმაღლე</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>სართ. ფართი: მინ. <strong>1,000 მ²</strong> (A); 500–999 მ² (A−)</li>
+                    <li>სუფთა ჭერის სიმ.: მინ. <strong>2.7 მ</strong> (A)</li>
+                    <li>სართ.-სართ. სიმ.: 3.6–4.2 მ</li>
+                    <li>სიღ. ბირთვ.-ფანჯ.-მდე: მაქს. 12–14 მ</li>
+                    <li>მოქნ. ღია სივ. (open-plan) + დახ. ბოქსი</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>სართ. ფართი ≥ 1,500 მ² (A+)</li>
+                    <li>სუფ. ჭ. სიმ. ≥ 3.0 მ (A+)</li>
+                    <li>ამწ. (raised) იატ. — ტექ. კაბ.-ების განაწ.-ისთვის</li>
+                    <li>BIM-დოკ. (Building Information Modelling)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="criteria-card">
+              <div class="criteria-icon">❄️</div>
+              <div class="criteria-title">HVAC — კლიმატური სისტემა</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>ცენტ. ან ინდ. VRF/VRV კლ.-კონტ.</li>
+                    <li>ახ. ჰაერის მიწ.: მინ. 10 ლ/წმ/პირ (EN 15251)</li>
+                    <li>24/7 ოპ. + BMS (Building Management System) კონტ.</li>
+                    <li>ტემპ. სტ.: 21–23°C ± 1°C; ტენ.: 40–60%</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>4-მილ. სისტ.: გათ. + გაგ. ცალ-ცალკე</li>
+                    <li>Chilled beam ან underfloor ჰაერ-განაწ.</li>
+                    <li>CO₂ + PM2.5 სენს. ყ. ზო.-ში</li>
+                    <li>DALI-კ. ტემპ./ტენ. ინდ. ზ.-ების მ.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="criteria-card">
+              <div class="criteria-icon">🛗</div>
+              <div class="criteria-title">ლიფტები და ვერტ. ტრანსპ.</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>სიჩქ.: მინ. 1.6 მ/წმ (A)</li>
+                    <li>1 ლიფ. ≤ 5,000 მ² ოფ.-ზე</li>
+                    <li>მოლ. დ.: ≤ 30 წმ (A)</li>
+                    <li>ევრ./ამ. სტ. მწ.: KONE, Otis, Schindler, Kleemann</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>სიჩქ. ≥ 2.5 მ/წმ; მოლ. ≤ 20 წმ (A+)</li>
+                    <li>Destination Dispatch System (DDS)</li>
+                    <li>სატვ. + სასერვ. ლიფ. ცალ-ცალკე</li>
+                    <li>ლ.-ის ენ. ეფ. კლ. A (EN 81-20/50)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="criteria-card">
+              <div class="criteria-icon">🅿️</div>
+              <div class="criteria-title">პარკინგი</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>კოეფ.: მინ. 1 ადგ./50 მ² (A−); 1:30–40 (A)</li>
+                    <li>მ/ქ. ან სახ. სტ. პარ. (ქ. ზ. — არ ჩ.)</li>
+                    <li>24/7 CCTV ვ.-მეთვ.</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>კოეფ. 1:25 (A+); ANPR-კ.</li>
+                    <li>EV დამტ. ≥ 10% ადგ.</li>
+                    <li>ველოს. სადგ. + შხ. ოთ.</li>
+                    <li>სპეც.-საჭ. პირ.-ისთ. ≥ 5% ადგ.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="criteria-card">
+              <div class="criteria-icon">⚡</div>
+              <div class="criteria-title">ელ. ენ. და სარ. სისტემა</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>100%-ანი სარ. გ. (დიზ. გენ.)</li>
+                    <li>UPS ≥ 15 წ. სრ. დ.-ისთ.</li>
+                    <li>გენ. ჩ.-ის ლოდ.: ≤ 15 წმ</li>
+                    <li>სართ.-მ. ელ. განაწ. (100–150 VA/მ²)</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>Dual Feed — 2 დ. ელ. მ. წყ.</li>
+                    <li>UPS ≥ 30 წ.; გ. გამ. ≥ 2 MVA (A+)</li>
+                    <li>ონლ. ენ. მ. (SCADA/BMS)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="criteria-card">
+              <div class="criteria-icon">🔒</div>
+              <div class="criteria-title">უსაფრთხ. და წვდ. კონტ.</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>24/7 ფ. დ. + CCTV სრ. პ.</li>
+                    <li>მაგ./RFID ბარ. წვდ. კ.</li>
+                    <li>ხ.-ს. სპრ. ყ. სართ.</li>
+                    <li>ვ. ჩ. შ.: მინ. 30 დ.</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>ბიომ. (სახ./თ.) წვდ. კ.</li>
+                    <li>VMS ვიზ. დ. სისტ.</li>
+                    <li>მოძ. სენ. ყ. სართ. + სეკ. ოთ.</li>
+                    <li>ვ. ჩ. შ. ≥ 60 დ. (A+)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="criteria-card">
+              <div class="criteria-icon">🌐</div>
+              <div class="criteria-title">ტელეკომ. და IT ინფ.</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>2+ დ. ოპ. ბოჭ. შ. შ.</li>
+                    <li>ბოჭ. სისტ. ყ. სართ. (Cat 6A მ.)</li>
+                    <li>სრ. მობ. გ. (4G Rep.) შ.</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>5G Repeater შ.</li>
+                    <li>MDF/IDF ოთ. ყ. სართ.</li>
+                    <li>EMS/BMS ონლ. მ.</li>
+                    <li>ტენ.-ისთ. ინდ. ოპ. ბოჭ.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="criteria-card">
+              <div class="criteria-icon">🌿</div>
+              <div class="criteria-title">ენ.-ეფ. და სერტ.</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>ენ. კლ. B ან A ეროვ. სტ.-ის მ.</li>
+                    <li>LED განათ. ≥ 95%</li>
+                    <li>ენ. ა. ყ. ერთ.-ზე ± 5 kWh/მ²/წ</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>LEED Silver+ ან BREEAM Very Good+</li>
+                    <li>Low-E მინ., ორმ./სამმ. ბარ.</li>
+                    <li>DALI/DALI-2 ს. კ.</li>
+                    <li>Solar PV ბ. ს. გ.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="criteria-card">
+              <div class="criteria-icon">🏛️</div>
+              <div class="criteria-title">ლობი, სერვ. და ინფ.</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>წარ. ლობ. ≥ 100 მ², სადღ. რეც.</li>
+                    <li>კაფე/რ. შ.</li>
+                    <li>საკ. ოთ. (საკ. ც./ბ. ლ.)</li>
+                    <li>ხელ. ინვ. პ.-ებ.: პ. + ლ.</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>ღ.-ღ. მ. + ბ. ლ. ყ. სართ.</li>
+                    <li>ფიტ. ც. + ბ. + საც. ა.</li>
+                    <li>სრ. ADA + ბრ. ყ. სართ.</li>
+                    <li>Rooftop terrace</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="criteria-card">
+              <div class="criteria-icon">🏢</div>
+              <div class="criteria-title">მართვა და სტანდ.</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>გამ. Property Management კ.</li>
+                    <li>SLA: ავ. ≤ 4 სთ; ჩვ. ≤ 48 სთ</li>
+                    <li>სასერვ. ოთ. ყ. სართ.</li>
+                    <li>წ. ინსპ. + ტექ. ა. ა.</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>ISO 41001 სერტ. PM კ.</li>
+                    <li>საერთ. ოპ.: CBRE, C&amp;W, Savills</li>
+                    <li>Tenant Satisfaction Portal</li>
+                    <li>ხ.-ს. + გ. ამ. ს. სისტ.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="criteria-card">
+              <div class="criteria-icon">📊</div>
+              <div class="criteria-title">A კლასების შედარება</div>
+              <div class="criteria-body">
+                <ul>
+                  <li><strong style="color:var(--gold)">A+:</strong> ყ. სავ. + LEED/BREEAM + ≥ 1,500 მ² + Dual Feed + DDS ლ.</li>
+                  <li><strong style="color:var(--gold)">A:</strong> ყ. სავ. + HVAC + ≥ 1,000 მ² + 1:30–40 პ.</li>
+                  <li><strong style="color:var(--gold-dim)">A−:</strong> A-ს უმ. კრ.; ნ. გამ. (ადგ. ან ასაკი)</li>
+                  <li><strong style="color:var(--text-muted)">B/A:</strong> გ. ობ. — A-ს ზ. მ., B-ს სხვ.</li>
+                </ul>
+              </div>
+            </div>
+
+          </div><!-- /criteria-grid A -->
+        </div><!-- /crit-view-a -->
+
+        <!-- ══ B-CLASS ══ -->
+        <div id="crit-view-b" style="display:none">
+
+          <div class="criteria-intro">
+            <strong style="color:var(--text-primary)">B კლასის საოფისე შენობა — კლასიფიკაციის სტანდარტი</strong><br>
+            B კლასი მოიცავს ფუნქციური, კარგად მოვლილ შენობებს, რომლებიც A კლასის ზღვარს ვერ აღწევენ, მაგრამ მკაფიოდ განსხვავდებიან სპეკ. ან განახლ.-მდ. ფ.-სგან. ხშირად — ძვ. A-კლ. შ. ან ახ. A− ადგ. კ.-ით. <strong style="color:var(--gold)">სავ.</strong> — B კლ. მინ. პ.; <strong style="color:var(--text-secondary)">სასურ.</strong> — B+ ს. ს.
+            <p class="criteria-source">წყარო: CBRE Georgia Office Market Report 2024 &middot; Cushman &amp; Wakefield Global Office Classification Standards &middot; BOMA International</p>
           </div>
 
-          <div class="criteria-card">
-            <div class="criteria-icon">❄️</div>
-            <div class="criteria-title">HVAC — კლიმატური სისტემა</div>
-            <div class="criteria-body">
-              <ul>
-                <li>ცენტრალური ან ინდივიდუალური VRF/VRV კლიმატ-კონტროლი</li>
-                <li>ახალი ჰაერის მიწოდება: მინ. 10 ლ/წმ პირზე (EN 15251)</li>
-                <li>4 მილის სისტემა გათბობა + გაგრილება ცალ-ცალკე</li>
-                <li>24/7 ოპერაცია, BMS (Building Management System) კონტროლი</li>
-                <li>ტემპ. სტაბილიზ.: 21–23°C ± 1°C; ტენიანობა: 40–60%</li>
-              </ul>
-            </div>
-          </div>
+          <div class="criteria-grid">
 
-          <div class="criteria-card">
-            <div class="criteria-icon">🛗</div>
-            <div class="criteria-title">ლიფტები და ვერტიკალური ტრანსპ.</div>
-            <div class="criteria-body">
-              <ul>
-                <li>ლიფტის სიჩქარე: მინ. 1.6 მ/წმ (A); 2.5 მ/წმ+ (A+)</li>
-                <li>1 ლიფტი: ≤ 3,500–5,000 მ² ოფისზე</li>
-                <li>მოლოდინის დრო: ≤ 30 წმ (A); ≤ 20 წმ (A+)</li>
-                <li>ევროპული/ამერ. სტანდ. მწარმოებელი (KONE, Otis, Schindler, Kleemann)</li>
-                <li>სატვირთო ლიფტი + სასერვისო ლიფტი ცალ-ცალკე</li>
-              </ul>
+            <div class="criteria-card b-cls">
+              <div class="criteria-icon">📍</div>
+              <div class="criteria-title">ადგილმდებარეობა და ხელმ.</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>ცნ. საქ. ან ბიზ. ზ., ან ძირ. დ. სიახ.</li>
+                    <li>საზ. ტ. ≤ 15 წ. ფეხ.</li>
+                    <li>ავტ. ს.-ის ადეკ. შ.</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>მეტ. ≤ 10 წ. ფ.-ით</li>
+                    <li>ძირ. ბ.-ქ.-ზე ან სიახ.</li>
+                    <li>ადვ. ხ. მ.-ი</li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="criteria-card">
-            <div class="criteria-icon">🅿️</div>
-            <div class="criteria-title">პარკინგი</div>
-            <div class="criteria-body">
-              <ul>
-                <li>კოეფ.: მინ. <strong>1 ადგილი / 50 მ²</strong> ოფისზე (A-)</li>
-                <li>A კლასი: 1 ადგ. / 30–40 მ²; A+: 1 ადგ. / 25 მ²</li>
-                <li>მიწისქვეშა ან სახურავის სტრუქტ. პარკინგი (არა ქუჩის)</li>
-                <li>24/7 CCTV ვიდეო მეთვალყ.; ANPR კარიბჭე</li>
-                <li>სასარგებლო: EV დამტენები, ველოსიპედის სადგომი</li>
-              </ul>
+            <div class="criteria-card b-cls">
+              <div class="criteria-icon">📐</div>
+              <div class="criteria-title">სართ. ფართ. და ჭ. სიმ.</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>სართ. ფ.: მინ. 400 მ²</li>
+                    <li>სუფ. ჭ. სიმ.: ≥ 2.5 მ</li>
+                    <li>სტ. საოფ. განაწ. შეს.</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>სართ. ≥ 600 მ²</li>
+                    <li>ჭ. სიმ. ≥ 2.7 მ</li>
+                    <li>Open-plan შ.</li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="criteria-card">
-            <div class="criteria-icon">⚡</div>
-            <div class="criteria-title">ელ. ენერგია და სარეზერვო სისტემა</div>
-            <div class="criteria-body">
-              <ul>
-                <li>ორი დამოუკიდებელი ელ. მიწოდების წყარო (Dual Feed)</li>
-                <li>UPS სისტემა: ≥ 15–30 წუთი სრული დატვირთვისთვის</li>
-                <li>დიზელ-გენერატორი: 100% back-up (გამომავალი ≥ 2 MVA A+-ისთვის)</li>
-                <li>სართულ-მოდულური ელ. განაწილება (100–150 VA/მ²)</li>
-                <li>ლოდინის დრო გენ. ჩართვამდე: ≤ 15 წმ</li>
-              </ul>
+            <div class="criteria-card b-cls">
+              <div class="criteria-icon">❄️</div>
+              <div class="criteria-title">HVAC — კლ. სისტ.</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>კლ. კ. (split/cassette ან VRF)</li>
+                    <li>ახ. ჰ. მ. ყ. ს. სართ.</li>
+                    <li>ტ. დ.: 20–24°C</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>ც. ან VRF/VRV სისტ.</li>
+                    <li>BMS კ. + 24/7 ოპ.</li>
+                    <li>ახ. ჰ. ≥ 8 ლ/წმ/პ.</li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="criteria-card">
-            <div class="criteria-icon">🔒</div>
-            <div class="criteria-title">უსაფრთხოება და კონტ. შესვლა</div>
-            <div class="criteria-body">
-              <ul>
-                <li>24/7 ფიზიკური დაცვა + CCTV სრული პერიმეტრი</li>
-                <li>მაგნიტური/RFID ბარათი ან ბიომეტ. წვდომა</li>
-                <li>მოძრაობის სენს. + ხანძარსაწინ. სპრინკლ. ყოველ სართ.</li>
-                <li>ვიდეო ჩანაწ. შენახვა: მინ. 30 დღე</li>
-                <li>ვიზიტორთა დარეგ. სისტემა (VMS)</li>
-              </ul>
+            <div class="criteria-card b-cls">
+              <div class="criteria-icon">🛗</div>
+              <div class="criteria-title">ლიფტები</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>≥ 1 ლ. ≥ 4-სართ. შ.-ებ.</li>
+                    <li>ფ. + შ. ლ.</li>
+                    <li>მოლ. ≤ 60 წმ</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>ევრ. სტ. მ. (KONE, Otis, Schindler)</li>
+                    <li>სიჩქ. ≥ 1.0 მ/წმ</li>
+                    <li>ცალ. სასერვ. ს.</li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="criteria-card">
-            <div class="criteria-icon">🌐</div>
-            <div class="criteria-title">ტელეკომ. და IT ინფრასტრუქტურა</div>
-            <div class="criteria-body">
-              <ul>
-                <li>2+ დამოუკ. ოპტ. ბოჭკოს შემოყვანა შენობაში</li>
-                <li>ბოჭკოვანი სისტ. ყოველ სართ. (Cat 6A minimum)</li>
-                <li>სრული მობ. გაფარება (4G/5G Repeater) შიგნით</li>
-                <li>სერვ. ოთახი (MDF/IDF) ყოველ სართ.</li>
-                <li>ენერ. მართვ. სისტ. (EMS/BMS) ონლაინ მონიტ.</li>
-              </ul>
+            <div class="criteria-card b-cls">
+              <div class="criteria-icon">🅿️</div>
+              <div class="criteria-title">პარკინგი</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>ს.-ზე ან მ. პ.</li>
+                    <li>კოეფ. მინ. 1:100 მ²</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>მ/ქ. ან დ. პ.; კ. 1:50 ან უკ.</li>
+                    <li>CCTV პ. ზ.-ში</li>
+                    <li>EV დამტ.</li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="criteria-card">
-            <div class="criteria-icon">🌿</div>
-            <div class="criteria-title">ენერგო-ეფექტ. და სერტ.</div>
-            <div class="criteria-body">
-              <ul>
-                <li>A+ / A: LEED Silver+ ან BREEAM Very Good+ (სასურველი)</li>
-                <li>ენ. კლ. B ან A ეროვ. სტანდ. მიხედვით</li>
-                <li>მაღ. ენ. ეფ. მინდვრ.: Low-E მინა, ორმ./სამმ. ბარიერი</li>
-                <li>LED განათება ≥ 95% + DALI/DALI-2 კონტ.</li>
-                <li>სვლის ენ. ყოველ ბინაზე ± 5 kWh/მ²/წ ზუსტ. ეფ.</li>
-              </ul>
+            <div class="criteria-card b-cls">
+              <div class="criteria-icon">⚡</div>
+              <div class="criteria-title">ელ. ენ. და სარ. სისტ.</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>გენ. — სამ. ს. + IT ნ. ს.-ისთ.</li>
+                    <li>UPS სერ. ოთ.-ისთ.</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>100% სარ. გ.; Dual Feed</li>
+                    <li>UPS ≥ 10 წ. მ. შ.</li>
+                    <li>ენ. მ. ონლ.</li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="criteria-card">
-            <div class="criteria-icon">🏛️</div>
-            <div class="criteria-title">ლობი, სერვისი და ინფრასტ.</div>
-            <div class="criteria-body">
-              <ul>
-                <li>წარმომადგ. ლობი: ≥ 100 მ², სადღ. პ./ღამ. მეკარე</li>
-                <li>კომ. ინფრ.: კაფე/რესტ., ბანკ., ფიტნ., კონფ. ცენტრი</li>
-                <li>ბიზნეს ლაუნჯი/რეცეფცია ყოველ სართ.</li>
-                <li>ხელმისაწვდ. ინვ. პირთ.: პანდ. + ინვ. ტ. + ბრ.</li>
-                <li>სასერვ. ზონ.: გამოყ. სატვ. კარ., ა/ნ. ოთ.</li>
-              </ul>
+            <div class="criteria-card b-cls">
+              <div class="criteria-icon">🔒</div>
+              <div class="criteria-title">უსაფ. და შ. კ.</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>კ. შ. (ინტ./კოდ./მ.)</li>
+                    <li>CCTV შ. ს.-ებ.</li>
+                    <li>ხ. გ. სისტ.</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>24/7 ფ. დ.</li>
+                    <li>RFID წვდ. კ.</li>
+                    <li>ვ. ჩ. შ. ≥ 14 დ.</li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="criteria-card">
-            <div class="criteria-icon">🏢</div>
-            <div class="criteria-title">მართვა და სტანდარტი</div>
-            <div class="criteria-body">
-              <ul>
-                <li>პროფ. Property Management კომ. (ISO 41001 სასურვ.)</li>
-                <li>SLA: ავარ. გამოძ. ≤ 4 სთ; ჩვ. სამ. ≤ 48 სთ</li>
-                <li>სამ. ოთ. / სერვ. ოთ. ყოვ. სართ.</li>
-                <li>მართვ. კომ. გამოცდ. საერთ. კომ. (CBRE, C&amp;W, Savills და სხვ.)</li>
-                <li>წლ. სრ. ინსპ. + ტექ. აუდ. ანგ.</li>
-              </ul>
+            <div class="criteria-card b-cls">
+              <div class="criteria-icon">🌐</div>
+              <div class="criteria-title">ტელეკომ. და IT</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>≥ 2 ბ. ოპ. შ.</li>
+                    <li>Cat 5e მ. კ.</li>
+                    <li>მობ. გ. შ.</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>ოპ. ბოჭ. შ.</li>
+                    <li>Cat 6 კ.</li>
+                    <li>სერ. ოთ. ყ. სართ.</li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="criteria-card">
-            <div class="criteria-icon">📊</div>
-            <div class="criteria-title">კლასების შედარება</div>
-            <div class="criteria-body">
-              <ul>
-                <li><strong style="color:var(--gold)">A+:</strong> ყველა A-კრ. + LEED/BREEAM + ≥ 1,500 მ² სართ. + ≤ 5% ვაკ.</li>
-                <li><strong style="color:var(--gold)">A:</strong> ძირ. კრ. + HVAC + ≥ 1,000 მ² + 1:30 პარკ.</li>
-                <li><strong style="color:var(--gold-dim)">A-:</strong> A-ს უმეტ. კრ., ნაწ. გამონაკლ. (ადგ., ასაკი)</li>
-                <li><strong style="color:var(--text-muted)">B/A:</strong> გარდამ. ობ. — A-ს ზოგ. მახ., B-ს სხვ.</li>
-              </ul>
+            <div class="criteria-card b-cls">
+              <div class="criteria-icon">🌿</div>
+              <div class="criteria-title">ენ.-ეფ.</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>ორ. მ. + ად. ი.</li>
+                    <li>ად. ხ. გ.; გ. ს. ა.</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>LED ≥ 70%; ენ. კლ. C ა. უ.</li>
+                    <li>BMS / ა. ენ. მ.</li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
 
-        </div>
+            <div class="criteria-card b-cls">
+              <div class="criteria-icon">🏛️</div>
+              <div class="criteria-title">ლობი, სერვ. და ინფ.</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>ფ., სუფ. ლ. + დ./უ.</li>
+                    <li>სა-ლ. ყ. სართ.</li>
+                    <li>ლ. ფ. შ.</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>კ./კ. შ.</li>
+                    <li>საკ. ოთ. ან ც.</li>
+                    <li>წ. ლ. ფ.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="criteria-card b-cls">
+              <div class="criteria-icon">🏢</div>
+              <div class="criteria-title">მართვა</div>
+              <div class="criteria-body">
+                <div class="crit-tier">
+                  <span class="tier-label tier-req">● სავალდებულო</span>
+                  <ul>
+                    <li>გ. PM კ. ა. ს. კ.</li>
+                    <li>ა. ს. + ძ. დ.</li>
+                    <li>რ. დ.</li>
+                  </ul>
+                </div>
+                <div class="crit-tier">
+                  <span class="tier-label tier-pref">◎ სასურველი</span>
+                  <ul>
+                    <li>PM კ.; ჩვ. SLA ≤ 72 სთ</li>
+                    <li>წ. ი.</li>
+                    <li>ა. ს. ო. (IT)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="criteria-card b-cls">
+              <div class="criteria-icon">📊</div>
+              <div class="criteria-title">B კლასების შედარება</div>
+              <div class="criteria-body">
+                <ul>
+                  <li><strong style="color:var(--gold-dim)">B+:</strong> ყ. სავ. + VRF HVAC + ≥ 600 მ² + 1:50 პ. + RFID + 100% გ.</li>
+                  <li><strong style="color:var(--text-secondary)">B:</strong> ყ. სავ. კრ., ≥ 400 მ², ≥ 1 ლ., ადეკ. კ. + ს. სისტ.</li>
+                  <li><strong style="color:var(--text-muted)">B/A:</strong> ნ. A-ს კ., ადგ. ა. ასაკ. გ. — A-კლ. ასაკ. შ.</li>
+                </ul>
+              </div>
+            </div>
+
+          </div><!-- /criteria-grid B -->
+        </div><!-- /crit-view-b -->
 
       </div>
     </div>
@@ -1562,6 +2005,14 @@
       if (cls === 'A-')                       return 'badge-aminus';
       if (cls === 'B/A')                      return 'badge-ba';
       return 'badge-ba';
+    }
+
+    /* ── Criteria class tab ── */
+    function switchCriteriaClass(cls) {
+      document.getElementById('crit-tab-a').classList.toggle('active', cls === 'a');
+      document.getElementById('crit-tab-b').classList.toggle('active', cls === 'b');
+      document.getElementById('crit-view-a').style.display = cls === 'a' ? 'block' : 'none';
+      document.getElementById('crit-view-b').style.display = cls === 'b' ? 'block' : 'none';
     }
 
     /* ── Render Cards ── */
