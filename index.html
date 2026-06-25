@@ -223,6 +223,7 @@
     .crit-icon.met { color: #4cba82; }
     .crit-icon.notmet { color: #e05555; }
     .crit-icon.nc { color: var(--text-muted); opacity: 0.45; }
+    .crit-icon.partial { color: var(--gold); }
     .card-phone { font-size: 12px; color: var(--text-muted); margin-bottom: 14px; }
     .card-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
@@ -713,7 +714,8 @@
     }
     .status-met    { background: rgba(76,186,130,0.12); color: #4cba82; border: 1px solid rgba(76,186,130,0.28); }
     .status-notmet { background: rgba(224,85,85,0.12);  color: #e05555; border: 1px solid rgba(224,85,85,0.28); }
-    .status-nc     { background: rgba(92,122,150,0.10); color: var(--text-muted); border: 1px solid rgba(92,122,150,0.2); }
+    .status-nc      { background: rgba(92,122,150,0.10); color: var(--text-muted); border: 1px solid rgba(92,122,150,0.2); }
+    .status-partial { background: rgba(201,168,76,0.12); color: var(--gold); border: 1px solid rgba(201,168,76,0.28); }
     .checklist-content { flex: 1; min-width: 0; }
     .checklist-title { font-size: 13.5px; font-weight: 600; color: var(--text-primary); margin-bottom: 7px; line-height: 1.4; }
     .checklist-icon { margin-right: 5px; }
@@ -1527,7 +1529,7 @@
         notes:'World Trade Center Tbilisi · Pullman 5★ · ორ-კოშკიანი კომპლექსი',
         web:'https://axistowers.ge/en',
         offering:'დაახლ. 17,000 მ² საოფ. სივ. ორ კოშ.; ბინ. 60 მ²-დ. · 7 საკონფ. ოთ. · საფიტნ.+საცურ. აუზი · კაფე-რ. · 24/7 ფიზ. დ. · Pullman 5★ · World Trade Center Tbilisi',
-        criteria:['met','nc','met','nc','nc','nc','met','nc','nc','met','nc'],
+        criteria:['met','nc','met','nc','partial','nc','met','partial','nc','met','nc'],
         phone:null,
         facade:'https://app.axistowers.ge/static/desktop/media/202402152709-uyqbp9u4eaa2uivujs8n9szapjcla88hxwice4hu.webp',
         gallery:[
@@ -1554,7 +1556,7 @@
         notes:'A+ კლასი · 17-სართ. · 6,126 მ² · 2024',
         web:'https://www.iliyard.com/',
         offering:'17-სართ. კოშ. (2024), 6,126 მ² სულ · 600 მ² საკონფ./ღ. სივ. · ბიზ.-ლ. · გარე ტ. · 50 მ² LED ეკ. · პრემ. მართვა',
-        criteria:['met','nc','nc','nc','nc','nc','nc','nc','nc','met','met'],
+        criteria:['met','partial','partial','met','partial','nc','partial','nc','partial','met','met'],
         phone:'+995 510 10 01 00',
         facade:'https://georgiatoday.ge/wp-content/uploads/2025/12/GT-WhatsApp-Image-2025-11-14-at-19.22.39.jpg',
         gallery:[
@@ -1579,7 +1581,7 @@
         notes:'City Mall-თან გადასასვლ. · Deloitte · 2020 · კლასი ✱',
         web:null,
         offering:'2020 წ. საოფ. კოშ. · City Mall-თ. პ. გ. · Deloitte Georgia ტ. · ოფ. შ. დ. ვ. დ.',
-        criteria:['met','nc','nc','nc','nc','nc','nc','nc','nc','nc','nc'],
+        criteria:['met','nc','partial','nc','nc','partial','partial','partial','nc','nc','nc'],
         phone:null,
         facade:'https://bellemaison.ge/storage/ywz1zohhfqsP0fbWzIptzqOVOxxDeE9fJa1F6qjE.webp',
         gallery:[
@@ -1602,7 +1604,7 @@
         notes:'Cushman & Wakefield მართვა · $15M ინვ. · 10,000 მ² · 300 პარკ. · 2023',
         web:null,
         offering:'10,000 მ² · 300 სადგ. (1:33 მ²) · კაფე-რ. · Oktopus Gym · ეკო · Cushman & Wakefield-ის მართვა',
-        criteria:['nc','nc','nc','nc','met','nc','nc','nc','nc','met','met'],
+        criteria:['partial','partial','nc','met','met','nc','nc','nc','partial','met','met'],
         phone:'+995 32 219 28 00',
         facade:'https://www.lamberts.info/fileadmin/_processed_/1/d/csm_Mziuri_Business_Center_LAMBERTS_01_cceb49f0ab.jpg',
         gallery:[
@@ -1627,7 +1629,7 @@
         notes:'PwC Georgia · Rezid Holding · 73–681 მ² · Kleemann ლიფ.',
         web:'https://kdr.ge/',
         offering:'ბინ. 73–681 მ², 5-★ სპ. · ც. HVAC · 6 Kleemann ლ. · PricewaterhouseCoopers Georgia ტ. · Rezid Holding',
-        criteria:['nc','nc','met','met','nc','nc','nc','nc','nc','nc','nc'],
+        criteria:['partial','nc','met','met','partial','nc','nc','nc','nc','partial','nc'],
         phone:null,
         facade:'https://kdr.ge/wp-content/uploads/2025/08/King-David-3-2-1-scaled.jpg',
         gallery:[
@@ -1652,7 +1654,7 @@
         notes:'EPAM Georgia · Tiflis Business Group',
         web:'https://www.officerent.ge/en/',
         offering:'7,000 მ² 6-სართ. (≈1,167 მ²/სართ.) · 200 სადგ. (1:35 მ²) · საკონფ. დ. · კაფე-რ. · ტ. · HVAC · EPAM Georgia ტ. · Tiflis Business Group',
-        criteria:['nc','met','met','nc','met','nc','nc','nc','nc','met','met'],
+        criteria:['nc','met','met','nc','met','nc','partial','nc','partial','met','met'],
         phone:null,
         facade:'https://www.officerent.ge/wp-content/uploads/2019/05/1.-Inoffice_kostava_Kvernadze_Cover-min.jpg',
         gallery:[
@@ -1679,7 +1681,7 @@
         notes:'Regus საერთ. ოპ. · 9,105 მ² · Redix Group შენ.',
         web:'https://www.regus.com/offices/georgia/tbilisi/office-space/tbilisi-freedom-square',
         offering:'Regus/IWG ც. (9,105 მ², Redix Group) · კ. მ. ოფ. · კოვ. · სასხდ. ოთ. · ადმ. მ. · ინტ. ჩ. · 24/7 CCTV · პ.',
-        criteria:['met','nc','nc','nc','nc','nc','met','nc','nc','met','met'],
+        criteria:['met','nc','nc','nc','partial','nc','met','partial','nc','met','met'],
         phone:null,
         facade:'https://assets.iwgplc.com/image/upload/c_fill,f_auto,q_auto,w_768,h_400,g_auto:subject//CentreImagery/4227/4227_8.jpg',
         gallery:[
@@ -1706,7 +1708,7 @@
         notes:'Tiflis Business Group · Vere Park-ი',
         web:'https://www.officerent.ge/en/',
         offering:'5-სართ. · ბინ. 300 მ²-დ. · საკონფ. დ. · HVAC · პ. · Vere Park-ს. · Tiflis Business Group',
-        criteria:['met','nc','met','nc','nc','nc','nc','nc','nc','nc','met'],
+        criteria:['met','nc','met','nc','partial','nc','partial','nc','partial','partial','met'],
         phone:null,
         facade:'https://www.officerent.ge/wp-content/uploads/2019/05/1.-Inoffice-Kosrava-43-min.jpg',
         gallery:[
@@ -1732,7 +1734,7 @@
         notes:'Tiflis Business Group · 9-სართ. · 2,400 მ²',
         web:'https://www.officerent.ge/en/project/kostava45g/',
         offering:'9-სართ. · 2,400 მ² სულ · ბინ. 20 მ²-დ. · ც. HVAC · კ.-რ. · პ. · Fit-out · Tiflis Business Group',
-        criteria:['met','notmet','met','nc','nc','nc','nc','nc','nc','met','met'],
+        criteria:['met','notmet','met','nc','partial','nc','partial','partial','partial','met','met'],
         phone:null,
         facade:'https://www.officerent.ge/wp-content/uploads/2020/01/DSC9637.jpg',
         gallery:[
@@ -1758,7 +1760,7 @@
         notes:'Tiflis Business Group · 9-სართ. · 200 მ²-დან',
         web:'https://www.officerent.ge/en/project/belinski/',
         offering:'9-სართ. · ბინ. 200 მ²-დ. · HVAC · მ.ქ.+ღ. პ. · საკონფ. · რ. · ტ. · Tiflis Business Group',
-        criteria:['met','nc','met','nc','met','nc','nc','nc','nc','met','met'],
+        criteria:['met','nc','met','nc','met','nc','partial','nc','partial','met','met'],
         phone:null,
         facade:'https://www.officerent.ge/wp-content/uploads/2019/05/8.-Inoffice-_-Chovelidze-min-2.jpg',
         gallery:[
@@ -1786,7 +1788,7 @@
         notes:'HVAC VRF · 230+ პარკ. · 2,000kW გენ. · EV დამტ. · კონფ. · ბოქსი · 24/7 დ. · კლასი ✱',
         web:'https://vakeplaza.ge/',
         offering:'≈22,000 მ² · Mitsubishi VRF HVAC · 230+ სადგ. · EV დ. · 2,000 kW გენ. · საკონფ. · ბოქ. კლ. · 24/7 CCTV+ფიზ. დ.',
-        criteria:['met','nc','met','nc','nc','met','met','nc','nc','met','nc'],
+        criteria:['met','nc','met','nc','partial','met','met','partial','partial','met','nc'],
         phone:'+995 595 59 43 42',
         facade:'https://vakeplaza.ge/Photos/DJI_1759.jpg',
         gallery:[
@@ -1812,7 +1814,7 @@
         notes:'Redix Group · 12,000 მ² · OTIS ლიფ. · მ.ქ. პარკ. · 20 მ. მეტრ. · კლასი ✱',
         web:'https://www.redix.ge/ka/rent/2',
         offering:'12,000 მ² (ოფ.+კ.) · მ.ქ. პ. · OTIS ლ. · HVAC · კ.-რ.+სუპ. · საფიტნ. · 24/7 უსაფ. · გენ.+წყ. რ. · 20 მ. მ-სდ.',
-        criteria:['met','nc','met','met','met','met','met','nc','nc','met','nc'],
+        criteria:['met','partial','met','met','met','met','met','nc','nc','met','partial'],
         phone:'+995 577 22 77 20',
         facade:'https://www.redix.ge/uploads/images/5d4980d2d2e95.jpg',
         gallery:[],
@@ -1836,7 +1838,7 @@
         notes:'Redix Group · 3-სართ. · 813 მ² · ისტ. ფასადი · კლასი ✱',
         web:'https://www.redix.ge/ka/rent/3',
         offering:'813 მ², 3-სართ. ისტ. შ. შ. ქ. · კ.-რ. I სართ-ზ. · ფინ./სამ./საინვ. კ-ების ოფ. კ.',
-        criteria:['nc','notmet','nc','nc','nc','nc','nc','nc','nc','met','nc'],
+        criteria:['partial','notmet','nc','nc','nc','nc','nc','nc','nc','met','nc'],
         phone:'+995 577 22 77 20',
         facade:'https://www.redix.ge/uploads/images/5d56966abf31d.jpg',
         gallery:[],
@@ -1855,7 +1857,7 @@
         notes:'Redix Group · 13,400 მ² ოფ. · 4-სართ. · KONE ლიფ. · HVAC · NFPA სტ.',
         web:'https://www.redix.ge/ka/rent/4',
         offering:'13,400 მ² ოფ.+124 მ² კ. · 4-სართ.+მ.ქ. პ. · KONE ლ. · HVAC · NFPA/ASHRAE სახ.-უ. · გენ.+წყ. რ. · ტ. პ.+ოფ. მ.',
-        criteria:['met','met','met','met','met','met','nc','nc','nc','nc','nc'],
+        criteria:['met','met','met','met','met','met','partial','nc','partial','nc','partial'],
         phone:'+995 577 55 51 77',
         facade:'https://www.redix.ge/uploads/images/5d497d9b44ea5.jpg',
         gallery:[],
@@ -2180,7 +2182,7 @@
         var criteriaHtml = '';
         if (b.criteria && b.criteria.length) {
           var items = b.criteria.map(function(s, idx) {
-            var icon = s === 'met' ? '✓' : s === 'notmet' ? '✗' : '—';
+            var icon = s === 'met' ? '✓' : s === 'notmet' ? '✗' : s === 'partial' ? '~' : '—';
             return '<span class="criteria-item"><span class="crit-icon ' + s + '">' + icon + '</span><span>' + CRITERIA_LABELS[idx] + '</span></span>';
           }).join('');
           criteriaHtml = '<div class="card-criteria"><div class="card-criteria-label">A-კლასის კრიტ.</div><div class="criteria-list">' + items + '</div></div>';
@@ -2229,7 +2231,7 @@
         var critCell = '';
         if (b.criteria && b.criteria.length) {
           var items = b.criteria.map(function(s, idx) {
-            var icon = s === 'met' ? '✓' : s === 'notmet' ? '✗' : '—';
+            var icon = s === 'met' ? '✓' : s === 'notmet' ? '✗' : s === 'partial' ? '~' : '—';
             return '<span class="criteria-item"><span class="crit-icon ' + s + '">' + icon + '</span><span>' + CRITERIA_LABELS[idx] + '</span></span>';
           }).join('');
           critCell = '<div class="criteria-list">' + items + '</div>';
@@ -2299,9 +2301,10 @@
       CRITERIA_FULL.forEach(function(crit, ci) {
         var raw = (b.criteria && b.criteria[ci]) ? b.criteria[ci] : 'nc';
         var statusLabel, statusClass;
-        if (raw === 'met')    { statusLabel = '✓ დაკმაყოფილდება';     statusClass = 'status-met'; }
-        else if (raw === 'notmet') { statusLabel = '✗ არ დაკმ.'; statusClass = 'status-notmet'; }
-        else                  { statusLabel = '— ვერ დასტ.'; statusClass = 'status-nc'; }
+        if (raw === 'met')         { statusLabel = '✓ დაკმაყოფილდება'; statusClass = 'status-met'; }
+        else if (raw === 'notmet') { statusLabel = '✗ არ დაკმ.';       statusClass = 'status-notmet'; }
+        else if (raw === 'partial'){ statusLabel = '~ ნაწილობრივ';      statusClass = 'status-partial'; }
+        else                       { statusLabel = '— ვერ დასტ.';      statusClass = 'status-nc'; }
         var subHtml = crit.points.map(function(p){ return '<li>' + p + '</li>'; }).join('');
         var item = document.createElement('div');
         item.className = 'checklist-item';
