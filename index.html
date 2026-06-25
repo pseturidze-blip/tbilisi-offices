@@ -120,6 +120,23 @@
 
     .kpi-unit { font-size: 13px; color: var(--gold-light); margin-top: 5px; }
 
+    .kpi-groups { display: flex; flex-direction: column; gap: 20px; }
+
+    .kpi-group-label {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      padding-left: 10px;
+      border-left: 3px solid currentColor;
+    }
+    .kpi-group-label--a { color: var(--gold); }
+    .kpi-group-label--b { color: #7ba3c4; }
+
+    .kpi-card--b { border-top-color: #7ba3c4; }
+    .kpi-card--b .kpi-unit { color: #9bbcd6; }
+
     /* ── View Tabs ── */
     .view-tabs {
       display: flex;
@@ -745,6 +762,7 @@
     @media (max-width: 900px) {
       .kpi-grid { grid-template-columns: 1fr; gap: 14px; }
       .kpi-card { border-top: none; border-left: 3px solid var(--gold); }
+      .kpi-card--b { border-top: none; border-left: 3px solid #7ba3c4; }
     }
 
     @media (max-width: 720px) {
@@ -779,22 +797,52 @@
       <!-- KPI Cards -->
       <section class="kpi-section">
         <p class="section-eyebrow">ბაზრის ძირითადი მაჩვენებლები</p>
-        <div class="kpi-grid">
-          <div class="kpi-card">
-            <p class="kpi-label">საშუალო ქირა</p>
-            <p class="kpi-value">$22 &ndash; $25</p>
-            <p class="kpi-unit">მ&sup2; / თვე</p>
+        <div class="kpi-groups">
+
+          <!-- A კლასი -->
+          <div class="kpi-group">
+            <p class="kpi-group-label kpi-group-label--a">A კლასი</p>
+            <div class="kpi-grid">
+              <div class="kpi-card">
+                <p class="kpi-label">საიჯარო ფასი</p>
+                <p class="kpi-value">$22 &ndash; $25</p>
+                <p class="kpi-unit">მ&sup2; / თვე</p>
+              </div>
+              <div class="kpi-card">
+                <p class="kpi-label">ყიდვის ფასი</p>
+                <p class="kpi-value">~$3,000</p>
+                <p class="kpi-unit">მ&sup2;</p>
+              </div>
+              <div class="kpi-card">
+                <p class="kpi-label">A-კლასის სეგმენტი</p>
+                <p class="kpi-value">14 ობიექტი</p>
+                <p class="kpi-unit">2025 წ. მონაცემი</p>
+              </div>
+            </div>
           </div>
-          <div class="kpi-card">
-            <p class="kpi-label">ყიდვის ფასი (A კლასი)</p>
-            <p class="kpi-value">~$3,000</p>
-            <p class="kpi-unit">მ&sup2;</p>
+
+          <!-- B კლასი -->
+          <div class="kpi-group">
+            <p class="kpi-group-label kpi-group-label--b">B კლასი</p>
+            <div class="kpi-grid">
+              <div class="kpi-card kpi-card--b">
+                <p class="kpi-label">საიჯარო ფასი</p>
+                <p class="kpi-value">$12 &ndash; $18</p>
+                <p class="kpi-unit">მ&sup2; / თვე</p>
+              </div>
+              <div class="kpi-card kpi-card--b">
+                <p class="kpi-label">ყიდვის ფასი</p>
+                <p class="kpi-value">~$1,500</p>
+                <p class="kpi-unit">მ&sup2;</p>
+              </div>
+              <div class="kpi-card kpi-card--b">
+                <p class="kpi-label">B-კლასის სეგმენტი</p>
+                <p class="kpi-value">9 ობიექტი</p>
+                <p class="kpi-unit">2025 წ. მონაცემი</p>
+              </div>
+            </div>
           </div>
-          <div class="kpi-card">
-            <p class="kpi-label">A-კლასის სეგმენტი</p>
-            <p class="kpi-value">14 ობიექტი</p>
-            <p class="kpi-unit">2025 წ. მონაცემი</p>
-          </div>
+
         </div>
       </section>
 
