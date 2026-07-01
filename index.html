@@ -242,6 +242,10 @@
     .crit-icon.nc { color: var(--text-muted); opacity: 0.45; }
     .crit-icon.partial { color: var(--gold); }
     .card-phone { font-size: 12px; color: var(--text-muted); margin-bottom: 14px; }
+    .card-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 10px; margin-bottom: 12px; }
+    .card-info-item { }
+    .card-info-label { font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 2px; }
+    .card-info-value { font-size: 12px; color: var(--text-secondary); }
     .card-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
     /* ── Badges (shared) ── */
@@ -873,6 +877,8 @@
               <col class="col-address">
               <col class="col-district">
               <col class="col-class">
+              <col class="col-condition">
+              <col class="col-rent">
               <col class="col-notes">
               <col class="col-web">
               <col class="col-criteria">
@@ -883,6 +889,8 @@
                 <th>მისამართი</th>
                 <th>რაიონი</th>
                 <th>კლასი</th>
+                <th>მდგომარეობა</th>
+                <th>საიჯარო ფასი</th>
                 <th>შენიშვნა</th>
                 <th>ვებსაიტი</th>
                 <th>A-კლ. კრიტ.</th>
@@ -2094,6 +2102,12 @@
       },
     ];
 
+    buildings.forEach(function(b) {
+      b.condition  = 'გარემონტებული';
+      b.rent       = '$30–$33 / მ² / თვეში';
+      b.serviceFee = '+$5 / მ² / თვეში';
+    });
+
     var CRITERIA_LABELS = [
       'Location',
       'Floor Area / Height',
@@ -2359,6 +2373,12 @@
         el.className = 'card';
         el.title = 'დააწკაპუნეთ დეტალებისთვის';
         el.addEventListener('click', (function(idx){ return function(){ openDetail(idx); }; })(i));
+        var infoHtml =
+          '<div class="card-info-grid">' +
+            '<div class="card-info-item"><div class="card-info-label">მდგომარეობა</div><div class="card-info-value">' + b.condition + '</div></div>' +
+            '<div class="card-info-item"><div class="card-info-label">საიჯარო ფასი</div><div class="card-info-value">' + b.rent + '</div></div>' +
+            '<div class="card-info-item"><div class="card-info-label">სერვისის საფასური</div><div class="card-info-value">' + b.serviceFee + '</div></div>' +
+          '</div>';
         el.innerHTML =
           '<div class="card-image">' + imgBlock + '</div>' +
           '<div class="card-body">' +
@@ -2368,6 +2388,7 @@
               '<span class="badge badge-district">' + b.district + '</span>' +
               '<span class="badge ' + clsToCSS(b.cls) + '">' + b.cls + '</span>' +
             '</div>' +
+            infoHtml +
             '<p class="card-notes">' + b.notes + '</p>' +
             offering +
             criteriaHtml +
@@ -2397,13 +2418,15 @@
           critCell = '<span style="color:var(--text-muted);font-size:12px">—</span>';
         }
         tr.innerHTML =
-          '<td class="td-building">' + b.name + '</td>' +
-          '<td class="td-address">'  + b.address + '</td>' +
-          '<td class="td-district">' + b.district + '</td>' +
+          '<td class="td-building">'   + b.name + '</td>' +
+          '<td class="td-address">'    + b.address + '</td>' +
+          '<td class="td-district">'   + b.district + '</td>' +
           '<td><span class="badge badge-sq ' + clsToCSS(b.cls) + '">' + b.cls + '</span></td>' +
-          '<td class="td-notes">'    + b.notes + (b.phone ? ' · ' + b.phone : '') + '</td>' +
-          '<td class="td-web">'      + webCell + '</td>' +
-          '<td>'                     + critCell + '</td>';
+          '<td style="font-size:12px">' + b.condition + '</td>' +
+          '<td style="font-size:12px;white-space:nowrap">' + b.rent + '<br><span style="color:var(--text-muted)">' + b.serviceFee + '</span></td>' +
+          '<td class="td-notes">'      + b.notes + (b.phone ? ' · ' + b.phone : '') + '</td>' +
+          '<td class="td-web">'        + webCell + '</td>' +
+          '<td>'                       + critCell + '</td>';
         tbody.appendChild(tr);
       });
     }
