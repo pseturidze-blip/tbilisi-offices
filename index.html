@@ -785,7 +785,7 @@
 
   <header>
     <div class="container">
-      <p class="header-eyebrow">Real Estate Intelligence &mdash; Tbilisi, Georgia</p>
+      <p class="header-eyebrow">უძრავი ქონების ბაზრის ანალიტიკა &mdash; თბილისი, საქართველო</p>
       <h1>თბილისის <span>A კლასის</span> საოფისე შენობები</h1>
       <div class="header-divider"></div>
       <p class="header-subtitle">კომერციული უძრავი ქონების კატალოგი &middot; 2025</p>
@@ -899,8 +899,8 @@
       <div class="container">
 
         <div class="criteria-class-tabs">
-          <button class="crit-cls-btn active" id="crit-tab-a" onclick="switchCriteriaClass('a')">Class A</button>
-          <button class="crit-cls-btn"        id="crit-tab-b" onclick="switchCriteriaClass('b')">Class B</button>
+          <button class="crit-cls-btn active" id="crit-tab-a" onclick="switchCriteriaClass('a')">A კლასი</button>
+          <button class="crit-cls-btn"        id="crit-tab-b" onclick="switchCriteriaClass('b')">B კლასი</button>
         </div>
 
         <!-- ══ A-CLASS ══ -->
@@ -2342,7 +2342,7 @@
             var icon = s === 'met' ? '✓' : s === 'notmet' ? '✗' : s === 'partial' ? '~' : '—';
             return '<span class="criteria-item"><span class="crit-icon ' + s + '">' + icon + '</span><span>' + CRITERIA_LABELS[idx] + '</span></span>';
           }).join('');
-          var critLabel = b.cls.startsWith('B') ? 'B-Class Criteria' : 'A-Class Criteria';
+          var critLabel = b.cls.startsWith('B') ? 'B-კლასის კრიტერიუმები' : 'A-კლასის კრიტერიუმები';
           criteriaHtml = '<div class="card-criteria"><div class="card-criteria-label">' + critLabel + '</div><div class="criteria-list">' + items + '</div></div>';
         }
         var webBtn = b.web
