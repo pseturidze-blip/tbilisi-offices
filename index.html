@@ -93,7 +93,7 @@
 
     .kpi-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 20px;
     }
 
@@ -813,7 +813,7 @@
             <div class="kpi-grid">
               <div class="kpi-card">
                 <p class="kpi-label">საიჯარო ფასი</p>
-                <p class="kpi-value">$22 &ndash; $25</p>
+                <p class="kpi-value" id="kpi-a-rent">$22 &ndash; $25</p>
                 <p class="kpi-unit">მ&sup2; / თვე</p>
               </div>
               <div class="kpi-card">
@@ -822,8 +822,13 @@
                 <p class="kpi-unit">მ&sup2;</p>
               </div>
               <div class="kpi-card">
+                <p class="kpi-label">საშუალო სერვისის საფასური</p>
+                <p class="kpi-value" id="kpi-a-fee">&mdash;</p>
+                <p class="kpi-unit">მ&sup2; / თვე</p>
+              </div>
+              <div class="kpi-card">
                 <p class="kpi-label">A-კლასის სეგმენტი</p>
-                <p class="kpi-value">14 ობიექტი</p>
+                <p class="kpi-value" id="kpi-a-count">14 ობიექტი</p>
                 <p class="kpi-unit">2025 წ. მონაცემი</p>
               </div>
             </div>
@@ -835,7 +840,7 @@
             <div class="kpi-grid">
               <div class="kpi-card kpi-card--b">
                 <p class="kpi-label">საიჯარო ფასი</p>
-                <p class="kpi-value">$12 &ndash; $18</p>
+                <p class="kpi-value" id="kpi-b-rent">$12 &ndash; $18</p>
                 <p class="kpi-unit">მ&sup2; / თვე</p>
               </div>
               <div class="kpi-card kpi-card--b">
@@ -844,8 +849,13 @@
                 <p class="kpi-unit">მ&sup2;</p>
               </div>
               <div class="kpi-card kpi-card--b">
+                <p class="kpi-label">საშუალო სერვისის საფასური</p>
+                <p class="kpi-value" id="kpi-b-fee">&mdash;</p>
+                <p class="kpi-unit">მ&sup2; / თვე</p>
+              </div>
+              <div class="kpi-card kpi-card--b">
                 <p class="kpi-label">B-კლასის სეგმენტი</p>
-                <p class="kpi-value">9 ობიექტი</p>
+                <p class="kpi-value" id="kpi-b-count">9 ობიექტი</p>
                 <p class="kpi-unit">2025 წ. მონაცემი</p>
               </div>
             </div>
@@ -2135,6 +2145,66 @@
       b.serviceFee = b.serviceFee || '+$5 / მ² / თვეში';
     });
 
+    /* ── KPI aggregation (computed live from buildings[]) ── */
+    function extractNumbers(str) {
+      var m = str.match(/\d[\d,]*(?:\.\d+)?/g);
+      return m ? m.map(function(n) { return parseFloat(n.replace(/,/g, '')); }) : [];
+    }
+
+    function renderKPIs() {
+      var groups = { a: [], b: [] };
+      buildings.forEach(function(b) {
+        (b.cls.charAt(0) === 'B' ? groups.b : groups.a).push(b);
+      });
+
+      var excluded = { a: { rent: [], fee: [] }, b: { rent: [], fee: [] } };
+
+      function rentRange(list, key) {
+        var min = Infinity, max = -Infinity;
+        list.forEach(function(b) {
+          if (b.rent.indexOf('მ²') === -1) { excluded[key].rent.push(b.name); return; }
+          var nums = extractNumbers(b.rent);
+          if (!nums.length) { excluded[key].rent.push(b.name); return; }
+          min = Math.min(min, Math.min.apply(null, nums));
+          max = Math.max(max, Math.max.apply(null, nums));
+        });
+        return min === Infinity ? null : { min: min, max: max };
+      }
+
+      function avgFee(list, key) {
+        var vals = [];
+        list.forEach(function(b) {
+          if (b.serviceFee.indexOf('$') === -1) { excluded[key].fee.push(b.name); return; }
+          var nums = extractNumbers(b.serviceFee);
+          if (!nums.length) { excluded[key].fee.push(b.name); return; }
+          vals.push(nums.reduce(function(s, n) { return s + n; }, 0) / nums.length);
+        });
+        return vals.length ? vals.reduce(function(s, n) { return s + n; }, 0) / vals.length : null;
+      }
+
+      function fmtRange(r) {
+        if (!r) return '—';
+        return r.min === r.max ? ('$' + r.min) : ('$' + r.min + ' – $' + r.max);
+      }
+      function fmtFee(v) {
+        return v == null ? '—' : ('+$' + Math.round(v));
+      }
+
+      var aRent = rentRange(groups.a, 'a'), bRent = rentRange(groups.b, 'b');
+      var aFee  = avgFee(groups.a, 'a'),    bFee  = avgFee(groups.b, 'b');
+
+      document.getElementById('kpi-a-rent').textContent  = fmtRange(aRent);
+      document.getElementById('kpi-b-rent').textContent  = fmtRange(bRent);
+      document.getElementById('kpi-a-fee').textContent   = fmtFee(aFee);
+      document.getElementById('kpi-b-fee').textContent   = fmtFee(bFee);
+      document.getElementById('kpi-a-count').textContent = groups.a.length + ' ობიექტი';
+      document.getElementById('kpi-b-count').textContent = groups.b.length + ' ობიექტი';
+
+      if (excluded.a.rent.length || excluded.b.rent.length || excluded.a.fee.length || excluded.b.fee.length) {
+        console.info('KPI calculation excluded (non per-m² or non-numeric):', excluded);
+      }
+    }
+
     var CRITERIA_LABELS = [
       'მდებარეობა',
       'ფართი / სიმაღლე',
@@ -2598,6 +2668,7 @@
 
     renderCards();
     renderTable();
+    renderKPIs();
   </script>
 </body>
 </html>
