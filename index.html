@@ -246,6 +246,7 @@
     .card-info-item { }
     .card-info-label { font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 2px; }
     .card-info-value { font-size: 12px; color: var(--text-secondary); }
+    .card-price-note { font-size: 11.5px; color: var(--gold-light); line-height: 1.55; margin: -4px 0 12px; padding: 8px 10px; background: rgba(201,168,76,0.10); border: 1px solid rgba(201,168,76,0.35); border-radius: 4px; }
     .card-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
     /* ── Badges (shared) ── */
@@ -341,9 +342,11 @@
     col.col-address   { width: 15%; }
     col.col-district  { width: 9%; }
     col.col-class     { width: 7%; }
-    col.col-notes     { width: 18%; }
-    col.col-web       { width: 11%; }
-    col.col-criteria  { width: 27%; }
+    col.col-condition { width: 8%; }
+    col.col-rent      { width: 11%; }
+    col.col-notes     { width: 12%; }
+    col.col-web       { width: 8%; }
+    col.col-criteria  { width: 17%; }
 
     thead {
       position: sticky;
@@ -1571,7 +1574,10 @@
         address:'ილია ჭავჭავაძის გამზ. 37მ',
         district:'ვაკე',
         cls:'A+',
-        notes:'World Trade Center Tbilisi · Pullman 5★ · ორ-კოშკიანი კომპლექსი',
+        notes:'World Trade Center Tbilisi · Pullman 5★ · ორ-კოშკიანი კომპლექსი · დღგ ცალკე',
+        condition:'გარემონტებული / მწვანე კარკასი',
+        rent:'$25–$35 / მ² / თვეში',
+        serviceFee:'+$5 / მ² / თვეში',
         web:'https://axistowers.ge/en',
         offering:'დაახლ. 17,000 მ² საოფ. სივ. ორ კოშ.; ბინ. 60 მ²-დ. · 7 საკონფ. ოთ. · საფიტნ.+საცურ. აუზი · კაფე-რ. · 24/7 ფიზ. დ. · Pullman 5★ · World Trade Center Tbilisi',
         criteria:['met','nc','met','nc','partial','nc','met','partial','nc','met','nc'],
@@ -1627,7 +1633,10 @@
         address:'ვაჟა-ფშაველას გამზ. 70',
         district:'საბურთალო',
         cls:'A',
-        notes:'City Mall-თან გადასასვლ. · Deloitte · 2020 · კლასი ✱',
+        notes:'City Mall-თან გადასასვლ. · Deloitte · 2020 · კლასი ✱ · დღგ ცალკე',
+        condition:'გარემონტებული',
+        rent:'$30–$35 / მ² / თვეში',
+        serviceFee:'+$5 / მ² / თვეში',
         web:null,
         offering:'2020 წ. საოფ. კოშ. · City Mall-თ. პ. გ. · Deloitte Georgia ტ. · ოფ. შ. დ. ვ. დ.',
         criteria:['met','nc','partial','nc','nc','partial','partial','partial','nc','nc','nc'],
@@ -1650,7 +1659,9 @@
         address:'ჭ. ამირეჯიბის გზ. 2',
         district:'ვაკე / საბურთალო',
         cls:'A',
-        notes:'Cushman & Wakefield მართვა · $15M ინვ. · 10,000 მ² · 300 პარკ. · 2023',
+        notes:'Cushman & Wakefield მართვა · $15M ინვ. · 10,000 მ² · 300 პარკ. · 2023 · დღგ ცალკე',
+        rent:'$23–$25 / მ² / თვეში',
+        serviceFee:'+$4 / მ² / თვეში',
         web:null,
         offering:'10,000 მ² · 300 სადგ. (1:33 მ²) · კაფე-რ. · Oktopus Gym · ეკო · Cushman & Wakefield-ის მართვა',
         criteria:['partial','partial','nc','met','met','nc','nc','nc','partial','met','met'],
@@ -1676,6 +1687,8 @@
         district:'საბურთალო',
         cls:'A',
         notes:'PwC Georgia · Rezid Holding · 73–681 მ² · Kleemann ლიფ.',
+        rent:'$35–$45 / მ² / თვეში, დღგს ჩათვლით',
+        serviceFee:'+$4–$6 / მ² / თვეში',
         web:'https://kdr.ge/',
         offering:'ბინ. 73–681 მ², 5-★ სპ. · ც. HVAC · 6 Kleemann ლ. · PricewaterhouseCoopers Georgia ტ. · Rezid Holding',
         criteria:['partial','nc','met','met','partial','nc','nc','nc','nc','partial','nc'],
@@ -1785,6 +1798,10 @@
         district:'სოლოლაკი',
         cls:'A',
         notes:'Regus საერთ. ოპ. · 9,105 მ² · Redix Group შენ.',
+        condition:'სრული რემონტი, ავეჯით',
+        rent:'$85–$110 / სამუშაო ადგილი / თვეში',
+        serviceFee:'ფასში ჩათვლილია',
+        priceNote:'ეს სივრცე გაიცემა არა კვადრატული მეტრით, არამედ სამუშაო ადგილების (დესკების) რაოდენობით — მაგ.: 4-კაციანი ოფისი ≈ $1,700/თვეში',
         web:'https://www.regus.com/offices/georgia/tbilisi/office-space/tbilisi-freedom-square',
         offering:'Regus/IWG ც. (9,105 მ², Redix Group) · კ. მ. ოფ. · კოვ. · სასხდ. ოთ. · ადმ. მ. · ინტ. ჩ. · 24/7 CCTV · პ.',
         criteria:['met','nc','nc','nc','partial','nc','met','partial','nc','met','met'],
@@ -1838,6 +1855,8 @@
         district:'ვერა',
         cls:'A-',
         notes:'Tiflis Business Group · 9-სართ. · 2,400 მ²',
+        rent:'$20–$25 / მ² / თვეში',
+        serviceFee:'+$3–$4 / მ² / თვეში',
         web:'https://www.officerent.ge/en/project/kostava45g/',
         offering:'9-სართ. · 2,400 მ² სულ · ბინ. 20 მ²-დ. · ც. HVAC · კ.-რ. · პ. · Fit-out · Tiflis Business Group',
         criteria:['met','notmet','met','nc','partial','nc','partial','partial','partial','met','met'],
@@ -1892,6 +1911,8 @@
         district:'ვაკე',
         cls:'A',
         notes:'HVAC VRF · 230+ პარკ. · 2,000kW გენ. · EV დამტ. · კონფ. · ბოქსი · 24/7 დ. · კლასი ✱',
+        rent:'$25–$30 / მ² / თვეში',
+        serviceFee:'+$5 / მ² / თვეში',
         web:'https://vakeplaza.ge/',
         offering:'≈22,000 მ² · Mitsubishi VRF HVAC · 230+ სადგ. · EV დ. · 2,000 kW გენ. · საკონფ. · ბოქ. კლ. · 24/7 CCTV+ფიზ. დ.',
         criteria:['met','nc','met','nc','partial','met','met','partial','partial','met','nc'],
@@ -1984,6 +2005,8 @@
         district:'ცენტრი',
         cls:'B',
         notes:'Google 4.6★ · ცენტრალური მდებარეობა · თანამედროვე არქიტექტურა',
+        rent:'$18–$23 / მ² / თვეში',
+        serviceFee:'+$3–$4 / მ² / თვეში',
         web:'http://meidangroup.ge',
         offering:'ც. კონდ./გათბობა · ლიფტი · რეცეფცია · 24/7 უსაფ. · ოპტ. ინ. · პროფ. მ.',
         criteria:['met','met','met','met','met','nc','met','met','nc','met','met'],
@@ -2009,6 +2032,8 @@
         district:'საბურთალო',
         cls:'B',
         notes:'Google 4.7★ · საბურთალო · თანამედროვე საოფისე შენობა',
+        rent:'$16–$22 / მ² / თვეში',
+        serviceFee:'+$2–$3 / მ² / თვეში',
         web:'https://www.newatrium.ge/en',
         offering:'ც. კონდ./გათბობა · ლიფტი · რეცეფცია · კაფე · 24/7 უსაფ. · ოპტ. ინ. · პროფ. მ.',
         criteria:['met','met','met','met','met','nc','met','met','nc','met','met'],
@@ -2086,6 +2111,8 @@
         district:'საბურთალო',
         cls:'B',
         notes:'8-სართ. საოფ. შენობა · ც. გათბ./ვენტ./კონდ. · 80 პარკ. ადგ.',
+        rent:'$16–$22 / მ² / თვეში',
+        serviceFee:'+$2–$3 / მ² / თვეში',
         web:'https://www.officerent.ge/en/project/vaja/',
         offering:'8-სართ. საოფ. შენ. · ც. გათბ./ვენტ./კონდ. · 80 პარკ. ადგ. · ლიფტი · პ. სართ. კაფე',
         criteria:['met','met','met','met','met','nc','nc','nc','nc','met','nc'],
@@ -2103,9 +2130,9 @@
     ];
 
     buildings.forEach(function(b) {
-      b.condition  = 'გარემონტებული';
-      b.rent       = '$30–$33 / მ² / თვეში';
-      b.serviceFee = '+$5 / მ² / თვეში';
+      b.condition  = b.condition  || 'გარემონტებული';
+      b.rent       = b.rent       || '$30–$33 / მ² / თვეში';
+      b.serviceFee = b.serviceFee || '+$5 / მ² / თვეში';
     });
 
     var CRITERIA_LABELS = [
@@ -2378,7 +2405,8 @@
             '<div class="card-info-item"><div class="card-info-label">მდგომარეობა</div><div class="card-info-value">' + b.condition + '</div></div>' +
             '<div class="card-info-item"><div class="card-info-label">საიჯარო ფასი</div><div class="card-info-value">' + b.rent + '</div></div>' +
             '<div class="card-info-item"><div class="card-info-label">სერვისის საფასური</div><div class="card-info-value">' + b.serviceFee + '</div></div>' +
-          '</div>';
+          '</div>' +
+          (b.priceNote ? '<div class="card-price-note">⚠ ' + b.priceNote + '</div>' : '');
         el.innerHTML =
           '<div class="card-image">' + imgBlock + '</div>' +
           '<div class="card-body">' +
@@ -2423,7 +2451,9 @@
           '<td class="td-district">'   + b.district + '</td>' +
           '<td><span class="badge badge-sq ' + clsToCSS(b.cls) + '">' + b.cls + '</span></td>' +
           '<td style="font-size:12px">' + b.condition + '</td>' +
-          '<td style="font-size:12px;white-space:nowrap">' + b.rent + '<br><span style="color:var(--text-muted)">' + b.serviceFee + '</span></td>' +
+          '<td style="font-size:12px">' + b.rent + '<br><span style="color:var(--text-muted)">' + b.serviceFee + '</span>' +
+            (b.priceNote ? '<div style="color:var(--gold-light);margin-top:6px;max-width:240px">⚠ ' + b.priceNote + '</div>' : '') +
+          '</td>' +
           '<td class="td-notes">'      + b.notes + (b.phone ? ' · ' + b.phone : '') + '</td>' +
           '<td class="td-web">'        + webCell + '</td>' +
           '<td>'                       + critCell + '</td>';
