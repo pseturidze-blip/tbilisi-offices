@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>კომუნალური ინფორმაცია · კომერციული ფართი</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:      #1B2B3E;
+    --navy-lt:   #2C4260;
+    --navy-glow: #35507A;
+    --text:      #1E2D3C;
+    --sub:       #697685;
+    --rule:      #E1DED7;
+    --bg-page:   #F5F3EF;
+    --card-bg:   #FFFFFF;
+
+    --elec:      #C4780C;
+    --elec-lt:   #E0A23D;
+    --elec-bg:   #FDF3E4;
+    --water:     #1768A0;
+    --water-lt:  #3A93CC;
+    --water-bg:  #EAF3FA;
+    --gas:       #A83020;
+    --gas-lt:    #C85341;
+    --gas-bg:    #FBEEEC;
+    --inet:      #3F5878;
+    --inet-lt:   #62809F;
+    --inet-bg:   #EEF1F5;
+    --facade:    #3A6045;
+    --facade-lt: #5C8A66;
+    --facade-bg: #EAF3EC;
+  }
+
+  body {
+    font-family: 'Noto Sans Georgian', 'BPG Arial', 'DejaVu Sans', Arial, sans-serif;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% 0%, rgba(27,43,62,0.05), transparent 60%),
+      var(--bg-page);
+    color: var(--text);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ─────────────────────────────────────────── */
+
+  .top-bar {
+    background:
+      radial-gradient(circle at 15% 25%, rgba(255,255,255,0.06), transparent 45%),
+      radial-gradient(circle at 92% 110%, rgba(255,255,255,0.05), transparent 50%),
+      linear-gradient(120deg, var(--navy) 0%, var(--navy-lt) 100%);
+    color: #fff;
+    box-shadow: 0 10px 28px -14px rgba(11,18,27,0.55);
+    position: relative;
+  }
+
+  .top-bar::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--elec-lt), var(--water-lt), var(--gas-lt), var(--facade-lt));
+    opacity: 0.85;
+  }
+
+  .top-bar-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 36px 24px 32px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .top-bar h1 {
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+  }
+
+  .top-bar p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.66);
+    margin-top: 7px;
+    letter-spacing: 0.2px;
+  }
+
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    color: var(--navy);
+    border: none;
+    padding: 11px 20px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    border-radius: 6px;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px -4px rgba(11,18,27,0.35);
+    transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+    flex-shrink: 0;
+  }
+
+  .btn-download:hover  {
+    background: #EDEBE5;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px -4px rgba(11,18,27,0.4);
+  }
+  .btn-download:active { transform: translateY(1px); box-shadow: 0 2px 8px -2px rgba(11,18,27,0.35); }
+
+  .btn-download svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+  /* ── LAYOUT ─────────────────────────────────────────── */
+
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 24px 56px;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+
+  .grid-1 { margin-bottom: 18px; }
+
+  @media (max-width: 680px) {
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+
+  /* ── CARDS ──────────────────────────────────────────── */
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-top: none;
+    border-radius: 10px;
+    padding: 23px 24px 24px;
+    box-shadow: 0 1px 2px rgba(27,43,62,0.04), 0 6px 20px -14px rgba(27,43,62,0.18);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(27,43,62,0.05), 0 14px 28px -14px rgba(27,43,62,0.24);
+  }
+
+  .card--elec::before   { background: linear-gradient(90deg, var(--elec),   var(--elec-lt));   }
+  .card--water::before  { background: linear-gradient(90deg, var(--water),  var(--water-lt));  }
+  .card--gas::before    { background: linear-gradient(90deg, var(--gas),    var(--gas-lt));    }
+  .card--inet::before   { background: linear-gradient(90deg, var(--inet),   var(--inet-lt));   }
+  .card--facade::before { background: linear-gradient(90deg, var(--facade), var(--facade-lt)); }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+  }
+
+  .icon-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: inset 0 0 0 1px rgba(27,43,62,0.03);
+  }
+
+  .icon-badge svg { width: 18px; height: 18px; }
+
+  .card--elec   .icon-badge { background: linear-gradient(145deg, var(--elec-bg), #FBE7C6);   color: var(--elec);   }
+  .card--water  .icon-badge { background: linear-gradient(145deg, var(--water-bg), #D9EBF7);  color: var(--water);  }
+  .card--gas    .icon-badge { background: linear-gradient(145deg, var(--gas-bg), #F8DFDA);    color: var(--gas);    }
+  .card--inet   .icon-badge { background: linear-gradient(145deg, var(--inet-bg), #E2E7EE);   color: var(--inet);   }
+  .card--facade .icon-badge { background: linear-gradient(145deg, var(--facade-bg), #DCEDE0); color: var(--facade); }
+
+  .card-title {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.1px;
+  }
+
+  .card-title-en {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--sub);
+    letter-spacing: 0.2px;
+    margin-top: 1px;
+  }
+
+  .card-body p {
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .card-body p:last-child { margin-bottom: 0; }
+
+  /* ── ABONENT NUMBER FIELD ───────────────────────────── */
+
+  .abon-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: var(--bg-page);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-top: 4px;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .abon-field:hover {
+    background: #fff;
+    border-color: #D3CFC5;
+  }
+
+  .abon-label {
+    font-size: 12.5px;
+    color: var(--sub);
+    font-weight: 600;
+    letter-spacing: 0.1px;
+  }
+
+  .abon-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 0.5px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .abon-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .abon-row .abon-field {
+    flex: 1;
+    min-width: 150px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .abon-row--power {
+    margin-top: 10px;
+  }
+
+  .abon-field--compact {
+    background: transparent;
+    border-style: dashed;
+    padding: 8px 14px;
+  }
+
+  .abon-field--compact .abon-label {
+    font-size: 11.5px;
+  }
+
+  .abon-field--compact .abon-value {
+    font-size: 14.5px;
+  }
+
+  /* ── IDENTIFICATION BLOCK ───────────────────────────── */
+
+  .id-block {
+    background: linear-gradient(135deg, #FBFAF7 0%, #F5F1E9 100%);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--navy);
+    border-radius: 6px;
+    padding: 22px 26px;
+    margin-bottom: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    box-shadow: 0 6px 20px -16px rgba(27,43,62,0.3);
+  }
+
+  .id-block-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--sub);
+    margin-bottom: 4px;
+  }
+
+  .id-block-project {
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: -0.2px;
+  }
+
+  .id-block-meta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .id-field {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 8px 18px;
+    text-align: center;
+    min-width: 78px;
+    box-shadow: 0 1px 2px rgba(27,43,62,0.04);
+    transition: box-shadow 0.15s, border-color 0.15s;
+  }
+
+  .id-field:hover {
+    border-color: #CFCABE;
+    box-shadow: 0 2px 6px rgba(27,43,62,0.07);
+  }
+
+  .id-field-value--placeholder {
+    font-weight: 500;
+    font-style: italic;
+    color: var(--sub);
+  }
+
+  .id-field-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--sub);
+    margin-bottom: 3px;
+  }
+
+  .id-field-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  @media (max-width: 560px) {
+    .id-block { flex-direction: column; align-items: flex-start; }
+    .id-block-meta { width: 100%; }
+    .id-field { flex: 1; }
+  }
+
+  /* ── REISSUE (გადაფორმება) SUBSECTION ───────────────── */
+
+  .reissue {
+    margin-top: 14px;
+    background: var(--bg-page);
+    border-left: 3px solid var(--rule);
+    border-radius: 0 6px 6px 0;
+    padding: 11px 14px 13px;
+    transition: border-color 0.15s;
+  }
+
+  .card--elec  .reissue { border-left-color: var(--elec-lt);  }
+  .card--water .reissue { border-left-color: var(--water-lt); }
+
+  .reissue-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--sub);
+    margin-bottom: 6px;
+  }
+
+  .reissue p {
+    font-size: 13px;
+    color: var(--sub);
+    margin-bottom: 8px;
+  }
+
+  .reissue-mail {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .reissue-mail svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .reissue-mail { transition: opacity 0.15s; }
+  .reissue-mail:hover { text-decoration: underline; opacity: 0.8; }
+
+  .card--elec  .reissue-mail { color: var(--elec);  }
+  .card--water .reissue-mail { color: var(--water); }
+
+  /* ── NOTES ──────────────────────────────────────────── */
+
+  .note {
+    border-radius: 5px;
+    padding: 12px 14px;
+    margin-top: 12px;
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+
+  .note--info {
+    background: var(--bg-page);
+    border-left: 3px solid var(--rule);
+    color: var(--sub);
+  }
+
+  .note--warn {
+    background: linear-gradient(135deg, #FBEEEC, #FCF2E9);
+    border: 1px solid #EAC3BC;
+    border-left: 4px solid var(--gas);
+    border-radius: 6px;
+    color: #6B2F26;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    box-shadow: 0 2px 8px -6px rgba(168,48,32,0.3);
+  }
+
+  .note--warn svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--gas);
+    margin-top: 1px;
+  }
+
+  .note--warn strong { color: var(--gas); }
+
+  .note--prohibit {
+    background: linear-gradient(135deg, #FBEEEC, #FCF2E9);
+    border: 1px solid #EAC3BC;
+    border-left: 4px solid var(--gas);
+    border-radius: 6px;
+    color: #6B2F26;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    box-shadow: 0 2px 8px -6px rgba(168,48,32,0.3);
+  }
+
+  .note--prohibit svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--gas);
+    margin-top: 1px;
+  }
+
+  .note--prohibit strong { color: var(--gas); }
+
+  .mail-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 12px;
+    background: var(--facade-bg);
+    color: var(--facade);
+    border: 1px solid #C7DDCC;
+    padding: 9px 16px;
+    border-radius: 6px;
+    font-size: 13.5px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.1px;
+    transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+  }
+
+  .mail-link:hover {
+    background: #DFEFE3;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px -6px rgba(58,96,69,0.4);
+  }
+  .mail-link svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+  /* ── FOOTER ─────────────────────────────────────────── */
+
+  footer {
+    text-align: center;
+    padding: 24px 24px 40px;
+    margin-top: 4px;
+    border-top: 1px solid var(--rule);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 12px;
+    color: var(--sub);
+    letter-spacing: 0.1px;
+  }
+
+  /* ── HEADER: BRAND MARK + ACTIONS ──────────────────── */
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .brand-mark {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+  }
+
+  .brand-mark svg { width: 22px; height: 22px; color: rgba(255,255,255,0.92); }
+
+  .header-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .btn-download--pdf {
+    background: linear-gradient(135deg, var(--elec-lt), var(--elec));
+    color: #fff;
+  }
+
+  .btn-download--pdf:hover {
+    background: linear-gradient(135deg, #E7B15A, var(--elec));
+    box-shadow: 0 6px 18px -4px rgba(196,120,12,0.5);
+  }
+
+  .btn-download--pdf:disabled {
+    opacity: 0.75;
+    cursor: wait;
+  }
+
+  /* ── PRINT / PDF EXPORT ─────────────────────────────── */
+
+  .card, .id-block, .note, .reissue {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  @media print {
+    .no-pdf { display: none; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><line x1="9" y1="7" x2="9" y2="7.01"/><line x1="15" y1="7" x2="15" y2="7.01"/><line x1="9" y1="11" x2="9" y2="11.01"/><line x1="15" y1="11" x2="15" y2="11.01"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+      </div>
+      <div>
+        <h1>კომუნალური ინფორმაცია</h1>
+        <p>კომერციული ფართი &nbsp;·&nbsp; Utility Information for Commercial Space</p>
+      </div>
+    </div>
+    <div class="header-actions no-pdf">
+      <button class="btn-download btn-download--pdf" id="pdfDownloadBtn" onclick="downloadPDF()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0l-4.5-4.5M12 16l4.5-4.5"/><path d="M4 19.5h16"/></svg>
+        <span class="btn-label">PDF-ის ჩამოტვირთვა</span>
+      </button>
+      <button class="btn-download" onclick="downloadPage()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0l-4.5-4.5M12 16l4.5-4.5"/><path d="M4 19.5h16"/></svg>
+        გვერდის ჩამოტვირთვა
+      </button>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- IDENTIFICATION BLOCK -->
+  <div class="id-block">
+    <div>
+      <div class="id-block-label">პროექტი</div>
+      <div class="id-block-project">შენი სახლი ჯიქიაზე</div>
+    </div>
+    <div class="id-block-meta">
+      <div class="id-field">
+        <div class="id-field-label">კორპუსი</div>
+        <div class="id-field-value">7</div>
+      </div>
+      <div class="id-field">
+        <div class="id-field-label">ფართი</div>
+        <div class="id-field-value">#2</div>
+      </div>
+      <div class="id-field">
+        <div class="id-field-label">საკადასტრო კოდი</div>
+        <div class="id-field-value">01.14.05.007.391.01.02.002</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 1: Electricity + Water -->
+  <div class="grid-2">
+
+    <div class="card card--elec">
+      <div class="card-head">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 11 14 10 22 21 10 13 10 13 2"/></svg>
+        </div>
+        <div>
+          <div class="card-title">ელექტროენერგია</div>
+          <span class="card-title-en">Electricity</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="abon-field">
+          <span class="abon-label">აბონენტის ნომერი</span>
+          <span class="abon-value">5724521</span>
+        </div>
+        <div class="abon-row abon-row--power">
+          <div class="abon-field abon-field--compact">
+            <span class="abon-label">ფაზა</span>
+            <span class="abon-value">0</span>
+          </div>
+          <div class="abon-field abon-field--compact">
+            <span class="abon-label">სიმძლავრე</span>
+            <span class="abon-value">3 კილოვატი</span>
+          </div>
+        </div>
+        <div class="reissue">
+          <div class="reissue-title">აბონენტის გადაფორმება</div>
+          <p>საჯარო რეესტრის ამონაწერის და პირადობის მოწმობის საფუძველზე — უფასოა.</p>
+          <a class="reissue-mail" href="mailto:info@telmico.ge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+            info@telmico.ge
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card--water">
+      <div class="card-head">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5s7 7.6 7 12.3a7 7 0 1 1-14 0c0-4.7 7-12.3 7-12.3z"/></svg>
+        </div>
+        <div>
+          <div class="card-title">წყალმომარაგება</div>
+          <span class="card-title-en">Water Supply</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="abon-field">
+          <span class="abon-label">აბონენტის ნომერი</span>
+          <span class="abon-value">764481903</span>
+        </div>
+        <div class="reissue">
+          <div class="reissue-title">აბონენტის გადაფორმება</div>
+          <p>საჯარო რეესტრის ამონაწერის და პირადობის მოწმობის საფუძველზე — უფასოა.</p>
+          <a class="reissue-mail" href="mailto:online@gwp.ge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+            online@gwp.ge
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ROW 2: Gas -->
+  <div class="grid-1">
+    <div class="card card--gas">
+      <div class="card-head">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A3.5 3.5 0 0012 18a3.5 3.5 0 003.5-3.5c0-1.94-2-3-2-5.5 0 0-1 1-1 2.5 0-2.5-1.5-4.5-3-5.5.3 2 -1 3-2 5-.7 1-1 2-1 3z"/></svg>
+        </div>
+        <div>
+          <div class="card-title">გაზი</div>
+          <span class="card-title-en">Gas</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>გაზის შემოყვანა სავალდებულო არ არის. სურვილის შემთხვევაში <strong>თბილისი ენერჯის</strong> უნდა მიმართოთ, ან ნებისმიერ ავტორიზებულ პროექტანტს.</p>
+        <div class="note note--warn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L14.7 3.86a2 2 0 0 0-3.4 0z"/></svg>
+          <span><strong>სავალდებულო:</strong> გაზის პროექტი წინასწარ უნდა შეთანხმდეს ჩვენთან. სადარბაზოში ან ფასადზე მილების გატარება მოითხოვს ჩვენს ნებართვას.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: Internet -->
+  <div class="grid-1">
+    <div class="card card--inet">
+      <div class="card-head">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+        </div>
+        <div>
+          <div class="card-title">ინტერნეტი</div>
+          <span class="card-title-en">Internet</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>ფართზე კომერციული ინტერნეტ აბონენტი რეგისტრირებული არ არის. ინტერნეტი ფართში შეყვანილი არ არის, შესაძლებელია მაგთის ან სილქნეტის შეყვანა, უნდა მიმართოს მოიჯარემ სურვილის მიხედვით.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: Facade -->
+  <div class="grid-1">
+    <div class="card card--facade">
+      <div class="card-head">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><line x1="9" y1="7" x2="9" y2="7.01"/><line x1="15" y1="7" x2="15" y2="7.01"/><line x1="9" y1="11" x2="9" y2="11.01"/><line x1="15" y1="11" x2="15" y2="11.01"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+        </div>
+        <div>
+          <div class="card-title">ფასადი — გარე აგრეგატების და აბრების მონტაჟი</div>
+          <span class="card-title-en">Facade — External Units &amp; Signage Installation</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>კომერციული ფართის ფასადზე გარე აგრეგატების, კონსტრუქციების შესათანხმებლად, ასევე ვიტრაჟზე კონსტრუქციული ცვლილებებისთვის — მიმართეთ ფასადის სამსახურს.</p>
+        <div class="note note--prohibit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.9" y1="4.9" x2="19.1" y2="19.1"/></svg>
+          <span><strong>დაუშვებელია</strong> ფასადზე თვითნებურად, ჩვენთან შეუთანხმებლად, აბრის ან კონსტრუქციის მონტაჟი. ნებისმიერი ცვლილება განხორციელდეს მხოლოდ <strong>წერილობითი თანხმობის</strong> მიღების შემდეგ.</span>
+        </div>
+        <a class="mail-link" href="mailto:facadepermit@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+          facadepermit@gmail.com
+        </a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  კომუნალური ინფორმაცია კომერციული ფართისთვის
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+  async function downloadPDF() {
+    const btn = document.getElementById('pdfDownloadBtn');
+    const originalHTML = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="btn-label">გენერირდება…</span>';
+
+    const opt = {
+      margin: [8, 8, 10, 8],
+      filename: 'კომერციული-ფართის-კომუნალური-ინფო.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#ffffff',
+        ignoreElements: (el) => el.classList && el.classList.contains('no-pdf')
+      },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+    };
+
+    try {
+      await html2pdf().set(opt).from(document.body).save();
+    } catch (err) {
+      alert('PDF-ის გენერირება ვერ მოხერხდა. სცადეთ თავიდან.');
+      console.error(err);
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = originalHTML;
+    }
+  }
+
+  function downloadPage() {
+    const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'კომერციული-ფართის-კომუნალური-ინფო.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+</script>
+
+</body>
+</html>
