@@ -26,6 +26,8 @@ const SECRET_TOKEN = 'CHANGE_ME';
 
 const MAX_RECIPIENTS = 100;
 const SENDER_NAME = 'საიდუმლო სანტა';
+// PNG, not SVG — many email clients don't render SVG. Must be an absolute URL.
+const LOGO_URL = 'https://pseturidze-blip.github.io/tbilisi-offices/arci-logo.png';
 const EMAIL_SUBJECT = '🎅 საიდუმლო სანტა — შენი პირადი ბმული';
 const EMAIL_RE = /^[A-Za-z0-9.!#$%&'*+\/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)*\.[A-Za-z]{2,}$/;
 
@@ -107,11 +109,12 @@ function buildEmailBody_(c) {
 function buildEmailHtml_(c) {
   const link = esc_(c.link);
   let html =
-    '<div style="font-family:Arial,sans-serif;font-size:16px;line-height:1.6;color:#1b2620">' +
+    '<div style="font-family:Arial,sans-serif;font-size:16px;line-height:1.6;color:#111111">' +
+    '<p style="margin:0 0 20px"><img src="' + LOGO_URL + '" alt="არსი" width="109" height="48" style="display:block;border:0;width:109px;height:48px"></p>' +
     '<p>გამარჯობა, <strong>' + esc_(c.name) + '</strong>! 🎅</p>' +
     '<p>ვთამაშობთ საიდუმლო სანტას — ბმულზე გაიგებ, ვისთვის ირჩევ საჩუქარს.</p>' +
-    '<p><a href="' + link + '" style="display:inline-block;background:#b3202e;color:#ffffff;text-decoration:none;font-weight:bold;padding:12px 20px;border-radius:10px">🎁 შენი პირადი ბმული</a></p>' +
-    '<p style="font-size:13px;color:#5d6b63;word-break:break-all">' + link + '</p>';
+    '<p><a href="' + link + '" style="display:inline-block;background:#C8102E;color:#ffffff;text-decoration:none;font-weight:bold;padding:12px 20px;border-radius:0">🎁 შენი პირადი ბმული</a></p>' +
+    '<p style="font-size:13px;color:#5E5B56;word-break:break-all">' + link + '</p>';
   if (c.budget) html += '<p><strong>ბიუჯეტი:</strong> ' + esc_(c.budget) + '</p>';
   if (c.note) html += '<p><strong>შენიშვნა:</strong> ' + esc_(c.note).replace(/\n/g, '<br>') + '</p>';
   html += '<p>ბმული არავის გაუზიარო 🤫</p></div>';
