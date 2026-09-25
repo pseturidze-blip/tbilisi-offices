@@ -12,11 +12,19 @@ Build caricatures for secret-santa.html.
   // CARICATURES:START and // CARICATURES:END. Keys are a salted SHA-256 of the
   normalized name (not the name itself), so no participant names end up in the repo.
 - Safe to re-run: caricatures/ and the mapping are rebuilt from scratch each time.
+- Writes an encrypted participant roster (names + caricature numbers) between
+  // ROSTER:START and // ROSTER:END for the roulette reveal. The AES-GCM key is derived
+  from the full participant list, which only the organizer has; the organizer page puts
+  that key into each personal link. Without a link, the roster can't be read.
+  Every key ever used is kept in roster-keys.txt (git-ignored) and the roster is encrypted
+  once per key, so links sent before a participant was added keep working.
 - Prints a report (in Georgian). The participant list comes from participants.txt
   (git-ignored) or is pasted into the terminal.
 """
 import argparse
+import base64
 import hashlib
+import os
 import io
 import json
 import re
@@ -26,6 +34,7 @@ import unicodedata
 from pathlib import Path
 
 from PIL import Image, ImageOps
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
 ROOT = Path(__file__).resolve().parent.parent
 EXTS = {'.png', '.jpg', '.jpeg', '.jfif', '.webp'}
@@ -34,6 +43,8 @@ MAX_BYTES = 150 * 1024
 BACKGROUND = (0xF5, 0xF3, 0xEF)  # off-white, used to flatten transparency
 # Must match CARICATURE_SALT and caricatureKey() in secret-santa.html.
 SALT = 'arci-santa-2026|'
+# Must match ROSTER_SALT and rosterKeyFor() in secret-santa.html.
+ROSTER_SALT = 'arci-roster-2026|'
 HEADER_RE = re.compile(r'e-?mail|სახელი|ელ[- ]?ფოსტა', re.I)
 
 
@@ -44,6 +55,48 @@ def normalize(name: str) -> str:
 
 def key_for(name: str) -> str:
     return hashlib.sha256((SALT + normalize(name)).encode('utf-8')).hexdigest()[:16]
+
+
+def b64url(data: bytes) -> str:
+    return base64.urlsafe_b64encode(data).decode('ascii').rstrip('=')
+
+
+def roster_key(normalized_names) -> bytes:
+    """16-byte AES key from the sorted, normalized participant list."""
+    text = ROSTER_SALT + '\n'.join(sorted(set(normalized_names)))
+    return hashlib.sha256(text.encode('utf-8')).digest()[:16]
+
+
+def roster_keys(participants: dict, keys_file: Path) -> list:
+    """Current key plus every earlier one (kept locally), so already-sent links still unlock the roster."""
+    history = []
+    if keys_file.exists():
+        history = [l.strip() for l in keys_file.read_text(encoding='utf-8').splitlines() if l.strip()]
+    current = b64url(roster_key(participants.keys()))
+    if current not in history:
+        history.append(current)
+        keys_file.write_text('\n'.join(history) + '\n', encoding='utf-8')
+    return history
+
+
+def encrypt_roster(participants: dict, numbers: dict, keys: list) -> list:
+    """participants: {normalized: display name}; numbers: {normalized: '07'} → [base64url(iv || ct)] per key."""
+    people = [[name, numbers.get(k, '')] for k, name in participants.items()]
+    secrets.SystemRandom().shuffle(people)
+    plain = json.dumps({'v': 1, 'p': people}, ensure_ascii=False, separators=(',', ':')).encode('utf-8')
+    blobs = []
+    for key in keys:
+        raw = base64.urlsafe_b64decode(key + '=' * (-len(key) % 4))
+        iv = os.urandom(12)
+        blobs.append(b64url(iv + AESGCM(raw).encrypt(iv, plain, None)))
+    return blobs
+
+
+def replace_block(html: str, marker: str, block: str) -> str:
+    new_html, n = re.subn(rf'// {marker}:START.*?// {marker}:END', lambda _: block, html, flags=re.S)
+    if n != 1:
+        sys.exit(f'secret-santa.html-ში ვერ მოიძებნა // {marker}:START … // {marker}:END ბლოკი.')
+    return new_html
 
 
 def parse_participants(text: str) -> dict:
@@ -138,22 +191,27 @@ def main():
         old.unlink()
 
     mapping = {}
+    numbers = {}
     processed = []
     for i, (k, f) in enumerate(order, 1):
         num = str(i).zfill(width)
         data = encode(f)
         (args.out / f'{num}.webp').write_bytes(data)
         mapping[key_for(f.stem)] = num
+        numbers[k] = num
         processed.append((f.name, len(data)))
 
     # Rewrite the mapping block in the HTML (sorted by key so the order reveals nothing).
     html = args.html.read_text(encoding='utf-8')
     body = ',\n'.join(f'  {json.dumps(k)}: {json.dumps(v)}' for k, v in sorted(mapping.items()))
     block = '// CARICATURES:START\nconst CARICATURES = {\n' + (body + '\n' if body else '') + '};\n// CARICATURES:END'
-    new_html, n = re.subn(r'// CARICATURES:START.*?// CARICATURES:END', lambda _: block, html, flags=re.S)
-    if n != 1:
-        sys.exit('secret-santa.html-ში ვერ მოიძებნა // CARICATURES:START … // CARICATURES:END ბლოკი.')
-    args.html.write_text(new_html, encoding='utf-8')
+    html = replace_block(html, 'CARICATURES', block)
+
+    # Encrypted roster for the roulette (empty without a participant list → classic reveal).
+    keys = roster_keys(participants, ROOT / 'roster-keys.txt') if participants else []
+    blobs = encrypt_roster(participants, numbers, keys) if participants else []
+    html = replace_block(html, 'ROSTER', '// ROSTER:START\nconst ROSTER = ' + json.dumps(blobs, indent=2) + ';\n// ROSTER:END')
+    args.html.write_text(html, encoding='utf-8')
 
     # ---- Report ----
     print()
@@ -180,6 +238,11 @@ def main():
         else:
             print('\n✅ ყველა მონაწილეს აქვს კარიკატურა.')
     print(f'\nგანახლდა: {args.html.name} (CARICATURES — {len(mapping)} ჩანაწერი)')
+    if participants:
+        print(f'🎰 რულეტკა ჩართულია: დაშიფრული სია, {len(participants)} მონაწილე ({len(keys)} გასაღები roster-keys.txt-ში).')
+        print('   ⚠️  გადაანაწილეთ ზუსტად იგივე სიით, რაც participants.txt-შია — სხვაგვარად რულეტკა ბმულებში არ იმუშავებს.')
+    else:
+        print('🎰 რულეტკა გამორთულია (მონაწილეების სია არ არის) — მონაწილეები ნახავენ ჩვეულებრივ გახსნას.')
 
 
 if __name__ == '__main__':
