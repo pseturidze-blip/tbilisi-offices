@@ -6,7 +6,7 @@ Build caricatures for secret-santa.html.
 
 - Reads one image per person from caricatures-src/ (named by full Georgian name,
   .png/.jpg/.jpeg/.jfif/.webp). That folder is private and git-ignored.
-- Center-crops to a square, resizes to 800×800, saves WebP (<150 KB) as
+- Fits the whole image inside 800×800 (no cropping; off-white padding), saves WebP (<150 KB) as
   caricatures/01.webp, 02.webp, ... numbered in a RANDOM order.
 - Rewrites the CARICATURES object in secret-santa.html between
   // CARICATURES:START and // CARICATURES:END. Keys are a salted SHA-256 of the
@@ -33,6 +33,7 @@ import json
 import re
 import secrets
 import sys
+import time
 import unicodedata
 from pathlib import Path
 
@@ -160,7 +161,11 @@ def encode(src: Path) -> bytes:
         im = bg
     else:
         im = im.convert('RGB')
-    im = ImageOps.fit(im, (SIZE, SIZE), Image.LANCZOS, centering=(0.5, 0.5))
+    # Contain, never crop: tall or wide caricatures are padded with the background colour.
+    im = ImageOps.contain(im, (SIZE, SIZE), Image.LANCZOS)
+    canvas = Image.new('RGB', (SIZE, SIZE), BACKGROUND)
+    canvas.paste(im, ((SIZE - im.width) // 2, (SIZE - im.height) // 2))
+    im = canvas
     data = b''
     for quality in (80, 74, 68, 62, 56, 50):
         buf = io.BytesIO()
@@ -231,6 +236,10 @@ def main():
     body = ',\n'.join(f'  {json.dumps(k)}: {json.dumps(v)}' for k, v in sorted(mapping.items()))
     block = '// CARICATURES:START\nconst CARICATURES = {\n' + (body + '\n' if body else '') + '};\n// CARICATURES:END'
     html = replace_block(html, 'CARICATURES', block)
+    # New version on every build: numbers are reshuffled, so browsers must not reuse cached images.
+    build_id = time.strftime('%Y%m%d%H%M%S')
+    html = replace_block(html, 'CARICATURE_VERSION',
+                         f"// CARICATURE_VERSION:START\nconst CARICATURE_VERSION = '{build_id}';\n// CARICATURE_VERSION:END")
 
     # Encrypted roster for the roulette (empty without a participant list → classic reveal).
     keys = roster_keys(participants, ROOT / 'roster-keys.txt') if participants else []
