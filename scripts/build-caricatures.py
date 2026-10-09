@@ -18,6 +18,9 @@ Build caricatures for secret-santa.html.
   that key into each personal link. Without a link, the roster can't be read.
   Every key ever used is kept in roster-keys.txt (git-ignored) and the roster is encrypted
   once per key, so links sent before a participant was added keep working.
+- File names may use underscores for spaces. caricature-aliases.txt (git-ignored) maps
+  file names that differ from the participant list ("file name = participant name";
+  an empty right side skips a non-participant's image).
 - Prints a report (in Georgian). The participant list comes from participants.txt
   (git-ignored) or is pasted into the terminal.
 """
@@ -51,6 +54,24 @@ HEADER_RE = re.compile(r'e-?mail|სახელი|ელ[- ]?ფოსტა',
 def normalize(name: str) -> str:
     """NFC, trim, collapse whitespace, lowercase (affects Latin; Georgian has no case)."""
     return re.sub(r'\s+', ' ', unicodedata.normalize('NFC', name)).strip().lower()
+
+
+def read_aliases(path: Path) -> dict:
+    """'file name = participant name' per line (git-ignored, so no names enter the repo).
+    An empty right side marks a non-participant whose image is skipped."""
+    out = {}
+    if path.exists():
+        for line in path.read_text(encoding='utf-8').splitlines():
+            if '=' in line and not line.lstrip().startswith('#'):
+                src, dst = line.split('=', 1)
+                out[normalize(src.replace('_', ' '))] = normalize(dst)
+    return out
+
+
+def file_name(stem: str, aliases: dict) -> str:
+    """Normalized participant name for an image file: underscores → spaces, then aliases ('' = skip)."""
+    k = normalize(stem.replace('_', ' '))
+    return aliases.get(k, k)
 
 
 def key_for(name: str) -> str:
@@ -156,12 +177,14 @@ def main():
     ap.add_argument('--out', default=ROOT / 'caricatures', type=Path)
     ap.add_argument('--html', default=ROOT / 'secret-santa.html', type=Path)
     ap.add_argument('--participants', default=ROOT / 'participants.txt', type=Path)
+    ap.add_argument('--aliases', default=ROOT / 'caricature-aliases.txt', type=Path)
     args = ap.parse_args()
 
     if not args.src.is_dir():
         sys.exit(f'საქაღალდე ვერ მოიძებნა: {args.src}')
 
     participants = read_participants(args.participants)
+    aliases = read_aliases(args.aliases)
 
     # Collect source images; one per normalized name.
     images = {}
@@ -169,7 +192,9 @@ def main():
     for f in sorted(args.src.iterdir()):
         if f.suffix.lower() not in EXTS or not f.is_file():
             continue
-        k = normalize(f.stem)
+        k = file_name(f.stem, aliases)
+        if not k:
+            continue
         if k in images:
             duplicates.append(f.name)
             continue
@@ -197,7 +222,7 @@ def main():
         num = str(i).zfill(width)
         data = encode(f)
         (args.out / f'{num}.webp').write_bytes(data)
-        mapping[key_for(f.stem)] = num
+        mapping[key_for(k)] = num
         numbers[k] = num
         processed.append((f.name, len(data)))
 
