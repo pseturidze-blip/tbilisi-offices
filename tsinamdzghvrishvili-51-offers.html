@@ -682,8 +682,14 @@ const GRINISHI_ORIGINAL =
 დაგვჭირდება წყლის და დენის სათავე.
 და მაქვს კითხვა: იქნება თუ არა ტერიტორიაზე საერთო საპირფარეშო?`;
 
-/** მონაცემების ვერსია: 2 = დაემატა originalText და სურათები ფაილებიდან (იხ. migrate() ქვემოთ) */
-const DATA_VERSION = 2;
+/** მონაცემების ვერსია (იხ. migrate() ქვემოთ):
+ *  2 = დაემატა originalText და სურათები ფაილებიდან; 3 = „ძველი ეზოს“ შემთავაზებლები */
+const DATA_VERSION = 3;
+
+/** „ძველი ეზო“ — შემთავაზებლები (დაზუსტდა 2026-10-23) */
+const OLD_YARD_COMPANY = 'ეპიზოდი, მეამა ქოლექთი';
+const OLD_YARD_CONTACT = 'შოთა ხვედელიძე';
+const OLD_YARD_WHO_Q = 'ვინ არის შემთავაზებელი კომპანია?';
 
 const SEED = [
   {
@@ -720,8 +726,8 @@ const SEED = [
     id: 'seed-old-yard',
     dateReceived: '2026-10-23',
     title: '„ძველი ეზო — ახალი სიცოცხლე“',
-    company: '',
-    contactPerson: '',
+    company: OLD_YARD_COMPANY,
+    contactPerson: OLD_YARD_CONTACT,
     type: 'yard',
     status: 'clarify',
     summary: 'დახურული ეზოს გადაქცევა მთელი დღის საჯარო სივრცედ: დილის ყავა და დისტანციური მუშაობა → ლანჩი → საღამოს ბარი და ღონისძიებები → შაბათ-კვირის ბაზრობები.',
@@ -753,7 +759,7 @@ const SEED = [
       { text: 'ბიზნეს-მოდელი: იჯარა / შემოსავლის წილი / მართვის საკომისიო?', done: false },
       { text: 'ვადა', done: false },
       { text: 'ბიუჯეტი', done: false },
-      { text: 'ვინ არის შემთავაზებელი კომპანია?', done: false },
+      { text: OLD_YARD_WHO_Q, done: true },
     ],
     originalText: OLD_YARD_ORIGINAL,
     images: OLD_YARD_IMAGES,
@@ -962,7 +968,8 @@ async function load() {
 }
 
 /** მიგრაცია ძველი ვერსიიდან. ცვლის მხოლოდ ახალ ველებს — სტატუსი, კითხვები, შენიშვნები და ა.შ. უცვლელი რჩება.
- *  v2: ორ საწყის შეთავაზებას (id-ით) ემატება originalText და სურათები offers-assets/-დან. */
+ *  v2: ორ საწყის შეთავაზებას (id-ით) ემატება originalText და სურათები offers-assets/-დან.
+ *  v3: „ძველ ეზოს“ ემატება კომპანია და საკონტაქტო პირი (თუ ცარიელია); კითხვა „ვინ არის…“ მოინიშნება. */
 async function migrate() {
   const version = (await req(db.transaction('meta').objectStore('meta').get('dataVersion'))) || 1;
   if (version >= DATA_VERSION) return;
@@ -976,6 +983,16 @@ async function migrate() {
       const have = new Set(o.images.map((i) => i.src));
       o.images = [...seed.images.filter((i) => !have.has(i.src)).map(normalizeImage), ...o.images];
       changed.push(o);
+    }
+  }
+  if (version < 3) {
+    const o = state.offers.find((x) => x.id === 'seed-old-yard');
+    if (o) {
+      if (!o.company) o.company = OLD_YARD_COMPANY;
+      if (!o.contactPerson) o.contactPerson = OLD_YARD_CONTACT;
+      const q = o.questions.find((x) => x.text === OLD_YARD_WHO_Q);
+      if (q) q.done = true;
+      if (!changed.includes(o)) changed.push(o);
     }
   }
   const tx = db.transaction(['offers', 'meta'], 'readwrite');
