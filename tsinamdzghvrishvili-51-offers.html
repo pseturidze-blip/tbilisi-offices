@@ -222,9 +222,23 @@ dl.kv dd { margin: 0; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip-off { opacity: .4; text-decoration: line-through; }
 
-.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
-.gallery button { border: 0; padding: 0; border-radius: 10px; overflow: hidden; cursor: zoom-in; aspect-ratio: 4/3; background: var(--surface-2); }
-.gallery img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* გალერეა: დიდი ესკიზები, წარწერა ქვემოთ, სექციებად დაჯგუფება */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+.gallery figure { margin: 0; }
+.gallery button { border: 0; padding: 0; border-radius: 10px; overflow: hidden; cursor: zoom-in; aspect-ratio: 16/9; background: var(--surface-2); width: 100%; display: block; }
+.gallery img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .2s ease; }
+.gallery button:hover img { transform: scale(1.03); }
+.gallery figcaption { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+.gallery-group + .gallery-group { margin-top: 22px; }
+.gallery-group h5 { font-size: 14px; font-weight: 600; color: var(--green); margin: 0 0 10px; }
+.panel-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.panel-head h4 { margin: 0; }
+
+/* ორიგინალი შემოთავაზება — მხოლოდ წასაკითხი, გამოყოფილი ზოლით */
+.panel.original { border-left: 4px solid var(--terra); }
+.original-text { white-space: pre-wrap; margin: 0; font-size: 15px; }
+.original textarea { min-height: 260px; font-size: 14px; }
+.notes-label { font-size: 11px; color: var(--muted); font-weight: 400; text-transform: none; letter-spacing: 0; }
 
 .checklist { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
 .checklist label { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; }
@@ -277,8 +291,10 @@ legend { padding: 0 6px; font-weight: 600; color: var(--green); }
 .amount-row { display: flex; gap: 8px; }
 .amount-row select { width: 100px; flex: none; }
 .img-edit { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; margin-bottom: 10px; }
-.img-edit figure { margin: 0; position: relative; border-radius: 10px; overflow: hidden; aspect-ratio: 4/3; background: var(--surface-2); }
+.img-edit figure { margin: 0; }
+.img-edit .thumb { position: relative; border-radius: 10px; overflow: hidden; aspect-ratio: 4/3; background: var(--surface-2); }
 .img-edit img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.img-edit input { margin-top: 4px; padding: 4px 8px; font-size: 12px; border-radius: 8px; }
 .img-edit .ctrl { position: absolute; inset: auto 4px 4px 4px; display: flex; gap: 4px; justify-content: flex-end; }
 .img-edit .ctrl button { border: 0; background: rgba(0,0,0,.6); color: #fff; border-radius: 6px; font-size: 11px; padding: 2px 6px; cursor: pointer; }
 .img-edit .cover-tag { position: absolute; left: 4px; top: 4px; background: var(--terra); color: #fff; font-size: 11px; padding: 1px 6px; border-radius: 6px; }
@@ -296,7 +312,9 @@ legend { padding: 0 6px; font-weight: 600; color: var(--green); }
 .lb-close { top: 16px; right: 16px; }
 .lb-prev { left: 16px; top: 50%; transform: translateY(-50%); }
 .lb-next { right: 16px; top: 50%; transform: translateY(-50%); }
-.lb-count { position: absolute; bottom: 18px; left: 0; right: 0; text-align: center; color: #ddd; font-size: 14px; }
+.lb-count { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; color: #ddd; font-size: 14px; padding: 0 70px; }
+.lb-count .lb-caption { display: block; color: #fff; font-size: 15px; margin-bottom: 2px; }
+.lightbox:fullscreen img { max-width: 100vw; max-height: calc(100vh - 70px); border-radius: 0; }
 
 footer { padding: 20px 0 40px; font-size: 12px; color: var(--muted); }
 
@@ -330,8 +348,18 @@ footer { padding: 20px 0 40px; font-size: 12px; color: var(--muted); }
   .print-plot { font-size: 9pt; color: #555; border-bottom: 1px solid #ccc; padding-bottom: 6px; margin-bottom: 12px; }
   .panel { box-shadow: none; break-inside: avoid; padding: 12px; }
   .detail-grid { grid-template-columns: 1.4fr 1fr; gap: 12px; }
-  .gallery { grid-template-columns: repeat(3, 1fr); }
-  .gallery button { cursor: default; }
+  /* ბეჭდვისას: 2 სურათი რიგში, წარწერა ქვემოთ, ორიგინალი სრულად */
+  .print-page .detail-grid { display: block; }
+  .print-page .detail-grid .panel { margin-top: 10px; }
+  .gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .gallery figure { break-inside: avoid; }
+  .gallery button { cursor: default; aspect-ratio: auto; }
+  .gallery img { height: auto; }
+  .gallery figcaption { font-size: 9pt; color: #333; }
+  /* ტექსტური და გალერეის ბლოკები შეიძლება გაიყოს გვერდებს შორის — ცარიელი გვერდები რომ არ დარჩეს */
+  .print-page .detail-grid > div > .panel { break-inside: auto; }
+  .panel h4, .panel-head { break-after: avoid; }
+  .gallery-group h5 { break-after: avoid; }
   .table-scroll { overflow: visible; border: 0; }
   table.cmp th, table.cmp td { min-width: 0; padding: 6px 8px; font-size: 9.5pt; }
   table.cmp th[scope=row] { position: static; }
@@ -442,12 +470,17 @@ footer { padding: 20px 0 40px; font-size: 12px; color: var(--muted); }
             <label for="f-space">საჭირო ფართი</label>
             <input type="text" id="f-space" placeholder="მ² ან ზომები">
           </div>
+          <div class="field full" id="f-original-wrap">
+            <label for="f-original">ორიგინალი შემოთავაზება (უცვლელად, როგორც გამოგვიგზავნეს)</label>
+            <textarea id="f-original" rows="6"></textarea>
+            <div class="hint">შენახვის შემდეგ ორიგინალი იცვლება მხოლოდ „ორიგინალის რედაქტირების“ ღილაკით.</div>
+          </div>
           <div class="field full">
-            <label for="f-summary">მოკლე აღწერა (1–2 წინადადება)</label>
+            <label for="f-summary">მოკლე აღწერა (1–2 წინადადება) — ჩვენი შენიშვნა</label>
             <textarea id="f-summary" rows="2" style="min-height:60px"></textarea>
           </div>
           <div class="field full">
-            <label for="f-desc">სრული აღწერა</label>
+            <label for="f-desc">სრული აღწერა — ჩვენი შენიშვნა</label>
             <textarea id="f-desc" rows="8"></textarea>
           </div>
         </div>
@@ -578,7 +611,80 @@ const CURRENCIES = ['GEL', 'USD', 'EUR'];
 
 /* =========================================================
    2. საწყისი მონაცემები (ჩაიწერება მხოლოდ პირველ ჩატვირთვაზე)
+   სურათი = { src, caption, group?, slide? }
+   - src: offers-assets/… (ფაილი HTML-ის გვერდით) ან data:image/… (ფორმიდან ატვირთული)
+   - group: გალერეის სექცია; slide: სლაიდის ნომერი („სლაიდების რეჟიმისთვის“)
    ========================================================= */
+
+/** „ძველი ეზო“ — პრეზენტაციის სლაიდების სათაურები (ტექსტი სლაიდებიდანაა გადმოწერილი) */
+const OLD_YARD_TITLES = {
+  1: 'ძველი ეზო — ახალი სიცოცხლე',
+  2: 'დახურული ეზო გადავაქციოთ ახალ თავშეყრის ადგილად',
+  3: 'ადგილი, რომელზეც ვმუშაობთ',
+  4: 'ნოი-ტიფლისიდან კრეატიულ უბნამდე',
+  5: 'თბილისი ძველ სივრცეებს აცოცხლებს',
+  6: 'პატარა ბიზნესები ნაკადს უკვე ქმნიან',
+  7: 'ჩუღურეთს საღამოს ადგილები აქვს. დღის ბაღი, სადაც ჭამენ, მუშაობენ და ისვენებენ — ჯერ არა.',
+  8: 'ვისთვის ვქმნით ამ სივრცეს',
+  9: 'როგორ შეიძლება ეზომ დილიდან ღამემდე იმუშაოს',
+  10: 'რაზე ვაშენებთ: ის, რაც ადგილს უკვე აქვს',
+  11: 'ჩვენ ვფიქრობთ, რომ კონცეფციის განვითარების მინიმუმ ეს ორი გზა გვაქვს',
+  12: 'საფუძველი ერთია',
+  13: 'რა შეიძლება იყოს შიგნით',
+  14: 'სტრიტ-კულტურის ეზო',
+  15: 'სტრიტ-კულტურის ეზო ღამით',
+  16: 'ზემოდან: ასე მუშაობს სივრცე',
+  17: 'ფასადი: ქუჩა უკვე ეზოს ნაწილია',
+  18: 'ერთი დღე ეზოში',
+  19: 'როგორ წარმოგვიდგენია',
+  20: 'საიდუმლო ბაღი',
+  21: 'საიდუმლო ბაღი',
+  22: 'გეგმა B · ვარიანტი 2', // სლაიდს სათაური არ აქვს — წარწერა ბეჯიდანაა
+  23: 'ზემოდან: მთელი ბაღი ერთ ხედში',
+  24: 'ერთი დღე ბაღში',
+  25: 'დამატებითი შესაძლებლობები ამ სივრცეში',
+  26: 'სპორტი დიდ ეკრანზე',
+  27: 'ეს ყველაფერი ზოგადი იდეებია, რომლებიც კიდევ მრავალმხრივ შეიძლება დაიხვეწოს და განვითარდეს.',
+};
+/** გალერეის სექციები და მათი სლაიდები (ამ რიგით ჩანს გალერეაში) */
+const OLD_YARD_GROUPS = [
+  ['გარეკანი', [1]],
+  ['ადგილი და კონტექსტი', [3, 4, 5, 6]],
+  ['კონცეფცია და აუდიტორია', [2, 7, 8, 9, 10]],
+  ['საერთო საფუძველი', [11, 12, 13]],
+  ['გეგმა A — სტრიტ-კულტურის ეზო', [14, 15, 16, 17, 18, 19]],
+  ['გეგმა B — საიდუმლო ბაღი', [20, 21, 22, 23, 24]],
+  ['დამატებითი', [25, 26, 27]],
+];
+const OLD_YARD_IMAGES = OLD_YARD_GROUPS.flatMap(([group, slides]) => slides.map((n) => ({
+  src: `offers-assets/old-yard/slide-${String(n).padStart(2, '0')}.jpg`,
+  caption: `სლაიდი ${n} — ${OLD_YARD_TITLES[n]}`,
+  group,
+  slide: n,
+})));
+const OLD_YARD_ORIGINAL =
+`ორიგინალი — სლაიდებზე (იხ. „ფოტოები და რენდერები“ / „სლაიდების რეჟიმი“).
+წყარო: Tsinamdzghvrishvili-51.pdf, 27 სლაიდი. სლაიდების ტექსტი გამოსახულების სახითაა და ავტომატურად ვერ ამოიღება, ამიტომ აქ მხოლოდ სათაურებია.
+
+` + Object.entries(OLD_YARD_TITLES).map(([n, t]) => `სლაიდი ${n} — ${t}`).join('\n');
+
+const GRINISHI_IMAGES = [
+  { src: 'offers-assets/grinishi/winter.jpg', caption: 'ზამთრის ვერსია' },
+  { src: 'offers-assets/grinishi/summer.jpg', caption: 'ზაფხულის ვერსია' },
+];
+const GRINISHI_ORIGINAL =
+`ანუ დაახლოებით ესეთი წარმოგვიდგენია: სეზონის მიხედვით სხვადასხვა იერსახე ექნება — ზამთარში უფრო მეტი ნაძვებით და მარადმწვანეებით.
+ზაფხულში — რაც ყვავილობს, ისეთი მცენარეებით.
+შემოდგომაზე და გაზაფხულზეც ანალოგიურად.
+ეს სივრცე პრაქტიკული ზომა ასეთი ჯიხურისთვის კარგი იქნება: სიგანე 3.0 მ × სიღრმე 2.0 მ × სიმაღლე დაახლოებით 2.5–2.7 მ. წინა სავაჭრო დახლი დაახლოებით 2.2–2.5 მ სიგანის შეიძლება იყოს.
+გარშემო დაეწყობა მცენარეები.
+ამ მოძრავ ჯიხურს ჩვენ თვითონ გავაკეთებინებთ, მოვიტანთ.
+დაგვჭირდება წყლის და დენის სათავე.
+და მაქვს კითხვა: იქნება თუ არა ტერიტორიაზე საერთო საპირფარეშო?`;
+
+/** მონაცემების ვერსია: 2 = დაემატა originalText და სურათები ფაილებიდან (იხ. migrate() ქვემოთ) */
+const DATA_VERSION = 2;
+
 const SEED = [
   {
     id: 'seed-greenish',
@@ -605,7 +711,8 @@ const SEED = [
     questions: [
       { text: 'იქნება თუ არა ტერიტორიაზე საერთო საპირფარეშო? (მათი კითხვა)', done: false },
     ],
-    images: [],
+    originalText: GRINISHI_ORIGINAL,
+    images: GRINISHI_IMAGES,
     links: '',
     notes: 'კიოსკს თავად აშენებენ — წყლისა და დენის მიერთების ხარჯი და კიოსკის ადგილმდებარეობა დასაზუსტებელია.',
   },
@@ -648,7 +755,8 @@ const SEED = [
       { text: 'ბიუჯეტი', done: false },
       { text: 'ვინ არის შემთავაზებელი კომპანია?', done: false },
     ],
-    images: [],
+    originalText: OLD_YARD_ORIGINAL,
+    images: OLD_YARD_IMAGES,
     links: '',
     notes: '',
   },
@@ -664,7 +772,8 @@ const state = {
   q: '', status: '', type: '',
   compareIds: new Set(),
   editingId: null,      // null = ახალი შეთავაზება
-  formImages: [],       // ფორმაში დროებით შენახული სურათები
+  formImages: [],       // ფორმაში დროებით შენახული სურათები ({src, caption, …})
+  editingOriginal: null, // შეთავაზების id, რომლის ორიგინალი ტექსტიც ახლა რედაქტირდება
   lb: { images: [], idx: 0 },
 };
 
@@ -720,6 +829,19 @@ function parseLinks(text) {
   });
 }
 
+/** სურათი → { src, caption, group?, slide? }. ძველი ფორმატი (უბრალოდ data URL) გარდაიქმნება.
+ *  დაშვებულია მხოლოდ data:image/… ან ლოკალური ფაილი offers-assets/ საქაღალდიდან. */
+function normalizeImage(img) {
+  if (typeof img === 'string') img = { src: img };
+  if (!img || typeof img.src !== 'string') return null;
+  const ok = img.src.startsWith('data:image/') || /^offers-assets\/[\w\-./]+$/.test(img.src) && !img.src.includes('..');
+  if (!ok) return null;
+  const out = { src: img.src, caption: img.caption || '' };
+  if (img.group) out.group = String(img.group);
+  if (img.slide) out.slide = +img.slide;
+  return out;
+}
+
 /** ძველი / იმპორტირებული ჩანაწერის შევსება ნაგულისხმევი ველებით */
 function normalizeOffer(o) {
   o = o || {};
@@ -752,7 +874,8 @@ function normalizeOffer(o) {
     questions: Array.isArray(o.questions)
       ? o.questions.map((q) => (typeof q === 'string' ? { text: q, done: false } : { text: q.text || '', done: !!q.done })).filter((q) => q.text)
       : [],
-    images: Array.isArray(o.images) ? o.images.filter((s) => typeof s === 'string' && s.startsWith('data:image/')) : [],
+    originalText: o.originalText || '',
+    images: Array.isArray(o.images) ? o.images.map(normalizeImage).filter(Boolean) : [],
     links: o.links || '',
     notes: o.notes || '',
   };
@@ -821,18 +944,44 @@ async function load() {
   if (!seeded) {
     // პირველი ჩატვირთვა: თუ ძველ ვერსიას localStorage-ში აქვს მონაცემები — გადმოგვაქვს, თორემ საწყისი ორი შეთავაზება
     let initial = SEED;
+    let version = DATA_VERSION;
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) initial = JSON.parse(raw);
+      if (raw) { initial = JSON.parse(raw); version = 1; } // ძველი მონაცემები → მიგრაცია ქვემოთ
     } catch (e) { /* localStorage მიუწვდომელია ან დაზიანებულია */ }
     const tx = db.transaction(['offers', 'meta'], 'readwrite');
     initial.map(normalizeOffer).forEach((o) => tx.objectStore('offers').put(o));
     tx.objectStore('meta').put(true, 'seeded');
+    tx.objectStore('meta').put(version, 'dataVersion');
     await txDone(tx);
     // გადმოტანის შემდეგ localStorage-ის ძველი ასლი აღარ გვჭირდება
     try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
   }
   state.offers = (await req(db.transaction('offers').objectStore('offers').getAll())).map(normalizeOffer);
+  await migrate();
+}
+
+/** მიგრაცია ძველი ვერსიიდან. ცვლის მხოლოდ ახალ ველებს — სტატუსი, კითხვები, შენიშვნები და ა.შ. უცვლელი რჩება.
+ *  v2: ორ საწყის შეთავაზებას (id-ით) ემატება originalText და სურათები offers-assets/-დან. */
+async function migrate() {
+  const version = (await req(db.transaction('meta').objectStore('meta').get('dataVersion'))) || 1;
+  if (version >= DATA_VERSION) return;
+  const changed = [];
+  if (version < 2) {
+    for (const seed of SEED) {
+      const o = state.offers.find((x) => x.id === seed.id);
+      if (!o) continue; // მომხმარებელმა წაშალა — თავიდან არ ვამატებთ
+      if (!o.originalText) o.originalText = seed.originalText;
+      // საწყისი სურათები წინ, უკვე ატვირთულები — მათ შემდეგ
+      const have = new Set(o.images.map((i) => i.src));
+      o.images = [...seed.images.filter((i) => !have.has(i.src)).map(normalizeImage), ...o.images];
+      changed.push(o);
+    }
+  }
+  const tx = db.transaction(['offers', 'meta'], 'readwrite');
+  changed.forEach((o) => tx.objectStore('offers').put(o));
+  tx.objectStore('meta').put(DATA_VERSION, 'dataVersion');
+  await txDone(tx);
 }
 
 /** ბაზიდან თავიდან წაკითხვა (შენახვის შეცდომისას მეხსიერების დასაბრუნებლად) */
@@ -864,7 +1013,7 @@ async function commit(mutator, { put = [], del = [] } = {}) {
    6. ფილტრაცია
    ========================================================= */
 function searchText(o) {
-  return [o.title, o.company, o.contactPerson, o.summary, o.description, o.space, o.notes,
+  return [o.title, o.company, o.contactPerson, o.summary, o.description, o.originalText, o.space, o.notes,
     o.infra.other, o.terms.term, ...o.questions.map((q) => q.text)].join(' ').toLowerCase();
 }
 function filtered() {
@@ -917,9 +1066,10 @@ async function renderFooter() {
 const LEAF_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22V12"/><path d="M12 12c0-5 3-8 8-9 0 6-3 9-8 9z"/><path d="M12 15c0-4-2.5-6.5-7-7 0 4.5 2.5 7 7 7z"/></svg>`;
 function coverHTML(o) {
   const inner = o.images.length
-    ? `<img src="${o.images[0]}" alt="" loading="lazy">`
+    ? `<img src="${esc(o.images[0].src)}" alt="" loading="lazy">`
     : `<div class="cover-ph">${LEAF_SVG}</div>`;
-  const count = o.images.length > 1 ? `<span class="img-count">${o.images.length} ფოტო</span>` : '';
+  const isDeck = o.images.some((i) => i.slide);
+  const count = o.images.length > 1 ? `<span class="img-count">${o.images.length} ${isDeck ? 'სლაიდი' : 'ფოტო'}</span>` : '';
   return `<div class="cover">${inner}${count}</div>`;
 }
 
@@ -966,6 +1116,58 @@ function renderCards() {
    9. დეტალური ხედი
    ========================================================= */
 
+/** გალერეა: სურათები group-ის მიხედვით სექციებად (თანმიმდევრული ჯგუფები), წარწერით ქვემოთ */
+function galleryHTML(o, forPrint) {
+  if (!o.images.length) {
+    return `<p class="muted" style="margin:0">სურათები არ არის${forPrint ? '' : ' — დაამატეთ „რედაქტირებიდან“'}.</p>`;
+  }
+  const groups = [];
+  o.images.forEach((img, i) => {
+    const last = groups[groups.length - 1];
+    if (last && last.name === (img.group || '')) last.items.push([img, i]);
+    else groups.push({ name: img.group || '', items: [[img, i]] });
+  });
+  return groups.map((g) => `
+    <div class="gallery-group">
+      ${g.name ? `<h5>${esc(g.name)}</h5>` : ''}
+      <div class="gallery">${g.items.map(([img, i]) => `
+        <figure>
+          <button type="button" data-action="lightbox" data-id="${o.id}" data-idx="${i}" aria-label="${esc(img.caption || 'სურათი ' + (i + 1))}">
+            <img src="${esc(img.src)}" alt="${esc(img.caption)}"${forPrint ? '' : ' loading="lazy"'}>
+          </button>
+          ${img.caption ? `<figcaption>${esc(img.caption)}</figcaption>` : ''}
+        </figure>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+/** „ორიგინალი შემოთავაზება (უცვლელი)“ — მხოლოდ წასაკითხი; რედაქტირება ცალკე ღილაკით და დადასტურებით */
+function originalHTML(o, forPrint) {
+  const editing = !forPrint && state.editingOriginal === o.id;
+  if (forPrint && !o.originalText) return '';
+  let body;
+  if (editing) {
+    body = `
+      <textarea id="original-edit" aria-label="ორიგინალი ტექსტი">${esc(o.originalText)}</textarea>
+      <div class="actions" style="margin-top:10px;justify-content:flex-end">
+        <button class="btn small" data-action="original-cancel">გაუქმება</button>
+        <button class="btn small primary" data-action="original-save" data-id="${o.id}">შენახვა</button>
+      </div>`;
+  } else {
+    body = o.originalText
+      ? `<p class="original-text">${esc(o.originalText)}</p>`
+      : `<p class="muted" style="margin:0">ორიგინალი ტექსტი არ არის შენახული.</p>`;
+  }
+  return `
+    <section class="panel original">
+      <div class="panel-head">
+        <h4>ორიგინალი შემოთავაზება (უცვლელი)</h4>
+        ${forPrint || editing ? '' : `<button class="btn small" data-action="original-edit" data-id="${o.id}">ორიგინალის რედაქტირება</button>`}
+      </div>
+      ${body}
+    </section>`;
+}
+
 /** შეთავაზების შიგთავსი — გამოიყენება ეკრანზეც და ბეჭდვისასაც */
 function offerBodyHTML(o, forPrint = false) {
   const t = o.terms;
@@ -974,10 +1176,8 @@ function offerBodyHTML(o, forPrint = false) {
   const total = o.questions.length;
   const done = total - openQuestions(o);
 
-  const gallery = o.images.length
-    ? `<div class="gallery">${o.images.map((src, i) =>
-        `<button type="button" data-action="lightbox" data-id="${o.id}" data-idx="${i}" aria-label="სურათი ${i + 1}"><img src="${src}" alt=""></button>`).join('')}</div>`
-    : `<p class="muted" style="margin:0">სურათები არ არის${forPrint ? '' : ' — დაამატეთ „რედაქტირებიდან“'}.</p>`;
+  const gallery = galleryHTML(o, forPrint);
+  const hasSlides = o.images.some((i) => i.slide);
 
   const questions = total
     ? `<div class="progress"><div style="width:${(done / total) * 100}%"></div></div>
@@ -999,16 +1199,20 @@ function offerBodyHTML(o, forPrint = false) {
   return `
   <div class="detail-grid">
     <div>
+      ${originalHTML(o, forPrint)}
       <section class="panel">
-        <h4>მოკლე აღწერა</h4>
+        <h4>მოკლე აღწერა <span class="notes-label">· ჩვენი შენიშვნები</span></h4>
         <p class="lead">${o.summary ? esc(o.summary) : '<span class="muted">—</span>'}</p>
       </section>
       <section class="panel">
-        <h4>სრული აღწერა</h4>
+        <h4>სრული აღწერა <span class="notes-label">· ჩვენი შენიშვნები</span></h4>
         <p class="prewrap">${o.description ? esc(o.description) : '<span class="muted">—</span>'}</p>
       </section>
-      <section class="panel">
-        <h4>სურათები (${o.images.length})</h4>
+      <section class="panel gallery-panel">
+        <div class="panel-head">
+          <h4>ფოტოები და რენდერები (${o.images.length})</h4>
+          ${hasSlides && !forPrint ? `<button class="btn small" data-action="slideshow" data-id="${o.id}">▶ სლაიდების რეჟიმი</button>` : ''}
+        </div>
         ${gallery}
       </section>
       <section class="panel">
@@ -1149,7 +1353,7 @@ function fillSelects() {
 function openForm(id = null) {
   const o = id ? state.offers.find((x) => x.id === id) : normalizeOffer({ status: 'new', type: 'single' });
   state.editingId = id;
-  state.formImages = [...o.images];
+  state.formImages = o.images.map((i) => ({ ...i }));
   $('#form-title').textContent = id ? 'რედაქტირება' : 'ახალი შეთავაზება';
   $('#f-title').value = o.title;
   $('#f-company').value = o.company;
@@ -1162,6 +1366,9 @@ function openForm(id = null) {
   $('#f-space').value = o.space;
   $('#f-summary').value = o.summary;
   $('#f-desc').value = o.description;
+  // ორიგინალი ტექსტი ფორმაში მხოლოდ ახალი შეთავაზებისთვის ჩანს
+  $('#f-original-wrap').hidden = !!id;
+  $('#f-original').value = '';
   document.querySelectorAll('#f-infra input').forEach((cb) => { cb.checked = !!o.infra[cb.value]; });
   $('#f-infra-other').value = o.infra.other;
   $('#f-model').value = o.terms.model;
@@ -1179,14 +1386,17 @@ function openForm(id = null) {
 }
 
 function renderFormImages() {
-  $('#f-images').innerHTML = state.formImages.map((src, i) => `
+  $('#f-images').innerHTML = state.formImages.map((img, i) => `
     <figure>
-      <img src="${src}" alt="">
-      ${i === 0 ? '<span class="cover-tag">ყდა</span>' : ''}
-      <div class="ctrl">
-        ${i > 0 ? `<button type="button" data-action="img-cover" data-idx="${i}">ყდად</button>` : ''}
-        <button type="button" data-action="img-remove" data-idx="${i}">წაშლა</button>
+      <div class="thumb">
+        <img src="${esc(img.src)}" alt="">
+        ${i === 0 ? '<span class="cover-tag">ყდა</span>' : ''}
+        <div class="ctrl">
+          ${i > 0 ? `<button type="button" data-action="img-cover" data-idx="${i}">ყდად</button>` : ''}
+          <button type="button" data-action="img-remove" data-idx="${i}">წაშლა</button>
+        </div>
       </div>
+      <input type="text" data-img-caption="${i}" value="${esc(img.caption)}" placeholder="წარწერა" aria-label="წარწერა">
     </figure>`).join('');
 }
 
@@ -1230,6 +1440,8 @@ async function submitForm(e) {
       fitout: $('#f-fitout').value,
     },
     questions,
+    // ორიგინალი რედაქტირებისას ფორმიდან არ იცვლება — მხოლოდ ცალკე ღილაკით
+    originalText: prev ? prev.originalText : $('#f-original').value.replace(/\s+$/, ''),
     images: state.formImages,
     links: $('#f-links').value.trim(),
     notes: $('#f-notes').value.trim(),
@@ -1275,7 +1487,7 @@ function compressImage(file, maxW = 1600, quality = 0.8) {
 async function addImages(files) {
   for (const f of files) {
     if (!f.type.startsWith('image/')) continue;
-    try { state.formImages.push(await compressImage(f)); }
+    try { state.formImages.push({ src: await compressImage(f), caption: '' }); }
     catch (e) { alert('სურათის წაკითხვა ვერ მოხერხდა: ' + e.message); }
   }
   renderFormImages();
@@ -1291,16 +1503,32 @@ function openLightbox(images, idx) {
 }
 function showLightbox() {
   const { images, idx } = state.lb;
-  $('#lb-img').src = images[idx];
-  $('#lb-count').textContent = `${idx + 1} / ${images.length}`;
+  const img = images[idx];
+  $('#lb-img').src = img.src;
+  $('#lb-img').alt = img.caption || '';
+  $('#lb-count').innerHTML = `${img.caption ? `<span class="lb-caption">${esc(img.caption)}</span>` : ''}${idx + 1} / ${images.length}`;
   $('.lb-prev').hidden = $('.lb-next').hidden = images.length < 2;
+}
+/** „სლაიდების რეჟიმი“: ყველა სლაიდი ნომრის მიხედვით, სრულ ეკრანზე */
+function openSlideshow(o) {
+  const slides = o.images.filter((i) => i.slide).sort((a, b) => a.slide - b.slide);
+  openLightbox(slides, 0);
+  try { $('#lightbox').requestFullscreen?.().catch(() => {}); } catch (e) {}
 }
 function stepLightbox(d) {
   const n = state.lb.images.length;
   state.lb.idx = (state.lb.idx + d + n) % n;
   showLightbox();
 }
-function closeLightbox() { $('#lightbox').hidden = true; $('#lb-img').src = ''; }
+function closeLightbox() {
+  if (document.fullscreenElement) document.exitFullscreen?.().catch(() => {});
+  $('#lightbox').hidden = true;
+  $('#lb-img').removeAttribute('src');
+}
+// სრული ეკრანიდან Esc-ით გამოსვლისას lightbox-იც დაიხუროს
+document.addEventListener('fullscreenchange', () => {
+  if (!document.fullscreenElement && !$('#lightbox').hidden) closeLightbox();
+});
 
 /* =========================================================
    13. ექსპორტი / იმპორტი
@@ -1354,7 +1582,7 @@ function importJSON(file) {
    ========================================================= */
 const PLOT_LINE = 'წინამძღვრიშვილის ქ. №51, ჩუღურეთი, თბილისი · ს/კ 01.16.05.010.014 · 921 მ²';
 
-function printView() {
+async function printView() {
   const root = $('#print-root');
   let landscape = false;
   if (state.view === 'detail') {
@@ -1373,6 +1601,8 @@ function printView() {
   pageStyle.id = 'print-page-style';
   pageStyle.textContent = landscape ? '@page { size: landscape; }' : '';
   document.head.appendChild(pageStyle);
+  // ვიცდით, სანამ ყველა სურათი ჩაიტვირთება — თორემ PDF-ში ცარიელი ადგილები დარჩება
+  await Promise.all([...root.querySelectorAll('img')].map((img) => img.decode().catch(() => {})));
   window.print();
 }
 function printPage(o) {
@@ -1390,6 +1620,7 @@ window.addEventListener('afterprint', () => {
 function goTo(view, id = null) {
   state.view = view;
   state.currentId = id;
+  state.editingOriginal = null;
   render();
   window.scrollTo(0, 0);
 }
@@ -1421,6 +1652,24 @@ document.addEventListener('click', async (e) => {
     case 'lightbox': {
       const o = state.offers.find((x) => x.id === id);
       openLightbox(o.images, +idx);
+      break;
+    }
+    case 'slideshow': openSlideshow(state.offers.find((x) => x.id === id)); break;
+    case 'original-edit':
+      if (confirm('ორიგინალი ტექსტი უნდა ემთხვეოდეს შემოთავაზებას, როგორც გამოგვიგზავნეს. ნამდვილად გსურთ მისი შეცვლა?')) {
+        state.editingOriginal = id;
+        render();
+        $('#original-edit')?.focus();
+      }
+      break;
+    case 'original-cancel': state.editingOriginal = null; render(); break;
+    case 'original-save': {
+      const o = state.offers.find((x) => x.id === id);
+      const text = $('#original-edit').value.replace(/\s+$/, '');
+      if (await commit(() => { o.originalText = text; }, { put: [o] })) {
+        state.editingOriginal = null;
+        render();
+      }
       break;
     }
     case 'lb-close': closeLightbox(); break;
@@ -1480,6 +1729,12 @@ document.addEventListener('submit', async (e) => {
   await commit(() => { o.questions.push({ text, done: false }); }, { put: [o] });
   render();
   document.querySelector('[data-add-q] input')?.focus();
+});
+
+// ფორმაში სურათის წარწერის ცვლილება
+$('#f-images').addEventListener('input', (e) => {
+  const i = e.target.dataset.imgCaption;
+  if (i !== undefined) state.formImages[+i].caption = e.target.value;
 });
 
 // ფილტრები
