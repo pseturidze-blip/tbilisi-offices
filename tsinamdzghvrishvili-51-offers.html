@@ -178,6 +178,12 @@ main { padding: 24px 0 60px; }
 .card-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
 .card h3 { font-size: 18px; }
 .card .company { font-size: 13px; color: var(--muted); }
+/* შემომთავაზებლები: სია დეტალურ ხედში და რიგები ფორმაში */
+.proposers { list-style: none; padding: 0; margin: 0 0 12px; display: flex; flex-direction: column; gap: 8px; }
+.proposers li { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; }
+.proposers .p-note { flex-basis: 100%; font-size: 13px; color: var(--muted); }
+.prop-row { display: grid; grid-template-columns: minmax(0, 2fr) 175px minmax(0, 2fr) auto; gap: 8px; margin-bottom: 8px; }
+@media (max-width: 820px) { .prop-row { grid-template-columns: 1fr 1fr; } }
 .card .summary { margin: 0; font-size: 14px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .card-foot { margin-top: auto; padding-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 12px; color: var(--muted); }
 .card-foot .date { margin-left: auto; }
@@ -314,6 +320,22 @@ legend { padding: 0 6px; font-weight: 600; color: var(--green); }
 .lb-next { right: 16px; top: 50%; transform: translateY(-50%); }
 .lb-count { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; color: #ddd; font-size: 14px; padding: 0 70px; }
 .lb-count .lb-caption { display: block; color: #fff; font-size: 15px; margin-bottom: 2px; }
+.lb-msg { position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); text-align: center; color: #eee; padding: 0 80px; font-size: 15px; }
+
+/* სურათი ვერ ჩაიტვირთა (გალერეაში) */
+.img-broken { position: relative; }
+.img-broken img { visibility: hidden; }
+.img-broken::after {
+  content: "სურათი ვერ ჩაიტვირთა"; position: absolute; inset: 0; display: grid; place-items: center;
+  color: var(--terra); font-size: 13px; text-align: center; padding: 8px;
+}
+
+/* გაფრთხილება: გვერდი გახსნილია WSL-იდან, სადაც Windows სურათებს ვერ კითხულობს */
+.env-warn {
+  background: var(--terra-soft); color: var(--terra); border: 1px solid var(--terra);
+  border-radius: 12px; padding: 12px 16px; margin-top: 16px; font-size: 14px;
+}
+.env-warn code { user-select: all; background: var(--surface); padding: 1px 6px; border-radius: 6px; color: var(--text); }
 .lightbox:fullscreen img { max-width: 100vw; max-height: calc(100vh - 70px); border-radius: 0; }
 
 footer { padding: 20px 0 40px; font-size: 12px; color: var(--muted); }
@@ -407,6 +429,14 @@ footer { padding: 20px 0 40px; font-size: 12px; color: var(--muted); }
   </div>
 </div>
 
+<div class="wrap" id="env-warn-wrap" hidden>
+  <div class="env-warn">
+    ⚠ ეს გვერდი გახსნილია WSL-იდან (<b>wsl.localhost</b>) — აქედან Windows სლაიდებსა და ფოტოებს ვერ ტვირთავს.
+    გახსენით Desktop-ის ასლი: <code>C:\Users\user\Desktop\tsinamdzghvrishvili-51-offers\tsinamdzghvrishvili-51-offers.html</code>
+    (შეთავაზებები გადაიტანეთ „ექსპორტი JSON“ → „იმპორტი JSON“-ით).
+  </div>
+</div>
+
 <main>
   <div class="wrap" id="app"></div>
 </main>
@@ -425,15 +455,16 @@ footer { padding: 20px 0 40px; font-size: 12px; color: var(--muted); }
     <div class="modal-body">
 
       <fieldset>
-        <legend>შემთავაზებელი</legend>
+        <legend>შემომთავაზებელი</legend>
         <div class="fgrid">
           <div class="field full">
             <label for="f-title">პროექტის / შეთავაზების სახელი</label>
             <input type="text" id="f-title" placeholder="მაგ.: „ძველი ეზო — ახალი სიცოცხლე“">
           </div>
-          <div class="field">
-            <label for="f-company">კომპანია</label>
-            <input type="text" id="f-company" placeholder="შპს …">
+          <div class="field full">
+            <span>შემომთავაზებლები</span>
+            <div id="f-proposers"></div>
+            <button type="button" class="btn small" data-action="prop-add">+ შემომთავაზებლის დამატება</button>
             <div class="hint">თუ უცნობია — დატოვეთ ცარიელი (მოინიშნება გაფრთხილებით).</div>
           </div>
           <div class="field">
@@ -492,6 +523,10 @@ footer { padding: 20px 0 40px; font-size: 12px; color: var(--muted); }
         <div class="field" style="margin-top:10px">
           <label for="f-infra-other">სხვა საჭიროებები</label>
           <input type="text" id="f-infra-other">
+        </div>
+        <div class="field" style="margin-top:10px">
+          <label for="f-power">დენის სიმძლავრე, კვტ</label>
+          <input type="number" id="f-power" min="0" step="any" placeholder="დაუზუსტებელი">
         </div>
       </fieldset>
 
@@ -562,6 +597,7 @@ footer { padding: 20px 0 40px; font-size: 12px; color: var(--muted); }
   <button class="lb-close" data-action="lb-close" aria-label="დახურვა">✕</button>
   <button class="lb-prev" data-action="lb-prev" aria-label="წინა">‹</button>
   <button class="lb-next" data-action="lb-next" aria-label="შემდეგი">›</button>
+  <div class="lb-msg" id="lb-msg"></div>
   <div class="lb-count" id="lb-count"></div>
 </div>
 
@@ -683,20 +719,40 @@ const GRINISHI_ORIGINAL =
 და მაქვს კითხვა: იქნება თუ არა ტერიტორიაზე საერთო საპირფარეშო?`;
 
 /** მონაცემების ვერსია (იხ. migrate() ქვემოთ):
- *  2 = დაემატა originalText და სურათები ფაილებიდან; 3 = „ძველი ეზოს“ შემთავაზებლები */
-const DATA_VERSION = 3;
+ *  2 = დაემატა originalText და სურათები ფაილებიდან; 3 = „ძველი ეზოს“ საკონტაქტო პირი;
+ *  4 = ერთი „კომპანიის“ ნაცვლად შემომთავაზებლების სია; 5 = დაემატა Stall-ის შეთავაზება;
+ *  6 = infra.powerKw (დენის სიმძლავრე) და Stall-ის დენის მონაცემები */
+const DATA_VERSION = 6;
 
-/** „ძველი ეზო“ — შემთავაზებლები (დაზუსტდა 2026-10-23) */
-const OLD_YARD_COMPANY = 'ეპიზოდი, მეამა ქოლექთი';
+/** შემომთავაზებლის სახე */
+const KINDS = {
+  company: 'კომპანია',
+  person:  'ფიზიკური პირი',
+};
+
+/** „ძველი ეზო“ — შემომთავაზებლები (დაზუსტდა 2026-10-23) */
+const OLD_YARD_PROPOSERS = [
+  { name: 'ნიკა ჩერქეზიშვილი', kind: 'person', note: '' },
+  { name: 'სასტუმრო „ეპიზოდი“', kind: 'company', note: '' },
+  { name: 'შოთა ხვედელიძე', kind: 'person', note: '' },
+  { name: 'მეამა ქოლექთი', kind: 'company', note: '' },
+];
 const OLD_YARD_CONTACT = 'შოთა ხვედელიძე';
-const OLD_YARD_WHO_Q = 'ვინ არის შემთავაზებელი კომპანია?';
+/** კითხვა „ვინ არის შემ(ომ)თავაზებელი კომპანია?“ — უკვე პასუხგაცემულია, სიიდან იშლება */
+const WHO_IS_PROPOSER_Q = /^ვინ არის შემ(ომ)?თავაზებელი კომპანია/;
+
+/** Stall — v6-ის ცვლილებები (დენი 200 კვტ). migrate()-ში ძველი ტექსტი იცვლება მხოლოდ თუ მომხმარებელს არ შეუცვლია. */
+const STALL_INFRA_OTHER_OLD = 'დასაზუსტებელი — ფუდტრაკებისთვის სავარაუდოდ დენი, წყალი და ნარჩენების მართვა';
+const STALL_INFRA_OTHER = 'დენის სიმძლავრე: 200 კვტ. წყალი და ნარჩენების მართვა — დასაზუსტებელი';
+const STALL_Q6_OLD = 'დენის/წყლის საჭიროება და ნარჩენების მართვა';
+const STALL_Q6 = '200 კვტ — პიკური მოთხოვნაა თუ ჯამური? მუდმივად თუ მხოლოდ ღონისძიების დღეებში? შეუძლიათ საკუთარი გენერატორებით ნაწილის დაფარვა?';
 
 const SEED = [
   {
     id: 'seed-greenish',
     dateReceived: '2026-10-23',
     title: '',
-    company: 'შპს გრინიში',
+    proposers: [{ name: 'შპს გრინიში', kind: 'company', note: '' }],
     contactPerson: 'ანი ლორია',
     type: 'single',
     status: 'review',
@@ -726,7 +782,7 @@ const SEED = [
     id: 'seed-old-yard',
     dateReceived: '2026-10-23',
     title: '„ძველი ეზო — ახალი სიცოცხლე“',
-    company: OLD_YARD_COMPANY,
+    proposers: OLD_YARD_PROPOSERS,
     contactPerson: OLD_YARD_CONTACT,
     type: 'yard',
     status: 'clarify',
@@ -759,10 +815,37 @@ const SEED = [
       { text: 'ბიზნეს-მოდელი: იჯარა / შემოსავლის წილი / მართვის საკომისიო?', done: false },
       { text: 'ვადა', done: false },
       { text: 'ბიუჯეტი', done: false },
-      { text: OLD_YARD_WHO_Q, done: true },
     ],
     originalText: OLD_YARD_ORIGINAL,
     images: OLD_YARD_IMAGES,
+    links: '',
+    notes: '',
+  },
+  {
+    id: 'stall',
+    dateReceived: '2026-10-26',
+    title: '',
+    proposers: [{ name: 'Stall', kind: 'company', note: '' }],
+    contactPerson: '',
+    type: 'event',
+    status: 'new',
+    summary: 'ფუდტრაკების შემოყვანა და პარასკევი–შაბათ–კვირის ღონისძიებები: გამოფენა, გაყიდვები.',
+    description: '',
+    space: '',
+    infra: { water: false, electricity: true, toilet: false, sewer: false, gas: false, powerKw: 200, other: STALL_INFRA_OTHER },
+    terms: { model: 'unspecified', amount: '', currency: 'GEL', term: '', fitout: 'unspecified' },
+    questions: [
+      { text: 'საკონტაქტო პირი და ტელეფონი', done: false },
+      { text: 'რამდენი ფუდტრაკი და რა ზომის?', done: false },
+      { text: 'ყოველ შაბათ-კვირას თუ კონკრეტულ თარიღებზე? რომელი სეზონი?', done: false },
+      { text: 'რა სახის გამოფენა და გაყიდვები — ვინ არიან მონაწილეები?', done: false },
+      { text: 'ტრაკების შემოსვლა და დგომა ეზოში — ფასადიდან შესასვლელის სიგანე და საფარი', done: false },
+      { text: STALL_Q6, done: false },
+      { text: 'კომერციული მოდელი: იჯარა ღონისძიებაზე, შემოსავლის წილი თუ სხვა', done: false },
+      { text: 'როგორ ერგება სხვა ოფერებს (მუდმივი ჯიხურები, შადრევნის ზონა)', done: false },
+    ],
+    originalText: 'კომპანია Stall — ფუდტრაკების შემოყვანა და პარასკევი, შაბათი, კვირის ღონისძიებები. გამოფენა, გაყიდვები.',
+    images: [],
     links: '',
     notes: '',
   },
@@ -799,7 +882,9 @@ function fmtDate(d) {
   const [y, m, day] = d.split('-');
   return `${day}.${m}.${y}`;
 }
-function offerName(o) { return o.title || o.company || 'უსახელო შეთავაზება'; }
+/** შემომთავაზებლების სახელები, მძიმით გამოყოფილი */
+function proposerNames(o) { return o.proposers.map((p) => p.name).join(', '); }
+function offerName(o) { return o.title || proposerNames(o) || 'უსახელო შეთავაზება'; }
 function optionsHTML(map, selected) {
   return Object.entries(map).map(([k, v]) => `<option value="${k}"${k === selected ? ' selected' : ''}>${esc(v)}</option>`).join('');
 }
@@ -823,6 +908,8 @@ function infraList(o) {
   if (o.infra.other) items.push(o.infra.other);
   return items;
 }
+/** დენის სიმძლავრე (კვტ) ტექსტად; ცარიელი → '' */
+function powerText(o) { return o.infra.powerKw === '' ? '' : `${Number(o.infra.powerKw).toLocaleString('ka-GE')} კვტ`; }
 function openQuestions(o) { return o.questions.filter((q) => !q.done).length; }
 
 /** ბმულების ტექსტის დაშლა: „სახელი | url“ ან მხოლოდ url. მხოლოდ http(s) ხდება ბმული. */
@@ -848,6 +935,18 @@ function normalizeImage(img) {
   return out;
 }
 
+/** შემომთავაზებლების სია. ძველი ფორმატი (ერთი ველი company) → ერთ-ელემენტიანი სია. */
+function normalizeProposers(o) {
+  if (Array.isArray(o.proposers)) {
+    return o.proposers
+      .map((p) => (typeof p === 'string' ? { name: p } : p || {}))
+      .map((p) => ({ name: String(p.name || '').trim(), kind: KINDS[p.kind] ? p.kind : 'company', note: String(p.note || '').trim() }))
+      .filter((p) => p.name);
+  }
+  const company = String(o.company || '').trim();
+  return company ? [{ name: company, kind: 'company', note: '' }] : [];
+}
+
 /** ძველი / იმპორტირებული ჩანაწერის შევსება ნაგულისხმევი ველებით */
 function normalizeOffer(o) {
   o = o || {};
@@ -857,7 +956,7 @@ function normalizeOffer(o) {
     id: o.id || uid(),
     dateReceived: o.dateReceived || today(),
     title: o.title || '',
-    company: o.company || '',
+    proposers: normalizeProposers(o),
     contactPerson: o.contactPerson || '',
     phone: o.phone || '',
     email: o.email || '',
@@ -868,7 +967,9 @@ function normalizeOffer(o) {
     space: o.space || '',
     infra: {
       water: !!infra.water, electricity: !!infra.electricity, toilet: !!infra.toilet,
-      sewer: !!infra.sewer, gas: !!infra.gas, other: infra.other || '',
+      sewer: !!infra.sewer, gas: !!infra.gas,
+      powerKw: infra.powerKw === '' || infra.powerKw == null || !Number.isFinite(+infra.powerKw) ? '' : +infra.powerKw,
+      other: infra.other || '',
     },
     terms: {
       model: MODELS[terms.model] ? terms.model : 'unspecified',
@@ -969,7 +1070,11 @@ async function load() {
 
 /** მიგრაცია ძველი ვერსიიდან. ცვლის მხოლოდ ახალ ველებს — სტატუსი, კითხვები, შენიშვნები და ა.შ. უცვლელი რჩება.
  *  v2: ორ საწყის შეთავაზებას (id-ით) ემატება originalText და სურათები offers-assets/-დან.
- *  v3: „ძველ ეზოს“ ემატება კომპანია და საკონტაქტო პირი (თუ ცარიელია); კითხვა „ვინ არის…“ მოინიშნება. */
+ *  v3: „ძველ ეზოს“ ემატება საკონტაქტო პირი (თუ ცარიელია).
+ *  v4: company → proposers (ეს უკვე normalizeOffer-ში ხდება); „ძველ ეზოს“ ეწერება ზუსტი შემომთავაზებლები
+ *      და იშლება კითხვა „ვინ არის შემომთავაზებელი კომპანია?“.
+ *  v5: ემატება Stall-ის შეთავაზება (id „stall“), მხოლოდ თუ ასეთი id ჯერ არ არსებობს.
+ *  v6: Stall-ს ეწერება დენი 200 კვტ; ტექსტი და მე-6 კითხვა იცვლება მხოლოდ თუ ჯერ ისევ ძველია. */
 async function migrate() {
   const version = (await req(db.transaction('meta').objectStore('meta').get('dataVersion'))) || 1;
   if (version >= DATA_VERSION) return;
@@ -988,10 +1093,33 @@ async function migrate() {
   if (version < 3) {
     const o = state.offers.find((x) => x.id === 'seed-old-yard');
     if (o) {
-      if (!o.company) o.company = OLD_YARD_COMPANY;
       if (!o.contactPerson) o.contactPerson = OLD_YARD_CONTACT;
-      const q = o.questions.find((x) => x.text === OLD_YARD_WHO_Q);
-      if (q) q.done = true;
+      if (!changed.includes(o)) changed.push(o);
+    }
+  }
+  if (version < 4) {
+    // ყველა ჩანაწერი ხელახლა ჩაიწერება უკვე ახალ ფორმატში (proposers, company-ის გარეშე)
+    for (const o of state.offers) if (!changed.includes(o)) changed.push(o);
+    const o = state.offers.find((x) => x.id === 'seed-old-yard');
+    if (o) {
+      o.proposers = OLD_YARD_PROPOSERS.map((p) => ({ ...p }));
+      o.questions = o.questions.filter((q) => !WHO_IS_PROPOSER_Q.test(q.text));
+    }
+  }
+  if (version < 5 && !state.offers.some((x) => x.id === 'stall')) {
+    // ახალი ჩანაწერი უკვე v6-ის სახით — v6 ქვემოთ მასზე არაფერს ცვლის
+    const o = normalizeOffer(SEED.find((x) => x.id === 'stall'));
+    state.offers.push(o);
+    changed.push(o);
+  }
+  if (version < 6) {
+    const o = state.offers.find((x) => x.id === 'stall');
+    if (o) {
+      o.infra.electricity = true;
+      if (o.infra.powerKw === '') o.infra.powerKw = 200;
+      if (!o.infra.other || o.infra.other === STALL_INFRA_OTHER_OLD) o.infra.other = STALL_INFRA_OTHER;
+      const q = o.questions.find((x) => x.text === STALL_Q6_OLD);
+      if (q) q.text = STALL_Q6;
       if (!changed.includes(o)) changed.push(o);
     }
   }
@@ -1030,7 +1158,7 @@ async function commit(mutator, { put = [], del = [] } = {}) {
    6. ფილტრაცია
    ========================================================= */
 function searchText(o) {
-  return [o.title, o.company, o.contactPerson, o.summary, o.description, o.originalText, o.space, o.notes,
+  return [o.title, proposerNames(o), ...o.proposers.map((p) => p.note), o.contactPerson, o.summary, o.description, o.originalText, o.space, o.notes,
     o.infra.other, o.terms.term, ...o.questions.map((q) => q.text)].join(' ').toLowerCase();
 }
 function filtered() {
@@ -1095,7 +1223,7 @@ function typeBadge(o) { return `<span class="badge type">${TYPES[o.type]}</span>
 function warnBadges(o) {
   let h = '';
   if (termsUnspecified(o)) h += `<span class="badge warn" title="კომერციული პირობები სრულად არ არის განსაზღვრული">⚠ დაუზუსტებელი პირობები</span>`;
-  if (!o.company) h += `<span class="badge warn">⚠ კომპანია უცნობია</span>`;
+  if (!o.proposers.length) h += `<span class="badge warn">⚠ შემომთავაზებელი უცნობია</span>`;
   return h;
 }
 
@@ -1116,7 +1244,7 @@ function renderCards() {
       <div class="card-body">
         <div class="badges">${typeBadge(o)}${statusBadge(o)}</div>
         <h3>${esc(offerName(o))}</h3>
-        ${o.title && o.company ? `<div class="company">${esc(o.company)}</div>` : ''}
+        ${o.title && o.proposers.length ? `<div class="company">${esc(proposerNames(o))}</div>` : ''}
         ${o.contactPerson ? `<div class="company">საკონტაქტო: ${esc(o.contactPerson)}</div>` : ''}
         <p class="summary">${esc(o.summary)}</p>
         <div class="card-foot">
@@ -1240,9 +1368,13 @@ function offerBodyHTML(o, forPrint = false) {
     </div>
     <aside>
       <section class="panel">
-        <h4>შემთავაზებელი</h4>
+        <h4>შემომთავაზებლები</h4>
+        ${o.proposers.length
+          ? `<ul class="proposers">${o.proposers.map((p) => `
+              <li><span>${esc(p.name)}</span><span class="badge">${KINDS[p.kind]}</span>
+                ${p.note ? `<span class="p-note">${esc(p.note)}</span>` : ''}</li>`).join('')}</ul>`
+          : '<p class="unspec" style="margin:0 0 12px">⚠ უცნობია</p>'}
         <dl class="kv">
-          <dt>კომპანია</dt><dd>${o.company ? esc(o.company) : '<span class="unspec">⚠ უცნობია</span>'}</dd>
           <dt>კონტაქტი</dt><dd>${o.contactPerson ? esc(o.contactPerson) : '—'}</dd>
           ${o.phone ? `<dt>ტელეფონი</dt><dd><a href="tel:${esc(o.phone.replace(/\s/g, ''))}">${esc(o.phone)}</a></dd>` : ''}
           ${o.email ? `<dt>ელ-ფოსტა</dt><dd><a href="mailto:${esc(o.email)}">${esc(o.email)}</a></dd>` : ''}
@@ -1254,6 +1386,7 @@ function offerBodyHTML(o, forPrint = false) {
         <dl class="kv" style="margin-bottom:12px">
           <dt>ტიპი</dt><dd>${TYPES[o.type]}</dd>
           <dt>ფართი</dt><dd>${unspecHTML(o.space)}</dd>
+          <dt>დენის სიმძლავრე</dt><dd>${unspecHTML(powerText(o))}</dd>
         </dl>
         <div class="chips">${infra}</div>
         ${o.infra.other ? `<p style="margin:10px 0 0;font-size:14px"><span class="muted">სხვა:</span> ${esc(o.infra.other)}</p>` : ''}
@@ -1289,7 +1422,7 @@ function detailHeadHTML(o, forPrint = false) {
     <div>
       ${forPrint ? '' : `<button class="btn small" data-action="back">← ყველა შეთავაზება</button>`}
       <h2>${esc(offerName(o))}</h2>
-      ${o.title && o.company ? `<div class="muted">${esc(o.company)}</div>` : ''}
+      ${o.title && o.proposers.length ? `<div class="muted">${esc(proposerNames(o))}</div>` : ''}
       <div class="badges" style="margin-top:8px">${typeBadge(o)}${statusBadge(o)}${warnBadges(o)}</div>
     </div>
     ${forPrint ? '' : `
@@ -1316,12 +1449,15 @@ function compareTableHTML(list) {
   if (!list.length) return `<div class="empty">აირჩიეთ შესადარებელი შეთავაზებები ზემოთ.</div>`;
   // მწკრივები: [სათაური, ფუნქცია რომელიც აბრუნებს HTML-ს]
   const rows = [
-    ['კომპანია', (o) => (o.company ? esc(o.company) : '<span class="unspec">⚠ უცნობია</span>')],
+    ['შემომთავაზებლები', (o) => (o.proposers.length
+      ? o.proposers.map((p) => `${esc(p.name)} <span class="muted">(${KINDS[p.kind]})</span>`).join('<br>')
+      : '<span class="unspec">⚠ უცნობია</span>')],
     ['ტიპი', (o) => TYPES[o.type]],
     ['სტატუსი', (o) => statusBadge(o)],
     ['მიღებულია', (o) => fmtDate(o.dateReceived)],
     ['ფართი', (o) => unspecHTML(o.space)],
     ['ინფრასტრუქტურა', (o) => { const l = infraList(o); return l.length ? esc(l.join(', ')) : '—'; }],
+    ['დენის სიმძლავრე, კვტ', (o) => unspecHTML(o.infra.powerKw === '' ? '' : Number(o.infra.powerKw).toLocaleString('ka-GE'))],
     ['მოდელი', (o) => (o.terms.model === 'unspecified' ? unspecHTML('') : MODELS[o.terms.model])],
     ['თვიური თანხა', (o) => unspecHTML(amountText(o.terms))],
     ['ვადა', (o) => unspecHTML(o.terms.term)],
@@ -1373,7 +1509,7 @@ function openForm(id = null) {
   state.formImages = o.images.map((i) => ({ ...i }));
   $('#form-title').textContent = id ? 'რედაქტირება' : 'ახალი შეთავაზება';
   $('#f-title').value = o.title;
-  $('#f-company').value = o.company;
+  renderProposerRows(o.proposers.length ? o.proposers : [{ name: '', kind: 'company', note: '' }]);
   $('#f-contact').value = o.contactPerson;
   $('#f-phone').value = o.phone;
   $('#f-email').value = o.email;
@@ -1388,6 +1524,7 @@ function openForm(id = null) {
   $('#f-original').value = '';
   document.querySelectorAll('#f-infra input').forEach((cb) => { cb.checked = !!o.infra[cb.value]; });
   $('#f-infra-other').value = o.infra.other;
+  $('#f-power').value = o.infra.powerKw;
   $('#f-model').value = o.terms.model;
   $('#f-amount').value = o.terms.amount;
   $('#f-currency').value = o.terms.currency;
@@ -1400,6 +1537,25 @@ function openForm(id = null) {
   renderFormImages();
   $('#form-dlg').showModal();
   $('#form-dlg .modal-body').scrollTop = 0;
+}
+
+/* ---------- შემომთავაზებლების რიგები ფორმაში ---------- */
+function proposerRowHTML(p) {
+  return `
+    <div class="prop-row">
+      <input type="text" data-p="name" value="${esc(p.name)}" placeholder="სახელი / დასახელება" aria-label="სახელი">
+      <select data-p="kind" aria-label="სახე">${optionsHTML(KINDS, p.kind)}</select>
+      <input type="text" data-p="note" value="${esc(p.note)}" placeholder="როლი / შენიშვნა (არასავალდებულო)" aria-label="როლი">
+      <button type="button" class="btn small danger" data-action="prop-remove" aria-label="წაშლა">✕</button>
+    </div>`;
+}
+function renderProposerRows(list) { $('#f-proposers').innerHTML = list.map(proposerRowHTML).join(''); }
+function readProposerRows() {
+  return normalizeProposers({ proposers: [...document.querySelectorAll('#f-proposers .prop-row')].map((row) => ({
+    name: row.querySelector('[data-p=name]').value,
+    kind: row.querySelector('[data-p=kind]').value,
+    note: row.querySelector('[data-p=note]').value,
+  })) });
 }
 
 function renderFormImages() {
@@ -1420,9 +1576,9 @@ function renderFormImages() {
 async function submitForm(e) {
   e.preventDefault();
   const title = $('#f-title').value.trim();
-  const company = $('#f-company').value.trim();
-  if (!title && !company) {
-    alert('მიუთითეთ პროექტის სახელი ან კომპანია.');
+  const proposers = readProposerRows();
+  if (!title && !proposers.length) {
+    alert('მიუთითეთ პროექტის სახელი ან ერთი შემომთავაზებელი მაინც.');
     $('#f-title').focus();
     return;
   }
@@ -1433,13 +1589,13 @@ async function submitForm(e) {
   const questions = $('#f-questions').value.split('\n').map((s) => s.trim()).filter(Boolean)
     .map((text) => ({ text, done: doneMap.get(text) || false }));
 
-  const infra = { other: $('#f-infra-other').value.trim() };
+  const infra = { other: $('#f-infra-other').value.trim(), powerKw: $('#f-power').value === '' ? '' : Number($('#f-power').value) };
   document.querySelectorAll('#f-infra input').forEach((cb) => { infra[cb.value] = cb.checked; });
 
   const offer = normalizeOffer({
     id: state.editingId || uid(),
     dateReceived: $('#f-date').value || today(),
-    title, company,
+    title, proposers,
     contactPerson: $('#f-contact').value.trim(),
     phone: $('#f-phone').value.trim(),
     email: $('#f-email').value.trim(),
@@ -1521,7 +1677,15 @@ function openLightbox(images, idx) {
 function showLightbox() {
   const { images, idx } = state.lb;
   const img = images[idx];
-  $('#lb-img').src = img.src;
+  const el = $('#lb-img');
+  // ჩატვირთვის / შეცდომის შეტყობინება, რომ ცარიელი ეკრანი არ დარჩეს
+  $('#lb-msg').textContent = 'იტვირთება…';
+  el.style.visibility = 'hidden';
+  el.onload = () => { $('#lb-msg').textContent = ''; el.style.visibility = ''; };
+  el.onerror = () => {
+    $('#lb-msg').textContent = `სურათი ვერ ჩაიტვირთა: ${img.src}. შეამოწმეთ, რომ offers-assets საქაღალდე HTML ფაილის გვერდითაა.`;
+  };
+  el.src = img.src;
   $('#lb-img').alt = img.caption || '';
   $('#lb-count').innerHTML = `${img.caption ? `<span class="lb-caption">${esc(img.caption)}</span>` : ''}${idx + 1} / ${images.length}`;
   $('.lb-prev').hidden = $('.lb-next').hidden = images.length < 2;
@@ -1664,6 +1828,11 @@ document.addEventListener('click', async (e) => {
       break;
     }
     case 'form-cancel': $('#form-dlg').close(); break;
+    case 'prop-add':
+      $('#f-proposers').insertAdjacentHTML('beforeend', proposerRowHTML({ name: '', kind: 'company', note: '' }));
+      $('#f-proposers .prop-row:last-child input')?.focus();
+      break;
+    case 'prop-remove': el.closest('.prop-row').remove(); break;
     case 'img-remove': state.formImages.splice(+idx, 1); renderFormImages(); break;
     case 'img-cover': state.formImages.unshift(state.formImages.splice(+idx, 1)[0]); renderFormImages(); break;
     case 'lightbox': {
@@ -1767,6 +1936,18 @@ $('#import-file').addEventListener('change', (e) => { if (e.target.files[0]) imp
 /* =========================================================
    16. გაშვება
    ========================================================= */
+// გალერეაში ჩაუტვირთავი სურათის მონიშვნა (error-ი არ „ბუშტავს“, ამიტომ capture)
+document.addEventListener('error', (e) => {
+  if (e.target.tagName === 'IMG' && e.target.closest('.gallery, .cover')) {
+    (e.target.closest('button') || e.target.parentElement).classList.add('img-broken');
+  }
+}, true);
+
+// WSL-იდან გახსნისას (file://wsl.localhost/… ან wsl$) Windows ფაილებს ძალიან ნელა / ვერ კითხულობს
+if (location.protocol === 'file:' && /^wsl(\.localhost|\$)$/i.test(location.host)) {
+  $('#env-warn-wrap').hidden = false;
+}
+
 fillSelects();
 load().then(() => {
   state.offers.forEach((o) => state.compareIds.add(o.id));
