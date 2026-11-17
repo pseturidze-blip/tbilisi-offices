@@ -211,7 +211,57 @@ const DATA = {
       { id: "M-4", type: "mixed", name: "K4 · დიდი + მცირე · +8.00",  units: ["O-11", "O-12"] },
       { id: "M-5", type: "mixed", name: "K4 · დიდი + მცირე · +12.00", units: ["O-16", "O-17"] }
     ]
-  }
+  },
+  /* სანიმუშო მოწყობის კონცეფციები (University_Office_Three_Options_With_Renders.pdf).
+     ციფრები — კონცეფციიდან; ზონები: [დასახელება, დაახლ. მ², მუდმივი ადგილი] */
+  concepts: {
+    "O-7": {
+      anchor: "concept-O-7", units: ["O-7"], m2: 257.7, seats: 26, seatsNote: "24 ღია + 1 მენეჯერი + 1 რეცეფცია",
+      m2pp: 9.91, meeting: "8", booths: 2, sheet: "A3",
+      plan: "images/concepts/O-7_plan.png", pdf: "images/concepts/O-7_plan.pdf",
+      zones: [["რეცეფცია / მოლოდინი", 18, 1], ["ღია სამუშაო სივრცე", 99, 24], ["მენეჯერის კაბინეტი", 18, 1],
+              ["შეხვედრის ოთახი / 8 ადამიანი", 24], ["ორი სატელეფონო კაბინა", 6], ["სამზარეულო / დასვენება", 32],
+              ["სერვერი / სათავსო", 8], ["არსებული WC-ები", 10], ["გადაადგილება / კედლები / კონსტრუქცია", 42.7]],
+      renders: [["images/concepts/O-7_open.jpg", "ღია სამუშაო სივრცე · 24 ადგილი"], ["images/concepts/O-7_meeting.jpg", "შეხვედრის ოთახი · 8 ადგილი"],
+                ["images/concepts/O-7_reception.jpg", "რეცეფცია"], ["images/concepts/O-7_kitchen.jpg", "სამზარეულო / lounge"]],
+      notes: ["შეხვედრის 8 ადგილი და 2 სატელეფონო კაბინა მუდმივ სამუშაო ადგილებს არ ემატება.",
+              "სამზარეულოში — 6 ადგილი და მცირე დასასვენებელი კუთხე."]
+    },
+    "O-8": {
+      anchor: "concept-O-8", units: ["O-8"], m2: 503.7, seats: 51, seatsNote: "48 ღია + 2 მენეჯერი + 1 რეცეფცია",
+      m2pp: 9.88, meeting: "12 + 6", booths: 4, sheet: "A2",
+      plan: "images/concepts/O-8_plan.png", pdf: "images/concepts/O-8_plan.pdf",
+      zones: [["რეცეფცია / მოლოდინი", 24, 1], ["ღია სამუშაო სივრცე", 210, 48], ["მენეჯერების ორი კაბინეტი", 34, 2],
+              ["დიდი შეხვედრის ოთახი / 12 ადამიანი", 23], ["მცირე შეხვედრის ოთახი / 6 ადამიანი", 19], ["ოთხი სატელეფონო კაბინა", 14],
+              ["სამზარეულო / დასვენება", 40], ["ცალკე lounge / არაფორმალური შეხვედრა", 26], ["სერვერი / სათავსო", 9],
+              ["არსებული WC-ები", 8], ["გადაადგილება / კედლები / კონსტრუქცია", 96.7]],
+      renders: [["images/concepts/O-8_open.jpg", "ღია სამუშაო სივრცე · 48 ადგილი"], ["images/concepts/O-8_meeting.jpg", "შეხვედრის ოთახი · 12 ადგილი"],
+                ["images/concepts/O-8_reception.jpg", "რეცეფცია"], ["images/concepts/O-8_kitchen.jpg", "სამზარეულო / lounge"]],
+      notes: ["სამუშაო მაგიდები 1.40 × 0.80 მ; ექვსი ჯგუფი, თითოეულში 8 ადგილი; ძირითადი გასასვლელი ≈ 1.25 მ.",
+              "შეხვედრის ოთახებისა და სატელეფონო კაბინების ადგილები 51 მუდმივ ადგილს არ ემატება."]
+    },
+    "O-7+O-8": {
+      anchor: "concept-O-7-8", units: ["O-7", "O-8"], combo: "M-2", m2: 761.4, seats: 69, seatsNote: "64 ღია + 4 კაბინეტი + 1 რეცეფცია",
+      m2pp: 11.03, meeting: "20 + 12 + 6", booths: 6, sheet: "A1",
+      plan: "images/concepts/O-7-8_plan.png", pdf: "images/concepts/O-7-8_plan.pdf", aerial: "images/concepts/O-7-8_aerial.jpg",
+      zones: [["ერთიანი რეცეფცია / მოლოდინი", 18, 1], ["ღია სამუშაო სივრცეები — O-7: 16 / O-8: 48", 274, 64],
+              ["ორი ხელმძღვანელის და ორი მენეჯერის კაბინეტი", 65, 4], ["დიდი საკონფერენციო ოთახი / 20 ადამიანი", 39],
+              ["შეხვედრის ოთახები / 12 + 6 ადამიანი", 42], ["ექვსი სატელეფონო კაბინა", 20], ["საერთო სამზარეულო / დასვენება", 40],
+              ["მთავარი და გუნდური lounge", 56], ["პროექტის / თანამშრომლობის ზონა", 24], ["სერვერი / სათავსოები", 17],
+              ["არსებული WC-ები", 18], ["გადაადგილება / კედლები / კონსტრუქცია", 148.4]],
+      renders: [["images/concepts/O-7-8_open.jpg", "ღია სამუშაო სივრცე"], ["images/concepts/O-7-8_conference.jpg", "დიდი საკონფერენციო ოთახი · 20 ადგილი"],
+                ["images/concepts/O-7-8_reception.jpg", "მთავარი რეცეფცია"], ["images/concepts/O-7-8_kitchen.jpg", "სამზარეულო / lounge"]],
+      hall: "O-7 — შეხვედრები და ხელმძღვანელობა (19 ადგილი), O-8 — ძირითადი გუნდი (50 ადგილი). ფართები ერთმანეთს უკავშირდება არსებული საერთო ბირთვის ჰოლით (52.6 მ²). ჰოლი 761.4 მ²-ში არ შედის და რჩება საერთო მიმოსვლად — ახალი ღიობი ან ბირთვის გადაკეთება არ არის გათვალისწინებული.",
+      notes: ["დიდი საკონფერენციო ოთახი ≈ 9.20 × 4.20 მ, მაგიდა ≈ 6.50 × 1.40 მ, 20 სკამი.",
+              "რეცეფცია საერთოა; O-8-ის ცალკე ვარიანტის რეცეფციის ადგილი პროექტის / თანამშრომლობის ზონად გარდაიქმნა."]
+    }
+  },
+  conceptNotes: [
+    "სართულის სიმაღლე 4.00 მ, ფილებს შორის 3.80 მ, ძირითადი ვიტრაჟი 3.30 მ. მოპირკეთება და საინჟინრო ქსელები სუფთა სიმაღლეს შეამცირებს.",
+    "ფართი გადაეცემა შავი კარკასის მდგომარეობაში. ვიზუალიზაციები კონცეპტუალურია — ზუსტი განლაგება იხილეთ 2D გეგმაზე.",
+    "ზონების ფართობები დამრგვალებული პროგრამაა და არა აზომვა. კონტური აღდგენილია PDF-ის ღერძებით — სამუშაო პროექტამდე საჭიროა ადგილზე აზომვა.",
+    "ფიქსირებული ელემენტები: ბირთვები, WC-ები და სვეტები. ახალი ტიხრები და ავეჯი — შეთავაზებაა."
+  ]
 };
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -429,6 +479,30 @@ td a:hover{color:var(--red)}
 #lbv{flex:1;overflow:hidden;cursor:grab;touch-action:none;position:relative}
 #lbv.drag{cursor:grabbing}
 #lbimg{position:absolute;left:0;top:0;transform-origin:0 0;max-width:none;user-select:none;-webkit-user-drag:none;background:#fff}
+/* fit-out concepts */
+.cfig{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.cfig .tile{padding:10px 12px}.cfig .tile b{font-size:24px}.cfig .tile span{font-size:11px;line-height:1.3;display:block}
+.cplan{flex:1;min-height:0;background:#fff;border:1px solid var(--line);border-radius:6px;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px}
+.cplan img{max-width:100%;max-height:100%;object-fit:contain;display:block;cursor:zoom-in}
+.cgal{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:10px;min-height:0}
+.cimg{position:relative;margin:0;border-radius:6px;overflow:hidden;background:var(--soft);min-height:0}
+.cimg img{width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in}
+.cimg figcaption{position:absolute;left:8px;bottom:8px;font-size:11px;font-weight:600;background:rgba(35,35,36,.82);color:#fff;padding:3px 8px;border-radius:3px;max-width:calc(100% - 16px)}
+.cimg.miss img{display:none}.cimg.miss::before{content:"სურათი არ არის";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted)}
+.ztab td,.ztab th{padding:3px 6px;font-size:11.5px;line-height:1.3}.ztab th{font-size:10px}
+.ztab tfoot td{font-weight:800;border-top:2px solid var(--ink);border-bottom:0}
+.cnotes{margin:0;padding-left:16px;font-size:10.5px;color:var(--muted);line-height:1.4}
+.cnotes li{margin-bottom:2px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:99px;background:var(--black);color:#fff;text-decoration:none;font-size:12px;font-weight:600}
+.btn:hover{background:var(--red)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.printonly{display:none}
+.teaser{display:grid;grid-template-columns:150px repeat(3,1fr);gap:10px;align-items:stretch;margin-top:10px}
+.teaser a{position:relative;display:block;height:78px;border-radius:6px;overflow:hidden;background:var(--soft)}
+.teaser a img{width:100%;height:100%;object-fit:cover;display:block}
+.teaser a span{position:absolute;left:6px;bottom:6px;font-size:10.5px;font-weight:600;background:rgba(35,35,36,.82);color:#fff;padding:2px 7px;border-radius:3px}
+.teaser .lbl{display:flex;flex-direction:column;justify-content:center;font-size:12px}
+.teaser .lbl b{font-size:14px}
 /* ---------- responsive ---------- */
 @media (max-width:860px){
   #nav{position:sticky;top:0;inset:auto;width:auto;flex-direction:row;flex-wrap:wrap;align-items:center;padding:10px 12px;gap:10px}
@@ -439,7 +513,8 @@ td a:hover{color:var(--red)}
   .search{flex:1}
   main{margin-left:0;padding:12px 0 40px;gap:14px}
   .page{width:100%;height:auto;min-height:0;zoom:1;padding:22px 16px 40px}
-  .g2,.g3,.g4,.tiles,.ucols,.ocols{grid-template-columns:1fr!important}
+  .g2,.g3,.g4,.tiles,.ucols,.ocols,.cgal,.teaser{grid-template-columns:1fr!important}
+  .cfig{grid-template-columns:1fr 1fr}.cgal{grid-template-rows:none}.cimg{aspect-ratio:3/2}.cplan{min-height:260px}
   .row{flex-direction:column}
   .cover{min-height:560px}
   .cover .in{padding:30px 22px}
@@ -453,6 +528,7 @@ td a:hover{color:var(--red)}
   #nav,#tip,.noprint,.filters,#lb,.vtog,.drw-img .zi{display:none!important}
   .fview .v-s{display:block!important}.fview .v-d{display:none!important}
   .drw-img img{width:100%;height:100%;max-height:none;object-fit:contain;cursor:auto}
+  .printonly{display:block}.cplan img{width:100%;height:100%}
   main{margin:0;padding:0;gap:0;display:block}
   .page{zoom:1!important;width:297mm;height:210mm;box-shadow:none;break-after:page;page-break-after:always;margin:0}
   .page.flow{height:auto;min-height:210mm;overflow:visible}
@@ -868,6 +944,40 @@ function floorDrawing(f){
 const viewToggle = `<div class="vtog noprint" role="group" aria-label="გეგმის ხედი"><button class="on" data-v="s">სქემა</button><button data-v="d">ნახაზი</button></div>`;
 const orient = `<span class="small muted">↑ ქუჩა (რიგი A) · ↓ ეზო (რიგი C)</span>`;
 
+/* ---------- fit-out concepts ---------- */
+const CN = DATA.concepts, CNOTES = DATA.conceptNotes || [];
+const conceptForCombo = id => Object.values(CN).find(c => c.combo === id);
+const cimg = (src, cap) => `<figure class="cimg"><img class="lbable" src="${src}" alt="${cap}" data-lb="${cap} · კონცეპტუალური ვიზუალიზაცია" loading="lazy" onerror="this.closest('figure').classList.add('miss')"><figcaption>${cap}</figcaption></figure>`;
+const cFigures = c => `<div class="cfig">
+  <div class="tile red"><b>${fmt(c.m2)}<small> მ²</small></b><span>საერთო ფართი</span></div>
+  <div class="tile dark"><b>${c.seats}</b><span>სამუშაო ადგილი · ${c.seatsNote}</span></div>
+  <div class="tile"><b>${c.m2pp.toFixed(2)}</b><span>მ² / თანამშრომელი</span></div>
+  <div class="tile"><b>${c.meeting}</b><span>შეხვედრის ადგილი</span></div>
+  <div class="tile"><b>${c.booths}</b><span>სატელეფონო კაბინა</span></div></div>`;
+function cZones(c){
+  const seats = c.zones.reduce((a, z) => a + (z[2] || 0), 0), tot = r1(c.zones.reduce((a, z) => a + z[1], 0));
+  return `<table class="ztab"><thead><tr><th>ზონა</th><th class="num">მ²</th><th class="num">ადგილი</th><th class="num">წილი</th></tr></thead><tbody>
+    ${c.zones.map(z => `<tr><td>${z[0]}</td><td class="num">${fmt(z[1])}</td><td class="num">${z[2] || "—"}</td><td class="num">${Math.round(z[1] / c.m2 * 100)}%</td></tr>`).join("")}</tbody>
+    <tfoot><tr><td>სულ · ${c.m2pp.toFixed(2)} მ² / თანამშრომელი</td><td class="num">${fmt(tot)}</td><td class="num">${seats}</td><td class="num">100%</td></tr></tfoot></table>`;
+}
+const cNotes = c => `<ul class="cnotes">${[...(c.notes || []), ...CNOTES].map(n => `<li>${n}</li>`).join("")}</ul>`;
+function cPlanPage(key, kick, title, foot, sec){
+  const c = CN[key];
+  return page(`${ph(kick, title, `<a class="btn noprint" href="${c.pdf}" target="_blank" rel="noopener">გეგმა 1:100 (PDF) ↓</a>`)}
+    <div class="cplan"><img class="lbable" src="${c.plan}" alt="${key} — სანიმუშო გეგმა" data-lb="${key} · სანიმუშო გეგმა · ორიგინალი 1:100, ${c.sheet}" onerror="drwFail(this)"></div>
+    <div class="small muted noprint" style="margin:5px 0 8px">დააჭირეთ გეგმას გასადიდებლად · ორიგინალი: 1:100, ${c.sheet} · ${fmt(c.m2)} მ²</div>
+    <div class="small muted printonly" style="margin:5px 0 8px">მასშტაბი არ შეესაბამება 1:100-ს — სრული გეგმა იხ. PDF (${c.pdf.split("/").pop()})</div>
+    ${cFigures(c)}`, { id: c.anchor + (c.aerial ? "-plan" : ""), sec, foot });
+}
+function cTablePage(key, kick, title, foot, sec){
+  const c = CN[key];
+  return page(`${ph(kick, title, "კონცეპტუალური ვიზუალიზაცია · ზუსტი განლაგება — 2D გეგმაზე")}
+    <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:18px;flex:1;min-height:0">
+      <div style="display:flex;flex-direction:column;gap:8px;min-height:0">${cZones(c)}${cNotes(c)}</div>
+      <div class="cgal">${c.renders.map(([s, cap]) => cimg(s, cap)).join("")}</div>
+    </div>`, { id: c.anchor + "-r", sec, foot });
+}
+
 /* ============================== PAGES ============================== */
 let H = "";
 
@@ -1058,7 +1168,11 @@ for (const f of [2, 3, 4]){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px">${orient}${viewToggle}</div>
     <div class="fview"><div class="v-s">${splitPlan(f, { interactive: true })}</div><div class="v-d">${floorDrawing(f)}</div></div>
     <div class="legend sch-only" style="margin-top:6px"><span><i class="sw" style="background:#4E5E69"></i>450 მ²+</span><span><i class="sw" style="background:#8597A3"></i>300–450 მ²</span><span><i class="sw" style="background:#B9C5CC"></i>300 მ²-მდე</span><span><i class="sw" style="background:#232324"></i>ბირთვი K1–K4 (52.6 მ²)</span><span><i class="sw" style="background:#F6D2CE;border:1px solid #E2231A"></i>ცენტრალური ლობი</span><span><i class="sw" style="background:#EEF1E4;border:1px solid #9AA86F"></i>ტერასა</span></div>
-    <div class="g3 sch-only" style="grid-template-columns:repeat(${us.length},1fr);gap:10px;margin-top:12px">${us.map(u => `<a href="#u-${u.id}" class="card" style="text-decoration:none;padding:10px 12px;gap:2px"><b style="font-size:15px">${u.id}</b><span style="font-size:20px;font-weight:800">${fmt(u.m2)} მ²</span><span class="small muted">${u.cores.join(" · ")}${u.terrace ? " · ტერასა " + u.terrace.m2 + " მ²" : ""}</span></a>`).join("")}</div>`,
+    <div class="g3 sch-only" style="grid-template-columns:repeat(${us.length},1fr);gap:10px;margin-top:12px">${us.map(u => `<a href="#u-${u.id}" class="card" style="text-decoration:none;padding:10px 12px;gap:2px"><b style="font-size:15px">${u.id}</b><span style="font-size:20px;font-weight:800">${fmt(u.m2)} მ²</span><span class="small muted">${u.cores.join(" · ")}${u.terrace ? " · ტერასა " + u.terrace.m2 + " მ²" : ""}</span></a>`).join("")}</div>
+    ${f === 2 ? `<div class="teaser"><div class="lbl"><b>სანიმუშო ინტერიერები</b><span class="muted">O-7 · O-8 · O-7 + O-8, სართული +8.00</span></div>
+      <a href="#${CN["O-7+O-8"].anchor}"><img src="${CN["O-7+O-8"].aerial}" alt="O-7 + O-8 — საერთო ხედი" loading="lazy" onerror="this.remove()"><span>O-7 + O-8 · ერთიანი ოფისი</span></a>
+      <a href="#${CN["O-8"].anchor}-r"><img src="${CN["O-8"].renders[0][0]}" alt="O-8 — ღია სამუშაო სივრცე" loading="lazy" onerror="this.remove()"><span>O-8 · ღია სივრცე</span></a>
+      <a href="#${CN["O-7+O-8"].anchor}-r"><img src="${CN["O-7+O-8"].renders[1][0]}" alt="O-7 + O-8 — საკონფერენციო" loading="lazy" onerror="this.remove()"><span>O-7 + O-8 · საკონფერენციო</span></a></div>` : ""}`,
     { sec: "offices", id: f === 2 ? "offices" : "", foot: "ოფისები " + LV[f] });
 }
 H += page(`${ph("C · ინტერიერი", "შავი კარკასიდან — მოწყობის მაგალითი", "კონცეპტუალური ვიზუალიზაცია.<br>ოფისები გადაეცემა შავი კარკასით.")}
@@ -1079,7 +1193,7 @@ for (const u of offices){
     ${miniPlan(u.floor, [u.id])}
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;height:286px;margin-top:6px">
       <div style="display:flex;flex-direction:column;min-width:0;min-height:0">
-        <div class="halfl" style="margin-top:0">მოწყობის სქემა · ღია სივრცე ≈ ${M.deskM2} მ² / სამუშაო ადგილი</div>
+        <div class="halfl" style="margin-top:0">${CN[u.id] ? "სქემა · ავტომატური, ≈ " + M.deskM2 + " მ² / ადგილი — სანიმუშო მოწყობა იხ. შემდეგ გვერდზე" : "მოწყობის სქემა · ღია სივრცე ≈ " + M.deskM2 + " მ² / სამუშაო ადგილი"}</div>
         <div style="flex:1;min-height:0;display:flex;justify-content:center;align-items:center">${lay.svg.replace('class="plan ', 'style="max-height:100%;width:100%" class="plan ')}</div>
         <div style="margin-top:4px">${ROOMLEG}</div>
       </div>
@@ -1098,20 +1212,26 @@ for (const u of offices){
         <dt>პარკინგი</dt><dd>ლიფტით ${u.cores[0]} → −3.50</dd>
       </dl></div>
       <div style="display:flex;flex-direction:column;gap:8px">
-        <div class="stats"><div class="stat"><b>${lay.tot.desks}</b>სამუშაო ადგილი</div><div class="stat"><b>${lay.tot.meet}</b>შეხვედრების ოთახი</div><div class="stat"><b>${lay.tot.mgr}</b>მენეჯერის კაბინეტი</div><div class="stat"><b>1 + 1</b>სამზარეულო · სერვერი</div></div>
-        <div class="why">რეკომენდებული კომპანია: <b>${head(u.m2)} თანამშრომელი</b> (8–10 მ² / ადამიანზე).</div>
+        ${CN[u.id] ? `<div class="stats"><div class="stat"><b>${CN[u.id].seats}</b>სამუშაო ადგილი</div><div class="stat"><b>${CN[u.id].m2pp.toFixed(2)}</b>მ² / თანამშრომელი</div><div class="stat"><b>${CN[u.id].meeting}</b>შეხვედრის ადგილი</div><div class="stat"><b>${CN[u.id].booths}</b>სატელეფონო კაბინა</div></div>
+        <div class="why">სანიმუშო მოწყობა: <b>${CN[u.id].seats} სამუშაო ადგილი</b> (${CN[u.id].seatsNote}). <a class="noprint" href="#${CN[u.id].anchor}">იხილეთ გეგმა და ვიზუალიზაციები →</a></div>`
+        : `<div class="stats"><div class="stat"><b>${lay.tot.desks}</b>სამუშაო ადგილი</div><div class="stat"><b>${lay.tot.meet}</b>შეხვედრების ოთახი</div><div class="stat"><b>${lay.tot.mgr}</b>მენეჯერის კაბინეტი</div><div class="stat"><b>1 + 1</b>სამზარეულო · სერვერი</div></div>
+        <div class="why">რეკომენდებული კომპანია: <b>${head(u.m2)} თანამშრომელი</b> (8–10 მ² / ადამიანზე).</div>`}
         ${stacks.length ? `<div class="small"><b>შედის შეთავაზებებში:</b> ${stacks.map(c => `<a href="#o-${c.id}">${c.name}</a> (${fmt(sum(c.units))} მ²)`).join(" · ")}</div>` : ""}
       </div>
       ${slot(`images/${u.id}_montage.jpg`, "office", "ფოტომონტაჟი")}
     </div>`, { id: "u-" + u.id, sec: "offices", foot: "ოფისები · " + u.id });
+  if (CN[u.id]){
+    H += cPlanPage(u.id, `C · ოფისი ${u.id} · ${LV[u.floor]} · სანიმუშო მოწყობა`, `${u.id} — სანიმუშო გეგმა`, `ოფისები · ${u.id} · სანიმუშო მოწყობა`, "offices");
+    H += cTablePage(u.id, `C · ოფისი ${u.id} · სანიმუშო მოწყობა`, `${u.id} — ზონები და ვიზუალიზაციები`, `ოფისები · ${u.id} · ზონები`, "offices");
+  }
 }
 
 /* ---------- C3. COMBINATIONS ---------- */
 const OC = DATA.combos.office;
 const floorsOf = c => [...new Set(c.units.map(id => LV[U[id].floor]))].join(" / ");
 const coresOf = c => [...new Set(c.units.flatMap(id => U[id].cores))].join(" · ");
-function offerHead(c, more, compact){ const a = sum(c.units);
-  const kv = `<div class="kv"><span>ფართები <b>${c.units.join(" + ")}</b></span><span>თანამშრომელი <b>${head(a)}</b></span><span>ბირთვი <b>${coresOf(c)}</b></span>${more || ""}</div>`;
+function offerHead(c, more, compact){ const a = sum(c.units), cc = conceptForCombo(c.id);
+  const kv = `<div class="kv"><span>ფართები <b>${c.units.join(" + ")}</b></span>${cc ? `<span>სამუშაო ადგილი <b>${cc.seats}</b> (კონცეფცია)</span>` : `<span>თანამშრომელი <b>${head(a)}</b></span>`}<span>ბირთვი <b>${coresOf(c)}</b></span>${more || ""}</div>`;
   if (compact) return `<div style="display:flex;justify-content:space-between;align-items:center;gap:14px"><div style="display:flex;align-items:center;gap:10px"><span class="tag red">${c.id}</span><h3>${c.name}</h3></div><div class="area">${fmt(a)}<small> მ²</small></div></div>${kv}`;
   return `<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px"><div><span class="tag red">${c.id}</span><h3 style="margin-top:6px">${c.name}</h3></div><div class="area">${fmt(a)}<small> მ²</small></div></div>${kv}`; }
 const axOrder = ids => ids.slice().sort((a, b) => Math.min(...rectsOf(U[a]).map(r => r.x)) - Math.min(...rectsOf(U[b]).map(r => r.x)));
@@ -1156,13 +1276,24 @@ for (let i = 0; i < stacks.length; i += 3){
 
 H += page(`${ph("C · კომბინაციები · 4", "შერეული: დიდი + მცირე ერთ ბირთვზე", "საერთო ლიფტის ჰოლი, გაფართოების რეზერვი")}
   <div class="g3" style="grid-template-columns:repeat(3,1fr);flex:1;grid-auto-rows:min-content">${OC.filter(c => c.type === "mixed").map(c => `<div class="card offer" id="o-${c.id}">${offerHead(c)}${zoomPlan(U[c.units[0]].floor, c.units, 5)}
-    <div class="small">${c.units.map(id => `${id} — ${fmt(U[id].m2)} მ²`).join(" · ")}</div></div>`).join("")}
+    <div class="small">${c.units.map(id => `${id} — ${fmt(U[id].m2)} მ²`).join(" · ")}</div>${conceptForCombo(c.id) ? (cc => `<div class="why" style="font-size:11.5px;padding:5px 9px">კონცეფცია: <b>${fmt(cc.m2)} მ² · ${cc.seats} ადგილი</b> · <a class="noprint" style="color:var(--red);font-weight:700" href="#${cc.anchor}">იხილეთ კონცეფცია →</a></div>`)(conceptForCombo(c.id)) : ""}</div>`).join("")}
     <div class="card" style="background:var(--mesh);border:0"><h3>რატომ შერეული?</h3><div class="small">დიდი ფართი — ძირითადი ოფისი; მცირე — მომავალი ზრდის რეზერვი, ტრენინგ-ცენტრი ან ქვეიჯარა. ორივე ერთი ბირთვის ლიფტის ჰოლიდან იხსნება, ამიტომ შესაძლებელია საერთო რესეფშენი და ერთიანი წვდომის კონტროლი.</div></div></div>`,
   { sec: "combos", foot: "კომბინაციები · შერეული" });
 
 H += page(`${ph("C · კომბინაციები · 4 · ნახაზები", "შერეული — სამშენებლო ნახაზები", PLNOTE + " · " + PLDATE)}
   <div class="g2" style="gap:14px 18px;flex:1;grid-auto-rows:min-content">${OC.filter(c => c.type === "mixed").map(c => `<div><div class="halfl" style="margin-top:0"><b style="color:var(--ink)">${c.id}</b> · ${c.name} · ${fmt(sum(c.units))} მ²</div>${drawRow(axOrder(c.units), 172)}</div>`).join("")}</div>`,
   { sec: "combos", foot: "კომბინაციები · შერეული · ნახაზები" });
+
+{ const c = CN["O-7+O-8"];
+  H += page(`${ph("C · კომბინაციები · " + c.combo + " · კონცეფცია", "O-7 + O-8 — ერთიანი ოფისის კონცეფცია", "+8.00 · ბირთვი K1 · ერთი მოიჯარე<br><a class='btn ghost noprint' style='margin-top:6px' href='#o-" + c.combo + "'>← შეთავაზება " + c.combo + "</a>")}
+    <figure class="cimg" style="height:330px;flex:none"><img class="lbable" src="${c.aerial}" alt="O-7 + O-8 — საერთო ხედი" data-lb="O-7 + O-8 · მთელი ოფისის საერთო ხედი · კონცეპტუალური ვიზუალიზაცია" onerror="this.closest('figure').classList.add('miss')"><figcaption>მთელი ოფისის საერთო ხედი</figcaption></figure>
+    <div style="margin-top:12px">${cFigures(c)}</div>
+    <div class="why" style="margin-top:12px;font-size:12.5px"><b>საერთო ჰოლი:</b> ${c.hall}</div>
+    <div class="small muted" style="margin-top:8px">${c.units.map(id => `${id} — ${fmt(U[id].m2)} მ²`).join(" · ")} · გეგმა და ზონები — შემდეგ გვერდებზე.</div>`,
+    { id: c.anchor, sec: "combos", foot: "კომბინაციები · O-7 + O-8 · კონცეფცია" });
+  H += cPlanPage("O-7+O-8", "C · კომბინაციები · " + c.combo + " · კონცეფცია", "O-7 + O-8 — ერთიანი ოფისის გეგმა", "კომბინაციები · O-7 + O-8 · გეგმა", "combos");
+  H += cTablePage("O-7+O-8", "C · კომბინაციები · " + c.combo + " · კონცეფცია", "O-7 + O-8 — ზონები და ვიზუალიზაციები", "კომბინაციები · O-7 + O-8 · ზონები", "combos");
+}
 
 /* summary table */
 H += page(`${ph("C · შეჯამება", "ყველა ოფისი და კომბინაცია", "დააჭირეთ სვეტის სათაურს დასალაგებლად")}
@@ -1232,7 +1363,7 @@ function zoomAt(f, cx, cy){ const ns = Math.min(Math.max(Z.s * f, Z.fit * .5), Z
 function openLb(img){ lastFocus = document.activeElement; lbcap.textContent = img.dataset.lb || img.alt; lb.hidden = false; tip.classList.remove("on");
   lbimg.onload = fitZ; lbimg.src = img.currentSrc || img.src; if (lbimg.complete) fitZ(); lb.querySelector('[data-z="close"]').focus(); }
 function closeLb(){ lb.hidden = true; lbimg.removeAttribute("src"); if (lastFocus) lastFocus.focus(); }
-document.addEventListener("click", ev => { const im = ev.target.closest && ev.target.closest(".drw-img img, .fh img"); if (im) openLb(im); });
+document.addEventListener("click", ev => { const im = ev.target.closest && ev.target.closest(".drw-img img, .fh img, img.lbable"); if (im) openLb(im); });
 lb.querySelector(".bar").addEventListener("click", ev => { const b = ev.target.closest("button"); if (!b) return; const z = b.dataset.z;
   if (z === "close") closeLb(); else if (z === "fit") fitZ(); else zoomAt(z === "in" ? 1.4 : 1 / 1.4, lbv.clientWidth / 2, lbv.clientHeight / 2); });
 lbv.addEventListener("wheel", ev => { ev.preventDefault(); const r = lbv.getBoundingClientRect(); zoomAt(ev.deltaY < 0 ? 1.18 : 1 / 1.18, ev.clientX - r.left, ev.clientY - r.top); }, { passive: false });
