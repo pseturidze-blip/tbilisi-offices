@@ -221,11 +221,13 @@ const DATA = {
 :root{
   --red:#E2231A; --black:#232324; --glass:#33414B; --glass2:#5B6B76; --concrete:#B8B4AC;
   --mesh:#F3F1EC; --paper:#FFFFFF; --ink:#1E1F21; --muted:#6B6E73; --line:#DDD9D1; --soft:#ECE9E3;
-  --z:1;
+  --z:1; --desk:#D9D6D0;
 }
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--desk:#1B1B1D}}
+:root[data-theme="dark"]{--desk:#1B1B1D}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:#D9D6D0;color:var(--ink);font-family:"Noto Sans Georgian",system-ui,sans-serif;font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--desk);color:var(--ink);font-family:"Noto Sans Georgian",system-ui,sans-serif;font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased}
 a{color:inherit}
 /* ---------- navigation ---------- */
 #nav{position:fixed;inset:0 auto 0 0;width:232px;background:var(--black);color:#fff;padding:22px 18px;display:flex;flex-direction:column;gap:18px;z-index:20}
@@ -403,7 +405,7 @@ td a:hover{color:var(--red)}
   #nav li a{padding:6px 9px;font-size:13px;white-space:nowrap}
   #nav li a span{display:none}
   .search{flex:1}
-  main{margin-left:0;padding:12px 10px 40px;gap:14px}
+  main{margin-left:0;padding:12px 0 40px;gap:14px}
   .page{width:100%;height:auto;min-height:0;zoom:1;padding:22px 16px 40px}
   .g2,.g3,.g4,.tiles,.ucols,.ocols{grid-template-columns:1fr!important}
   .row{flex-direction:column}
