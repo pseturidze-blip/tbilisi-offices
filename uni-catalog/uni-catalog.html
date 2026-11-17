@@ -490,6 +490,39 @@ td a:hover{color:var(--red)}
 #lbfoot .legend{font-size:11.5px}
 #lbfoot .kv,#lbfoot .stats{gap:6px 14px}
 #lbfoot .stat{background:var(--soft)}
+/* 3D viewer */
+#v3{position:fixed;inset:0;z-index:105;background:rgba(35,35,36,.92);display:flex;flex-direction:column;padding:0 16px 16px;color:#fff}
+#v3[hidden]{display:none}
+#v3 .bar{display:flex;align-items:center;gap:8px;padding:10px 0;font-size:13px}
+#v3 .bar button{all:unset;cursor:pointer;min-width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;border:1px solid #555;border-radius:6px;color:#fff;font-size:16px;padding:0 8px}
+#v3 .bar button:hover{border-color:#fff}
+#v3 .bar button[disabled]{opacity:.3;cursor:default}
+#v3 .bar button:focus-visible,#v3tools button:focus-visible,#v3sel:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+#v3title{font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#v3sub{font-size:11.5px;color:#B6B4AE;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#v3count{font-size:12px;color:#B6B4AE;padding:0 6px;white-space:nowrap}
+#v3sel{background:#2B2B2D;color:#fff;border:1px solid #555;border-radius:6px;padding:7px 8px;font:inherit;font-size:12px;max-width:280px}
+#v3tools{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:0 0 10px}
+#v3tools button{all:unset;cursor:pointer;font-size:12px;padding:6px 12px;border:1px solid #555;border-radius:99px;color:#fff}
+#v3tools button:hover{border-color:#fff}
+#v3tools button[aria-pressed="true"]{background:#fff;color:#232324;border-color:#fff}
+.v3hint{font-size:11px;color:#8B8984;margin-left:auto}
+#v3view{position:relative;flex:1;min-height:0;border-radius:8px;overflow:hidden;border-top:4px solid var(--red);background:#F3F1EC}
+#v3view canvas{display:block;touch-action:none}
+.v3labels{position:absolute!important;inset:0;pointer-events:none;overflow:hidden}
+.v3lbl{font:600 11px "Noto Sans Georgian",sans-serif;background:rgba(35,35,36,.86);color:#fff;padding:3px 7px;border-radius:4px;white-space:nowrap;line-height:1.25;text-align:center}
+.v3lbl span{display:block;font-weight:400;font-size:10px;opacity:.9}
+.v3lbl.hl{background:#E2231A}
+.v3lbl.lvl{background:rgba(255,255,255,.88);color:#3A3B3E;font-weight:700}
+.v3lbl.st{background:#fff;color:#B3261E;border:1px solid #E2231A;font-size:10.5px}
+.v3lbl.zone{background:#FFF3B0;color:#232324;border:1px solid #C9A400}
+#v3tip{position:absolute;z-index:4;pointer-events:none;display:none;background:var(--black);color:#fff;padding:6px 9px;border-radius:5px;font-size:12px;line-height:1.3}
+#v3msg{position:absolute;inset:0;z-index:5;display:none;align-items:center;justify-content:center;font-size:14px;color:#3A3B3E;background:#F3F1EC;text-align:center;padding:20px}
+.btn3d{all:unset;position:absolute;left:6px;top:6px;z-index:3;cursor:pointer;font-size:11px;font-weight:700;line-height:1;padding:5px 9px;border-radius:4px;background:var(--red);color:#fff;font-family:inherit;white-space:nowrap}
+.btn3d:hover{background:#B81A12}
+.btn3d:focus-visible{outline:2px solid var(--black);outline-offset:1px}
+.btn3d[disabled]{background:#8B8984;cursor:default;white-space:normal;max-width:220px}
+svg.open3d{cursor:pointer}
 /* zoom triggers on schematic plans */
 .zhost{position:relative}
 .zwrap{position:relative;width:100%}
@@ -544,7 +577,8 @@ svg.zoomable{cursor:zoom-in}
 @page{size:A4 landscape;margin:0}
 @media print{
   html,body{background:#fff}
-  #nav,#tip,.noprint,.filters,#lb,.vtog,.drw-img .zi,.zbtn{display:none!important}
+  #nav,#tip,.noprint,.filters,#lb,.vtog,.drw-img .zi,.zbtn,#v3,.btn3d{display:none!important}
+  svg.open3d{cursor:auto}
   svg.zoomable{cursor:auto}
   .fview .v-s{display:block!important}.fview .v-d{display:none!important}
   .drw-img img{width:100%;height:100%;max-height:none;object-fit:contain;cursor:auto}
@@ -613,6 +647,26 @@ svg.zoomable{cursor:zoom-in}
   </div>
   <div id="lbv"><div id="lbstage"></div></div>
   <div id="lbfoot"></div>
+</div>
+<div id="v3" class="noprint" hidden role="dialog" aria-modal="true" aria-labelledby="v3title">
+  <div class="bar">
+    <div class="lbhead"><div id="v3title"></div><div id="v3sub"></div></div>
+    <select id="v3sel" aria-label="კომბინაციის მონიშვნა" hidden></select>
+    <span id="v3count" aria-live="polite"></span>
+    <button type="button" data-a="prev" aria-label="წინა" title="წინა (←)">←</button>
+    <button type="button" data-a="next" aria-label="შემდეგი" title="შემდეგი (→)">→</button>
+    <button type="button" data-a="close" aria-label="დახურვა" title="დახურვა (Esc)">✕</button>
+  </div>
+  <div id="v3tools" role="toolbar" aria-label="3D ხედის მართვა">
+    <button type="button" data-a="reset">საწყისი ხედი</button>
+    <button type="button" data-a="top">ზედა ხედი</button>
+    <button type="button" data-a="side">გვერდითი ხედი</button>
+    <button type="button" data-a="explode" aria-pressed="false">სართულების დაშლა</button>
+    <button type="button" data-a="ctx" aria-pressed="true">კონტექსტი</button>
+    <button type="button" data-a="facade" aria-pressed="false">ფასადი</button>
+    <span class="v3hint">მოტრიალება — მაუსით/თითით · გადიდება — გორგოლაჭით · გადაადგილება — მარჯვენა ღილაკით ან ორი თითით</span>
+  </div>
+  <div id="v3view"><div id="v3tip" role="tooltip"></div><div id="v3msg"></div></div>
 </div>
 
 <script>
@@ -1498,6 +1552,315 @@ document.addEventListener("keydown", ev => { if (lb.hidden) return;
   else if (ev.key === "Tab"){ const f = [...lb.querySelectorAll("button:not([disabled]), a[href]")]; if (!f.length) return;
     const i = f.indexOf(document.activeElement); ev.preventDefault(); f[(i + (ev.shiftKey ? -1 : 1) + f.length) % f.length].focus(); } });
 addEventListener("resize", () => { if (!lb.hidden) lbFit(); });
+
+/* ===== 3D viewer — three.js r147 (UMD) from libs/three/, loaded on first use; works under file:// and offline ===== */
+const v3 = document.getElementById("v3"), v3view = document.getElementById("v3view"), v3tip = document.getElementById("v3tip"), v3msg = document.getElementById("v3msg");
+const v3title = document.getElementById("v3title"), v3sub = document.getElementById("v3sub"), v3count = document.getElementById("v3count"), v3sel = document.getElementById("v3sel");
+const NO3D = "3D ხედი ამ ბრაუზერში მიუწვდომელია";
+const FH = 4, UH = 3.6, ST = .3;                 /* floor-to-floor, unit volume height, slab thickness (m) */
+const T3 = { ready: null, R: null, L: null, cam: null, ctl: null, scene: null, raf: 0, list: [], idx: 0, mode: "", focus: [], hlCombo: "",
+  ex: 0, exTo: 0, ctx: true, facade: false, pick: [], ghosts: [], facades: [], floors: {}, dash: null, stair: null, box: null, hover: null, tween: null, down: null, last: null, ov: "" };
+const loadScript = src => new Promise((res, rej) => { const sc = document.createElement("script"); sc.src = src; sc.onload = res; sc.onerror = () => rej(new Error(src)); document.head.appendChild(sc); });
+function loadThree(){
+  if (!T3.ready) T3.ready = (window.THREE ? Promise.resolve() : loadScript("libs/three/three.min.js"))
+    .then(() => THREE.OrbitControls || loadScript("libs/three/OrbitControls.js"))
+    .then(() => THREE.CSS2DRenderer || loadScript("libs/three/CSS2DRenderer.js"))
+    .catch(e => { T3.ready = null; throw e; });
+  return T3.ready;
+}
+function webglOK(){ try { const c = document.createElement("canvas"); return !!(window.WebGLRenderingContext && (c.getContext("webgl2") || c.getContext("webgl"))); } catch (e) { return false; } }
+const isDark = () => { const t = document.documentElement.dataset.theme; return t ? t === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; };
+const reduceMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+const elev = f => (f - 1) * FH;
+
+function initR(){
+  if (T3.R) return;
+  const R = new THREE.WebGLRenderer({ antialias: true });
+  R.setPixelRatio(Math.min(devicePixelRatio || 1, 2)); R.shadowMap.enabled = true; R.shadowMap.type = THREE.PCFSoftShadowMap;
+  v3view.prepend(R.domElement);
+  const L = new THREE.CSS2DRenderer(); L.domElement.className = "v3labels"; v3view.appendChild(L.domElement);
+  const cam = new THREE.PerspectiveCamera(32, 1, .5, 4000);
+  const ctl = new THREE.OrbitControls(cam, R.domElement);
+  ctl.enableDamping = true; ctl.dampingFactor = .08; ctl.autoRotateSpeed = .55; ctl.maxPolarAngle = Math.PI * .495; ctl.screenSpacePanning = true; ctl.minDistance = 8; ctl.maxDistance = 900;
+  ctl.addEventListener("start", () => { ctl.autoRotate = false; T3.tween = null; });
+  Object.assign(T3, { R, L, cam, ctl });
+  R.domElement.addEventListener("pointerdown", e => { T3.down = [e.clientX, e.clientY]; });
+  R.domElement.addEventListener("pointermove", onMove3);
+  R.domElement.addEventListener("pointerleave", () => { setHover(null); v3tip.style.display = "none"; });
+  R.domElement.addEventListener("click", onClick3);
+}
+function resize3(){ if (!T3.R) return; const w = v3view.clientWidth, h = v3view.clientHeight; T3.R.setSize(w, h); T3.L.setSize(w, h); T3.cam.aspect = w / Math.max(h, 1); T3.cam.updateProjectionMatrix(); }
+
+/* ---- scene helpers ---- */
+const mStd = (color, op) => { const m = new THREE.MeshStandardMaterial({ color, roughness: .85, metalness: 0, transparent: op < 1, opacity: op, depthWrite: op >= .5 }); m.userData.op = op; return m; };
+function box(x0, x1, y0, y1, z0, z1, mat){ const m = new THREE.Mesh(new THREE.BoxGeometry(x1 - x0, z1 - z0, y1 - y0), mat); m.position.set((x0 + x1) / 2, (z0 + z1) / 2, (y0 + y1) / 2); return m; }
+function edges(mesh, color, op){ const e = new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry), new THREE.LineBasicMaterial({ color, transparent: op < 1, opacity: op })); e.position.copy(mesh.position); e.rotation.copy(mesh.rotation); return e; }
+function label(html, cls, x, y, z){ const d = document.createElement("div"); d.className = "v3lbl " + (cls || ""); d.innerHTML = html; const o = new THREE.CSS2DObject(d); o.position.set(x, y, z); return o; }
+function canvasTex(draw, w, h){ const c = document.createElement("canvas"); c.width = w; c.height = h; draw(c.getContext("2d"), w, h); const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; return t; }
+function stairFor(c){
+  if (!c || c.type !== "stack") return null;
+  const us = c.units.map(id => U[id]), fl = us.map(u => u.floor);
+  const span = u => { const rs = rectsOf(u).filter(r => r.h >= 5); return [Math.min(...rs.map(r => r.x)), Math.max(...rs.map(r => r.x + r.w))]; };
+  const sp = us.map(span), x0 = Math.max(...sp.map(v => v[0])), x1 = Math.min(...sp.map(v => v[1]));
+  const left = coreMid(c.core) < (x0 + x1) / 2, sx0 = left ? x0 + 1 : x1 - 7;
+  return { lo: Math.min(...fl), hi: Math.max(...fl), x0: sx0, x1: sx0 + 6, y0: 5.1, y1: 8.1, dir: left ? 1 : -1, common: { x0, x1 },
+           misaligned: new Set(us.map(u => u.axes.join("-"))).size > 1 };
+}
+function disposeScene(){
+  if (!T3.scene) return;
+  T3.scene.traverse(o => {
+    if (o.geometry) o.geometry.dispose();
+    const ms = o.material ? (Array.isArray(o.material) ? o.material : [o.material]) : [];
+    ms.forEach(m => { if (m.map) m.map.dispose(); m.dispose(); });
+  });
+  if (T3.sun) T3.sun.shadow.map && T3.sun.shadow.map.dispose();
+  T3.L.domElement.querySelectorAll(".v3lbl").forEach(n => n.remove());
+  T3.scene = null; T3.pick = []; T3.ghosts = []; T3.facades = []; T3.floors = {}; T3.dash = null; T3.hover = null;
+}
+const TYPECLR = { comm: 0xD4891C, off: 0x8597A3 };
+function buildScene(focusIds, opts){
+  disposeScene();
+  const S = new THREE.Scene(); T3.scene = S; T3.focus = focusIds;
+  S.background = new THREE.Color(isDark() ? 0x1B1B1D : 0xF3F1EC);
+  v3view.style.background = isDark() ? "#1B1B1D" : "#F3F1EC";
+  S.add(new THREE.HemisphereLight(0xffffff, 0x8a8478, .95));
+  const sun = new THREE.DirectionalLight(0xffffff, .7); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -.0006; sun.shadow.radius = 4;
+  T3.sun = sun; S.add(sun); S.add(sun.target);
+  const st = T3.stair = opts.stair || null;
+  const fu = focusIds.map(id => U[id]).filter(Boolean);
+  /* focus box (metres) */
+  const fr = fu.flatMap(rectsOf);
+  const bx0 = fr.length ? Math.min(...fr.map(r => r.x)) : 0, bx1 = fr.length ? Math.max(...fr.map(r => r.x + r.w)) : AX[35];
+  const ftop = fu.length ? Math.max(...fu.map(u => u.floor)) : 4;
+  T3.box = opts.building ? { x0: -6, x1: AX[35] + 6, z0: 0, z1: D, y0: 0, y1: 16 } : { x0: bx0 - 8, x1: bx1 + 8, z0: 0, z1: D, y0: 0, y1: elev(ftop) + FH };
+  const mSlab = mStd(0xE9E6E0, 1), mCore = mStd(0x232324, 1), mStair = mStd(0x5D6770, 1);
+  const zoneTex = canvasTex((g, w, h) => { g.fillStyle = "rgba(255,226,90,.55)"; g.fillRect(0, 0, w, h); g.strokeStyle = "rgba(201,164,0,.95)"; g.lineWidth = 6; for (let i = -h; i < w; i += 22){ g.beginPath(); g.moveTo(i, h); g.lineTo(i + h, 0); g.stroke(); } }, 128, 128);
+  zoneTex.repeat.set(6, 2);
+  const meshTex = canvasTex((g, w, h) => { g.fillStyle = "rgba(255,255,255,.22)"; g.fillRect(0, 0, w, h); g.strokeStyle = "rgba(255,255,255,.95)"; g.lineWidth = 2; for (let i = 0; i <= w; i += 8){ g.beginPath(); g.moveTo(i, 0); g.lineTo(i, h); g.stroke(); } for (let j = 0; j <= h; j += 8){ g.beginPath(); g.moveTo(0, j); g.lineTo(w, j); g.stroke(); } }, 64, 64);
+  meshTex.repeat.set(AX[35] / 1.2, FH / 1.2);
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(AX[35] + 200, 160), new THREE.ShadowMaterial({ opacity: isDark() ? .35 : .14 }));
+  ground.rotation.x = -Math.PI / 2; ground.position.set(AX[35] / 2, -ST - .01, D / 2); ground.receiveShadow = true; S.add(ground);
+  for (const f of [1, 2, 3, 4]){
+    const g = new THREE.Group(); g.userData.base = elev(f); g.position.y = elev(f); S.add(g); T3.floors[f] = g;
+    /* slab with stair opening where the internal stair passes through it */
+    const sh = new THREE.Shape(); sh.moveTo(0, 0); sh.lineTo(AX[35], 0); sh.lineTo(AX[35], D); sh.lineTo(0, D); sh.lineTo(0, 0);
+    if (st && f > st.lo && f <= st.hi){ const hole = new THREE.Path(); hole.moveTo(st.x0, st.y0); hole.lineTo(st.x0, st.y1); hole.lineTo(st.x1, st.y1); hole.lineTo(st.x1, st.y0); hole.lineTo(st.x0, st.y0); sh.holes.push(hole); }
+    const sg = new THREE.ExtrudeGeometry(sh, { depth: ST, bevelEnabled: false }); sg.rotateX(Math.PI / 2);
+    const slab = new THREE.Mesh(sg, mSlab); slab.receiveShadow = true; g.add(slab); g.add(edges(slab, 0xB2ACA2, .9));
+    g.add(label(f === 1 ? "±0.00" : LV[f], "lvl", -4.5, .4, D / 2));
+    /* units */
+    for (const u of DATA.units.filter(x => x.floor === f)){
+      const isF = focusIds.includes(u.id);
+      let color, op, role;
+      if (opts.building){ role = isF ? "hl" : (focusIds.length ? "dim" : "type"); color = isF ? 0xE2231A : (f === 1 ? TYPECLR.comm : TYPECLR.off); op = isF ? .9 : (focusIds.length ? .22 : .88); }
+      else { role = isF ? "hl" : "ghost"; color = isF ? 0xE2231A : 0xffffff; op = isF ? .85 : .12; }
+      const mat = mStd(color, op);
+      const rs = rectsOf(u);
+      for (const rr of rs){
+        const m = box(rr.x, rr.x + rr.w, rr.y, rr.y + rr.h, 0, UH, mat); m.userData.uid = u.id; m.castShadow = role !== "ghost" && role !== "dim"; m.receiveShadow = true;
+        const e = edges(m, role === "hl" ? 0x8E140E : (role === "type" ? 0x5E6268 : 0x9C988F), role === "ghost" || role === "dim" ? .35 : .9);
+        g.add(m); g.add(e); T3.pick.push(m);
+        if (role === "ghost" || role === "dim") T3.ghosts.push(m, e);
+      }
+      if (role === "hl"){ const b = biggest(rs); g.add(label(`<b>${u.id}</b><span>${fmt(u.m2)} მ²</span>`, "hl", b.x + b.w / 2, UH + 1.2, b.y + b.h / 2)); }
+    }
+    /* cores rise through all floors */
+    for (const c of DATA.cores){
+      if (c.central && f > 3) continue;
+      const yd = f === 1 ? D : (c.central ? DATA.grid.rowB : 8.5);
+      const m = box(X(c.axes[0]), X(c.axes[1]), 0, yd, 0, FH - ST, mCore); m.castShadow = true; m.receiveShadow = true; g.add(m);
+      if (f === (c.central ? 3 : 4)) g.add(label(c.id, "", (X(c.axes[0]) + X(c.axes[1])) / 2, FH + .6, yd / 2));
+    }
+    /* internal stair: one flight per storey inside the opening */
+    if (st && f >= st.lo && f < st.hi){
+      const n = 20, run = (st.x1 - st.x0) / n, rise = FH / n, ym = (st.y0 + st.y1) / 2;
+      for (let i = 0; i < n; i++){ const xa = st.dir > 0 ? st.x0 + i * run : st.x1 - (i + 1) * run; const s = box(xa, xa + run, ym - .65, ym + .65, rise * i, rise * (i + 1), mStair); s.castShadow = true; g.add(s); }
+    }
+    /* common zone shared by all floors of a stack with mismatched boundaries */
+    if (st && st.misaligned && f >= st.lo && f <= st.hi){
+      const zm = new THREE.MeshBasicMaterial({ map: zoneTex, transparent: true, opacity: .95, depthWrite: false, side: THREE.DoubleSide });
+      const band = box(st.common.x0, st.common.x1, -.05, D + .05, .02, .12, zm); band.renderOrder = 2; g.add(band);
+      const outline = box(st.common.x0, st.common.x1, -.1, D + .1, .02, UH + .1, zm); g.add(edges(outline, 0xC9A400, 1)); outline.geometry.dispose();
+      if (f === st.hi) g.add(label("საერთო ზონა", "zone", (st.common.x0 + st.common.x1) / 2, UH + 3.2, D + 1));
+    }
+    /* metal-mesh curtain on the street facade (row A) of the office floors */
+    if (f > 1){
+      const fm = new THREE.MeshBasicMaterial({ map: meshTex, transparent: true, opacity: .75, depthWrite: false, side: THREE.DoubleSide });
+      const pl = new THREE.Mesh(new THREE.PlaneGeometry(AX[35], FH), fm); pl.position.set(AX[35] / 2, FH / 2 - ST, -.35); pl.visible = T3.facade; g.add(pl); T3.facades.push(pl);
+    }
+    /* roof outline +16.00 */
+    if (f === 4){ const pts = [[0, 0], [AX[35], 0], [AX[35], D], [0, D], [0, 0]].map(([x, z]) => new THREE.Vector3(x, FH, z));
+      g.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineDashedMaterial({ color: 0x9C988F, dashSize: 1.2, gapSize: .8 })).computeLineDistances());
+      g.add(label("+16.00", "lvl", -4.5, FH, D / 2)); }
+  }
+  if (st){
+    const cx = (st.x0 + st.x1) / 2, cz = (st.y0 + st.y1) / 2;
+    const geo = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(cx, 0, cz), new THREE.Vector3(cx, 1, cz)]);
+    T3.dash = new THREE.Line(geo, new THREE.LineDashedMaterial({ color: 0xE2231A, dashSize: .7, gapSize: .45, depthTest: false })); T3.dash.renderOrder = 10; S.add(T3.dash);
+    T3.stairLbl = label("შიდა კიბე — საჭიროებს კონსტრუქტორის თანხმობას", "st", cx, 0, cz); S.add(T3.stairLbl);
+    updateDash();
+  }
+  T3.ghosts.forEach(o => o.visible = T3.ctx);
+  const c = new THREE.Vector3((T3.box.x0 + T3.box.x1) / 2, 0, D / 2), sz = Math.max(T3.box.x1 - T3.box.x0, 40);
+  sun.position.set(c.x + sz * .35, 140, c.z - 90); sun.target.position.copy(c);
+  Object.assign(sun.shadow.camera, { left: -sz * .7, right: sz * .7, top: sz * .7, bottom: -sz * .7, near: 1, far: 600 }); sun.shadow.camera.updateProjectionMatrix();
+  applyExplode();
+}
+function updateDash(){
+  if (!T3.dash || !T3.stair) return;
+  const st = T3.stair, y0 = T3.floors[st.lo].position.y, y1 = T3.floors[st.hi].position.y + UH;
+  const p = T3.dash.geometry.attributes.position; p.setY(0, y0); p.setY(1, y1); p.needsUpdate = true; T3.dash.computeLineDistances(); T3.dash.geometry.computeBoundingSphere();
+  T3.stairLbl.position.y = y1 + 2.4;
+}
+function applyExplode(){ for (const f in T3.floors){ const g = T3.floors[f]; g.position.y = g.userData.base * (1 + 1.5 * T3.ex); } updateDash(); }
+
+/* ---- camera ---- */
+function camFor(kind){
+  const b = T3.box, ex = 1 + 1.5 * T3.ex, c = new THREE.Vector3((b.x0 + b.x1) / 2, (b.y1 * ex) * .42, D / 2);
+  const span = Math.max(b.x1 - b.x0, b.y1 * ex * 1.7, 30), d = span / (2 * Math.tan(T3.cam.fov * Math.PI / 360)) * (T3.cam.aspect < 1 ? 1.4 / T3.cam.aspect : (T3.mode === "building" ? .62 : .8));
+  const pos = kind === "top" ? new THREE.Vector3(c.x, d * 1.05, c.z + .01)
+    : kind === "side" ? new THREE.Vector3(c.x, c.y + d * .05, c.z - d)
+    : new THREE.Vector3(c.x + d * .22, c.y + d * .48, c.z - d * .85);
+  return { pos, tgt: c };
+}
+function goView(kind, now){
+  const v = camFor(kind);
+  if (now || reduceMotion()){ T3.cam.position.copy(v.pos); T3.ctl.target.copy(v.tgt); T3.tween = null; T3.ctl.update(); return; }
+  T3.tween = { p0: T3.cam.position.clone(), t0: T3.ctl.target.clone(), p1: v.pos, t1: v.tgt, s: performance.now(), d: 700 };
+}
+
+/* ---- picking ---- */
+const ray3 = () => T3._ray || (T3._ray = new THREE.Raycaster());
+function hit3(e){
+  const r = T3.R.domElement.getBoundingClientRect(), v = new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  const ry = ray3(); ry.setFromCamera(v, T3.cam);
+  const hs = ry.intersectObjects(T3.pick.filter(m => m.visible), false); return hs.length ? hs[0].object : null;
+}
+function setHover(m){
+  const id = m ? m.userData.uid : null; if (T3.hover === id) return;
+  const mats = uid => [...new Set(T3.pick.filter(p => p.userData.uid === uid).map(p => p.material))];
+  if (T3.hover) mats(T3.hover).forEach(mt => { mt.opacity = mt.userData.op; mt.emissive.setHex(0); mt.depthWrite = mt.userData.op >= .5; });
+  T3.hover = id;
+  if (id) mats(id).forEach(mt => { mt.opacity = Math.max(mt.userData.op, .6); mt.emissive.setHex(0x3a1010); mt.depthWrite = true; });
+  T3.R.domElement.style.cursor = id ? "pointer" : "";
+}
+function onMove3(e){
+  if (e.buttons) { v3tip.style.display = "none"; return; }
+  const m = hit3(e); setHover(m);
+  if (!m){ v3tip.style.display = "none"; return; }
+  const u = U[m.userData.uid], r = v3view.getBoundingClientRect();
+  v3tip.innerHTML = `<b>${u.id}</b> · ${u.floor === 1 ? "±0.00" : LV[u.floor]} · ${fmt(u.m2)} მ²<br><span style="opacity:.75">დააჭირეთ — ფართის გვერდი</span>`;
+  v3tip.style.display = "block"; v3tip.style.left = Math.min(e.clientX - r.left + 14, r.width - 200) + "px"; v3tip.style.top = (e.clientY - r.top + 14) + "px";
+}
+function onClick3(e){
+  if (T3.down && Math.hypot(e.clientX - T3.down[0], e.clientY - T3.down[1]) > 5) return;
+  const m = hit3(e); if (!m) return;
+  const id = m.userData.uid; close3d(true); location.hash = "u-" + id;
+}
+
+/* ---- render loop ---- */
+function loop3(t){
+  T3.raf = requestAnimationFrame(loop3);
+  if (T3.tween){ const k = Math.min(1, (t - T3.tween.s) / T3.tween.d), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+    T3.cam.position.lerpVectors(T3.tween.p0, T3.tween.p1, e); T3.ctl.target.lerpVectors(T3.tween.t0, T3.tween.t1, e); if (k >= 1) T3.tween = null; }
+  if (Math.abs(T3.exTo - T3.ex) > .002){ T3.ex += (T3.exTo - T3.ex) * (reduceMotion() ? 1 : .12); applyExplode(); }
+  T3.ctl.update(); T3.R.render(T3.scene, T3.cam); T3.L.render(T3.scene, T3.cam);
+}
+
+/* ---- open / switch / close ---- */
+function comboHead(c){
+  const a = sum(c.units), cc = conceptForCombo(c.id);
+  return { title: `${c.id} · ${c.name}`, sub: `${c.units.join(" + ")} · ${fmt(a)} მ² · ${cc ? cc.seats + " სამუშაო ადგილი (კონცეფცია)" : head(a) + " თანამშრომელი"} · ბირთვი ${coresOf(c)} · ${floorsOf(c)}` };
+}
+function showCombo(i){
+  T3.idx = (i + T3.list.length) % T3.list.length; const c = T3.list[T3.idx], h = comboHead(c);
+  v3title.textContent = h.title; v3sub.textContent = h.sub;
+  v3count.textContent = T3.list.length > 1 ? `${T3.idx + 1} / ${T3.list.length}` : "";
+  buildScene(c.units, { stair: stairFor(c) }); goView("reset", true);
+}
+function showBuilding(comboId){
+  T3.hlCombo = comboId || "";
+  const all = [...OC, ...DATA.combos.commercial.map(c => ({ ...c, type: "commercial" }))], c = all.find(x => x.id === T3.hlCombo);
+  v3title.textContent = "მთელი შენობა · " + M.name;
+  v3sub.textContent = c ? `${c.id} · ${c.name} · ${c.units.join(" + ")} · ${fmt(sum(c.units))} მ²` : `კომერცია ${fmt(M.commercial_m2)} მ² · ოფისები ${fmt(M.office_m2)} მ² · ბირთვები K1–K4 + L`;
+  v3count.textContent = "";
+  buildScene(c ? c.units : [], { building: true, stair: c ? stairFor(c) : null });
+}
+function setMsg(t){ v3msg.textContent = t || ""; v3msg.style.display = t ? "flex" : "none"; }
+function flagNo(trigger, msg){
+  const card = trigger && trigger.closest(".card, .page"), b = trigger && (trigger.classList.contains("btn3d") ? trigger : (card && card.querySelector(".btn3d")));
+  if (b){ b.textContent = msg || NO3D; b.disabled = true; } else alert(msg || NO3D);
+}
+async function open3d(kind, id, trigger){
+  if (!webglOK()){ flagNo(trigger); return; }
+  try { await loadThree(); } catch (e){ flagNo(trigger, "3D ბიბლიოთეკა ვერ ჩაიტვირთა (libs/three/)"); return; }
+  T3.last = trigger; T3.ov = document.documentElement.style.overflow; document.documentElement.style.overflow = "hidden";
+  v3.hidden = false; tip.classList.remove("on"); setMsg("");
+  try { initR(); } catch (e){ v3.hidden = true; document.documentElement.style.overflow = T3.ov; flagNo(trigger); return; }
+  resize3();
+  T3.ex = T3.exTo = 0; v3.querySelector('[data-a="explode"]').setAttribute("aria-pressed", "false");
+  if (kind === "building"){
+    T3.mode = "building"; T3.list = [];
+    v3sel.hidden = false;
+    if (!v3sel.options.length){
+      v3sel.innerHTML = `<option value="">— კომბინაციის მონიშვნა —</option>` +
+        `<optgroup label="ოფისები">${OC.map(c => `<option value="${c.id}">${c.id} · ${c.name} (${fmt(sum(c.units))} მ²)</option>`).join("")}</optgroup>` +
+        `<optgroup label="კომერცია">${DATA.combos.commercial.map(c => `<option value="${c.id}">${c.id} · ${c.name} (${fmt(sum(c.units))} მ²)</option>`).join("")}</optgroup>`;
+    }
+    v3sel.value = id || ""; showBuilding(v3sel.value);
+  } else {
+    const c = OC.find(x => x.id === id); T3.mode = c.type; T3.list = OC.filter(x => x.type === c.type); v3sel.hidden = true;
+    showCombo(T3.list.indexOf(c));
+  }
+  v3.querySelectorAll('[data-a="prev"],[data-a="next"]').forEach(b => b.disabled = T3.list.length < 2);
+  goView("reset", true);
+  T3.ctl.autoRotate = !reduceMotion();
+  cancelAnimationFrame(T3.raf); T3.raf = requestAnimationFrame(loop3);
+  v3.querySelector('[data-a="close"]').focus();
+}
+function close3d(nav){
+  cancelAnimationFrame(T3.raf); T3.raf = 0; disposeScene(); v3tip.style.display = "none";
+  v3.hidden = true; document.documentElement.style.overflow = T3.ov;
+  if (!nav && T3.last && document.contains(T3.last)) T3.last.focus({ preventScroll: true });
+}
+v3.addEventListener("click", ev => {
+  const b = ev.target.closest("button"); if (ev.target === v3){ close3d(); return; } if (!b || b.disabled) return;
+  const a = b.dataset.a;
+  if (a === "close") close3d();
+  else if (a === "prev" || a === "next"){ showCombo(T3.idx + (a === "next" ? 1 : -1)); T3.ctl.autoRotate = false; }
+  else if (a === "reset" || a === "top" || a === "side"){ T3.ctl.autoRotate = false; goView(a); }
+  else if (a === "explode"){ T3.exTo = T3.exTo ? 0 : 1; b.setAttribute("aria-pressed", String(!!T3.exTo)); }
+  else if (a === "ctx"){ T3.ctx = !T3.ctx; b.setAttribute("aria-pressed", String(T3.ctx)); T3.ghosts.forEach(o => o.visible = T3.ctx); }
+  else if (a === "facade"){ T3.facade = !T3.facade; b.setAttribute("aria-pressed", String(T3.facade)); T3.facades.forEach(o => o.visible = T3.facade); }
+});
+v3sel.addEventListener("change", () => { showBuilding(v3sel.value); T3.ctl.autoRotate = false; });
+document.addEventListener("keydown", ev => {
+  if (v3.hidden) return;
+  if (ev.key === "Escape"){ ev.preventDefault(); close3d(); }
+  else if ((ev.key === "ArrowLeft" || ev.key === "ArrowRight") && T3.list.length > 1 && ev.target !== v3sel){ ev.preventDefault(); showCombo(T3.idx + (ev.key === "ArrowRight" ? 1 : -1)); }
+  else if (ev.key === "Tab"){ const f = [...v3.querySelectorAll("button:not([disabled]), select:not([hidden])")]; if (!f.length) return;
+    const i = f.indexOf(document.activeElement); ev.preventDefault(); f[(i + (ev.shiftKey ? -1 : 1) + f.length) % f.length].focus(); }
+});
+addEventListener("resize", () => { if (!v3.hidden) resize3(); });
+
+/* ---- triggers: "3D ხედი" on stack + block cards, clickable isometric SVG, whole-building button ---- */
+OC.filter(c => c.type === "stack" || c.type === "block").forEach(c => {
+  const card = document.getElementById("o-" + c.id); if (!card) return;
+  const svg = card.querySelector(c.type === "stack" ? "svg.axo" : "svg.plan");
+  const host = (svg && svg.closest(".zhost")) || card; if (host === card) card.style.position = "relative";
+  const b = document.createElement("button"); b.type = "button"; b.className = "btn3d noprint"; b.textContent = "3D ხედი"; b.dataset.combo = c.id;
+  b.setAttribute("aria-label", `3D ხედი — ${c.id} ${c.name}`); host.appendChild(b);
+  if (c.type === "stack" && svg){ svg.classList.remove("zoomable"); svg.classList.add("open3d"); svg.dataset.combo = c.id; }
+});
+{ const side = document.querySelector("#combos .ph .side");
+  if (side){ const b = document.createElement("button"); b.type = "button"; b.className = "btn noprint btn3d-all"; b.style.cssText = "all:unset;display:inline-block;margin-bottom:6px;cursor:pointer;padding:6px 12px;border-radius:99px;background:var(--red);color:#fff;font-weight:700;font-size:12px";
+    b.textContent = "მთელი შენობა 3D"; side.prepend(b, document.createElement("br")); } }
+document.addEventListener("click", ev => {
+  if (!ev.target.closest) return;
+  const all = ev.target.closest(".btn3d-all"); if (all){ open3d("building", "", all); return; }
+  const b = ev.target.closest(".btn3d"); if (b){ ev.preventDefault(); if (!b.disabled) open3d("combo", b.dataset.combo, b); return; }
+  const sv = ev.target.closest("svg.open3d"); if (sv && !sv.closest("#lb")) open3d("combo", sv.dataset.combo, sv.closest(".zhost").querySelector(".btn3d"));
+});
 
 /* search */
 const dl = document.getElementById("ids"); dl.innerHTML = DATA.units.map(u => `<option value="${u.id}">`).join("");
