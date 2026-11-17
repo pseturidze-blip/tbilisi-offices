@@ -375,7 +375,7 @@ svg text{font-family:"Noto Sans Georgian",sans-serif}
 .filters button.on{background:var(--black);color:#fff;border-color:var(--black)}
 .filters button:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 .halfl{font-size:10px;color:var(--muted);letter-spacing:.6px;text-transform:uppercase;margin:6px 0 2px}
-#tip{position:fixed;pointer-events:none;background:var(--black);color:#fff;padding:8px 11px;border-radius:6px;font-size:12px;line-height:1.35;z-index:50;opacity:0;transform:translateY(4px);transition:opacity .1s;max-width:260px}
+#tip{position:fixed;pointer-events:none;background:var(--black);color:#fff;padding:8px 11px;border-radius:6px;font-size:12px;line-height:1.35;z-index:120;opacity:0;transform:translateY(4px);transition:opacity .1s;max-width:260px}
 #tip.on{opacity:1}
 #tip b{font-size:14px}
 /* image slots */
@@ -470,15 +470,34 @@ td a:hover{color:var(--red)}
 .vtog button{all:unset;cursor:pointer;font-size:12px;padding:4px 12px}
 .vtog button.on{background:var(--black);color:#fff}
 .vtog button:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
-#lb{position:fixed;inset:0;z-index:100;background:rgba(20,20,22,.95);display:flex;flex-direction:column}
+#lb{position:fixed;inset:0;z-index:100;background:rgba(35,35,36,.92);display:flex;flex-direction:column;color:#fff}
 #lb[hidden]{display:none}
 #lb .bar{display:flex;align-items:center;gap:8px;padding:10px 14px;color:#fff;font-size:13px}
-#lb .bar span{flex:1}
+#lb .lbhead{flex:1;min-width:0}
+#lbtitle{font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#lbsub{font-size:11.5px;color:#B6B4AE;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#lbcount{font-size:12px;color:#B6B4AE;padding:0 6px;white-space:nowrap}
+#lb .bar button[disabled]{opacity:.3;cursor:default}
 #lb .bar button{all:unset;cursor:pointer;min-width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;border:1px solid #555;border-radius:6px;color:#fff;font-size:16px;padding:0 8px}
 #lb .bar button:hover{border-color:#fff}
 #lbv{flex:1;overflow:hidden;cursor:grab;touch-action:none;position:relative}
 #lbv.drag{cursor:grabbing}
-#lbimg{position:absolute;left:0;top:0;transform-origin:0 0;max-width:none;user-select:none;-webkit-user-drag:none;background:#fff}
+#lbstage{position:absolute;left:0;top:0;background:#fff;border-top:4px solid var(--red);padding:12px;border-radius:4px;box-shadow:0 10px 40px rgba(0,0,0,.4)}
+#lbstage img,#lbstage svg{display:block;max-width:none;user-select:none;-webkit-user-drag:none}
+#lbstage svg text{user-select:none}
+#lbfoot{margin:0 auto 12px;max-width:92vw;background:#fff;color:var(--ink);border-radius:6px;padding:8px 14px;display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;font-size:12px}
+#lbfoot:empty{display:none}
+#lbfoot .legend{font-size:11.5px}
+#lbfoot .kv,#lbfoot .stats{gap:6px 14px}
+#lbfoot .stat{background:var(--soft)}
+/* zoom triggers on schematic plans */
+.zhost{position:relative}
+.zwrap{position:relative;width:100%}
+svg.zoomable{cursor:zoom-in}
+.zbtn{all:unset;position:absolute;top:6px;right:6px;z-index:3;cursor:pointer;font-size:11px;font-weight:600;line-height:1;padding:5px 8px;border-radius:4px;background:rgba(35,35,36,.85);color:#fff;opacity:0;transition:opacity .15s;white-space:nowrap;font-family:inherit}
+.zhost:hover > .zbtn,.zbtn:focus-visible{opacity:1}
+.zbtn:focus-visible{outline:2px solid var(--red);outline-offset:1px}
+@media (hover:none){.zbtn{opacity:1}}
 /* fit-out concepts */
 .cfig{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
 .cfig .tile{padding:10px 12px}.cfig .tile b{font-size:24px}.cfig .tile span{font-size:11px;line-height:1.3;display:block}
@@ -525,7 +544,8 @@ td a:hover{color:var(--red)}
 @page{size:A4 landscape;margin:0}
 @media print{
   html,body{background:#fff}
-  #nav,#tip,.noprint,.filters,#lb,.vtog,.drw-img .zi{display:none!important}
+  #nav,#tip,.noprint,.filters,#lb,.vtog,.drw-img .zi,.zbtn{display:none!important}
+  svg.zoomable{cursor:auto}
   .fview .v-s{display:block!important}.fview .v-d{display:none!important}
   .drw-img img{width:100%;height:100%;max-height:none;object-fit:contain;cursor:auto}
   .printonly{display:block}.cplan img{width:100%;height:100%}
@@ -580,9 +600,19 @@ td a:hover{color:var(--red)}
 
 <main id="main"></main>
 <div id="tip" role="tooltip"></div>
-<div id="lb" class="noprint" hidden role="dialog" aria-modal="true" aria-label="ნახაზის დათვალიერება">
-  <div class="bar"><span id="lbcap"></span><button data-z="in" aria-label="გადიდება">+</button><button data-z="out" aria-label="დაპატარავება">−</button><button data-z="fit" aria-label="ეკრანზე მორგება">⤢</button><button data-z="close" aria-label="დახურვა (Esc)">✕</button></div>
-  <div id="lbv"><img id="lbimg" alt=""></div>
+<div id="lb" class="noprint" hidden role="dialog" aria-modal="true" aria-labelledby="lbtitle">
+  <div class="bar">
+    <div class="lbhead"><div id="lbtitle"></div><div id="lbsub"></div></div>
+    <span id="lbcount" aria-live="polite"></span>
+    <button type="button" data-z="prev" aria-label="წინა" title="წინა (←)">←</button>
+    <button type="button" data-z="next" aria-label="შემდეგი" title="შემდეგი (→)">→</button>
+    <button type="button" data-z="in" aria-label="გადიდება" title="გადიდება (+)">+</button>
+    <button type="button" data-z="out" aria-label="დაპატარავება" title="დაპატარავება (−)">−</button>
+    <button type="button" data-z="fit" aria-label="მორგება" title="მორგება">⤢</button>
+    <button type="button" data-z="close" aria-label="დახურვა" title="დახურვა (Esc)">✕</button>
+  </div>
+  <div id="lbv"><div id="lbstage"></div></div>
+  <div id="lbfoot"></div>
 </div>
 
 <script>
@@ -1335,7 +1365,7 @@ function showTip(ev, id){
   const x = Math.min(ev.clientX + 14, innerWidth - 270), y = ev.clientY + 16;
   tip.style.left = x + "px"; tip.style.top = y + "px";
 }
-document.addEventListener("mousemove", ev => { const g = ev.target.closest && ev.target.closest(".u.int"); if (g) showTip(ev, g.dataset.id); else tip.classList.remove("on"); });
+document.addEventListener("mousemove", ev => { const g = ev.target.closest && ev.target.closest(".u.int, #lb .u[data-id]"); if (g) showTip(ev, g.dataset.id); else tip.classList.remove("on"); });
 document.addEventListener("click", ev => { const g = ev.target.closest && ev.target.closest(".u.int"); if (g) location.hash = "u-" + g.dataset.id; });
 document.addEventListener("keydown", ev => { if (ev.key === "Enter" && ev.target.classList && ev.target.classList.contains("int")) location.hash = "u-" + ev.target.dataset.id; });
 
@@ -1353,29 +1383,121 @@ document.addEventListener("click", ev => { const b = ev.target.closest && ev.tar
   fv.classList.toggle("show-d", b.dataset.v === "d"); page.classList.toggle("drw-mode", b.dataset.v === "d");
   const pf2 = page.querySelector("#pfilter"); if (pf2) pf2.style.visibility = b.dataset.v === "d" ? "hidden" : ""; });
 
-/* lightbox: zoom + pan, Esc closes */
-const lb = document.getElementById("lb"), lbv = document.getElementById("lbv"), lbimg = document.getElementById("lbimg"), lbcap = document.getElementById("lbcap");
-let Z = { s: 1, x: 0, y: 0, fit: 1 }, lastFocus = null;
-const applyZ = () => { lbimg.style.transform = `translate(${Z.x}px,${Z.y}px) scale(${Z.s})`; };
-function fitZ(){ const w = lbv.clientWidth, h = lbv.clientHeight, iw = lbimg.naturalWidth || 1, ih = lbimg.naturalHeight || 1;
-  Z.fit = Math.min(w / iw, h / ih) * .96; Z.s = Z.fit; Z.x = (w - iw * Z.s) / 2; Z.y = (h - ih * Z.s) / 2; applyZ(); }
-function zoomAt(f, cx, cy){ const ns = Math.min(Math.max(Z.s * f, Z.fit * .5), Z.fit * 14); Z.x = cx - (cx - Z.x) * ns / Z.s; Z.y = cy - (cy - Z.y) * ns / Z.s; Z.s = ns; applyZ(); }
-function openLb(img){ lastFocus = document.activeElement; lbcap.textContent = img.dataset.lb || img.alt; lb.hidden = false; tip.classList.remove("on");
-  lbimg.onload = fitZ; lbimg.src = img.currentSrc || img.src; if (lbimg.complete) fitZ(); lb.querySelector('[data-z="close"]').focus(); }
-function closeLb(){ lb.hidden = true; lbimg.removeAttribute("src"); if (lastFocus) lastFocus.focus(); }
-document.addEventListener("click", ev => { const im = ev.target.closest && ev.target.closest(".drw-img img, .fh img, img.lbable"); if (im) openLb(im); });
-lb.querySelector(".bar").addEventListener("click", ev => { const b = ev.target.closest("button"); if (!b) return; const z = b.dataset.z;
-  if (z === "close") closeLb(); else if (z === "fit") fitZ(); else zoomAt(z === "in" ? 1.4 : 1 / 1.4, lbv.clientWidth / 2, lbv.clientHeight / 2); });
+/* lightbox: drawings, renders and schematic plans (vector clone) — zoom, pan, pinch, prev/next */
+const lb = document.getElementById("lb"), lbv = document.getElementById("lbv"), stage = document.getElementById("lbstage");
+const lbtitle = document.getElementById("lbtitle"), lbsub = document.getElementById("lbsub"), lbcount = document.getElementById("lbcount"), lbfoot = document.getElementById("lbfoot");
+const IMGSEL = ".drw-img img, .fh img, img.lbable", PLANSEL = "svg.plan, svg.uplan, svg.axo", PAD = 12, TOP = 4;
+let Z = { s: 1, x: 0, y: 0, base: 1, bw: 1, bh: 1, min: 1, max: 6 }, el = null, list = [], idx = 0, lastFocus = null, moved = false, docOverflow = "";
+/* zoom triggers: button on every schematic plan; whole plan clickable unless it is interactive (units navigate) */
+document.querySelectorAll(PLANSEL).forEach(svg => {
+  let host = svg.parentElement;
+  if (!svg.getAttribute("style")){ const w = document.createElement("div"); w.className = "zwrap"; svg.before(w); w.appendChild(svg); host = w; }
+  host.classList.add("zhost");
+  const btn = document.createElement("button"); btn.type = "button"; btn.className = "zbtn noprint"; btn.textContent = "⤢ გადიდება"; btn.setAttribute("aria-label", "გადიდება");
+  btn._svg = svg; svg._zbtn = btn; host.appendChild(btn);
+  if (!svg.querySelector(".u.int")) svg.classList.add("zoomable");
+});
+const qs = (root, sel) => root ? root.querySelector(sel) : null;
+const txt = n => n ? n.textContent.replace(/\s+/g, " ").trim() : "";
+function planInfo(svg){
+  const card = svg.closest(".card"), pg = svg.closest(".page");
+  const title = txt(qs(card, "h3")) || txt(qs(pg, "h2 > span")) || txt(qs(pg, "h2"));
+  const kick = txt(qs(pg, ".kick")), kv = qs(card, ".kv");
+  const unitsSpan = kv ? [...kv.querySelectorAll("span")].find(sp => /ფართები/.test(sp.textContent)) : null;
+  const units = unitsSpan ? txt(qs(unitsSpan, "b")) : "";
+  let area = txt(qs(card, ".area")) || txt(qs(pg, ".big"));
+  if (!area){ const side = qs(pg, ".ph .side b"); if (side && /მ²/.test(side.textContent)) area = txt(side); }
+  const hasRooms = svg.querySelector("rect.f-desk, rect[class^='f-room']");
+  const leg = hasRooms ? ROOMLEG.replace("</span></span>", `</span><span><i class="sw" style="background:#fff;border:1px solid #4B4D51"></i>მაგიდა</span></span>`)
+    : (qs(pg, ".legend") ? qs(pg, ".legend").outerHTML : "");
+  const figs = kv ? `<div class="kv">${kv.innerHTML}</div>` : (qs(pg, ".stats") ? `<div class="stats sm">${qs(pg, ".stats").innerHTML}</div>` : "");
+  return { title: [title, units, area.replace(/(\d)(მ²)/, "$1 $2")].filter(Boolean).join(" · "), sub: kick, foot: leg + figs };
+}
+function setContent(t){
+  stage.innerHTML = "";
+  if (t.tagName.toLowerCase() === "img"){
+    const im = new Image(); im.alt = t.alt; im.draggable = false; stage.appendChild(im); el = im;
+    lbtitle.textContent = t.dataset.lb || t.alt; lbsub.textContent = txt(qs(t.closest(".page"), ".kick")); lbfoot.innerHTML = "";
+    Z.min = .5; Z.max = 14; Z.bw = 1; Z.bh = 1;
+    im.onload = () => { Z.bw = im.naturalWidth || 1; Z.bh = im.naturalHeight || 1; lbFit(); };
+    im.src = t.currentSrc || t.src; if (im.complete && im.naturalWidth) im.onload();
+  } else {
+    const c = t.cloneNode(true);
+    c.removeAttribute("style"); c.classList.remove("zoomable"); c.removeAttribute("role");
+    c.querySelectorAll("[tabindex],[role]").forEach(n => { n.removeAttribute("tabindex"); n.removeAttribute("role"); });
+    c.querySelectorAll(".u.int").forEach(n => n.classList.remove("int"));
+    c.setAttribute("aria-hidden", "true"); stage.appendChild(c); el = c;
+    const vb = t.viewBox.baseVal; Z.bw = vb && vb.width ? vb.width : t.getBoundingClientRect().width; Z.bh = vb && vb.height ? vb.height : t.getBoundingClientRect().height;
+    Z.min = 1; Z.max = 6;
+    const inf = planInfo(t); lbtitle.textContent = inf.title; lbsub.textContent = inf.sub; lbfoot.innerHTML = inf.foot;
+    lbFit();
+  }
+}
+function apply(){ if (!el) return; el.style.width = (Z.bw * Z.base * Z.s) + "px"; el.style.height = (Z.bh * Z.base * Z.s) + "px"; stage.style.transform = `translate(${Z.x}px,${Z.y}px)`; }
+function lbFit(){
+  const W = lbv.clientWidth, Hh = lbv.clientHeight, svgMode = Z.max === 6;
+  const aw = (svgMode ? W * .92 : W * .96) - 2 * PAD, ah = (svgMode ? Math.min(Hh * .96, innerHeight * .8) : Hh * .96) - 2 * PAD - TOP;
+  Z.base = Math.max(.0001, Math.min(aw / Z.bw, ah / Z.bh)); Z.s = 1;
+  Z.x = (W - (Z.bw * Z.base + 2 * PAD)) / 2; Z.y = (Hh - (Z.bh * Z.base + 2 * PAD + TOP)) / 2; apply();
+}
+function zoomAt(f, cx, cy){ const ns = Math.min(Math.max(Z.s * f, Z.min), Z.max), k = ns / Z.s; if (k === 1) return;
+  const ox = Z.x + PAD, oy = Z.y + PAD + TOP; Z.x = cx - (cx - ox) * k - PAD; Z.y = cy - (cy - oy) * k - PAD - TOP; Z.s = ns; apply(); }
+const mid = () => [lbv.clientWidth / 2, lbv.clientHeight / 2];
+function show(i){
+  idx = (i + list.length) % list.length; setContent(list[idx]);
+  lbcount.textContent = list.length > 1 ? `${idx + 1} / ${list.length}` : "";
+  lb.querySelectorAll('[data-z="prev"],[data-z="next"]').forEach(b => b.disabled = list.length < 2);
+}
+function openLb(trigger){
+  const isImg = trigger.tagName.toLowerCase() === "img", sec = (trigger.closest(".page") || {}).dataset ? trigger.closest(".page").dataset.sec : "";
+  const all = isImg ? [...document.querySelectorAll(IMGSEL)] : [...document.querySelectorAll(PLANSEL)];
+  list = all.filter(n => !n.closest("#lb") && (n.closest(".page") || {}).dataset && n.closest(".page").dataset.sec === sec);
+  if (!list.includes(trigger)) list = [trigger];
+  lastFocus = isImg ? trigger : (trigger._zbtn || document.activeElement);
+  docOverflow = document.documentElement.style.overflow; document.documentElement.style.overflow = "hidden";
+  lb.hidden = false; tip.classList.remove("on"); show(list.indexOf(trigger));
+  lb.querySelector('[data-z="close"]').focus();
+}
+function closeLb(){ lb.hidden = true; stage.innerHTML = ""; el = null; document.documentElement.style.overflow = docOverflow; tip.classList.remove("on");
+  if (lastFocus && document.contains(lastFocus)) lastFocus.focus({ preventScroll: true }); }
+document.addEventListener("click", ev => {
+  if (!ev.target.closest || ev.target.closest("#lb")) return;
+  const zb = ev.target.closest(".zbtn"); if (zb){ ev.preventDefault(); openLb(zb._svg); return; }
+  const sv = ev.target.closest("svg.zoomable"); if (sv){ openLb(sv); return; }
+  const im = ev.target.closest(IMGSEL); if (im) openLb(im);
+});
+lb.querySelector(".bar").addEventListener("click", ev => { const b = ev.target.closest("button"); if (!b || b.disabled) return; const z = b.dataset.z;
+  if (z === "close") closeLb(); else if (z === "fit") lbFit(); else if (z === "prev") show(idx - 1); else if (z === "next") show(idx + 1);
+  else zoomAt(z === "in" ? 1.4 : 1 / 1.4, ...mid()); });
+lb.addEventListener("click", ev => { if (moved){ moved = false; return; } if (ev.target.closest(".bar, #lbfoot")) return;
+  const r = stage.getBoundingClientRect(); if (ev.clientX < r.left || ev.clientX > r.right || ev.clientY < r.top || ev.clientY > r.bottom) closeLb(); });
 lbv.addEventListener("wheel", ev => { ev.preventDefault(); const r = lbv.getBoundingClientRect(); zoomAt(ev.deltaY < 0 ? 1.18 : 1 / 1.18, ev.clientX - r.left, ev.clientY - r.top); }, { passive: false });
-let drag = null;
-lbv.addEventListener("pointerdown", ev => { drag = { x: ev.clientX - Z.x, y: ev.clientY - Z.y }; lbv.setPointerCapture(ev.pointerId); lbv.classList.add("drag"); });
-lbv.addEventListener("pointermove", ev => { if (!drag) return; Z.x = ev.clientX - drag.x; Z.y = ev.clientY - drag.y; applyZ(); });
-const endDrag = () => { drag = null; lbv.classList.remove("drag"); };
-lbv.addEventListener("pointerup", endDrag); lbv.addEventListener("pointercancel", endDrag);
-lbv.addEventListener("dblclick", ev => { const r = lbv.getBoundingClientRect(); zoomAt(2, ev.clientX - r.left, ev.clientY - r.top); });
+/* pointer: one-finger / mouse pan, two-finger pinch */
+const ptrs = new Map(); let pan = null, pinch = null;
+lbv.addEventListener("pointerdown", ev => {
+  ptrs.set(ev.pointerId, { x: ev.clientX, y: ev.clientY }); lbv.setPointerCapture(ev.pointerId); moved = false;
+  if (ptrs.size === 1){ pan = { x: ev.clientX - Z.x, y: ev.clientY - Z.y, sx: ev.clientX, sy: ev.clientY }; lbv.classList.add("drag"); }
+  else if (ptrs.size === 2){ const [a, b] = [...ptrs.values()]; pinch = Math.hypot(a.x - b.x, a.y - b.y); pan = null; }
+});
+lbv.addEventListener("pointermove", ev => {
+  if (!ptrs.has(ev.pointerId)) return; ptrs.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
+  if (ptrs.size === 2 && pinch){ const [a, b] = [...ptrs.values()], d = Math.hypot(a.x - b.x, a.y - b.y), r = lbv.getBoundingClientRect();
+    zoomAt(d / pinch, (a.x + b.x) / 2 - r.left, (a.y + b.y) / 2 - r.top); pinch = d; moved = true; return; }
+  if (pan){ if (Math.abs(ev.clientX - pan.sx) + Math.abs(ev.clientY - pan.sy) > 4) moved = true; Z.x = ev.clientX - pan.x; Z.y = ev.clientY - pan.y; apply(); }
+});
+const endPtr = ev => { ptrs.delete(ev.pointerId); if (ptrs.size < 2) pinch = null;
+  if (ptrs.size === 1){ const [p] = [...ptrs.values()]; pan = { x: p.x - Z.x, y: p.y - Z.y, sx: p.x, sy: p.y }; } else if (!ptrs.size){ pan = null; lbv.classList.remove("drag"); } };
+lbv.addEventListener("pointerup", endPtr); lbv.addEventListener("pointercancel", endPtr);
+lbv.addEventListener("dblclick", ev => { const r = lbv.getBoundingClientRect();
+  if (Z.s > 1.05) lbFit(); else zoomAt(2.5 / Z.s, ev.clientX - r.left, ev.clientY - r.top); });
 document.addEventListener("keydown", ev => { if (lb.hidden) return;
-  if (ev.key === "Escape") closeLb(); else if (ev.key === "+" || ev.key === "=") zoomAt(1.4, lbv.clientWidth / 2, lbv.clientHeight / 2); else if (ev.key === "-") zoomAt(1 / 1.4, lbv.clientWidth / 2, lbv.clientHeight / 2); });
-addEventListener("resize", () => { if (!lb.hidden) fitZ(); });
+  if (ev.key === "Escape"){ ev.preventDefault(); closeLb(); }
+  else if (ev.key === "ArrowLeft"){ ev.preventDefault(); if (list.length > 1) show(idx - 1); }
+  else if (ev.key === "ArrowRight"){ ev.preventDefault(); if (list.length > 1) show(idx + 1); }
+  else if (ev.key === "+" || ev.key === "=") zoomAt(1.4, ...mid()); else if (ev.key === "-") zoomAt(1 / 1.4, ...mid());
+  else if (ev.key === "Tab"){ const f = [...lb.querySelectorAll("button:not([disabled]), a[href]")]; if (!f.length) return;
+    const i = f.indexOf(document.activeElement); ev.preventDefault(); f[(i + (ev.shiftKey ? -1 : 1) + f.length) % f.length].focus(); } });
+addEventListener("resize", () => { if (!lb.hidden) lbFit(); });
 
 /* search */
 const dl = document.getElementById("ids"); dl.innerHTML = DATA.units.map(u => `<option value="${u.id}">`).join("");
