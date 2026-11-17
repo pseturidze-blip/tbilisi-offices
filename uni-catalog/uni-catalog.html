@@ -105,7 +105,7 @@ const DATA = {
     { floor: 3, kind: "terrace", x: [18.4, 21], y: [0, 2.4], label: "ტერასა 26 მ²" },
     { floor: 3, kind: "core", core: "K3", x: [24, 25], y: [0, 8.5] },
     { floor: 3, kind: "core", core: "K4", x: [31, 32], y: [0, 8.5] },
-    { floor: 3, kind: "terrace", x: [34.67, 35], y: [0, 12.6], label: "33 მ²" },
+    { floor: 3, kind: "terrace", x: [34.33, 35], y: [0, 12.6], label: "33 მ²" },
     { floor: 3, kind: "stair", x: [16, 18.5], y: [12.6, 15.2], label: "გარე კიბე" },
 
     { floor: 4, kind: "roof", x: [1, 4], y: [0, 12.6], label: "სახურავი" },
@@ -172,8 +172,8 @@ const DATA = {
     { id: "O-8",  floor: 3, m2: 503.7, axes: [5, 11],  cores: ["K1", "K2"], verify: false, shape: [[5, 11, 0, 12.6], [4.5, 5, 8.5, 12.6], [11, 11.5, 8.5, 12.6]] },
     { id: "O-9",  floor: 3, m2: 446.8, axes: [12, 18], cores: ["K2", "L"],  verify: false, shape: [[12, 18, 0, 12.6], [11.5, 12, 8.5, 12.6]] },
     { id: "O-10", floor: 3, m2: 462.5, axes: [18, 24], cores: ["K3"],       verify: false, shape: [[18, 24, 0, 12.6], [24, 25, 8.5, 12.6]], terrace: { m2: 26 } },
-    { id: "O-11", floor: 3, m2: 503.4, axes: [25, 31], cores: ["K3", "K4"], verify: false },
-    { id: "O-12", floor: 3, m2: 232.2, axes: [32, 35], cores: ["K4"],       verify: false, shape: [[32, 34.67, 0, 12.6], [31, 32, 8.5, 12.6]], terrace: { m2: 33 } },
+    { id: "O-11", floor: 3, m2: 503.4, axes: [25, 31], cores: ["K3", "K4"], verify: false, shape: [[25, 31, 0, 12.6], [31, 31.5, 8.5, 12.6]] },
+    { id: "O-12", floor: 3, m2: 232.2, axes: [32, 35], cores: ["K4"],       verify: false, shape: [[32, 34.33, 0, 12.6], [31.5, 32, 8.5, 12.6]], terrace: { m2: 33 } },
     /* ---------- ოფისები, +12.00 ---------- */
     { id: "O-13", floor: 4, m2: 486.4, axes: [5, 11],  cores: ["K1", "K2"], verify: false },
     { id: "O-14", floor: 4, m2: 556.2, axes: [11, 19], cores: ["K2"],       verify: false, shape: [[12, 19, 0, 12.6], [11, 12, 8.5, 12.6]] },
@@ -501,12 +501,55 @@ td a:hover{color:var(--red)}
 #v3title{font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #v3sub{font-size:11.5px;color:#B6B4AE;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #v3count{font-size:12px;color:#B6B4AE;padding:0 6px;white-space:nowrap}
+#v3sum{text-align:right;line-height:1.15;padding:0 8px;white-space:nowrap}
+#v3sum:empty{display:none}
+#v3sum b{font-size:20px;font-weight:800}
+#v3sum span{display:block;font-size:11px;color:#B6B4AE}
+.v3lbl.sum{background:#232324;border:2px solid #E2231A;font-size:13px;padding:5px 10px}
+#v3pshare{font-size:12px;font-weight:700;color:#B3261E;margin-top:2px}
+#v3pshare:empty{display:none}
 #v3sel{background:#2B2B2D;color:#fff;border:1px solid #555;border-radius:6px;padding:7px 8px;font:inherit;font-size:12px;max-width:280px}
 #v3tools{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:0 0 10px}
 #v3tools button{all:unset;cursor:pointer;font-size:12px;padding:6px 12px;border:1px solid #555;border-radius:99px;color:#fff}
 #v3tools button:hover{border-color:#fff}
 #v3tools button[aria-pressed="true"]{background:#fff;color:#232324;border-color:#fff}
 .v3hint{font-size:11px;color:#8B8984;margin-left:auto}
+#v3body{flex:1;min-height:0;display:flex;gap:12px}
+#v3body #v3view{flex:1;min-width:0}
+#v3panel{width:42%;flex:none;background:#fff;color:var(--ink);border-radius:8px;border-top:4px solid var(--red);display:flex;flex-direction:column;min-height:0;overflow:hidden;animation:v3in .22s ease-out}
+#v3panel[hidden]{display:none}
+@keyframes v3in{from{transform:translateX(28px);opacity:0}to{transform:none;opacity:1}}
+.v3ph{display:flex;gap:10px;align-items:flex-start;padding:10px 12px 6px}
+.v3phead{flex:1;min-width:0}
+#v3ptitle{font-size:16px;font-weight:800;outline:none}
+#v3psub{font-size:11.5px;color:var(--muted)}
+#v3panel button{all:unset;cursor:pointer;font-size:12px;color:var(--ink);font-family:inherit}
+#v3panel button:focus-visible,#v3plink:focus-visible{outline:2px solid var(--red);outline-offset:1px}
+#v3panel .v3ph button,#v3panel .pzbar button,#v3floors button{border:1px solid var(--line);border-radius:6px;padding:4px 9px;background:#fff}
+#v3panel .v3ph button:hover,#v3panel .pzbar button:hover,#v3floors button:hover{border-color:var(--ink)}
+#v3floors{display:flex;gap:5px;align-items:center;padding:0 12px 8px;flex-wrap:wrap;font-size:12px}
+#v3floors button.on{background:var(--black);color:#fff;border-color:var(--black)}
+#v3floors button[disabled]{opacity:.35;cursor:default}
+#v3tabs{display:flex;gap:2px;padding:0 12px;border-bottom:1px solid var(--line)}
+#v3tabs button{padding:6px 10px;border-bottom:2px solid transparent;color:var(--muted)}
+#v3tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--red);font-weight:700}
+.pz{position:relative;flex:1;min-height:180px}
+.pzv{position:absolute;inset:0;overflow:hidden;cursor:grab;touch-action:none;background:#FAF9F6}
+.pzv.drag{cursor:grabbing}
+.pzstage{position:absolute;left:0;top:0;padding:10px}
+.pzstage img,.pzstage svg{display:block;max-width:none;user-select:none;-webkit-user-drag:none}
+.pzbar{position:absolute;right:8px;top:8px;display:flex;gap:4px;z-index:2}
+#v3pinfo{padding:8px 12px;font-size:12px;max-height:34%;overflow:auto;border-top:1px solid var(--line)}
+#v3pinfo .facts{font-size:12px;grid-template-columns:150px 1fr}
+#v3pinfo .facts dt,#v3pinfo .facts dd{padding:4px 0}
+#v3prend{display:flex;gap:6px;padding:0 12px 6px;overflow-x:auto}
+#v3prend:empty{display:none}
+#v3prend button{flex:none;width:84px;height:54px;border-radius:4px;overflow:hidden;border:2px solid transparent}
+#v3prend button.on{border-color:var(--red)}
+#v3prend img{width:100%;height:100%;object-fit:cover;display:block}
+#v3plink{display:block;padding:6px 12px 10px;font-size:11px;color:var(--muted)}
+#v3plink[hidden]{display:none}
+.v3lbl.sel{background:#fff;color:#B3261E;border:1px solid #E2231A;font-weight:800}
 #v3view{position:relative;flex:1;min-height:0;border-radius:8px;overflow:hidden;border-top:4px solid var(--red);background:#F3F1EC}
 #v3view canvas{display:block;touch-action:none}
 .v3labels{position:absolute!important;inset:0;pointer-events:none;overflow:hidden}
@@ -541,6 +584,12 @@ svg.zoomable{cursor:zoom-in}
 .cimg img{width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in}
 .cimg figcaption{position:absolute;left:8px;bottom:8px;font-size:11px;font-weight:600;background:rgba(35,35,36,.82);color:#fff;padding:3px 8px;border-radius:3px;max-width:calc(100% - 16px)}
 .cimg.miss img{display:none}.cimg.miss::before{content:"სურათი არ არის";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted)}
+.fsum{font-size:12px;color:var(--ink);line-height:1.35}
+.kv.tight{gap:1px 12px;font-size:11.5px;line-height:1.35}.kv.tight b{font-size:13px}
+.fsum b{font-weight:800}
+.fsum .muted{font-size:11px}
+tr.sumrow td{border-top:2px solid var(--red);font-weight:800;border-bottom:0}
+#sumt .fcol{font-size:11px;color:var(--muted)}
 .ztab td,.ztab th{padding:3px 6px;font-size:11.5px;line-height:1.3}.ztab th{font-size:10px}
 .ztab tfoot td{font-weight:800;border-top:2px solid var(--ink);border-bottom:0}
 .cnotes{margin:0;padding-left:16px;font-size:10.5px;color:var(--muted);line-height:1.4}
@@ -566,7 +615,8 @@ svg.zoomable{cursor:zoom-in}
   main{margin-left:0;padding:12px 0 40px;gap:14px}
   .page{width:100%;height:auto;min-height:0;zoom:1;padding:22px 16px 40px}
   .g2,.g3,.g4,.tiles,.ucols,.ocols,.cgal,.teaser{grid-template-columns:1fr!important}
-  .cfig{grid-template-columns:1fr 1fr}.cgal{grid-template-rows:none}.cimg{aspect-ratio:3/2}.cplan{min-height:260px}
+  .cfig{grid-template-columns:1fr 1fr}
+  #v3body{flex-direction:column}#v3panel{width:auto;height:60%;animation:none}.cgal{grid-template-rows:none}.cimg{aspect-ratio:3/2}.cplan{min-height:260px}
   .row{flex-direction:column}
   .cover{min-height:560px}
   .cover .in{padding:30px 22px}
@@ -583,6 +633,7 @@ svg.zoomable{cursor:zoom-in}
   .fview .v-s{display:block!important}.fview .v-d{display:none!important}
   .drw-img img{width:100%;height:100%;max-height:none;object-fit:contain;cursor:auto}
   .printonly{display:block}.cplan img{width:100%;height:100%}
+  #sumt .fcol{display:none}
   main{margin:0;padding:0;gap:0;display:block}
   .page{zoom:1!important;width:297mm;height:210mm;box-shadow:none;break-after:page;page-break-after:always;margin:0}
   .page.flow{height:auto;min-height:210mm;overflow:visible}
@@ -651,6 +702,7 @@ svg.zoomable{cursor:zoom-in}
 <div id="v3" class="noprint" hidden role="dialog" aria-modal="true" aria-labelledby="v3title">
   <div class="bar">
     <div class="lbhead"><div id="v3title"></div><div id="v3sub"></div></div>
+    <div id="v3sum" aria-live="polite"></div>
     <select id="v3sel" aria-label="კომბინაციის მონიშვნა" hidden></select>
     <span id="v3count" aria-live="polite"></span>
     <button type="button" data-a="prev" aria-label="წინა" title="წინა (←)">←</button>
@@ -666,7 +718,20 @@ svg.zoomable{cursor:zoom-in}
     <button type="button" data-a="facade" aria-pressed="false">ფასადი</button>
     <span class="v3hint">მოტრიალება — მაუსით/თითით · გადიდება — გორგოლაჭით · გადაადგილება — მარჯვენა ღილაკით ან ორი თითით</span>
   </div>
-  <div id="v3view"><div id="v3tip" role="tooltip"></div><div id="v3msg"></div></div>
+  <div id="v3body">
+    <div id="v3view"><div id="v3tip" role="tooltip"></div><div id="v3msg"></div></div>
+    <aside id="v3panel" role="region" aria-labelledby="v3ptitle" hidden>
+      <div class="v3ph"><div class="v3phead"><div id="v3ptitle" tabindex="-1"></div><div id="v3psub"></div><div id="v3pshare"></div></div>
+        <button type="button" data-p="close" aria-label="პანელის დახურვა" title="დახურვა (Esc)">✕</button></div>
+      <div id="v3floors" role="group" aria-label="სართულები"></div>
+      <div id="v3tabs" role="tablist" aria-label="გეგმის ტიპი"></div>
+      <div class="pz"><div class="pzv" id="v3pzv"><div class="pzstage" id="v3pzs"></div></div>
+        <div class="pzbar"><button type="button" data-pz="in" aria-label="გადიდება" title="გადიდება">+</button><button type="button" data-pz="out" aria-label="დაპატარავება" title="დაპატარავება">−</button><button type="button" data-pz="fit" aria-label="მორგება">მორგება</button></div></div>
+      <div id="v3pinfo"></div>
+      <div id="v3prend" aria-label="ვიზუალიზაციები"></div>
+      <a id="v3plink" target="_blank" rel="noopener">სრული აღწერა კატალოგში ↗</a>
+    </aside>
+  </div>
 </div>
 
 <script>
@@ -1314,16 +1379,23 @@ for (const u of offices){
 const OC = DATA.combos.office;
 const floorsOf = c => [...new Set(c.units.map(id => LV[U[id].floor]))].join(" / ");
 const coresOf = c => [...new Set(c.units.flatMap(id => U[id].cores))].join(" · ");
-function offerHead(c, more, compact){ const a = sum(c.units), cc = conceptForCombo(c.id);
+/* sums: always computed from DATA unit m² */
+const formulaTxt = ids => ids.length > 1 ? `${ids.map(id => fmt(U[id].m2)).join(" + ")} = ${fmt(sum(ids))} მ²` : `${fmt(sum(ids))} მ²`;
+const terrTxt = ids => { const t = ids.filter(id => U[id].terrace).map(id => U[id].terrace.m2); if (!t.length) return "";
+  return `+ ტერასები ${t.length > 1 ? t.map(v => fmt(v)).join(" + ") + " = " : ""}${fmt(r1(t.reduce((a, b) => a + b, 0)))} მ² (ჯამში არ შედის)`; };
+const sumLine = ids => `<div class="fsum"><b>${formulaTxt(ids)}</b>${terrTxt(ids) ? `<span class="muted"> · ${terrTxt(ids)}</span>` : ""}</div>`;
+const HALLNOTE = "საერთო ჰოლები ჯამში არ შედის";
+function offerHead(c, more, compact, noFormula){ const a = sum(c.units), cc = conceptForCombo(c.id);
   const kv = `<div class="kv"><span>ფართები <b>${c.units.join(" + ")}</b></span>${cc ? `<span>სამუშაო ადგილი <b>${cc.seats}</b> (კონცეფცია)</span>` : `<span>თანამშრომელი <b>${head(a)}</b></span>`}<span>ბირთვი <b>${coresOf(c)}</b></span>${more || ""}</div>`;
-  if (compact) return `<div style="display:flex;justify-content:space-between;align-items:center;gap:14px"><div style="display:flex;align-items:center;gap:10px"><span class="tag red">${c.id}</span><h3>${c.name}</h3></div><div class="area">${fmt(a)}<small> მ²</small></div></div>${kv}`;
-  return `<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px"><div><span class="tag red">${c.id}</span><h3 style="margin-top:6px">${c.name}</h3></div><div class="area">${fmt(a)}<small> მ²</small></div></div>${kv}`; }
+  const fl = noFormula ? "" : sumLine(c.units);
+  if (compact) return `${""}<div style="display:flex;justify-content:space-between;align-items:center;gap:14px"><div style="display:flex;align-items:center;gap:10px"><span class="tag red">${c.id}</span><h3>${c.name}</h3></div><div class="area">${fmt(a)}<small> მ²</small></div></div>${kv.replace('class="kv"', 'class="kv tight"')}${fl}`;
+  return `<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px"><div><span class="tag red">${c.id}</span><h3 style="margin-top:6px">${c.name}</h3></div><div class="area">${fmt(a)}<small> მ²</small></div></div>${kv}${fl}`; }
 const axOrder = ids => ids.slice().sort((a, b) => Math.min(...rectsOf(U[a]).map(r => r.x)) - Math.min(...rectsOf(U[b]).map(r => r.x)));
 const layKv = t => `<span>სამუშაო ადგილი <b>${t.desks}</b></span><span>შეხვედრა <b>${t.meet}</b></span><span>კაბინეტი <b>${t.mgr}</b></span><span>სამზარეულო <b>${t.kit}</b></span>`;
 
-H += page(`${ph("C · კომბინაციები · 1", "ბლოკის სრული სართული", "K1–K2 (O-2 / O-8 / O-13) და K3–K4 (O-5 / O-11 / O-16)<br>უკვე ერთი ფართია — აქ: ბლოკი K2–K3, ცენტრალურ ლობთან<br>" + ROOMLEG)}
+H += page(`${ph("C · კომბინაციები · 1", "ბლოკის სრული სართული", "K1–K2 (O-2 / O-8 / O-13) და K3–K4 (O-5 / O-11 / O-16)<br>უკვე ერთი ფართია — აქ: ბლოკი K2–K3, ცენტრალურ ლობთან · " + HALLNOTE + "<br>" + ROOMLEG)}
   <div style="display:flex;flex-direction:column;gap:10px;flex:1">${OC.filter(c => c.type === "block").map(c => { const l = layoutSVG(c.units, { pad: 9 });
-    return `<div class="card offer" id="o-${c.id}" style="gap:4px;padding:10px 16px">${offerHead(c, layKv(l.tot), true)}<div style="height:112px;display:flex;justify-content:center">${l.svg.replace('class="plan ', 'style="height:100%;width:auto;max-width:100%" class="plan ')}</div></div>`; }).join("")}
+    return `<div class="card offer" id="o-${c.id}" style="gap:4px;padding:10px 16px">${offerHead(c, layKv(l.tot), true)}<div style="height:100px;display:flex;justify-content:center">${l.svg.replace('class="plan ', 'style="height:100%;width:auto;max-width:100%" class="plan ')}</div></div>`; }).join("")}
   </div>`,
   { sec: "combos", id: "combos", foot: "კომბინაციები · ბლოკი" });
 
@@ -1331,10 +1403,9 @@ H += page(`${ph("C · კომბინაციები · 1 · ნახა�
   <div style="display:flex;flex-direction:column;gap:12px;flex:1">${OC.filter(c => c.type === "block").map(c => `<div><div class="halfl" style="margin-top:0"><b style="color:var(--ink)">${c.id}</b> · ${c.name} · ${fmt(sum(c.units))} მ²</div>${drawRow(axOrder(c.units), 172)}</div>`).join("")}</div>`,
   { sec: "combos", foot: "კომბინაციები · ბლოკი · ნახაზები" });
 
-H += page(`${ph("C · კომბინაციები · 2", "სრული სართული — სათაო ოფისი", "ერთი მოიჯარე, 4 ბირთვი + ცენტრალური ლობი<br>" + ROOMLEG)}
+H += page(`${ph("C · კომბინაციები · 2", "სრული სართული — სათაო ოფისი", "ერთი მოიჯარე, 4 ბირთვი + ცენტრალური ლობი · " + HALLNOTE + "<br>" + ROOMLEG)}
   <div style="display:flex;flex-direction:column;gap:10px;flex:1">${OC.filter(c => c.type === "floor").map(c => { const l = layoutSVG(c.units, { full: true });
-    const ter = c.units.filter(id => U[id].terrace).map(id => U[id].terrace.m2).join(" + ");
-    return `<div class="card offer" id="o-${c.id}" style="gap:4px;padding:10px 16px">${offerHead(c, layKv(l.tot) + (ter ? `<span>ტერასები <b>${ter} მ²</b></span>` : ""), true)}${l.svg}</div>`; }).join("")}
+    return `<div class="card offer" id="o-${c.id}" style="gap:3px;padding:8px 14px">${offerHead(c, layKv(l.tot), true)}${l.svg}</div>`; }).join("")}
   </div>`,
   { sec: "combos", foot: "კომბინაციები · სართული" });
 
@@ -1346,9 +1417,11 @@ const stacks = OC.filter(c => c.type === "stack");
 for (let i = 0; i < stacks.length; i += 3){
   H += page(`${ph("C · კომბინაციები · 3", "ვერტიკალური ბლოკი" + (i ? " (გაგრძელება)" : ""), "ერთი ბირთვის ფართები 2–3–4 სართულზე · შიდა კიბის ვარიანტით")}
     <div class="g3" style="flex:1">${stacks.slice(i, i + 3).map(c => { const misaligned = new Set(c.units.map(id => U[id].axes.join("-"))).size > 1;
-      return `<div class="card offer" id="o-${c.id}">${offerHead(c)}
+      return `<div class="card offer" id="o-${c.id}">${offerHead(c, "", false, true)}
         <div style="flex:1;display:flex;align-items:center">${stackSVG(c.units, c.core)}</div>
-        <table><tbody>${c.units.map(id => `<tr><td>${unitLink(id)}</td><td>${LV[U[id].floor]}</td><td class="num">${fmt(U[id].m2)} მ²</td></tr>`).join("")}</tbody></table>
+        <table><tbody>${c.units.map(id => `<tr><td>${unitLink(id)}</td><td>${LV[U[id].floor]}</td><td class="num">${fmt(U[id].m2)} მ²</td></tr>`).join("")}</tbody>
+          <tfoot><tr class="sumrow"><td>ჯამი</td><td></td><td class="num">${fmt(sum(c.units))} მ²</td></tr></tfoot></table>
+        <div class="fsum">${terrTxt(c.units) ? terrTxt(c.units) + " · " : ""}<span class="muted">საერთო ჰოლები ჯამში არ შედის</span></div>
         <div class="small"><b>შიდა კიბე:</b> ფილის ღიობი ~3 × 6 მ ${c.core}-ის მხარეს, ${c.units.length - 1} სართულშორისი კავშირი (საჭიროებს კონსტრუქტორის თანხმობას).</div>
         ${misaligned ? `<div class="small muted">ფართების საზღვრები სართულებზე სრულად არ ემთხვევა (ღერძები ${c.units.map(id => U[id].axes.join("–")).join(" / ")}).</div>` : ""}</div>`; }).join("")}</div>`,
     { sec: "combos", foot: "კომბინაციები · ვერტიკალი" });
@@ -1358,9 +1431,9 @@ for (let i = 0; i < stacks.length; i += 3){
     { sec: "combos", foot: "კომბინაციები · ვერტიკალი · ნახაზები" });
 }
 
-H += page(`${ph("C · კომბინაციები · 4", "შერეული: დიდი + მცირე ერთ ბირთვზე", "საერთო ლიფტის ჰოლი, გაფართოების რეზერვი")}
-  <div class="g3" style="grid-template-columns:repeat(3,1fr);flex:1;grid-auto-rows:min-content">${OC.filter(c => c.type === "mixed").map(c => `<div class="card offer" id="o-${c.id}">${offerHead(c)}${zoomPlan(U[c.units[0]].floor, c.units, 5)}
-    <div class="small">${c.units.map(id => `${id} — ${fmt(U[id].m2)} მ²`).join(" · ")}</div>${conceptForCombo(c.id) ? (cc => `<div class="why" style="font-size:11.5px;padding:5px 9px">კონცეფცია: <b>${fmt(cc.m2)} მ² · ${cc.seats} ადგილი</b> · <a class="noprint" style="color:var(--red);font-weight:700" href="#${cc.anchor}">იხილეთ კონცეფცია →</a></div>`)(conceptForCombo(c.id)) : ""}</div>`).join("")}
+H += page(`${ph("C · კომბინაციები · 4", "შერეული: დიდი + მცირე ერთ ბირთვზე", "საერთო ლიფტის ჰოლი, გაფართოების რეზერვი<br>" + HALLNOTE)}
+  <div class="g3" style="grid-template-columns:repeat(3,1fr);flex:1;grid-auto-rows:min-content">${OC.filter(c => c.type === "mixed").map(c => `<div class="card offer" id="o-${c.id}" style="gap:5px;padding:12px 14px">${offerHead(c)}${zoomPlan(U[c.units[0]].floor, c.units, 5)}
+    ${conceptForCombo(c.id) ? (cc => `<div class="why" style="font-size:11.5px;padding:5px 9px">კონცეფცია: <b>${fmt(cc.m2)} მ² · ${cc.seats} ადგილი</b> · <a class="noprint" style="color:var(--red);font-weight:700" href="#${cc.anchor}">იხილეთ კონცეფცია →</a></div>`)(conceptForCombo(c.id)) : ""}</div>`).join("")}
     <div class="card" style="background:var(--mesh);border:0"><h3>რატომ შერეული?</h3><div class="small">დიდი ფართი — ძირითადი ოფისი; მცირე — მომავალი ზრდის რეზერვი, ტრენინგ-ცენტრი ან ქვეიჯარა. ორივე ერთი ბირთვის ლიფტის ჰოლიდან იხსნება, ამიტომ შესაძლებელია საერთო რესეფშენი და ერთიანი წვდომის კონტროლი.</div></div></div>`,
   { sec: "combos", foot: "კომბინაციები · შერეული" });
 
@@ -1381,7 +1454,7 @@ H += page(`${ph("C · კომბინაციები · 4 · ნახა�
 
 /* summary table */
 H += page(`${ph("C · შეჯამება", "ყველა ოფისი და კომბინაცია", "დააჭირეთ სვეტის სათაურს დასალაგებლად")}
-  <table id="sumt"><thead><tr><th class="sort" data-k="name">დასახელება</th><th>ტიპი</th><th>ფართები</th><th>სართული</th><th class="sort num" data-k="m2">მ²</th><th class="num">თანამშრომელი</th></tr></thead><tbody></tbody></table>`,
+  <table id="sumt"><thead><tr><th class="sort" data-k="name">დასახელება</th><th>ტიპი</th><th>ფართები</th><th>სართული</th><th class="sort num" data-k="m2">მ²</th><th class="fcol">ფორმულა</th><th class="num">თანამშრომელი</th></tr></thead><tbody></tbody></table>`,
   { sec: "combos", cls: "flow", foot: "შეჯამება" });
 
 /* ---------- D. CONTACT ---------- */
@@ -1577,7 +1650,7 @@ function initR(){
   if (T3.R) return;
   const R = new THREE.WebGLRenderer({ antialias: true });
   R.setPixelRatio(Math.min(devicePixelRatio || 1, 2)); R.shadowMap.enabled = true; R.shadowMap.type = THREE.PCFSoftShadowMap;
-  v3view.prepend(R.domElement);
+  v3view.prepend(R.domElement); R.domElement.tabIndex = -1; R.domElement.setAttribute("aria-label", "3D მოდელი");
   const L = new THREE.CSS2DRenderer(); L.domElement.className = "v3labels"; v3view.appendChild(L.domElement);
   const cam = new THREE.PerspectiveCamera(32, 1, .5, 4000);
   const ctl = new THREE.OrbitControls(cam, R.domElement);
@@ -1615,7 +1688,7 @@ function disposeScene(){
   });
   if (T3.sun) T3.sun.shadow.map && T3.sun.shadow.map.dispose();
   T3.L.domElement.querySelectorAll(".v3lbl").forEach(n => n.remove());
-  T3.scene = null; T3.pick = []; T3.ghosts = []; T3.facades = []; T3.floors = {}; T3.dash = null; T3.hover = null;
+  T3.scene = null; T3.pick = []; T3.ghosts = []; T3.facades = []; T3.floors = {}; T3.dash = null; T3.hover = null; T3.slabs = []; T3.selObjs = []; T3.sel = null;
 }
 const TYPECLR = { comm: 0xD4891C, off: 0x8597A3 };
 function buildScene(focusIds, opts){
@@ -1633,7 +1706,7 @@ function buildScene(focusIds, opts){
   const bx0 = fr.length ? Math.min(...fr.map(r => r.x)) : 0, bx1 = fr.length ? Math.max(...fr.map(r => r.x + r.w)) : AX[35];
   const ftop = fu.length ? Math.max(...fu.map(u => u.floor)) : 4;
   T3.box = opts.building ? { x0: -6, x1: AX[35] + 6, z0: 0, z1: D, y0: 0, y1: 16 } : { x0: bx0 - 8, x1: bx1 + 8, z0: 0, z1: D, y0: 0, y1: elev(ftop) + FH };
-  const mSlab = mStd(0xE9E6E0, 1), mCore = mStd(0x232324, 1), mStair = mStd(0x5D6770, 1);
+  let mSlab, mCore, mStair; T3.slabs = []; T3.selObjs = []; T3.sel = null;
   const zoneTex = canvasTex((g, w, h) => { g.fillStyle = "rgba(255,226,90,.55)"; g.fillRect(0, 0, w, h); g.strokeStyle = "rgba(201,164,0,.95)"; g.lineWidth = 6; for (let i = -h; i < w; i += 22){ g.beginPath(); g.moveTo(i, h); g.lineTo(i + h, 0); g.stroke(); } }, 128, 128);
   zoneTex.repeat.set(6, 2);
   const meshTex = canvasTex((g, w, h) => { g.fillStyle = "rgba(255,255,255,.22)"; g.fillRect(0, 0, w, h); g.strokeStyle = "rgba(255,255,255,.95)"; g.lineWidth = 2; for (let i = 0; i <= w; i += 8){ g.beginPath(); g.moveTo(i, 0); g.lineTo(i, h); g.stroke(); } for (let j = 0; j <= h; j += 8){ g.beginPath(); g.moveTo(0, j); g.lineTo(w, j); g.stroke(); } }, 64, 64);
@@ -1641,12 +1714,13 @@ function buildScene(focusIds, opts){
   const ground = new THREE.Mesh(new THREE.PlaneGeometry(AX[35] + 200, 160), new THREE.ShadowMaterial({ opacity: isDark() ? .35 : .14 }));
   ground.rotation.x = -Math.PI / 2; ground.position.set(AX[35] / 2, -ST - .01, D / 2); ground.receiveShadow = true; S.add(ground);
   for (const f of [1, 2, 3, 4]){
+    mSlab = mStd(0xE9E6E0, 1); mCore = mStd(0x232324, 1); mStair = mStd(0x5D6770, 1);
     const g = new THREE.Group(); g.userData.base = elev(f); g.position.y = elev(f); S.add(g); T3.floors[f] = g;
     /* slab with stair opening where the internal stair passes through it */
     const sh = new THREE.Shape(); sh.moveTo(0, 0); sh.lineTo(AX[35], 0); sh.lineTo(AX[35], D); sh.lineTo(0, D); sh.lineTo(0, 0);
     if (st && f > st.lo && f <= st.hi){ const hole = new THREE.Path(); hole.moveTo(st.x0, st.y0); hole.lineTo(st.x0, st.y1); hole.lineTo(st.x1, st.y1); hole.lineTo(st.x1, st.y0); hole.lineTo(st.x0, st.y0); sh.holes.push(hole); }
     const sg = new THREE.ExtrudeGeometry(sh, { depth: ST, bevelEnabled: false }); sg.rotateX(Math.PI / 2);
-    const slab = new THREE.Mesh(sg, mSlab); slab.receiveShadow = true; g.add(slab); g.add(edges(slab, 0xB2ACA2, .9));
+    const slab = new THREE.Mesh(sg, mSlab); slab.receiveShadow = true; slab.userData.floor = f; T3.slabs.push(slab); g.add(slab); g.add(edges(slab, 0xB2ACA2, .9));
     g.add(label(f === 1 ? "±0.00" : LV[f], "lvl", -4.5, .4, D / 2));
     /* units */
     for (const u of DATA.units.filter(x => x.floor === f)){
@@ -1693,6 +1767,8 @@ function buildScene(focusIds, opts){
       g.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineDashedMaterial({ color: 0x9C988F, dashSize: 1.2, gapSize: .8 })).computeLineDistances());
       g.add(label("+16.00", "lvl", -4.5, FH, D / 2)); }
   }
+  T3.sumLbl = null;
+  if (fu.length){ T3.sumTop = ftop; /* sits above the stair / common-zone labels */ T3.sumLbl = label(`${focusIds.join(" + ")} = ${fmt(sum(focusIds))} მ²`, "sum", (bx0 + bx1) / 2, 0, D / 2); S.add(T3.sumLbl); }
   if (st){
     const cx = (st.x0 + st.x1) / 2, cz = (st.y0 + st.y1) / 2;
     const geo = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(cx, 0, cz), new THREE.Vector3(cx, 1, cz)]);
@@ -1712,7 +1788,8 @@ function updateDash(){
   const p = T3.dash.geometry.attributes.position; p.setY(0, y0); p.setY(1, y1); p.needsUpdate = true; T3.dash.computeLineDistances(); T3.dash.geometry.computeBoundingSphere();
   T3.stairLbl.position.y = y1 + 2.4;
 }
-function applyExplode(){ for (const f in T3.floors){ const g = T3.floors[f]; g.position.y = g.userData.base * (1 + 1.5 * T3.ex); } updateDash(); }
+function applyExplode(){ for (const f in T3.floors){ const g = T3.floors[f]; g.position.y = g.userData.base * (1 + 1.5 * T3.ex); } updateDash();
+  if (T3.sumLbl && T3.floors[T3.sumTop]) T3.sumLbl.position.y = T3.floors[T3.sumTop].position.y + UH + (T3.stair ? 8 : 3); }
 
 /* ---- camera ---- */
 function camFor(kind){
@@ -1739,23 +1816,34 @@ function hit3(e){
 function setHover(m){
   const id = m ? m.userData.uid : null; if (T3.hover === id) return;
   const mats = uid => [...new Set(T3.pick.filter(p => p.userData.uid === uid).map(p => p.material))];
-  if (T3.hover) mats(T3.hover).forEach(mt => { mt.opacity = mt.userData.op; mt.emissive.setHex(0); mt.depthWrite = mt.userData.op >= .5; });
+  const base = mt => (mt.userData.op0 !== undefined ? mt.userData.op0 : mt.userData.op) * (mt.userData.k !== undefined ? mt.userData.k : 1);
+  if (T3.hover) mats(T3.hover).forEach(mt => { mt.opacity = base(mt); mt.emissive.setHex(0); mt.depthWrite = base(mt) >= .5; });
   T3.hover = id;
-  if (id) mats(id).forEach(mt => { mt.opacity = Math.max(mt.userData.op, .6); mt.emissive.setHex(0x3a1010); mt.depthWrite = true; });
+  if (id) mats(id).forEach(mt => { mt.opacity = Math.max(base(mt), .6); mt.emissive.setHex(0x3a1010); mt.depthWrite = true; });
   T3.R.domElement.style.cursor = id ? "pointer" : "";
+}
+function hitSlab(e){
+  const r = T3.R.domElement.getBoundingClientRect(), v = new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  const ry = ray3(); ry.setFromCamera(v, T3.cam); const hs = ry.intersectObjects(T3.slabs || [], false); return hs.length ? hs[0].object : null;
 }
 function onMove3(e){
   if (e.buttons) { v3tip.style.display = "none"; return; }
   const m = hit3(e); setHover(m);
-  if (!m){ v3tip.style.display = "none"; return; }
-  const u = U[m.userData.uid], r = v3view.getBoundingClientRect();
-  v3tip.innerHTML = `<b>${u.id}</b> · ${u.floor === 1 ? "±0.00" : LV[u.floor]} · ${fmt(u.m2)} მ²<br><span style="opacity:.75">დააჭირეთ — ფართის გვერდი</span>`;
+  const r = v3view.getBoundingClientRect();
+  if (!m){
+    const sl = hitSlab(e); T3.R.domElement.style.cursor = sl ? "pointer" : "";
+    if (!sl){ v3tip.style.display = "none"; return; }
+    v3tip.innerHTML = `<b>${sl.userData.floor === 1 ? "±0.00" : LV[sl.userData.floor]}</b> · ${FLOORNAME[sl.userData.floor]}<br><span style="opacity:.75">დააჭირეთ — სართულის გეგმა</span>`;
+    v3tip.style.display = "block"; v3tip.style.left = Math.min(e.clientX - r.left + 14, r.width - 220) + "px"; v3tip.style.top = (e.clientY - r.top + 14) + "px"; return;
+  }
+  const u = U[m.userData.uid];
+  v3tip.innerHTML = `<b>${u.id}</b> · ${u.floor === 1 ? "±0.00" : LV[u.floor]} · ${fmt(u.m2)} მ²<br><span style="opacity:.75">დააჭირეთ — გეგმა</span>`;
   v3tip.style.display = "block"; v3tip.style.left = Math.min(e.clientX - r.left + 14, r.width - 200) + "px"; v3tip.style.top = (e.clientY - r.top + 14) + "px";
 }
 function onClick3(e){
   if (T3.down && Math.hypot(e.clientX - T3.down[0], e.clientY - T3.down[1]) > 5) return;
-  const m = hit3(e); if (!m) return;
-  const id = m.userData.uid; close3d(true); location.hash = "u-" + id;
+  const m = hit3(e); if (m){ openSel({ kind: "unit", id: m.userData.uid }); return; }
+  const sl = hitSlab(e); if (sl) openSel({ kind: "floor", floor: sl.userData.floor });
 }
 
 /* ---- render loop ---- */
@@ -1773,19 +1861,24 @@ function comboHead(c){
   return { title: `${c.id} · ${c.name}`, sub: `${c.units.join(" + ")} · ${fmt(a)} მ² · ${cc ? cc.seats + " სამუშაო ადგილი (კონცეფცია)" : head(a) + " თანამშრომელი"} · ბირთვი ${coresOf(c)} · ${floorsOf(c)}` };
 }
 function showCombo(i){
+  closePanel(true);
   T3.idx = (i + T3.list.length) % T3.list.length; const c = T3.list[T3.idx], h = comboHead(c);
-  v3title.textContent = h.title; v3sub.textContent = h.sub;
+  v3title.textContent = h.title; v3sub.textContent = h.sub; v3sumEl.innerHTML = sumHtml(c.units);
   v3count.textContent = T3.list.length > 1 ? `${T3.idx + 1} / ${T3.list.length}` : "";
   buildScene(c.units, { stair: stairFor(c) }); goView("reset", true);
 }
 function showBuilding(comboId){
+  closePanel(true);
   T3.hlCombo = comboId || "";
   const all = [...OC, ...DATA.combos.commercial.map(c => ({ ...c, type: "commercial" }))], c = all.find(x => x.id === T3.hlCombo);
   v3title.textContent = "მთელი შენობა · " + M.name;
   v3sub.textContent = c ? `${c.id} · ${c.name} · ${c.units.join(" + ")} · ${fmt(sum(c.units))} მ²` : `კომერცია ${fmt(M.commercial_m2)} მ² · ოფისები ${fmt(M.office_m2)} მ² · ბირთვები K1–K4 + L`;
-  v3count.textContent = "";
+  v3count.textContent = ""; v3sumEl.innerHTML = c ? sumHtml(c.units) : "";
   buildScene(c ? c.units : [], { building: true, stair: c ? stairFor(c) : null });
 }
+const v3sumEl = document.getElementById("v3sum");
+function sumHtml(ids){ const fls = [...new Set(ids.map(id => U[id].floor))].sort((a, b) => a - b);
+  return `<b>ჯამი ${fmt(sum(ids))} მ²</b><span>${fls.map(f => `${f === 1 ? "±0.00" : LV[f]} · ${fmt(sum(ids.filter(id => U[id].floor === f)))}`).join(" | ")}</span>`; }
 function setMsg(t){ v3msg.textContent = t || ""; v3msg.style.display = t ? "flex" : "none"; }
 function flagNo(trigger, msg){
   const card = trigger && trigger.closest(".card, .page"), b = trigger && (trigger.classList.contains("btn3d") ? trigger : (card && card.querySelector(".btn3d")));
@@ -1819,6 +1912,7 @@ async function open3d(kind, id, trigger){
   v3.querySelector('[data-a="close"]').focus();
 }
 function close3d(nav){
+  closePanel(true);
   cancelAnimationFrame(T3.raf); T3.raf = 0; disposeScene(); v3tip.style.display = "none";
   v3.hidden = true; document.documentElement.style.overflow = T3.ov;
   if (!nav && T3.last && document.contains(T3.last)) T3.last.focus({ preventScroll: true });
@@ -1836,12 +1930,181 @@ v3.addEventListener("click", ev => {
 v3sel.addEventListener("change", () => { showBuilding(v3sel.value); T3.ctl.autoRotate = false; });
 document.addEventListener("keydown", ev => {
   if (v3.hidden) return;
-  if (ev.key === "Escape"){ ev.preventDefault(); close3d(); }
-  else if ((ev.key === "ArrowLeft" || ev.key === "ArrowRight") && T3.list.length > 1 && ev.target !== v3sel){ ev.preventDefault(); showCombo(T3.idx + (ev.key === "ArrowRight" ? 1 : -1)); }
-  else if (ev.key === "Tab"){ const f = [...v3.querySelectorAll("button:not([disabled]), select:not([hidden])")]; if (!f.length) return;
+  if (ev.key === "Escape"){ ev.preventDefault(); if (!v3panel.hidden) closePanel(); else close3d(); }
+  else if ((ev.key === "ArrowUp" || ev.key === "ArrowDown") && !v3panel.hidden && ev.target !== v3sel){ ev.preventDefault(); stepFloor(ev.key === "ArrowUp" ? 1 : -1); }
+  else if ((ev.key === "ArrowLeft" || ev.key === "ArrowRight") && v3panel.hidden && T3.list.length > 1 && ev.target !== v3sel){ ev.preventDefault(); showCombo(T3.idx + (ev.key === "ArrowRight" ? 1 : -1)); }
+  else if (ev.key === "Tab"){ const f = [...v3.querySelectorAll("button:not([disabled]), select:not([hidden]), a[href]:not([hidden]), #v3ptitle")].filter(n => n.offsetParent !== null); if (!f.length) return;
     const i = f.indexOf(document.activeElement); ev.preventDefault(); f[(i + (ev.shiftKey ? -1 : 1) + f.length) % f.length].focus(); }
 });
 addEventListener("resize", () => { if (!v3.hidden) resize3(); });
+
+/* ---- plan panel inside the 3D viewer (no navigation) ---- */
+const v3panel = document.getElementById("v3panel"), v3ptitle = document.getElementById("v3ptitle"), v3psub = document.getElementById("v3psub");
+const v3floors = document.getElementById("v3floors"), v3tabs = document.getElementById("v3tabs"), v3pinfo = document.getElementById("v3pinfo"), v3prend = document.getElementById("v3prend"), v3plink = document.getElementById("v3plink");
+/* zoom/pan for the panel — same maths and gestures as the lightbox (wheel, +/−, drag, pinch, double-click, fit) */
+function makeZoomer(view, stage){
+  const Z = { s: 1, x: 0, y: 0, base: 1, bw: 1, bh: 1, min: 1, max: 6 }, PD = 10; let el = null;
+  const apply = () => { if (!el) return; el.style.width = (Z.bw * Z.base * Z.s) + "px"; el.style.height = (Z.bh * Z.base * Z.s) + "px"; stage.style.transform = `translate(${Z.x}px,${Z.y}px)`; };
+  const fit = () => { if (!el) return; const W = view.clientWidth, H = view.clientHeight; if (!W || !H) return;
+    Z.base = Math.max(.0001, Math.min((W * .96 - 2 * PD) / Z.bw, (H * .96 - 2 * PD) / Z.bh)); Z.s = 1; Z.x = (W - (Z.bw * Z.base + 2 * PD)) / 2; Z.y = (H - (Z.bh * Z.base + 2 * PD)) / 2; apply(); };
+  const zoomAt = (f, cx, cy) => { if (!el) return; const ns = Math.min(Math.max(Z.s * f, Z.min), Z.max), k = ns / Z.s; if (k === 1) return;
+    const ox = Z.x + PD, oy = Z.y + PD; Z.x = cx - (cx - ox) * k - PD; Z.y = cy - (cy - oy) * k - PD; Z.s = ns; apply(); };
+  view.addEventListener("wheel", ev => { ev.preventDefault(); const r = view.getBoundingClientRect(); zoomAt(ev.deltaY < 0 ? 1.18 : 1 / 1.18, ev.clientX - r.left, ev.clientY - r.top); }, { passive: false });
+  const ptrs = new Map(); let pan = null, pinch = null;
+  view.addEventListener("pointerdown", ev => { ptrs.set(ev.pointerId, { x: ev.clientX, y: ev.clientY }); view.setPointerCapture(ev.pointerId);
+    if (ptrs.size === 1){ pan = { x: ev.clientX - Z.x, y: ev.clientY - Z.y }; view.classList.add("drag"); }
+    else if (ptrs.size === 2){ const [a, b] = [...ptrs.values()]; pinch = Math.hypot(a.x - b.x, a.y - b.y); pan = null; } });
+  view.addEventListener("pointermove", ev => { if (!ptrs.has(ev.pointerId)) return; ptrs.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
+    if (ptrs.size === 2 && pinch){ const [a, b] = [...ptrs.values()], d = Math.hypot(a.x - b.x, a.y - b.y), r = view.getBoundingClientRect(); zoomAt(d / pinch, (a.x + b.x) / 2 - r.left, (a.y + b.y) / 2 - r.top); pinch = d; return; }
+    if (pan){ Z.x = ev.clientX - pan.x; Z.y = ev.clientY - pan.y; apply(); } });
+  const end = ev => { ptrs.delete(ev.pointerId); if (ptrs.size < 2) pinch = null;
+    if (ptrs.size === 1){ const [q1] = [...ptrs.values()]; pan = { x: q1.x - Z.x, y: q1.y - Z.y }; } else if (!ptrs.size){ pan = null; view.classList.remove("drag"); } };
+  view.addEventListener("pointerup", end); view.addEventListener("pointercancel", end);
+  view.addEventListener("dblclick", ev => { const r = view.getBoundingClientRect(); if (Z.s > 1.05) fit(); else zoomAt(2.5 / Z.s, ev.clientX - r.left, ev.clientY - r.top); });
+  if (window.ResizeObserver) new ResizeObserver(() => fit()).observe(view);
+  return {
+    svg(node){ stage.innerHTML = ""; if (!node){ el = null; return; } node.removeAttribute("style"); node.setAttribute("aria-hidden", "true");
+      node.querySelectorAll("[tabindex],[role]").forEach(n => { n.removeAttribute("tabindex"); n.removeAttribute("role"); });
+      stage.appendChild(node); el = node; const vb = node.viewBox.baseVal; Z.bw = vb.width || 100; Z.bh = vb.height || 50; Z.min = 1; Z.max = 6; fit(); },
+    img(src, alt){ stage.innerHTML = ""; el = null; Z.min = .5; Z.max = 14; const im = new Image(); im.alt = alt || ""; im.draggable = false;
+      im.onload = () => { stage.innerHTML = ""; stage.appendChild(im); el = im; Z.bw = im.naturalWidth || 1; Z.bh = im.naturalHeight || 1; fit(); };
+      im.onerror = () => { stage.innerHTML = `<div class="drw-miss">ფაილი არ არის<br><code>${src}</code></div>`; stage.style.transform = "translate(10px,10px)"; };
+      im.src = src; },
+    fit, zoom: f => zoomAt(f, view.clientWidth / 2, view.clientHeight / 2), clear(){ stage.innerHTML = ""; el = null; }
+  };
+}
+const PZ = makeZoomer(document.getElementById("v3pzv"), document.getElementById("v3pzs"));
+const lvTxt = f => f === 1 ? "±0.00" : LV[f];
+const curCombo = () => T3.mode === "building" ? [...OC, ...DATA.combos.commercial].find(c => c.id === T3.hlCombo) : T3.list[T3.idx];
+const parseSvg = str => { const t = document.createElement("div"); t.innerHTML = String(str).trim(); return t.querySelector("svg"); };
+const probe = src => new Promise(res => { const im = new Image(); im.onload = () => res(true); im.onerror = () => res(false); im.src = src; });
+const selFloor = () => !T3.sel ? null : (T3.sel.kind === "unit" ? U[T3.sel.id].floor : T3.sel.floor);
+function panelFloors(){ const c = curCombo(), cur = selFloor(), fl = c ? [...new Set(c.units.map(id => U[id].floor))] : [];
+  if (fl.length < 2) return [1, 2, 3, 4]; if (cur && !fl.includes(cur)) fl.push(cur); return fl.sort((a, b) => a - b); }
+function factsHtml(rows, extra){ return `<dl class="facts">${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>${extra || ""}`; }
+function setTab(k){
+  T3.tab = k;
+  v3tabs.querySelectorAll("button").forEach(b => { const on = b.dataset.tab === k; b.setAttribute("aria-selected", String(on)); b.tabIndex = on ? 0 : -1; });
+  v3prend.querySelectorAll("button").forEach(b => b.classList.remove("on"));
+  const S = T3.selData;
+  if (k === "schem"){ PZ.svg(parseSvg(S.schem)); v3pinfo.innerHTML = factsHtml(S.facts); }
+  else if (k === "draw"){ PZ.img(S.draw, "სამშენებლო ნახაზი"); v3pinfo.innerHTML = factsHtml(S.facts, `<div class="small muted" style="margin-top:6px">${PLNOTE} · ${PLDATE}</div>`); }
+  else if (k === "concept"){ const cc = S.cc; PZ.img(cc.plan, "სანიმუშო გეგმა");
+    v3pinfo.innerHTML = `<div style="margin-bottom:6px"><b>${cc.seats} სამუშაო ადგილი</b> · ${cc.m2pp.toFixed(2)} მ² / თანამშრომელი · შეხვედრა ${cc.meeting} · კაბინა ${cc.booths}</div>${cZones(cc)}`; }
+}
+function renderTabs(){
+  const S = T3.selData, tabs = [["schem", "სქემა"]]; if (S.hasDraw) tabs.push(["draw", "სამშენებლო ნახაზი"]); if (S.cc) tabs.push(["concept", "სანიმუშო მოწყობა"]);
+  v3tabs.innerHTML = tabs.map(([k, l]) => `<button type="button" role="tab" data-tab="${k}" aria-selected="${k === T3.tab}" tabindex="${k === T3.tab ? 0 : -1}">${l}</button>`).join("");
+}
+function renderStrip(){
+  const R = T3.selData.renders;
+  v3prend.innerHTML = R.map(([src, cap], i) => `<button type="button" data-r="${i}" aria-label="ვიზუალიზაცია: ${cap}" title="${cap}"><img src="${src}" alt="" loading="lazy"></button>`).join("");
+}
+function openSel(sel, opts){
+  opts = opts || {};
+  const wasHidden = v3panel.hidden, c = curCombo(), tok = T3.selTok = (T3.selTok || 0) + 1;
+  setHover(null); T3.sel = sel; T3.ctl.autoRotate = false; v3tip.style.display = "none";
+  const f = selFloor(), D3 = { renders: [], hasDraw: false, cc: null };
+  if (sel.kind === "unit"){
+    const u = U[sel.id], inC = c && c.units.includes(u.id), others = OC.filter(x => x.units.includes(u.id) && (!c || x.id !== c.id));
+    v3ptitle.textContent = `${u.id} · ${lvTxt(u.floor)} · ${fmt(u.m2)} მ²`;
+    v3psub.textContent = inC ? `კომბინაცია ${c.id} · ${c.name}` : (others.length ? `შედის: ${others.map(x => x.id).join(", ")}` : (u.floor === 1 ? "კომერციული ფართი" : "საოფისე ფართი"));
+    v3plink.href = location.href.split("#")[0] + "#u-" + u.id; v3plink.hidden = false;
+    document.getElementById("v3pshare").textContent = inC && c.units.length > 1 ? `ეს ფართი: ${fmt(u.m2)} მ² · კომბინაციის ჯამი: ${fmt(sum(c.units))} მ² (${(u.m2 / sum(c.units) * 100).toFixed(1)}%)` : "";
+    if (u.floor === 1){ const up = unitPlanSVG(u); D3.schem = up.svg;
+      D3.facts = [["პროფილი", P[u.profiles[0]].name], ...up.st, ["ტერასა", u.terrace ? fmt(u.terrace.m2) + " მ²" : "—"], ["ბირთვი", u.core]]; }
+    else { const l = layoutSVG([u.id]), cc = CN[u.id]; D3.schem = l.svg; D3.cc = cc || null;
+      D3.facts = [["სამუშაო ადგილი", cc ? `${cc.seats} (სანიმუშო მოწყობა)` : `≈ ${l.tot.desks} (სქემა, ${M.deskM2} მ²/ად.)`],
+                  ["შეხვედრის ოთახი", cc ? `${cc.meeting} ადგილი` : l.tot.meet], ["ტერასა", u.terrace ? u.terrace.m2 + " მ²" : "—"], ["ბირთვი", u.cores.join(" · ")]]; }
+    D3.draw = `images/plans/${u.id}.png`;
+    if (D3.cc) D3.renders = D3.cc.renders.slice();
+  } else {
+    const us = DATA.units.filter(u => u.floor === f), hl = c ? c.units.filter(id => U[id].floor === f) : [];
+    v3ptitle.textContent = `${FLOORNAME[f]} · ${lvTxt(f)}`;
+    document.getElementById("v3pshare").textContent = hl.length ? `კომბინაცია ამ სართულზე: ${formulaTxt(hl)}` : "";
+    v3psub.textContent = `${us.length} ფართი · ${fmt(sum(us.map(u => u.id)))} მ²${hl.length ? " · მონიშნულია " + c.id : ""}`; v3plink.hidden = true;
+    D3.schem = planSVG(f, hl.length ? { hl, rows: false } : { rows: false });
+    D3.facts = [["ფართები", us.map(u => u.id).join(", ")], ["სულ", fmt(sum(us.map(u => u.id))) + " მ²"], ...(hl.length ? [["კომბინაცია", `${c.id}: ${hl.join(" + ")} · ${fmt(sum(hl))} მ²`]] : [])];
+    D3.draw = `images/plans/${FLOORIMG[f]}.png`;
+  }
+  T3.selData = D3; T3.tab = "schem";
+  v3panel.hidden = false;
+  /* floor indicator */
+  const fl = panelFloors(), up = fl.some(x => x > f), dn = fl.some(x => x < f);
+  v3floors.innerHTML = `<button type="button" data-p="down" aria-label="ქვედა სართული" title="ქვედა სართული (↓)" ${dn ? "" : "disabled"}>↓</button>` +
+    fl.map(x => `<button type="button" data-p="floor" data-f="${x}" class="${x === f ? "on" : ""}" aria-pressed="${x === f}" aria-label="სართული ${lvTxt(x)}">${lvTxt(x)}</button>`).join(`<span class="muted" aria-hidden="true">·</span>`) +
+    `<button type="button" data-p="up" aria-label="ზედა სართული" title="ზედა სართული (↑)" ${up ? "" : "disabled"}>↑</button>`;
+  renderTabs(); renderStrip(); setTab("schem");
+  probe(D3.draw).then(ok => { if (ok && tok === T3.selTok){ D3.hasDraw = true; renderTabs(); } });
+  if (sel.kind === "unit"){ const mt = `images/${sel.id}_montage.jpg`;
+    probe(mt).then(ok => { if (ok && tok === T3.selTok && !D3.renders.some(r0 => r0[0] === mt)){ D3.renders.unshift([mt, "ფოტომონტაჟი"]); renderStrip(); } }); }
+  sync3d();
+  requestAnimationFrame(() => { resize3(); PZ.fit(); frameSel(); });
+  if (!opts.keepFocus) v3ptitle.focus({ preventScroll: true });
+}
+function clearSel3d(){
+  (T3.selObjs || []).forEach(o => { if (o.parent) o.parent.remove(o); if (o.geometry) o.geometry.dispose(); if (o.material) o.material.dispose(); });
+  T3.selObjs = []; fadeFloors(null);
+}
+function fadeFloors(sf){
+  for (const f in T3.floors){
+    const k = sf == null || +f === sf ? 1 : .25;
+    T3.floors[f].traverse(o => {
+      if (o.isCSS2DObject){ o.element.style.opacity = k < 1 ? ".3" : ""; return; }
+      const m = o.material; if (!m || Array.isArray(m)) return;
+      if (m.userData.op0 === undefined){ m.userData.op0 = m.opacity; m.userData.tr0 = m.transparent; m.userData.dw0 = m.depthWrite; }
+      m.userData.k = k; m.opacity = m.userData.op0 * k; m.transparent = m.userData.tr0 || k < 1; m.depthWrite = k < 1 ? false : m.userData.dw0; m.needsUpdate = true;
+    });
+  }
+}
+function sync3d(){
+  if (!T3.scene) return;
+  clearSel3d(); const f = selFloor(), g = T3.floors[f]; fadeFloors(f);
+  const outline = mesh => { const e = edges(mesh, 0xffffff, 1); e.material.depthTest = false; e.renderOrder = 6; e.scale.set(1.004, 1.03, 1.03); mesh.parent.add(e); T3.selObjs.push(e); };
+  let x0;
+  if (T3.sel.kind === "unit"){ const ms = T3.pick.filter(m => m.userData.uid === T3.sel.id); ms.forEach(outline); x0 = Math.min(...rectsOf(U[T3.sel.id]).map(r => r.x)); }
+  else { const sl = T3.slabs.find(s0 => s0.userData.floor === f); if (sl) outline(sl); x0 = Math.max(T3.box.x0 + 4, 0); }
+  const mk = label(`▶ ${lvTxt(f)}`, "sel", x0 - 2.5, UH + .5, -1.5); g.add(mk); T3.selObjs.push(mk);
+}
+function frameSel(){
+  if (!T3.sel || !T3.scene) return;
+  const f = selFloor(), g = T3.floors[f]; let x0, x1;
+  if (T3.sel.kind === "unit"){ const rs = rectsOf(U[T3.sel.id]); x0 = Math.min(...rs.map(r => r.x)) - 6; x1 = Math.max(...rs.map(r => r.x + r.w)) + 6; }
+  else { x0 = T3.box.x0; x1 = T3.box.x1; }
+  const c = new THREE.Vector3((x0 + x1) / 2, g.position.y + UH / 2, D / 2), span = Math.max(x1 - x0, 28);
+  const d = span / (2 * Math.tan(T3.cam.fov * Math.PI / 360)) * (T3.cam.aspect < 1 ? 1.3 / T3.cam.aspect : .9);
+  const pos = new THREE.Vector3(c.x + d * .18, c.y + d * .55, c.z - d * .8);
+  if (reduceMotion()){ T3.cam.position.copy(pos); T3.ctl.target.copy(c); T3.tween = null; return; }
+  T3.tween = { p0: T3.cam.position.clone(), t0: T3.ctl.target.clone(), p1: pos, t1: c, s: performance.now(), d: 650 };
+}
+function gotoFloor(f){ const c = curCombo(), u = c && c.units.find(id => U[id].floor === f); openSel(u ? { kind: "unit", id: u } : { kind: "floor", floor: f }, { keepFocus: true }); }
+function stepFloor(dir){
+  if (!T3.sel) return; const cur = selFloor(), fl = panelFloors(), cand = fl.filter(x => dir > 0 ? x > cur : x < cur);
+  if (!cand.length) return; gotoFloor(dir > 0 ? Math.min(...cand) : Math.max(...cand));
+}
+function closePanel(silent){
+  if (v3panel.hidden) return;
+  v3panel.hidden = true; T3.sel = null; T3.selTok = (T3.selTok || 0) + 1; PZ.clear();
+  if (T3.scene) clearSel3d();
+  requestAnimationFrame(() => { resize3(); if (!silent && T3.scene) goView("reset"); });
+  if (!silent && T3.R) T3.R.domElement.focus({ preventScroll: true });
+}
+v3panel.addEventListener("click", ev => {
+  const b = ev.target.closest("button"); if (!b || b.disabled) return;
+  if (b.dataset.p === "close") closePanel();
+  else if (b.dataset.p === "up") stepFloor(1);
+  else if (b.dataset.p === "down") stepFloor(-1);
+  else if (b.dataset.p === "floor") gotoFloor(+b.dataset.f);
+  else if (b.dataset.pz) b.dataset.pz === "fit" ? PZ.fit() : PZ.zoom(b.dataset.pz === "in" ? 1.4 : 1 / 1.4);
+  else if (b.dataset.tab) setTab(b.dataset.tab);
+  else if (b.dataset.r !== undefined){ const [src, cap] = T3.selData.renders[+b.dataset.r]; PZ.img(src, cap);
+    v3tabs.querySelectorAll("button").forEach(t => t.setAttribute("aria-selected", "false"));
+    v3prend.querySelectorAll("button").forEach(t => t.classList.toggle("on", t === b)); }
+});
+v3tabs.addEventListener("keydown", ev => { if (ev.key !== "ArrowLeft" && ev.key !== "ArrowRight") return; ev.stopPropagation(); ev.preventDefault();
+  const bs = [...v3tabs.querySelectorAll("button")], i = bs.findIndex(b => b.getAttribute("aria-selected") === "true"), n = bs[(i + (ev.key === "ArrowRight" ? 1 : -1) + bs.length) % bs.length];
+  if (n){ setTab(n.dataset.tab); n.focus(); } });
+if (window.ResizeObserver) new ResizeObserver(() => { if (!v3.hidden) resize3(); }).observe(v3view);
 
 /* ---- triggers: "3D ხედი" on stack + block cards, clickable isometric SVG, whole-building button ---- */
 OC.filter(c => c.type === "stack" || c.type === "block").forEach(c => {
@@ -1872,11 +2135,11 @@ q.addEventListener("change", go);
 
 /* summary table */
 const rows = [
-  ...offices.map(u => ({ name: u.id, href: "#u-" + u.id, type: "ოფისი", units: u.id, fl: LV[u.floor], m2: u.m2 })),
-  ...OC.map(c => ({ name: c.name, href: "#o-" + c.id, type: { block: "ბლოკი", floor: "სართული", stack: "ვერტიკალი", mixed: "შერეული" }[c.type], units: c.units.join(" + "), fl: floorsOf(c), m2: sum(c.units) }))
+  ...offices.map(u => ({ name: u.id, href: "#u-" + u.id, type: "ოფისი", units: u.id, fl: LV[u.floor], m2: u.m2, f: "—" })),
+  ...OC.map(c => ({ name: c.name, href: "#o-" + c.id, type: { block: "ბლოკი", floor: "სართული", stack: "ვერტიკალი", mixed: "შერეული" }[c.type], units: c.units.join(" + "), fl: floorsOf(c), m2: sum(c.units), f: formulaTxt(c.units) }))
 ];
 const tb = document.querySelector("#sumt tbody");
-function renderT(rs){ tb.innerHTML = rs.map(r => `<tr><td><a href="${r.href}">${r.name}</a></td><td>${r.type}</td><td class="small">${r.units}</td><td class="small">${r.fl}</td><td class="num"><b>${fmt(r.m2)}</b></td><td class="num">${head(r.m2)}</td></tr>`).join(""); }
+function renderT(rs){ tb.innerHTML = rs.map(r => `<tr><td><a href="${r.href}">${r.name}</a></td><td>${r.type}</td><td class="small">${r.units}</td><td class="small">${r.fl}</td><td class="num"><b>${fmt(r.m2)}</b></td><td class="fcol">${r.f}</td><td class="num">${head(r.m2)}</td></tr>`).join(""); }
 renderT(rows);
 document.querySelectorAll("#sumt th.sort").forEach(th => th.addEventListener("click", () => {
   const k = th.dataset.k, asc = !th.classList.contains("asc");
