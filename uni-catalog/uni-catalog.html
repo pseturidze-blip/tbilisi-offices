@@ -140,10 +140,10 @@ const DATA = {
       reason: "K2-ის მეორე მხარეს, 8.3 მ ვიტრინა — აფთიაქი ან შოურუმი." },
     { id: "C-9", outline: [[81.60, 0.00], [81.60, 12.60], [89.60, 12.60], [89.60, 0.00]],  floor: 1, m2: 98,  axes: [14, 15], core: "L",  profiles: ["market", "food"],   verify: false,
       reason: "ცენტრალურ ლობსა და პარკინგის ლიფტთან ყველაზე ახლოს — ყოველდღიური მინი-მარკეტი ან ყავა წასაღებად." },
-    { id: "C-10", outline: [[112.50, 0.20], [104.90, 0.20], [104.90, 6.60], [97.30, 6.60], [97.30, 12.60], [112.50, 12.60]], floor: 1, m2: 204, axes: [16, 18], core: "L",  profiles: ["food", "retail"],   terrace: { m2: 69, label: "საზაფხულო ტერასა" }, verify: false,
+    { id: "C-10", outline: [[104.90, 3.48], [112.51, 3.48], [112.51, 12.60], [97.50, 12.60], [97.50, 6.61], [104.90, 6.61]], floor: 1, m2: 204, axes: [16, 18], core: "L",  profiles: ["food", "retail"],   terrace: { m2: 69, label: "საზაფხულო ტერასა" }, verify: false,
       shape: [[17, 18, 0, 12.6], [16, 17, 6.6, 12.6]],
       reason: "204 მ², ცენტრალური ლობი და 69 მ² საზაფხულო ტერასა — კომპლექსის მთავარი რესტორანი." },
-    { id: "C-11", outline: [[143.50, 12.60], [143.50, 0.00], [136.00, 0.00], [136.00, 12.60]], floor: 1, m2: 82,  axes: [22, 23], core: "K3", profiles: ["food"],             terrace: { m2: 109, label: "საზაფხულო ტერასა" }, verify: false,
+    { id: "C-11", outline: [[137.74, 0.01], [143.50, 0.01], [143.50, 12.60], [136.75, 12.60], [136.75, 3.00], [137.74, 3.00]], floor: 1, m2: 82,  axes: [22, 23], core: "K3", profiles: ["food"],             terrace: { m2: 109, label: "საზაფხულო ტერასა" }, verify: false,
       reason: "109 მ² ტერასა უშუალოდ არკასთან — კაფე ეზოს მხარეს." },
     { id: "C-12", outline: [[151.20, 0.00], [143.70, 0.00], [143.70, 12.60], [151.20, 12.60]], floor: 1, m2: 92,  axes: [23, 24], core: "K3", profiles: ["food", "beauty"],   verify: false,
       reason: "C-11-ის მეზობელი, გაერთიანება შესაძლებელია — საცხობი/კაფე ან სალონი." },
@@ -357,6 +357,43 @@ svg text{font-family:"Noto Sans Georgian",sans-serif}
 .k-core{fill-opacity:.55}
 .ul.dim{opacity:.16}
 .uout-f{fill:#fff}
+/* unit & combination pages */
+.upage{gap:10px}
+.uh{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.uhl{font-size:20px;font-weight:600}.uhl b{font-size:34px;font-weight:800;letter-spacing:-.3px}
+.uhn{font-size:14px;color:var(--muted);font-weight:500}
+.uha{font-size:40px;font-weight:800;line-height:1;white-space:nowrap}.uha small{font-size:18px;font-weight:600;margin-left:3px}
+.blab{font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.kprow{display:flex;align-items:center;gap:8px}.kplv{font-size:11px;color:var(--muted);width:46px;flex:none}
+.kprow svg{height:78px;width:100%;flex:1;min-width:0}.ub1.multi .kprow svg{height:44px}
+.kp .archb{opacity:.35}.kp .fp{fill:#FAF9F7}
+.ub3{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding:8px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.fig b{display:block;font-size:23px;font-weight:800;line-height:1.15}.fig.long b{font-size:15px;line-height:1.3}.fig span{font-size:11.5px;color:var(--muted)}
+.ub24{display:grid;grid-template-columns:3fr 2fr;gap:20px;min-height:0}
+.dbox{height:362px;display:flex;align-items:center;justify-content:center}
+.ub24.multi .dbox{height:296px}
+.dv{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:0}
+.dv img{max-width:100%;max-height:100%;object-fit:contain;cursor:zoom-in;display:block}
+.dv .zwrap,.dv>svg{width:100%}.dv svg.plan{max-height:100%}
+.ub24.multi .dv svg.plan{max-height:82px}
+.dvl{font-size:10.5px;color:var(--muted);align-self:flex-start}
+.dv-c{display:none}.dbox.show-c .dv-a{display:none}.dbox.show-c .dv-c{display:flex}
+.dsw{display:inline-flex;border:1px solid var(--line);border-radius:99px;overflow:hidden;text-transform:none;letter-spacing:0}
+.dsw button{all:unset;cursor:pointer;font-size:11px;padding:3px 10px;color:var(--ink)}.dsw button.on{background:var(--black);color:#fff}
+.dsw button:focus-visible,.ub:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.rmain{margin:0;aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:var(--soft)}
+.rmain img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;display:block}.rmain.miss img{display:none}
+.rthumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px}.rt:nth-child(n+5){display:none}
+.rt img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:4px;display:block;cursor:zoom-in}
+.ubtn{display:flex;gap:8px;flex-wrap:wrap;margin-top:2px}
+.ub{all:unset;cursor:pointer;font-size:12px;font-weight:600;padding:6px 13px;border:1px solid var(--line);border-radius:99px;color:var(--ink);font-family:inherit}
+.ub:hover{border-color:var(--ink)}.ub.offer{background:var(--black);color:#fff;border-color:var(--black)}
+.unote{font-size:11.5px;color:var(--muted)}
+.det{margin-top:6px;border-top:1px solid var(--line);padding-top:6px;margin-bottom:26px}
+.det summary{cursor:pointer;font-size:12.5px;font-weight:600;color:var(--muted)}
+.detc{padding-top:10px;display:flex;flex-direction:column;gap:12px}
+.detc .fittog{position:static;align-self:flex-start}
+.clist{display:flex;flex-direction:column;gap:4px;font-size:13px}.clist a{text-decoration:none}.clist a:hover{color:var(--red)}
 .cplan .v-s{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
 .uout{fill:none;stroke:var(--red);stroke-width:2px;vector-effect:non-scaling-stroke}
 .fit{display:none}
@@ -651,6 +688,7 @@ tr.sumrow td{border-top:2px solid var(--red);font-weight:800;border-bottom:0}
   .page{width:100%;height:auto;min-height:0;zoom:1;padding:22px 16px 40px}
   .g2,.g3,.g4,.tiles,.ucols,.ocols,.cgal,.teaser{grid-template-columns:1fr!important}
   .cfig{grid-template-columns:1fr 1fr}
+  .ub24{grid-template-columns:1fr!important}.ub3{grid-template-columns:1fr 1fr!important}.dbox,.ub24.multi .dbox{height:300px}.uha{font-size:28px}.uhl b{font-size:26px}
   #v3body{flex-direction:column}#v3panel{width:auto;height:60%;animation:none}.cgal{grid-template-rows:none}.cimg{aspect-ratio:3/2}.cplan{min-height:260px}
   .row{flex-direction:column}
   .cover{min-height:560px}
@@ -669,6 +707,8 @@ tr.sumrow td{border-top:2px solid var(--red);font-weight:800;border-bottom:0}
   .drw-img img{width:100%;height:100%;max-height:none;object-fit:contain;cursor:auto}
   .printonly{display:block}.cplan img{width:100%;height:100%}
   #sumt .fcol{display:none}
+  body.print1 .page:not(.print-me){display:none!important}
+  .upage{height:210mm!important;min-height:0!important;overflow:hidden}
   main{margin:0;padding:0;gap:0;display:block}
   .page{zoom:1!important;width:297mm;height:210mm;box-shadow:none;break-after:page;page-break-after:always;margin:0}
   .page.flow{height:auto;min-height:210mm;overflow:visible}
@@ -821,6 +861,7 @@ function planSVG(floor, o = {}){
     for (let i = 1; i <= 35; i++) s += `<line class="axl" x1="${AX[i]}" x2="${AX[i]}" y1="-1.7" y2="${D + .6}"/>`;
     for (let i = 1; i <= 35; i++){
       if (DATA.grid.joints.includes(i - 1)) continue;
+      if (o.axes === "ends" && i !== 1 && i !== 35) continue;
       const j = DATA.grid.joints.includes(i);
       const x = j ? (AX[i] + AX[i + 1]) / 2 : AX[i];
       if (x < vx0 || x > vx1) continue;
@@ -834,7 +875,7 @@ function planSVG(floor, o = {}){
     const x = X(f.x[0]), w = X(f.x[1]) - x, y = f.y[0], h = f.y[1] - f.y[0];
     let t = `<rect class="k-${f.kind}" x="${r1(x)}" y="${y}" width="${r1(w)}" height="${r1(h)}"/>`;
     const lab = f.kind === "core" ? f.core : (f.label || "");
-    if (o.labels !== false && lab && (w > 1.4 || f.kind === "core") && (!o.lay || f.kind === "core" || f.kind === "lobby")){
+    if ((o.labels !== false || (o.coreLabels && f.kind === "core")) && lab && (w > 1.4 || f.kind === "core") && (!o.lay || f.kind === "core" || f.kind === "lobby")){
       const cls = (f.kind === "core" || f.kind === "shaft") ? "ft w" : "ft";
       const vertical = f.kind !== "core" && h > w && lab.length * .66 > w;
       t += `<text class="${cls}" x="${r1(x + w / 2)}" y="${r1(y + h / 2)}" ${vertical ? `transform="rotate(-90 ${r1(x + w / 2)} ${r1(y + h / 2)})"` : ""}>${lab}</text>`;
@@ -1291,6 +1332,76 @@ H += page(`${ph("A · სქემა", "დონეები, ბირთვ�
   <div style="margin-top:10px">${planSVG(1, { axes: true, labels: false, vy1: 13.6, cls: "mini" })}</div>
   <div class="small muted" style="margin-top:4px">±0.00 გეგმა: ზემოთ — ქუჩა (რიგი A), ქვემოთ — ეზო (რიგი C). ფერები — რეკომენდებული პროფილი; შავი — ბირთვები; დაშტრიხული — ტერასები.</div>`, { sec: "overview", foot: "სქემა" });
 
+/* ===== unit & combination pages: key plan · drawing · key figures · render (+ collapsed details) ===== */
+const LVX = f => f === 1 ? "±0.00" : LV[f];
+const EXTS = [["images/render_corner_day.jpg", "დასავლეთი კუთხე"], ["images/render_dusk.jpg", "ცენტრალური შესასვლელი"], ["images/render_front_day.jpg", "ქუჩის ფასადი"], ["images/render_courtyard.jpg", "ეზოს ფასადი"]];
+function extFor(ids){ const xs = ids.flatMap(id => rectsOf(U[id]).map(r => r.x + r.w / 2)), x = xs.reduce((a, b) => a + b, 0) / xs.length;
+  return x < 45 ? EXTS[0] : (x >= 85 && x <= 145) ? EXTS[1] : EXTS[2]; }
+function keyPlans(ids){
+  const fls = [...new Set(ids.map(id => U[id].floor))].sort((a, b) => b - a);
+  return fls.map(f => `<div class="kprow"><span class="kplv">${LVX(f)}</span>${planSVG(f, { hl: ids.filter(id => U[id].floor === f), axes: "ends", labels: false, coreLabels: true, m2: false, rows: false, cls: "kp", vy0: -4.4, vy1: 13.6 })}</div>`).join("");
+}
+function rendersFor(ids, cc){
+  const out = []; if (cc) cc.renders.forEach(r => out.push(r));
+  ids.forEach(id => out.push([`images/${id}_montage.jpg`, `${id} · ფოტომონტაჟი`]));
+  const e = extFor(ids); out.push(e); EXTS.forEach(x => { if (x !== e) out.push(x); });
+  return out;
+}
+window.rFb = img => { const fb = (img.dataset.fb || "").split("|").filter(Boolean);
+  if (!fb.length){ img.closest("figure").classList.add("miss"); return; } img.dataset.fb = fb.slice(1).join("|"); img.src = fb[0]; };
+window.rDedupe = img => { const box = img.closest(".ub4"); if (!box) return; const t = box.querySelector(`.rt img[src="${img.getAttribute("src")}"]`); if (t) t.parentNode.remove();
+  const th = box.querySelector(`.rt img[src="${img.getAttribute("src")}"]`); img.dataset.lb = (th && th.alt) || img.dataset.lb; };
+function renderBlock(list, gal){
+  const [m, ...rest] = list;
+  return `<div class="ub4"><div class="blab">რენდერი</div><figure class="rmain"><img class="lbable" src="${m[0]}" alt="${m[1]}" data-lb="${m[1]}" data-gal="${gal}" data-fb="${rest.map(x => x[0]).join("|")}" onerror="rFb(this)" onload="rDedupe(this)"></figure>
+    <div class="rthumbs">${rest.map(x => `<span class="rt"><img class="lbable" src="${x[0]}" alt="${x[1]}" data-lb="${x[1]}" data-gal="${gal}" loading="lazy" onerror="this.parentNode.remove()"></span>`).join("")}</div></div>`;
+}
+function unitDraw(id){ const cc = CN[id];
+  return { inner: `<div class="dv dv-a"><img class="lbable" src="images/arch/units/${id}.svg" alt="${id} — სამშენებლო ნახაზი" data-lb="${id} · სამშენებლო ნახაზი · ${PLNOTE}" data-gal="d-${id}" onerror="drwFail(this)"></div>${cc ? `<div class="dv dv-c"><img class="lbable" src="${cc.plan}" alt="${id} — სანიმუშო გეგმა" data-lb="${id} · სანიმუშო გეგმა" data-gal="d-${id}" onerror="drwFail(this)"></div>` : ""}`, sw: !!cc }; }
+function comboDraw(c){
+  const cc = conceptForCombo(c.id); let a;
+  if (c.type === "stack") a = c.units.slice().sort((x, y) => U[y].floor - U[x].floor).map(id => `<div class="dvl">${LVX(U[id].floor)} · ${id}</div>${zoomPlan(U[id].floor, [id], 3)}`).join("");
+  else if (c.type === "floor") a = planSVG(U[c.units[0]].floor, { hl: c.units, rows: false, m2: false });
+  else a = zoomPlan(U[c.units[0]].floor, c.units, 3);
+  return { inner: `<div class="dv dv-a">${a}</div>${cc ? `<div class="dv dv-c"><img class="lbable" src="${cc.plan}" alt="${c.id} — სანიმუშო გეგმა" data-lb="${c.id} · სანიმუშო გეგმა" onerror="drwFail(this)"></div>` : ""}`, sw: !!cc };
+}
+function uLayout(o){
+  const multi = new Set(o.ids.map(id => U[id].floor)).size > 1;
+  const sw = o.draw.sw ? `<span class="dsw noprint" role="group" aria-label="ნახაზის ტიპი"><button type="button" class="on" data-d="a" aria-pressed="true">სამშენებლო</button><button type="button" data-d="c" aria-pressed="false">სანიმუშო</button></span>` : "";
+  return `<div class="uh"><div class="uhl"><b>${o.code}</b> · ${o.level}${o.name ? `<span class="uhn"> · ${o.name}</span>` : ""}</div><div class="uha">${fmt(o.m2)}<small> მ²</small></div></div>
+  <div class="ub1${multi ? " multi" : ""}"><div class="blab">სართულზე განლაგება</div>${keyPlans(o.ids)}</div>
+  <div class="ub3">${o.figs.map(([k, v]) => `<div class="fig${String(v).length > 16 ? " long" : ""}"><b>${v}</b><span>${k}</span></div>`).join("")}</div>
+  <div class="ub24${multi ? " multi" : ""}"><div class="ub2"><div class="blab">სამშენებლო ნახაზი${sw}</div><div class="dbox">${o.draw.inner}</div></div>${renderBlock(o.renders, o.gal)}</div>
+  <div class="ubtn noprint"><button type="button" class="ub offer">⬇ შეთავაზება</button>${o.pdf ? `<a class="ub" href="${o.pdf}" target="_blank" rel="noopener">გეგმა 1:100 (PDF)</a>` : ""}${o.d3 ? `<button type="button" class="ub d3" data-k="${o.d3[0]}" data-c="${o.d3[1]}">3D</button>` : ""}</div>
+  <div class="unote">ფართი გადაეცემა შავი კარკასის მდგომარეობაში.</div>
+  <details class="det noprint"><summary>დეტალები ▾</summary><div class="detc">${o.details}</div></details>`;
+}
+const OCT = { block: "ბლოკის სრული სართული", floor: "სრული სართული — სათაო ოფისი", stack: "ვერტიკალური ბლოკი", mixed: "შერეული: დიდი + მცირე ერთ ბირთვზე" };
+const COMBOINTRO = { block: "K1–K2 (O-2 / O-8 / O-13) და K3–K4 (O-5 / O-11 / O-16) უკვე ერთი ფართია — აქ: ბლოკი K2–K3, ცენტრალურ ლობთან.",
+  floor: "ერთი მოიჯარე, 4 ბირთვი + ცენტრალური ლობი.", stack: "ერთი ბირთვის ფართები 2–3–4 სართულზე · შიდა კიბის ვარიანტით.",
+  mixed: "საერთო ლიფტის ჰოლი, გაფართოების რეზერვი. დიდი ფართი — ძირითადი ოფისი; მცირე — მომავალი ზრდის რეზერვი, ტრენინგ-ცენტრი ან ქვეიჯარა. ორივე ერთი ბირთვის ლიფტის ჰოლიდან იხსნება, ამიტომ შესაძლებელია საერთო რესეფშენი და ერთიანი წვდომის კონტროლი." };
+const formulaTxtC = ids => ids.length > 1 ? `${ids.map(id => fmt(U[id].m2)).join(" + ")} = ${fmt(sum(ids))} მ²` : `${fmt(sum(ids))} მ²`;
+function comboOld(c){
+  let s = `<div class="small muted">${COMBOINTRO[c.type]} ${HALLNOTE}.</div>`;
+  if (c.type === "block"){ const l = layoutSVG(c.units, { pad: 9 });
+    s += `<div class="card offer" style="gap:4px;padding:10px 16px">${offerHead(c, layKv(l.tot), true)}<div style="height:110px;display:flex;justify-content:center">${l.svg.replace('class="plan ', 'style="height:100%;width:auto;max-width:100%" class="plan ')}</div><div>${ROOMLEG}</div></div>`; }
+  else if (c.type === "floor"){ const l = layoutSVG(c.units, { full: true });
+    s += `<div class="card offer" style="gap:3px;padding:8px 14px">${offerHead(c, layKv(l.tot), true)}${l.svg}<div>${ROOMLEG}</div></div>`; }
+  else if (c.type === "stack"){ const misaligned = new Set(c.units.map(id => U[id].axes.join("-"))).size > 1;
+    s += `<div class="card offer" style="max-width:420px">${offerHead(c, "", false, true)}
+        <div>${stackSVG(c.units, c.core)}</div>
+        <table><tbody>${c.units.map(id => `<tr><td>${unitLink(id)}</td><td>${LV[U[id].floor]}</td><td class="num">${fmt(U[id].m2)} მ²</td></tr>`).join("")}</tbody>
+          <tfoot><tr class="sumrow"><td>ჯამი</td><td></td><td class="num">${fmt(sum(c.units))} მ²</td></tr></tfoot></table>
+        <div class="fsum">${terrTxt(c.units) ? terrTxt(c.units) + " · " : ""}<span class="muted">საერთო ჰოლები ჯამში არ შედის</span></div>
+        <div class="small"><b>შიდა კიბე:</b> ფილის ღიობი ~3 × 6 მ ${c.core}-ის მხარეს, ${c.units.length - 1} სართულშორისი კავშირი (საჭიროებს კონსტრუქტორის თანხმობას).</div>
+        ${misaligned ? `<div class="small muted">ფართების საზღვრები სართულებზე სრულად არ ემთხვევა (ღერძები ${c.units.map(id => U[id].axes.join("–")).join(" / ")}).</div>` : ""}</div>`; }
+  else { s += `<div class="card offer" style="gap:5px;padding:12px 14px;max-width:420px">${offerHead(c)}${zoomPlan(U[c.units[0]].floor, c.units, 5)}
+    ${conceptForCombo(c.id) ? (cc => `<div class="why" style="font-size:11.5px;padding:5px 9px">კონცეფცია: <b>${fmt(cc.m2)} მ² · ${cc.seats} ადგილი</b> · <a class="noprint" style="color:var(--red);font-weight:700" href="#${cc.anchor}">იხილეთ კონცეფცია →</a></div>`)(conceptForCombo(c.id)) : ""}</div>`; }
+  const ids = c.type === "stack" ? c.units.slice().sort((x, y) => U[y].floor - U[x].floor) : axOrder(c.units);
+  s += `<div class="halfl">სამშენებლო ნახაზები · ${PLNOTE} · ${PLDATE}</div>${c.type === "stack" ? `<div class="g3">${ids.map(id => drawing(id, { cap: "short", h: 172 })).join("")}</div>` : drawRow(ids, c.type === "floor" ? 150 : 172)}`;
+  return s;
+}
+
 /* ---------- B. COMMERCIAL ---------- */
 const usedProfiles = Object.keys(P);
 H += page(`${ph("B · კომერციული სართული ±0.00", "19 ფართი · " + fmt(M.commercial_m2) + " მ²", "დააჭირეთ ფართს — გაიხსნება მისი გვერდი<br><span style='display:inline-block;margin-top:6px'>" + viewToggle + "</span>")}
@@ -1314,7 +1425,7 @@ function combosOf(id){ return DATA.combos.commercial.filter(c => c.units.include
 for (const u of comm){
   const up = unitPlanSVG(u), main = u.profiles[0], fr = frontage(u), core = CORE[u.core];
   const cb = combosOf(u.id);
-  H += page(`<div class="ph"><div><div class="kick">B · კომერციული ფართი · ±0.00 · ღერძები ${u.axes[0]}–${u.axes[1]}</div>
+  const old = `<div class="ph"><div><div class="kick">B · კომერციული ფართი · ±0.00 · ღერძები ${u.axes[0]}–${u.axes[1]}</div>
       <h2 style="display:flex;align-items:center;gap:14px"><span style="font-size:40px;font-weight:800">${u.id}</span>${u.profiles.map((p, i) => chip(p, i === 0)).join("")}${u.verify ? '<span class="warn">გადასამოწმებელი</span>' : ""}</h2></div>
       <div class="big">${fmt(u.m2)}<small>მ²</small></div></div>
     ${miniPlan(1, [u.id])}
@@ -1343,7 +1454,11 @@ for (const u of comm){
         <div class="g2" style="gap:10px">${slot(`images/${u.id}_analog.jpg`, main, "ანალოგი")}${slot(`images/${u.id}_montage.jpg`, "facade", "ფოტომონტაჟი", u.id)}</div>
         <div class="small muted" style="font-size:11px;line-height:1.35">${P[main].analog}</div>
       </div>
-    </div>`, { id: "u-" + u.id, sec: "commercial", foot: "კომერციული · " + u.id, cls: "show-fit" });
+    </div>`;
+  H += page(uLayout({ code: u.id, level: "±0.00", m2: u.m2, ids: [u.id], draw: unitDraw(u.id),
+    figs: [["ფართი", fmt(u.m2) + " მ²"], ["ვიტრინა", fmt(fr, 1) + " მ"], ["ტერასა", u.terrace ? fmt(u.terrace.m2) + " მ²" : "—"], ["პროფილი", P[main].short]],
+    renders: rendersFor([u.id], null), gal: "u-" + u.id, details: old }),
+    { id: "u-" + u.id, sec: "commercial", foot: "კომერციული · " + u.id, cls: "upage flow show-fit" });
 }
 
 /* commercial combinations */
@@ -1352,13 +1467,23 @@ function zoomPlan(floor, ids, pad, noAxes){
   return planSVG(floor, { hl: ids, vx0: Math.min(...all.map(r => r.x)) - (pad || 9), vx1: Math.max(...all.map(r => r.x + r.w)) + (pad || 9), axes: !noAxes, vy0: noAxes ? -.6 : undefined, vy1: noAxes ? 13.2 : undefined, rows: false, m2: false, cls: "zoom" });
 }
 H += page(`${ph("B · კომბინაციები", "მეზობელი ფართების გაერთიანება", "მხოლოდ კედლით გაყოფილი ფართები")}
-  <div class="g4">${DATA.combos.commercial.map(c => `<div class="card offer" style="gap:6px;padding:12px 14px">
-    <div class="units">${c.units.map(unitLink).join("")}</div>
-    <h3 style="font-size:14.5px;min-height:36px">${c.name}</h3>
-    <div style="display:flex;align-items:baseline;justify-content:space-between"><div class="area">${fmt(sum(c.units))}<small> მ²</small></div><span class="small muted">ვიტრინა <b style="color:var(--ink)">${fmt(c.units.reduce((s, id) => s + frontage(U[id]), 0), 1)} მ</b></span></div>
-    ${zoomPlan(1, c.units, 4, true)}
-    <div><span class="chip" style="--c:${P[c.use].color}">${P[c.use].short}</span></div></div>`).join("")}</div>
+  <div class="clist">${DATA.combos.commercial.map(c => `<a href="#o-${c.id}"><b>${c.id}</b> · ${c.name} · ${c.units.join(" + ")} · <b>${fmt(sum(c.units))} მ²</b></a>`).join("")}</div>
   <div class="small muted" style="margin-top:10px">C-2 + C-3 და C-17 + C-18 ერთმანეთისგან ბირთვით (K1 / K4) არის გაყოფილი — პირდაპირი გაერთიანება შეუძლებელია. შიდა რიგის ნებისმიერი თანმიმდევრული ფართები (C-3…C-7, C-13…C-17) ერთიანდება.</div>`, { sec: "commercial", foot: "კომერციული კომბინაციები" });
+for (const c of DATA.combos.commercial){
+  const a = sum(c.units), fr = c.units.reduce((t, id) => t + frontage(U[id]), 0);
+  const old = `<div class="card offer" style="gap:6px;padding:12px 14px;max-width:340px">
+    <div class="units">${c.units.map(unitLink).join("")}</div>
+    <h3 style="font-size:14.5px">${c.name}</h3>
+    <div style="display:flex;align-items:baseline;justify-content:space-between"><div class="area">${fmt(a)}<small> მ²</small></div><span class="small muted">ვიტრინა <b style="color:var(--ink)">${fmt(fr, 1)} მ</b></span></div>
+    ${zoomPlan(1, c.units, 4, true)}
+    <div><span class="chip" style="--c:${P[c.use].color}">${P[c.use].short}</span></div></div>
+    <div class="small">${formulaTxtC(c.units)}</div>
+    <div class="halfl">სამშენებლო ნახაზები · ${PLNOTE} · ${PLDATE}</div>${drawRow(c.units, 172)}`;
+  H += page(uLayout({ code: c.id, level: "±0.00", name: c.name, m2: a, ids: c.units, draw: comboDraw({ ...c, type: "mixed" }),
+    figs: [["ჯამური ფართი", fmt(a) + " მ²"], ["ფართები", c.units.join(" + ")], ["ვიტრინა", fmt(fr, 1) + " მ"], ["პროფილი", P[c.use].short]],
+    renders: rendersFor(c.units, null), gal: "o-" + c.id, d3: ["building", c.id], details: old }),
+    { id: "o-" + c.id, sec: "commercial", foot: "კომერციული კომბინაციები · " + c.id, cls: "upage flow" });
+}
 
 /* ---------- C. OFFICES ---------- */
 for (const f of [2, 3, 4]){
@@ -1386,7 +1511,7 @@ for (const u of offices){
   const lay = layoutSVG([u.id]), fr = rectsOf(u);
   const len = r1(Math.max(...fr.map(r => r.x + r.w)) - Math.min(...fr.map(r => r.x)));
   const stacks = DATA.combos.office.filter(c => c.units.includes(u.id));
-  H += page(`<div class="ph"><div><div class="kick">C · ოფისი · ${LV[u.floor]} · ღერძები ${u.axes[0]}–${u.axes[1]}</div>
+  const old = `<div class="ph"><div><div class="kick">C · ოფისი · ${LV[u.floor]} · ღერძები ${u.axes[0]}–${u.axes[1]}</div>
       <h2 style="display:flex;align-items:center;gap:14px"><span style="font-size:40px;font-weight:800">${u.id}</span><span class="chip lg" style="--c:#4E5E69">შავი კარკასი</span>${u.terrace ? `<span class="chip lg" style="--c:#6E8F1E">ტერასა ${u.terrace.m2} მ²</span>` : ""}${u.verify ? '<span class="warn">გადასამოწმებელი</span>' : ""}</h2></div>
       <div class="big">${fmt(u.m2)}<small>მ²</small></div></div>
     ${miniPlan(u.floor, [u.id])}
@@ -1418,7 +1543,14 @@ for (const u of offices){
         ${stacks.length ? `<div class="small"><b>შედის შეთავაზებებში:</b> ${stacks.map(c => `<a href="#o-${c.id}">${c.name}</a> (${fmt(sum(c.units))} მ²)`).join(" · ")}</div>` : ""}
       </div>
       ${slot(`images/${u.id}_montage.jpg`, "office", "ფოტომონტაჟი")}
-    </div>`, { id: "u-" + u.id, sec: "offices", foot: "ოფისები · " + u.id, cls: "show-fit" });
+    </div>`;
+  const cn = CN[u.id];
+  H += page(uLayout({ code: u.id, level: LV[u.floor], m2: u.m2, ids: [u.id], draw: unitDraw(u.id), pdf: cn && cn.pdf,
+    figs: [["ფართი", fmt(u.m2) + " მ²"], ["სამუშაო ადგილი", cn ? String(cn.seats) : "≈ " + lay.tot.desks],
+           ["შეხვედრის ოთახი", cn ? `${cn.meeting.split("+").length} (${cn.meeting} ადგ.)` : String(lay.tot.meet)],
+           ["ტერასა / ბირთვი", `${u.terrace ? u.terrace.m2 + " მ²" : "—"} · ${u.cores.join(" · ")}`]],
+    renders: rendersFor([u.id], cn), gal: "u-" + u.id, details: old }),
+    { id: "u-" + u.id, sec: "offices", foot: "ოფისები · " + u.id, cls: "upage flow show-fit" });
   if (CN[u.id]){
     H += cPlanPage(u.id, `C · ოფისი ${u.id} · ${LV[u.floor]} · სანიმუშო მოწყობა`, `${u.id} — სანიმუშო გეგმა`, `ოფისები · ${u.id} · სანიმუშო მოწყობა`, "offices");
     H += cTablePage(u.id, `C · ოფისი ${u.id} · სანიმუშო მოწყობა`, `${u.id} — ზონები და ვიზუალიზაციები`, `ოფისები · ${u.id} · ზონები`, "offices");
@@ -1443,53 +1575,16 @@ function offerHead(c, more, compact, noFormula){ const a = sum(c.units), cc = co
 const axOrder = ids => ids.slice().sort((a, b) => Math.min(...rectsOf(U[a]).map(r => r.x)) - Math.min(...rectsOf(U[b]).map(r => r.x)));
 const layKv = t => `<span>სამუშაო ადგილი <b>${t.desks}</b></span><span>შეხვედრა <b>${t.meet}</b></span><span>კაბინეტი <b>${t.mgr}</b></span><span>სამზარეულო <b>${t.kit}</b></span>`;
 
-H += page(`${ph("C · კომბინაციები · 1", "ბლოკის სრული სართული", "K1–K2 (O-2 / O-8 / O-13) და K3–K4 (O-5 / O-11 / O-16)<br>უკვე ერთი ფართია — აქ: ბლოკი K2–K3, ცენტრალურ ლობთან · " + HALLNOTE + "<br>" + ROOMLEG)}
-  <div style="display:flex;flex-direction:column;gap:10px;flex:1">${OC.filter(c => c.type === "block").map(c => { const l = layoutSVG(c.units, { pad: 9 });
-    return `<div class="card offer" id="o-${c.id}" style="gap:4px;padding:10px 16px">${offerHead(c, layKv(l.tot), true)}<div style="height:100px;display:flex;justify-content:center">${l.svg.replace('class="plan ', 'style="height:100%;width:auto;max-width:100%" class="plan ')}</div></div>`; }).join("")}
-  </div>`,
-  { sec: "combos", id: "combos", foot: "კომბინაციები · ბლოკი" });
-
-H += page(`${ph("C · კომბინაციები · 1 · ნახაზები", "ბლოკის სრული სართული — სამშენებლო ნახაზები", PLNOTE + " · " + PLDATE)}
-  <div style="display:flex;flex-direction:column;gap:12px;flex:1">${OC.filter(c => c.type === "block").map(c => `<div><div class="halfl" style="margin-top:0"><b style="color:var(--ink)">${c.id}</b> · ${c.name} · ${fmt(sum(c.units))} მ²</div>${drawRow(axOrder(c.units), 172)}</div>`).join("")}</div>`,
-  { sec: "combos", foot: "კომბინაციები · ბლოკი · ნახაზები" });
-
-H += page(`${ph("C · კომბინაციები · 2", "სრული სართული — სათაო ოფისი", "ერთი მოიჯარე, 4 ბირთვი + ცენტრალური ლობი · " + HALLNOTE + "<br>" + ROOMLEG)}
-  <div style="display:flex;flex-direction:column;gap:10px;flex:1">${OC.filter(c => c.type === "floor").map(c => { const l = layoutSVG(c.units, { full: true });
-    return `<div class="card offer" id="o-${c.id}" style="gap:3px;padding:8px 14px">${offerHead(c, layKv(l.tot), true)}${l.svg}</div>`; }).join("")}
-  </div>`,
-  { sec: "combos", foot: "კომბინაციები · სართული" });
-
-H += page(`${ph("C · კომბინაციები · 2 · ნახაზები", "სრული სართული — სამშენებლო ნახაზები", PLNOTE + " · " + PLDATE)}
-  <div style="display:flex;flex-direction:column;gap:12px;flex:1">${OC.filter(c => c.type === "floor").map(c => `<div><div class="halfl" style="margin-top:0"><b style="color:var(--ink)">${c.id}</b> · ${c.name} · ${fmt(sum(c.units))} მ²</div>${drawRow(axOrder(c.units), 168)}</div>`).join("")}</div>`,
-  { sec: "combos", foot: "კომბინაციები · სართული · ნახაზები" });
-
-const stacks = OC.filter(c => c.type === "stack");
-for (let i = 0; i < stacks.length; i += 3){
-  H += page(`${ph("C · კომბინაციები · 3", "ვერტიკალური ბლოკი" + (i ? " (გაგრძელება)" : ""), "ერთი ბირთვის ფართები 2–3–4 სართულზე · შიდა კიბის ვარიანტით")}
-    <div class="g3" style="flex:1">${stacks.slice(i, i + 3).map(c => { const misaligned = new Set(c.units.map(id => U[id].axes.join("-"))).size > 1;
-      return `<div class="card offer" id="o-${c.id}">${offerHead(c, "", false, true)}
-        <div style="flex:1;display:flex;align-items:center">${stackSVG(c.units, c.core)}</div>
-        <table><tbody>${c.units.map(id => `<tr><td>${unitLink(id)}</td><td>${LV[U[id].floor]}</td><td class="num">${fmt(U[id].m2)} მ²</td></tr>`).join("")}</tbody>
-          <tfoot><tr class="sumrow"><td>ჯამი</td><td></td><td class="num">${fmt(sum(c.units))} მ²</td></tr></tfoot></table>
-        <div class="fsum">${terrTxt(c.units) ? terrTxt(c.units) + " · " : ""}<span class="muted">საერთო ჰოლები ჯამში არ შედის</span></div>
-        <div class="small"><b>შიდა კიბე:</b> ფილის ღიობი ~3 × 6 მ ${c.core}-ის მხარეს, ${c.units.length - 1} სართულშორისი კავშირი (საჭიროებს კონსტრუქტორის თანხმობას).</div>
-        ${misaligned ? `<div class="small muted">ფართების საზღვრები სართულებზე სრულად არ ემთხვევა (ღერძები ${c.units.map(id => U[id].axes.join("–")).join(" / ")}).</div>` : ""}</div>`; }).join("")}</div>`,
-    { sec: "combos", foot: "კომბინაციები · ვერტიკალი" });
-  H += page(`${ph("C · კომბინაციები · 3 · ნახაზები", "ვერტიკალური ბლოკი — ნახაზები" + (i ? " (გაგრძელება)" : ""), "ზედა სართული — პირველი · " + PLNOTE + " · " + PLDATE)}
-    <div class="g3" style="flex:1;min-height:0">${stacks.slice(i, i + 3).map(c => { const ids = c.units.slice().sort((a, b) => U[b].floor - U[a].floor);
-      return `<div style="display:flex;flex-direction:column;gap:8px;min-width:0"><div class="halfl" style="margin-top:0"><b style="color:var(--ink)">${c.id}</b> · ${c.name} · ${fmt(sum(c.units))} მ²</div>${ids.map(id => drawing(id, { cap: "short", h: ids.length > 2 ? 172 : 230 })).join("")}</div>`; }).join("")}</div>`,
-    { sec: "combos", foot: "კომბინაციები · ვერტიკალი · ნახაზები" });
+H += page(`${ph("C · კომბინაციები", "კომბინირებული შეთავაზებები", "ერთი მოიჯარე — ბლოკი, სართული, ვერტიკალი, შერეული · " + HALLNOTE)}
+  <div class="g2" style="gap:14px 28px">${["block", "floor", "stack", "mixed"].map(t => `<div><div class="halfl">${OCT[t]}</div><div class="clist">${OC.filter(c => c.type === t).map(c => `<a href="#o-${c.id}"><b>${c.id}</b> · ${c.name} · <b>${fmt(sum(c.units))} მ²</b></a>`).join("")}</div></div>`).join("")}</div>`,
+  { sec: "combos", id: "combos", foot: "კომბინაციები" });
+for (const c of OC){
+  const cc = conceptForCombo(c.id), a = sum(c.units);
+  H += page(uLayout({ code: c.id, level: floorsOf(c), name: c.name, m2: a, ids: c.units, draw: comboDraw(c), pdf: cc && cc.pdf,
+    figs: [["ჯამური ფართი", fmt(a) + " მ²"], ["ფართები", c.units.join(" + ")], ["თანამშრომელი", cc ? String(cc.seats) : head(a)], ["ბირთვი", coresOf(c)]],
+    renders: rendersFor(c.units, cc), gal: "o-" + c.id, d3: [c.type === "stack" || c.type === "block" ? "combo" : "building", c.id], details: comboOld(c) }),
+    { id: "o-" + c.id, sec: "combos", foot: "კომბინაციები · " + c.id, cls: "upage flow" });
 }
-
-H += page(`${ph("C · კომბინაციები · 4", "შერეული: დიდი + მცირე ერთ ბირთვზე", "საერთო ლიფტის ჰოლი, გაფართოების რეზერვი<br>" + HALLNOTE)}
-  <div class="g3" style="grid-template-columns:repeat(3,1fr);flex:1;grid-auto-rows:min-content">${OC.filter(c => c.type === "mixed").map(c => `<div class="card offer" id="o-${c.id}" style="gap:5px;padding:12px 14px">${offerHead(c)}${zoomPlan(U[c.units[0]].floor, c.units, 5)}
-    ${conceptForCombo(c.id) ? (cc => `<div class="why" style="font-size:11.5px;padding:5px 9px">კონცეფცია: <b>${fmt(cc.m2)} მ² · ${cc.seats} ადგილი</b> · <a class="noprint" style="color:var(--red);font-weight:700" href="#${cc.anchor}">იხილეთ კონცეფცია →</a></div>`)(conceptForCombo(c.id)) : ""}</div>`).join("")}
-    <div class="card" style="background:var(--mesh);border:0"><h3>რატომ შერეული?</h3><div class="small">დიდი ფართი — ძირითადი ოფისი; მცირე — მომავალი ზრდის რეზერვი, ტრენინგ-ცენტრი ან ქვეიჯარა. ორივე ერთი ბირთვის ლიფტის ჰოლიდან იხსნება, ამიტომ შესაძლებელია საერთო რესეფშენი და ერთიანი წვდომის კონტროლი.</div></div></div>`,
-  { sec: "combos", foot: "კომბინაციები · შერეული" });
-
-H += page(`${ph("C · კომბინაციები · 4 · ნახაზები", "შერეული — სამშენებლო ნახაზები", PLNOTE + " · " + PLDATE)}
-  <div class="g2" style="gap:14px 18px;flex:1;grid-auto-rows:min-content">${OC.filter(c => c.type === "mixed").map(c => `<div><div class="halfl" style="margin-top:0"><b style="color:var(--ink)">${c.id}</b> · ${c.name} · ${fmt(sum(c.units))} მ²</div>${drawRow(axOrder(c.units), 172)}</div>`).join("")}</div>`,
-  { sec: "combos", foot: "კომბინაციები · შერეული · ნახაზები" });
 
 { const c = CN["O-7+O-8"];
   H += page(`${ph("C · კომბინაციები · " + c.combo + " · კონცეფცია", "O-7 + O-8 — ერთიანი ოფისის კონცეფცია", "+8.00 · ბირთვი K1 · ერთი მოიჯარე<br><a class='btn ghost noprint' style='margin-top:6px' href='#o-" + c.combo + "'>← შეთავაზება " + c.combo + "</a>")}
@@ -1553,12 +1648,27 @@ pf.addEventListener("click", ev => { const b = ev.target.closest("button"); if (
   const p = b.dataset.p;
   document.querySelectorAll("#gplan .u, #gplan .ul").forEach(g => g.classList.toggle("dim", !!p && !g.dataset.p.split(" ").includes(p))); });
 
-/* fit-out layer toggle per page ("განლაგება"); default on only on unit pages */
+/* fit-out layer toggle per page ("განლაგება"); default on only on unit pages — inside "დეტალები" on unit/combination pages */
 document.querySelectorAll(".page").forEach(pg => {
   if (!pg.querySelector(".fit")) return;
   const b = document.createElement("button"); b.type = "button"; b.className = "fittog noprint"; b.textContent = "განლაგება";
-  b.title = "მოწყობის სქემა (ავეჯი) — ჩვენება / დამალვა"; b.setAttribute("aria-pressed", String(pg.classList.contains("show-fit"))); pg.appendChild(b);
+  b.title = "მოწყობის სქემა (ავეჯი) — ჩვენება / დამალვა"; b.setAttribute("aria-pressed", String(pg.classList.contains("show-fit")));
+  const det = pg.querySelector("details.det .detc"); if (det && det.querySelector(".fit")) det.prepend(b); else pg.appendChild(b);
 });
+/* drawing switch (სამშენებლო / სანიმუშო), 3D button, single-page offer export */
+document.addEventListener("click", ev => {
+  if (!ev.target.closest) return;
+  const sw = ev.target.closest(".dsw button");
+  if (sw){ const box = sw.closest(".ub2").querySelector(".dbox"), c = sw.dataset.d === "c"; box.classList.toggle("show-c", c);
+    sw.parentNode.querySelectorAll("button").forEach(x => { x.classList.toggle("on", x === sw); x.setAttribute("aria-pressed", String(x === sw)); }); return; }
+  const d3b = ev.target.closest(".ub.d3"); if (d3b){ open3d(d3b.dataset.k, d3b.dataset.c, d3b); return; }
+  const of = ev.target.closest(".ub.offer");
+  if (of){ const pg = of.closest(".page"); document.body.classList.add("print1"); pg.classList.add("print-me"); document.documentElement.style.setProperty("--z", 1); window.print(); }
+});
+addEventListener("afterprint", () => { document.body.classList.remove("print1"); document.querySelectorAll(".print-me").forEach(p => p.classList.remove("print-me")); });
+/* open a closed "დეტალები" when a link points inside it */
+function openDetFor(h){ const t = h && document.getElementById(h.slice(1)); const d = t && t.closest("details"); if (d) d.open = true; }
+addEventListener("hashchange", () => openDetFor(location.hash)); openDetFor(location.hash);
 document.addEventListener("click", ev => { const b = ev.target.closest && ev.target.closest(".fittog"); if (!b) return;
   const on = b.closest(".page").classList.toggle("show-fit"); b.setAttribute("aria-pressed", String(on)); });
 
@@ -1641,6 +1751,7 @@ function openLb(trigger){
   const isImg = trigger.tagName.toLowerCase() === "img", sec = (trigger.closest(".page") || {}).dataset ? trigger.closest(".page").dataset.sec : "";
   const all = isImg ? [...document.querySelectorAll(IMGSEL)] : [...document.querySelectorAll(PLANSEL)];
   list = all.filter(n => !n.closest("#lb") && (n.closest(".page") || {}).dataset && n.closest(".page").dataset.sec === sec);
+  if (isImg && trigger.dataset.gal) list = [...document.querySelectorAll(`img[data-gal="${trigger.dataset.gal}"]`)].filter(n => n.isConnected);
   if (!list.includes(trigger)) list = [trigger];
   lastFocus = isImg ? trigger : (trigger._zbtn || document.activeElement);
   docOverflow = document.documentElement.style.overflow; document.documentElement.style.overflow = "hidden";
@@ -2180,7 +2291,7 @@ if (window.ResizeObserver) new ResizeObserver(() => { if (!v3.hidden) resize3();
 /* ---- triggers: "3D ხედი" on stack + block cards, clickable isometric SVG, whole-building button ---- */
 OC.filter(c => c.type === "stack" || c.type === "block").forEach(c => {
   const card = document.getElementById("o-" + c.id); if (!card) return;
-  const svg = card.querySelector(c.type === "stack" ? "svg.axo" : "svg.plan");
+  const svg = card.querySelector(c.type === "stack" ? "details svg.axo" : "details svg.plan");
   const host = (svg && svg.closest(".zhost")) || card; if (host === card) card.style.position = "relative";
   const b = document.createElement("button"); b.type = "button"; b.className = "btn3d noprint"; b.textContent = "3D ხედი"; b.dataset.combo = c.id;
   b.setAttribute("aria-label", `3D ხედი — ${c.id} ${c.name}`); host.appendChild(b);
