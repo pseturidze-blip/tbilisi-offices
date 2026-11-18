@@ -1,0 +1,698 @@
+[
+ {
+  "file": "images/Daylit Tbilisi Office Reception.png",
+  "kind": "interior",
+  "type": "office_reception",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა",
+  "same_as": "images/concepts/O-7-8_reception.jpg"
+ },
+ {
+  "file": "images/Daylit office with oak workstations-6.png",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა",
+  "same_as": "images/concepts/O-8_open.jpg"
+ },
+ {
+  "file": "images/Eastward sightline through concrete workspaces.png",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "ღია ბეტონის ჭერი, ხის აკუსტიკური ზოლები, მუხა + ტერაკოტა, ხედი თბილისზე"
+ },
+ {
+  "file": "images/Modern glass-walled meeting room-2.png",
+  "kind": "interior",
+  "type": "office_meeting",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა"
+ },
+ {
+  "file": "images/Modern office reception and workspaces-3.png",
+  "kind": "interior",
+  "type": "office_reception",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა",
+  "same_as": "images/concepts/O-8_reception.jpg"
+ },
+ {
+  "file": "images/O-10_montage.jpg",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "მუქი (შავი) ჭერი, ხის ჩანართები, ნაცრისფერი/ხის პალიტრა"
+ },
+ {
+  "file": "images/O-11_montage.jpg",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "მუქი (შავი) ჭერი, ხის ჩანართები, ნაცრისფერი/ხის პალიტრა"
+ },
+ {
+  "file": "images/O-12_montage.jpg",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა",
+  "same_as": "images/concepts/O-7_open.jpg"
+ },
+ {
+  "file": "images/O-13_montage.jpg",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "მუქი (შავი) ჭერი, ხის ჩანართები, ნაცრისფერი/ხის პალიტრა"
+ },
+ {
+  "file": "images/O-14_montage.jpg",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "მუქი (შავი) ჭერი, ხის ჩანართები, ნაცრისფერი/ხის პალიტრა"
+ },
+ {
+  "file": "images/O-7_montage.jpg",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა",
+  "same_as": "images/concepts/O-7_open.jpg"
+ },
+ {
+  "file": "images/O-8_montage.jpg",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა",
+  "same_as": "images/concepts/O-8_open.jpg"
+ },
+ {
+  "file": "images/Oak Kitchen Opens to Office.png",
+  "kind": "interior",
+  "type": "office_kitchen_lounge",
+  "style": "ღია ბეტონის ჭერი, ხის აკუსტიკური ზოლები, მუხა + ტერაკოტა, ხედი თბილისზე"
+ },
+ {
+  "file": "images/Photorealistic Office With Exposed Downstand Beams.png",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "ღია ბეტონის ჭერი, ხის აკუსტიკური ზოლები, მუხა + ტერაკოტა, ხედი თბილისზე"
+ },
+ {
+  "file": "images/Sunlit O8 Office Kitchen Lounge.png",
+  "kind": "interior",
+  "type": "office_kitchen_lounge",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა",
+  "same_as": "images/concepts/O-7-8_kitchen.jpg"
+ },
+ {
+  "file": "images/Sunlit Office Kitchen Lounge-4.png",
+  "kind": "interior",
+  "type": "office_kitchen_lounge",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა",
+  "same_as": "images/concepts/O-8_kitchen.jpg"
+ },
+ {
+  "file": "images/Sunlit Tbilisi office with open workstations-1.png",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა"
+ },
+ {
+  "file": "images/Sunlit concrete kitchen with terracotta chairs.png",
+  "kind": "interior",
+  "type": "office_kitchen_lounge",
+  "style": "ღია ბეტონის ჭერი, ხის აკუსტიკური ზოლები, მუხა + ტერაკოტა, ხედი თბილისზე"
+ },
+ {
+  "file": "images/Sunlit oak meeting room with Tbilisi views.png",
+  "kind": "interior",
+  "type": "office_meeting",
+  "style": "ღია ბეტონის ჭერი, ხის აკუსტიკური ზოლები, მუხა + ტერაკოტა, ხედი თბილისზე"
+ },
+ {
+  "file": "images/Sunlit oak reception workspace.png",
+  "kind": "interior",
+  "type": "office_reception",
+  "style": "ღია ბეტონის ჭერი, ხის აკუსტიკური ზოლები, მუხა + ტერაკოტა, ხედი თბილისზე"
+ },
+ {
+  "file": "images/Twelve-seat oak meeting room-5.png",
+  "kind": "interior",
+  "type": "office_meeting",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა",
+  "same_as": "images/concepts/O-8_meeting.jpg"
+ },
+ {
+  "file": "images/Warm navy oak office with terracotta accents.png",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "ღია ბეტონის ჭერი, ხის აკუსტიკური ზოლები, მუხა + ტერაკოტა, ხედი თბილისზე"
+ },
+ {
+  "file": "images/Warm oak kitchen by glass facade.png",
+  "kind": "interior",
+  "type": "office_kitchen_lounge",
+  "style": "ღია ბეტონის ჭერი, ხის აკუსტიკური ზოლები, მუხა + ტერაკოტა, ხედი თბილისზე",
+  "same_as": "images/Oak Kitchen Opens to Office.png"
+ },
+ {
+  "file": "images/Warm oak reception and glass meeting room.png",
+  "kind": "interior",
+  "type": "office_reception",
+  "style": "ღია ბეტონის ჭერი, ხის აკუსტიკური ზოლები, მუხა + ტერაკოტა, ხედი თბილისზე"
+ },
+ {
+  "file": "images/Wide conference room with twenty chairs.png",
+  "kind": "interior",
+  "type": "office_meeting",
+  "style": "ღია ბეტონის ჭერი, ხის აკუსტიკური ზოლები, მუხა + ტერაკოტა, ხედი თბილისზე"
+ },
+ {
+  "file": "images/_originals/B 2.jfif",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "მუქი (შავი) ჭერი, ხის ჩანართები, ნაცრისფერი/ხის პალიტრა",
+  "usable": false,
+  "note": "ეკრანის სქრინშოტი Windows-ის taskbar-ით — არ გამოიყენება · _originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/B.jfif",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "მუქი (შავი) ჭერი, ხის ჩანართები, ნაცრისფერი/ხის პალიტრა",
+  "usable": false,
+  "note": "ეკრანის სქრინშოტი Windows-ის taskbar-ით — არ გამოიყენება · _originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/B4.jfif",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "მუქი (შავი) ჭერი, ხის ჩანართები, ნაცრისფერი/ხის პალიტრა",
+  "usable": false,
+  "note": "ეკრანის სქრინშოტი Windows-ის taskbar-ით — არ გამოიყენება · _originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/B5.jfif",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "მუქი (შავი) ჭერი, ხის ჩანართები, ნაცრისფერი/ხის პალიტრა",
+  "usable": false,
+  "note": "ეკრანის სქრინშოტი Windows-ის taskbar-ით — არ გამოიყენება · _originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/B6.jfif",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "მუქი (შავი) ჭერი, ხის ჩანართები, ნაცრისფერი/ხის პალიტრა",
+  "usable": false,
+  "note": "ეკრანის სქრინშოტი Windows-ის taskbar-ით — არ გამოიყენება · _originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/C-10_montage.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/C-11_montage.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/C-1_montage.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/C-2_montage.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/C-9_montage.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/Enscape_2026-03-04-12-13-24.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/Enscape_2026-03-04-15-42-12.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/Enscape_2026-03-04-15-43-27.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/Enscape_2026-03-04-18-49-34.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/Enscape_2026-03-04-18-53-21.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/Enscape_2026-10-29-15-00-00.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/Enscape_2026-10-29-15-01-56.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/Enscape_2026-10-29-15-09-55.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/Enscape_2026-10-29-15-13-17.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/Enscape_2026-10-30-13-45-52.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/Enscape_2026-10-30-15-20-00.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/Enscape_2026-11-03-14-47-18.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/Enscape_2026-11-13-14-12-02.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/Enscape_2026-11-13-15-23-57.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/Enscape_2026-11-13-15-34-00.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/G-01.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/G-02.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/G-04.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/G-05.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/G-06.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/G-07.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/G-08.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/G-09.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/G-10.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/G01.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/Glass-walled oak meeting room.png",
+  "kind": "interior",
+  "type": "office_meeting",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა",
+  "same_as": "images/concepts/O-7_meeting.jpg",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/O-1_montage.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/O-4_montage.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/Sunlit Oak Kitchen Lounge.png",
+  "kind": "interior",
+  "type": "office_kitchen_lounge",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა",
+  "same_as": "images/concepts/O-7_kitchen.jpg",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/Sunlit modern office with oak desks.png",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა",
+  "same_as": "images/concepts/O-7_open.jpg",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/Sunlit office reception with oak desk.png",
+  "kind": "interior",
+  "type": "office_reception",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა",
+  "same_as": "images/concepts/O-7_reception.jpg",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/_replaced_catalog_copies/O-7_montage.before-concept.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/_replaced_catalog_copies/render_corner_day.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/_replaced_catalog_copies/render_courtyard.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/_replaced_catalog_copies/render_front_day.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/facade_mesh.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/facade_night_triangle.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/render_dusk.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/render_front_day.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/render_lobby.jpg",
+  "kind": "exterior",
+  "view": "შესასვლელი ქუჩიდან (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/render_night.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/_originals/render_panorama.jpg",
+  "kind": "exterior",
+  "view": "ფასადი / ქუჩა / ეზო (ექსტერიერი)",
+  "note": "_originals (git-ში არ არის)"
+ },
+ {
+  "file": "images/concepts/O-10 office cutaway with north terrace.png",
+  "kind": "interior",
+  "type": "office_aerial_dollhouse",
+  "style": "აქსონომეტრიული ჭრილი (dollhouse), ღია ნაცრისფერი ფონი"
+ },
+ {
+  "file": "images/concepts/O-7-8_aerial.jpg",
+  "kind": "interior",
+  "type": "office_aerial_dollhouse",
+  "style": "აქსონომეტრიული ჭრილი (dollhouse), ღია ნაცრისფერი ფონი"
+ },
+ {
+  "file": "images/concepts/O-7-8_conference.jpg",
+  "kind": "interior",
+  "type": "office_meeting",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა"
+ },
+ {
+  "file": "images/concepts/O-7-8_kitchen.jpg",
+  "kind": "interior",
+  "type": "office_kitchen_lounge",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა"
+ },
+ {
+  "file": "images/concepts/O-7-8_open.jpg",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა"
+ },
+ {
+  "file": "images/concepts/O-7-8_reception.jpg",
+  "kind": "interior",
+  "type": "office_reception",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა"
+ },
+ {
+  "file": "images/concepts/O-7_kitchen.jpg",
+  "kind": "interior",
+  "type": "office_kitchen_lounge",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა"
+ },
+ {
+  "file": "images/concepts/O-7_meeting.jpg",
+  "kind": "interior",
+  "type": "office_meeting",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა"
+ },
+ {
+  "file": "images/concepts/O-7_open.jpg",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა"
+ },
+ {
+  "file": "images/concepts/O-7_reception.jpg",
+  "kind": "interior",
+  "type": "office_reception",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა"
+ },
+ {
+  "file": "images/concepts/O-8_kitchen.jpg",
+  "kind": "interior",
+  "type": "office_kitchen_lounge",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა"
+ },
+ {
+  "file": "images/concepts/O-8_meeting.jpg",
+  "kind": "interior",
+  "type": "office_meeting",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა"
+ },
+ {
+  "file": "images/concepts/O-8_open.jpg",
+  "kind": "interior",
+  "type": "office_open",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა"
+ },
+ {
+  "file": "images/concepts/O-8_reception.jpg",
+  "kind": "interior",
+  "type": "office_reception",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა"
+ },
+ {
+  "file": "images/concepts/O-9_O-10 office dollhouse cutaway.png",
+  "kind": "interior",
+  "type": "office_aerial_dollhouse",
+  "style": "აქსონომეტრიული ჭრილი (dollhouse), ღია ნაცრისფერი ფონი"
+ },
+ {
+  "file": "images/concepts/Photorealistic open-plan office dollhouse cutaway.png",
+  "kind": "interior",
+  "type": "office_aerial_dollhouse",
+  "style": "აქსონომეტრიული ჭრილი (dollhouse), ღია ნაცრისფერი ფონი"
+ },
+ {
+  "file": "images/concepts/Tbilisi O7+O8 office cutaway.png",
+  "kind": "interior",
+  "type": "office_aerial_dollhouse",
+  "style": "აქსონომეტრიული ჭრილი (dollhouse), ღია ნაცრისფერი ფონი",
+  "same_as": "images/concepts/O-7-8_aerial.jpg"
+ },
+ {
+  "file": "images/concepts/Warm Oak Office Dollhouse Cutaway.png",
+  "kind": "interior",
+  "type": "office_aerial_dollhouse",
+  "style": "აქსონომეტრიული ჭრილი (dollhouse), ღია ნაცრისფერი ფონი"
+ },
+ {
+  "file": "images/interior_kitchen.jpg",
+  "kind": "interior",
+  "type": "office_kitchen_lounge",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა",
+  "same_as": "images/concepts/O-7_kitchen.jpg"
+ },
+ {
+  "file": "images/interior_meeting.jpg",
+  "kind": "interior",
+  "type": "office_meeting",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა",
+  "same_as": "images/concepts/O-7_meeting.jpg"
+ },
+ {
+  "file": "images/interior_reception.jpg",
+  "kind": "interior",
+  "type": "office_reception",
+  "style": "ღია თეთრი ჭერი (ღია კომუნიკაციები), სალბისფერი აკუსტიკური ზოლები, ხე/მუხა, ნაცრისფერი ხალიჩა",
+  "same_as": "images/concepts/O-7_reception.jpg"
+ },
+ {
+  "file": "images/Daylit office with oak workstations.png",
+  "byte_identical_to": "images/Daylit office with oak workstations-6.png"
+ },
+ {
+  "file": "images/Modern glass-walled meeting room.png",
+  "byte_identical_to": "images/Modern glass-walled meeting room-2.png"
+ },
+ {
+  "file": "images/Modern office reception and workspaces.png",
+  "byte_identical_to": "images/Modern office reception and workspaces-3.png"
+ },
+ {
+  "file": "images/O-15_montage.jpg",
+  "byte_identical_to": "images/O-10_montage.jpg"
+ },
+ {
+  "file": "images/O-16_montage.jpg",
+  "byte_identical_to": "images/O-11_montage.jpg"
+ },
+ {
+  "file": "images/O-17_montage.jpg",
+  "byte_identical_to": "images/O-12_montage.jpg"
+ },
+ {
+  "file": "images/O-2_montage.jpg",
+  "byte_identical_to": "images/O-13_montage.jpg"
+ },
+ {
+  "file": "images/O-3_montage.jpg",
+  "byte_identical_to": "images/O-14_montage.jpg"
+ },
+ {
+  "file": "images/O-5_montage.jpg",
+  "byte_identical_to": "images/O-11_montage.jpg"
+ },
+ {
+  "file": "images/O-6_montage.jpg",
+  "byte_identical_to": "images/O-10_montage.jpg"
+ },
+ {
+  "file": "images/O-9_montage.jpg",
+  "byte_identical_to": "images/O-14_montage.jpg"
+ },
+ {
+  "file": "images/Twelve-seat oak meeting room.png",
+  "byte_identical_to": "images/Twelve-seat oak meeting room-5.png"
+ },
+ {
+  "file": "images/_originals/B3.jfif",
+  "byte_identical_to": "images/_originals/B 2.jfif"
+ },
+ {
+  "file": "images/_originals/C-12_montage.jpg",
+  "byte_identical_to": "images/_originals/C-11_montage.jpg"
+ },
+ {
+  "file": "images/_originals/_replaced_catalog_copies/O-8_montage.before-concept.jpg",
+  "byte_identical_to": "images/O-13_montage.jpg"
+ },
+ {
+  "file": "images/_originals/facade_terrace.jpg",
+  "byte_identical_to": "images/_originals/O-4_montage.jpg"
+ },
+ {
+  "file": "images/_originals/render_corner_day.jpg",
+  "byte_identical_to": "images/_originals/C-1_montage.jpg"
+ },
+ {
+  "file": "images/_originals/render_courtyard.jpg",
+  "byte_identical_to": "images/_originals/C-11_montage.jpg"
+ },
+ {
+  "file": "images/interior_open.jpg",
+  "byte_identical_to": "images/O-12_montage.jpg"
+ }
+]

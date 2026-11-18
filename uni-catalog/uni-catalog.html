@@ -216,6 +216,438 @@ const DATA = {
   },
   /* სანიმუშო მოწყობის კონცეფციები (University_Office_Three_Options_With_Renders.pdf).
      ციფრები — კონცეფციიდან; ზონები: [დასახელება, დაახლ. მ², მუდმივი ადგილი] */
+  /* რენდერის ბლოკი — მხოლოდ ინტერიერი. თითო გვერდზე: პირველი = მთავარი სურათი, დანარჩენი 4 = მინიატურები.
+     origin: "mine" (ჩემი) · "similar" (მსგავსი ფართის მაგალითი) · "analog" (საილუსტრაციო ანალოგი, images/analog/, წყარო — _sources.json) */
+  renders: {
+    "C-1": [
+      { src: "images/analog/cafe_05.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/cafe_06.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/cafe_07.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/cafe_08.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/restaurant_01.jpg", type: "cafe_restaurant", origin: "analog" }
+    ],
+    "C-2": [
+      { src: "images/analog/salon_03.jpg", type: "salon", origin: "analog" },
+      { src: "images/analog/salon_04.jpg", type: "salon", origin: "analog" },
+      { src: "images/analog/salon_05.jpg", type: "salon", origin: "analog" },
+      { src: "images/analog/salon_06.jpg", type: "salon", origin: "analog" },
+      { src: "images/analog/salon_01.jpg", type: "salon", origin: "analog" }
+    ],
+    "C-3": [
+      { src: "images/analog/clinic_01.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_02.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_03.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_04.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_05.jpg", type: "health", origin: "analog" }
+    ],
+    "C-4": [
+      { src: "images/analog/salon_02.jpg", type: "salon", origin: "analog" },
+      { src: "images/analog/salon_03.jpg", type: "salon", origin: "analog" },
+      { src: "images/analog/salon_04.jpg", type: "salon", origin: "analog" },
+      { src: "images/analog/salon_05.jpg", type: "salon", origin: "analog" },
+      { src: "images/analog/salon_06.jpg", type: "salon", origin: "analog" }
+    ],
+    "C-5": [
+      { src: "images/analog/boutique_01.jpg", type: "retail", origin: "analog" },
+      { src: "images/analog/showroom_01.jpg", type: "retail", origin: "analog" },
+      { src: "images/analog/showroom_02.jpg", type: "retail", origin: "analog" },
+      { src: "images/analog/showroom_03.jpg", type: "retail", origin: "analog" },
+      { src: "images/analog/showroom_04.jpg", type: "retail", origin: "analog" }
+    ],
+    "C-6": [
+      { src: "images/analog/showroom_05.jpg", type: "retail", origin: "analog" },
+      { src: "images/analog/showroom_06.jpg", type: "retail", origin: "analog" },
+      { src: "images/analog/showroom_07.jpg", type: "retail", origin: "analog" },
+      { src: "images/analog/showroom_08.jpg", type: "retail", origin: "analog" },
+      { src: "images/analog/boutique_01.jpg", type: "retail", origin: "analog" }
+    ],
+    "C-7": [
+      { src: "images/analog/office_lounge_02.jpg", type: "office_kitchen_lounge", origin: "analog" },
+      { src: "images/analog/office_reception_01.jpg", type: "office_reception", origin: "analog" },
+      { src: "images/analog/office_reception_02.jpg", type: "office_reception", origin: "analog" },
+      { src: "images/analog/clinic_01.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_02.jpg", type: "health", origin: "analog" }
+    ],
+    "C-8": [
+      { src: "images/analog/clinic_02.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_03.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_04.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_05.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_01.jpg", type: "health", origin: "analog" }
+    ],
+    "C-9": [
+      { src: "images/analog/market_01.jpg", type: "market", origin: "analog" },
+      { src: "images/analog/cafe_05.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/cafe_06.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/cafe_07.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/cafe_08.jpg", type: "cafe_restaurant", origin: "analog" }
+    ],
+    "C-10": [
+      { src: "images/analog/restaurant_02.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/restaurant_03.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/restaurant_04.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/restaurant_05.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/restaurant_06.jpg", type: "cafe_restaurant", origin: "analog" }
+    ],
+    "C-11": [
+      { src: "images/analog/cafe_01.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/cafe_02.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/cafe_03.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/cafe_04.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/cafe_05.jpg", type: "cafe_restaurant", origin: "analog" }
+    ],
+    "C-12": [
+      { src: "images/analog/cafe_06.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/cafe_07.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/cafe_08.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/restaurant_01.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/restaurant_02.jpg", type: "cafe_restaurant", origin: "analog" }
+    ],
+    "C-13": [
+      { src: "images/analog/office_lounge_02.jpg", type: "office_kitchen_lounge", origin: "analog" },
+      { src: "images/analog/office_reception_01.jpg", type: "office_reception", origin: "analog" },
+      { src: "images/analog/office_reception_02.jpg", type: "office_reception", origin: "analog" },
+      { src: "images/analog/clinic_03.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_04.jpg", type: "health", origin: "analog" }
+    ],
+    "C-14": [
+      { src: "images/analog/salon_01.jpg", type: "salon", origin: "analog" },
+      { src: "images/analog/salon_02.jpg", type: "salon", origin: "analog" },
+      { src: "images/analog/salon_03.jpg", type: "salon", origin: "analog" },
+      { src: "images/analog/salon_04.jpg", type: "salon", origin: "analog" },
+      { src: "images/analog/salon_05.jpg", type: "salon", origin: "analog" }
+    ],
+    "C-15": [
+      { src: "images/analog/clinic_03.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_04.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_05.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_01.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_02.jpg", type: "health", origin: "analog" }
+    ],
+    "C-16": [
+      { src: "images/analog/showroom_01.jpg", type: "retail", origin: "analog" },
+      { src: "images/analog/showroom_02.jpg", type: "retail", origin: "analog" },
+      { src: "images/analog/showroom_03.jpg", type: "retail", origin: "analog" },
+      { src: "images/analog/showroom_04.jpg", type: "retail", origin: "analog" },
+      { src: "images/analog/showroom_05.jpg", type: "retail", origin: "analog" }
+    ],
+    "C-17": [
+      { src: "images/analog/clinic_04.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_05.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_01.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_02.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_03.jpg", type: "health", origin: "analog" }
+    ],
+    "C-18": [
+      { src: "images/analog/market_01.jpg", type: "market", origin: "analog" },
+      { src: "images/analog/boutique_01.jpg", type: "retail", origin: "analog" },
+      { src: "images/analog/showroom_01.jpg", type: "retail", origin: "analog" },
+      { src: "images/analog/showroom_02.jpg", type: "retail", origin: "analog" },
+      { src: "images/analog/showroom_03.jpg", type: "retail", origin: "analog" }
+    ],
+    "C-19": [
+      { src: "images/analog/restaurant_03.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/restaurant_04.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/restaurant_05.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/restaurant_06.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/cafe_01.jpg", type: "cafe_restaurant", origin: "analog" }
+    ],
+    "CC-1": [
+      { src: "images/analog/restaurant_01.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/restaurant_02.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/restaurant_03.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/restaurant_04.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/restaurant_05.jpg", type: "cafe_restaurant", origin: "analog" }
+    ],
+    "CC-2": [
+      { src: "images/analog/clinic_05.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_01.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_02.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_03.jpg", type: "health", origin: "analog" },
+      { src: "images/analog/clinic_04.jpg", type: "health", origin: "analog" }
+    ],
+    "CC-3": [
+      { src: "images/analog/showroom_04.jpg", type: "retail", origin: "analog" },
+      { src: "images/analog/showroom_05.jpg", type: "retail", origin: "analog" },
+      { src: "images/analog/showroom_06.jpg", type: "retail", origin: "analog" },
+      { src: "images/analog/showroom_07.jpg", type: "retail", origin: "analog" },
+      { src: "images/analog/showroom_08.jpg", type: "retail", origin: "analog" }
+    ],
+    "CC-4": [
+      { src: "images/analog/market_01.jpg", type: "market", origin: "analog" },
+      { src: "images/analog/cafe_01.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/cafe_02.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/cafe_03.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/cafe_04.jpg", type: "cafe_restaurant", origin: "analog" }
+    ],
+    "CC-5": [
+      { src: "images/analog/restaurant_06.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/cafe_01.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/cafe_02.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/cafe_03.jpg", type: "cafe_restaurant", origin: "analog" },
+      { src: "images/analog/cafe_04.jpg", type: "cafe_restaurant", origin: "analog" }
+    ],
+    "CC-6": [
+      { src: "images/analog/office_lounge_02.jpg", type: "office_kitchen_lounge", origin: "analog" },
+      { src: "images/analog/office_reception_01.jpg", type: "office_reception", origin: "analog" },
+      { src: "images/analog/office_reception_02.jpg", type: "office_reception", origin: "analog" },
+      { src: "images/analog/salon_01.jpg", type: "salon", origin: "analog" },
+      { src: "images/analog/salon_02.jpg", type: "salon", origin: "analog" }
+    ],
+    "CC-7": [
+      { src: "images/analog/fitness_01.jpg", type: "fitness", origin: "analog" },
+      { src: "images/analog/fitness_02.jpg", type: "fitness", origin: "analog" },
+      { src: "images/analog/fitness_03.jpg", type: "fitness", origin: "analog" },
+      { src: "images/analog/fitness_04.jpg", type: "fitness", origin: "analog" },
+      { src: "images/analog/fitness_05.jpg", type: "fitness", origin: "analog" }
+    ],
+    "CC-8": [
+      { src: "images/analog/fitness_06.jpg", type: "fitness", origin: "analog" },
+      { src: "images/analog/fitness_07.jpg", type: "fitness", origin: "analog" },
+      { src: "images/analog/fitness_08.jpg", type: "fitness", origin: "analog" },
+      { src: "images/analog/fitness_09.jpg", type: "fitness", origin: "analog" },
+      { src: "images/analog/fitness_01.jpg", type: "fitness", origin: "analog" }
+    ],
+    "O-1": [
+      { src: "images/concepts/O-7_open.jpg", type: "office_open", origin: "similar", unit: "O-7" },
+      { src: "images/concepts/O-7_meeting.jpg", type: "office_meeting", origin: "similar", unit: "O-7" },
+      { src: "images/concepts/O-7_reception.jpg", type: "office_reception", origin: "similar", unit: "O-7" },
+      { src: "images/concepts/O-7_kitchen.jpg", type: "office_kitchen_lounge", origin: "similar", unit: "O-7" },
+      { src: "images/concepts/Photorealistic open-plan office dollhouse cutaway.png", type: "office_aerial_dollhouse", origin: "mine" }
+    ],
+    "O-2": [
+      { src: "images/concepts/O-8_open.jpg", type: "office_open", origin: "similar", unit: "O-8" },
+      { src: "images/concepts/O-8_meeting.jpg", type: "office_meeting", origin: "similar", unit: "O-8" },
+      { src: "images/concepts/O-8_reception.jpg", type: "office_reception", origin: "similar", unit: "O-8" },
+      { src: "images/concepts/O-8_kitchen.jpg", type: "office_kitchen_lounge", origin: "similar", unit: "O-8" },
+      { src: "images/concepts/Warm Oak Office Dollhouse Cutaway.png", type: "office_aerial_dollhouse", origin: "mine" }
+    ],
+    "O-3": [
+      { src: "images/Sunlit Tbilisi office with open workstations-1.png", type: "office_open", origin: "mine" },
+      { src: "images/Wide conference room with twenty chairs.png", type: "office_meeting", origin: "mine" },
+      { src: "images/Warm oak reception and glass meeting room.png", type: "office_reception", origin: "mine" },
+      { src: "images/Sunlit concrete kitchen with terracotta chairs.png", type: "office_kitchen_lounge", origin: "mine" },
+      { src: "images/concepts/Photorealistic open-plan office dollhouse cutaway.png", type: "office_aerial_dollhouse", origin: "mine" }
+    ],
+    "O-4": [
+      { src: "images/concepts/O-8_open.jpg", type: "office_open", origin: "similar", unit: "O-8" },
+      { src: "images/concepts/O-8_meeting.jpg", type: "office_meeting", origin: "similar", unit: "O-8" },
+      { src: "images/concepts/O-8_reception.jpg", type: "office_reception", origin: "similar", unit: "O-8" },
+      { src: "images/concepts/O-8_kitchen.jpg", type: "office_kitchen_lounge", origin: "similar", unit: "O-8" },
+      { src: "images/concepts/Warm Oak Office Dollhouse Cutaway.png", type: "office_aerial_dollhouse", origin: "mine" }
+    ],
+    "O-5": [
+      { src: "images/concepts/O-7-8_open.jpg", type: "office_open", origin: "mine", unit: "O-7+O-8" },
+      { src: "images/concepts/O-8_meeting.jpg", type: "office_meeting", origin: "similar", unit: "O-8" },
+      { src: "images/concepts/O-8_reception.jpg", type: "office_reception", origin: "similar", unit: "O-8" },
+      { src: "images/concepts/O-8_kitchen.jpg", type: "office_kitchen_lounge", origin: "similar", unit: "O-8" },
+      { src: "images/concepts/Photorealistic open-plan office dollhouse cutaway.png", type: "office_aerial_dollhouse", origin: "mine" }
+    ],
+    "O-6": [
+      { src: "images/O-13_montage.jpg", type: "office_open", origin: "mine" },
+      { src: "images/concepts/O-7_meeting.jpg", type: "office_meeting", origin: "similar", unit: "O-7" },
+      { src: "images/concepts/O-7_reception.jpg", type: "office_reception", origin: "similar", unit: "O-7" },
+      { src: "images/concepts/O-7_kitchen.jpg", type: "office_kitchen_lounge", origin: "similar", unit: "O-7" },
+      { src: "images/concepts/Warm Oak Office Dollhouse Cutaway.png", type: "office_aerial_dollhouse", origin: "mine" }
+    ],
+    "O-7": [
+      { src: "images/concepts/O-7_open.jpg", type: "office_open", origin: "mine", unit: "O-7" },
+      { src: "images/concepts/O-7_meeting.jpg", type: "office_meeting", origin: "mine", unit: "O-7" },
+      { src: "images/concepts/O-7_reception.jpg", type: "office_reception", origin: "mine", unit: "O-7" },
+      { src: "images/concepts/O-7_kitchen.jpg", type: "office_kitchen_lounge", origin: "mine", unit: "O-7" },
+      { src: "images/concepts/Photorealistic open-plan office dollhouse cutaway.png", type: "office_aerial_dollhouse", origin: "mine" }
+    ],
+    "O-8": [
+      { src: "images/concepts/O-8_open.jpg", type: "office_open", origin: "mine", unit: "O-8" },
+      { src: "images/concepts/O-8_meeting.jpg", type: "office_meeting", origin: "mine", unit: "O-8" },
+      { src: "images/concepts/O-8_reception.jpg", type: "office_reception", origin: "mine", unit: "O-8" },
+      { src: "images/concepts/O-8_kitchen.jpg", type: "office_kitchen_lounge", origin: "mine", unit: "O-8" },
+      { src: "images/concepts/Warm Oak Office Dollhouse Cutaway.png", type: "office_aerial_dollhouse", origin: "mine" }
+    ],
+    "O-9": [
+      { src: "images/Eastward sightline through concrete workspaces.png", type: "office_open", origin: "mine" },
+      { src: "images/Modern glass-walled meeting room-2.png", type: "office_meeting", origin: "mine" },
+      { src: "images/Sunlit oak reception workspace.png", type: "office_reception", origin: "mine" },
+      { src: "images/Oak Kitchen Opens to Office.png", type: "office_kitchen_lounge", origin: "mine" },
+      { src: "images/concepts/Photorealistic open-plan office dollhouse cutaway.png", type: "office_aerial_dollhouse", origin: "mine" }
+    ],
+    "O-10": [
+      { src: "images/concepts/O-8_open.jpg", type: "office_open", origin: "similar", unit: "O-8" },
+      { src: "images/concepts/O-8_meeting.jpg", type: "office_meeting", origin: "similar", unit: "O-8" },
+      { src: "images/concepts/O-8_reception.jpg", type: "office_reception", origin: "similar", unit: "O-8" },
+      { src: "images/concepts/O-8_kitchen.jpg", type: "office_kitchen_lounge", origin: "similar", unit: "O-8" },
+      { src: "images/concepts/O-10 office cutaway with north terrace.png", type: "office_aerial_dollhouse", origin: "mine", unit: "O-10" }
+    ],
+    "O-11": [
+      { src: "images/Warm navy oak office with terracotta accents.png", type: "office_open", origin: "mine" },
+      { src: "images/Sunlit oak meeting room with Tbilisi views.png", type: "office_meeting", origin: "mine" },
+      { src: "images/Warm oak reception and glass meeting room.png", type: "office_reception", origin: "mine" },
+      { src: "images/Sunlit concrete kitchen with terracotta chairs.png", type: "office_kitchen_lounge", origin: "mine" },
+      { src: "images/concepts/Warm Oak Office Dollhouse Cutaway.png", type: "office_aerial_dollhouse", origin: "mine" }
+    ],
+    "O-12": [
+      { src: "images/concepts/O-7_open.jpg", type: "office_open", origin: "similar", unit: "O-7" },
+      { src: "images/concepts/O-7_meeting.jpg", type: "office_meeting", origin: "similar", unit: "O-7" },
+      { src: "images/concepts/O-7_reception.jpg", type: "office_reception", origin: "similar", unit: "O-7" },
+      { src: "images/concepts/O-7_kitchen.jpg", type: "office_kitchen_lounge", origin: "similar", unit: "O-7" },
+      { src: "images/concepts/O-7-8_aerial.jpg", type: "office_aerial_dollhouse", origin: "mine", unit: "O-7+O-8" }
+    ],
+    "O-13": [
+      { src: "images/O-10_montage.jpg", type: "office_open", origin: "mine" },
+      { src: "images/Wide conference room with twenty chairs.png", type: "office_meeting", origin: "mine" },
+      { src: "images/Sunlit oak reception workspace.png", type: "office_reception", origin: "mine" },
+      { src: "images/Oak Kitchen Opens to Office.png", type: "office_kitchen_lounge", origin: "mine" },
+      { src: "images/concepts/O-9_O-10 office dollhouse cutaway.png", type: "office_aerial_dollhouse", origin: "mine", unit: "O-9+O-10" }
+    ],
+    "O-14": [
+      { src: "images/O-11_montage.jpg", type: "office_open", origin: "mine" },
+      { src: "images/Modern glass-walled meeting room-2.png", type: "office_meeting", origin: "mine" },
+      { src: "images/Warm oak reception and glass meeting room.png", type: "office_reception", origin: "mine" },
+      { src: "images/Sunlit concrete kitchen with terracotta chairs.png", type: "office_kitchen_lounge", origin: "mine" },
+      { src: "images/concepts/O-10 office cutaway with north terrace.png", type: "office_aerial_dollhouse", origin: "mine", unit: "O-10" }
+    ],
+    "O-15": [
+      { src: "images/O-13_montage.jpg", type: "office_open", origin: "mine" },
+      { src: "images/Sunlit oak meeting room with Tbilisi views.png", type: "office_meeting", origin: "mine" },
+      { src: "images/Sunlit oak reception workspace.png", type: "office_reception", origin: "mine" },
+      { src: "images/Oak Kitchen Opens to Office.png", type: "office_kitchen_lounge", origin: "mine" },
+      { src: "images/concepts/O-7-8_aerial.jpg", type: "office_aerial_dollhouse", origin: "mine", unit: "O-7+O-8" }
+    ],
+    "O-16": [
+      { src: "images/O-14_montage.jpg", type: "office_open", origin: "mine" },
+      { src: "images/Wide conference room with twenty chairs.png", type: "office_meeting", origin: "mine" },
+      { src: "images/Warm oak reception and glass meeting room.png", type: "office_reception", origin: "mine" },
+      { src: "images/Sunlit concrete kitchen with terracotta chairs.png", type: "office_kitchen_lounge", origin: "mine" },
+      { src: "images/concepts/O-9_O-10 office dollhouse cutaway.png", type: "office_aerial_dollhouse", origin: "mine", unit: "O-9+O-10" }
+    ],
+    "O-17": [
+      { src: "images/concepts/O-7_open.jpg", type: "office_open", origin: "similar", unit: "O-7" },
+      { src: "images/concepts/O-7_meeting.jpg", type: "office_meeting", origin: "similar", unit: "O-7" },
+      { src: "images/concepts/O-7_reception.jpg", type: "office_reception", origin: "similar", unit: "O-7" },
+      { src: "images/concepts/O-7_kitchen.jpg", type: "office_kitchen_lounge", origin: "similar", unit: "O-7" },
+      { src: "images/concepts/O-10 office cutaway with north terrace.png", type: "office_aerial_dollhouse", origin: "mine", unit: "O-10" }
+    ],
+    "B-2": [
+      { src: "images/Photorealistic Office With Exposed Downstand Beams.png", type: "office_open", origin: "mine" },
+      { src: "images/Modern glass-walled meeting room-2.png", type: "office_meeting", origin: "mine" },
+      { src: "images/Sunlit oak reception workspace.png", type: "office_reception", origin: "mine" },
+      { src: "images/Oak Kitchen Opens to Office.png", type: "office_kitchen_lounge", origin: "mine" },
+      { src: "images/concepts/O-7-8_aerial.jpg", type: "office_aerial_dollhouse", origin: "mine", unit: "O-7+O-8" }
+    ],
+    "B-3": [
+      { src: "images/concepts/O-7-8_open.jpg", type: "office_open", origin: "mine", unit: "O-7+O-8" },
+      { src: "images/Sunlit oak meeting room with Tbilisi views.png", type: "office_meeting", origin: "mine" },
+      { src: "images/Sunlit oak reception workspace.png", type: "office_reception", origin: "mine" },
+      { src: "images/Oak Kitchen Opens to Office.png", type: "office_kitchen_lounge", origin: "mine" },
+      { src: "images/concepts/O-9_O-10 office dollhouse cutaway.png", type: "office_aerial_dollhouse", origin: "mine", unit: "O-9+O-10" }
+    ],
+    "B-4": [
+      { src: "images/Sunlit Tbilisi office with open workstations-1.png", type: "office_open", origin: "mine" },
+      { src: "images/Sunlit oak meeting room with Tbilisi views.png", type: "office_meeting", origin: "mine" },
+      { src: "images/Warm oak reception and glass meeting room.png", type: "office_reception", origin: "mine" },
+      { src: "images/Sunlit concrete kitchen with terracotta chairs.png", type: "office_kitchen_lounge", origin: "mine" },
+      { src: "images/concepts/O-9_O-10 office dollhouse cutaway.png", type: "office_aerial_dollhouse", origin: "mine", unit: "O-9+O-10" }
+    ],
+    "F-2": [
+      { src: "images/Eastward sightline through concrete workspaces.png", type: "office_open", origin: "mine" },
+      { src: "images/Wide conference room with twenty chairs.png", type: "office_meeting", origin: "mine" },
+      { src: "images/concepts/O-7-8_reception.jpg", type: "office_reception", origin: "mine", unit: "O-7+O-8" },
+      { src: "images/concepts/O-7-8_kitchen.jpg", type: "office_kitchen_lounge", origin: "mine", unit: "O-7+O-8" },
+      { src: "images/concepts/O-10 office cutaway with north terrace.png", type: "office_aerial_dollhouse", origin: "mine", unit: "O-10" }
+    ],
+    "F-3": [
+      { src: "images/concepts/O-7-8_open.jpg", type: "office_open", origin: "mine", unit: "O-7+O-8" },
+      { src: "images/concepts/O-7-8_conference.jpg", type: "office_meeting", origin: "mine", unit: "O-7+O-8" },
+      { src: "images/concepts/O-7-8_reception.jpg", type: "office_reception", origin: "mine", unit: "O-7+O-8" },
+      { src: "images/concepts/O-7-8_kitchen.jpg", type: "office_kitchen_lounge", origin: "mine", unit: "O-7+O-8" },
+      { src: "images/concepts/O-10 office cutaway with north terrace.png", type: "office_aerial_dollhouse", origin: "mine", unit: "O-10" }
+    ],
+    "F-4": [
+      { src: "images/Warm navy oak office with terracotta accents.png", type: "office_open", origin: "mine" },
+      { src: "images/Modern glass-walled meeting room-2.png", type: "office_meeting", origin: "mine" },
+      { src: "images/concepts/O-7-8_reception.jpg", type: "office_reception", origin: "mine", unit: "O-7+O-8" },
+      { src: "images/concepts/O-7-8_kitchen.jpg", type: "office_kitchen_lounge", origin: "mine", unit: "O-7+O-8" },
+      { src: "images/concepts/O-7-8_aerial.jpg", type: "office_aerial_dollhouse", origin: "mine", unit: "O-7+O-8" }
+    ],
+    "V-W": [
+      { src: "images/O-10_montage.jpg", type: "office_open", origin: "mine" },
+      { src: "images/Sunlit oak meeting room with Tbilisi views.png", type: "office_meeting", origin: "mine" },
+      { src: "images/concepts/O-7-8_reception.jpg", type: "office_reception", origin: "mine", unit: "O-7+O-8" },
+      { src: "images/concepts/O-7-8_kitchen.jpg", type: "office_kitchen_lounge", origin: "mine", unit: "O-7+O-8" },
+      { src: "images/analog/office_atrium_01.jpg", type: "office_stair", origin: "analog" }
+    ],
+    "V-1": [
+      { src: "images/O-11_montage.jpg", type: "office_open", origin: "mine" },
+      { src: "images/Wide conference room with twenty chairs.png", type: "office_meeting", origin: "mine" },
+      { src: "images/O-13_montage.jpg", type: "office_open", origin: "mine" },
+      { src: "images/analog/office_kitchen_01.jpg", type: "office_kitchen_lounge", origin: "analog" },
+      { src: "images/analog/office_atrium_02.jpg", type: "office_stair", origin: "analog" }
+    ],
+    "V-2": [
+      { src: "images/O-14_montage.jpg", type: "office_open", origin: "mine" },
+      { src: "images/Modern glass-walled meeting room-2.png", type: "office_meeting", origin: "mine" },
+      { src: "images/Photorealistic Office With Exposed Downstand Beams.png", type: "office_open", origin: "mine" },
+      { src: "images/analog/office_kitchen_02.jpg", type: "office_kitchen_lounge", origin: "analog" },
+      { src: "images/analog/office_stair_01.jpg", type: "office_stair", origin: "analog" }
+    ],
+    "V-3": [
+      { src: "images/Sunlit Tbilisi office with open workstations-1.png", type: "office_open", origin: "mine" },
+      { src: "images/concepts/O-7-8_conference.jpg", type: "office_meeting", origin: "mine", unit: "O-7+O-8" },
+      { src: "images/Eastward sightline through concrete workspaces.png", type: "office_open", origin: "mine" },
+      { src: "images/analog/office_lounge_01.jpg", type: "office_kitchen_lounge", origin: "analog" },
+      { src: "images/analog/office_stair_02.jpg", type: "office_stair", origin: "analog" }
+    ],
+    "V-4": [
+      { src: "images/Warm navy oak office with terracotta accents.png", type: "office_open", origin: "mine" },
+      { src: "images/concepts/O-7-8_conference.jpg", type: "office_meeting", origin: "mine", unit: "O-7+O-8" },
+      { src: "images/O-10_montage.jpg", type: "office_open", origin: "mine" },
+      { src: "images/analog/office_kitchen_01.jpg", type: "office_kitchen_lounge", origin: "analog" },
+      { src: "images/analog/office_atrium_01.jpg", type: "office_stair", origin: "analog" }
+    ],
+    "V-E": [
+      { src: "images/O-11_montage.jpg", type: "office_open", origin: "mine" },
+      { src: "images/concepts/O-7-8_conference.jpg", type: "office_meeting", origin: "mine", unit: "O-7+O-8" },
+      { src: "images/O-13_montage.jpg", type: "office_open", origin: "mine" },
+      { src: "images/analog/office_kitchen_02.jpg", type: "office_kitchen_lounge", origin: "analog" },
+      { src: "images/analog/office_atrium_02.jpg", type: "office_stair", origin: "analog" }
+    ],
+    "M-1": [
+      { src: "images/O-14_montage.jpg", type: "office_open", origin: "mine" },
+      { src: "images/Photorealistic Office With Exposed Downstand Beams.png", type: "office_open", origin: "mine" },
+      { src: "images/Sunlit Tbilisi office with open workstations-1.png", type: "office_open", origin: "mine" },
+      { src: "images/analog/office_lounge_01.jpg", type: "office_kitchen_lounge", origin: "analog" },
+      { src: "images/concepts/O-9_O-10 office dollhouse cutaway.png", type: "office_aerial_dollhouse", origin: "mine", unit: "O-9+O-10" }
+    ],
+    "M-2": [
+      { src: "images/concepts/O-7-8_open.jpg", type: "office_open", origin: "mine", unit: "O-7+O-8" },
+      { src: "images/concepts/O-7-8_conference.jpg", type: "office_meeting", origin: "mine", unit: "O-7+O-8" },
+      { src: "images/concepts/O-7-8_reception.jpg", type: "office_reception", origin: "mine", unit: "O-7+O-8" },
+      { src: "images/concepts/O-7-8_kitchen.jpg", type: "office_kitchen_lounge", origin: "mine", unit: "O-7+O-8" },
+      { src: "images/concepts/O-7-8_aerial.jpg", type: "office_aerial_dollhouse", origin: "mine", unit: "O-7+O-8" }
+    ],
+    "M-3": [
+      { src: "images/Eastward sightline through concrete workspaces.png", type: "office_open", origin: "mine" },
+      { src: "images/Warm navy oak office with terracotta accents.png", type: "office_open", origin: "mine" },
+      { src: "images/O-10_montage.jpg", type: "office_open", origin: "mine" },
+      { src: "images/analog/office_kitchen_01.jpg", type: "office_kitchen_lounge", origin: "analog" },
+      { src: "images/O-11_montage.jpg", type: "office_open", origin: "mine" }
+    ],
+    "M-4": [
+      { src: "images/O-13_montage.jpg", type: "office_open", origin: "mine" },
+      { src: "images/O-14_montage.jpg", type: "office_open", origin: "mine" },
+      { src: "images/Photorealistic Office With Exposed Downstand Beams.png", type: "office_open", origin: "mine" },
+      { src: "images/analog/office_kitchen_02.jpg", type: "office_kitchen_lounge", origin: "analog" },
+      { src: "images/Sunlit Tbilisi office with open workstations-1.png", type: "office_open", origin: "mine" }
+    ],
+    "M-5": [
+      { src: "images/Eastward sightline through concrete workspaces.png", type: "office_open", origin: "mine" },
+      { src: "images/Warm navy oak office with terracotta accents.png", type: "office_open", origin: "mine" },
+      { src: "images/O-10_montage.jpg", type: "office_open", origin: "mine" },
+      { src: "images/analog/office_lounge_01.jpg", type: "office_kitchen_lounge", origin: "analog" },
+      { src: "images/O-11_montage.jpg", type: "office_open", origin: "mine" }
+    ]
+  },
+  analogCredits: {"office_open_01": "Coworking Macherzentrum Toggenburg", "office_open_02": "Petr", "office_open_03": "Lotus Design N Print", "office_lounge_01": "Petr", "office_lounge_02": "Aalo Lens", "office_reception_01": "Aalo Lens", "office_reception_02": "Aalo Lens", "office_kitchen_01": "Petr", "office_kitchen_02": "Nastuh Abootalebi", "office_stair_01": "Sou Jest", "office_stair_02": "Vitaly Gariev", "office_atrium_01": "Barney Goodman", "office_atrium_02": "Bays work", "cafe_01": "Alexander Faé", "cafe_02": "Alexander Faé", "cafe_03": "JIRAN FAMILY", "cafe_04": "Janosch Lino", "cafe_05": "Sung Jin Cho", "cafe_06": "Praveen Gupta", "cafe_07": "99.films", "cafe_08": "99.films", "restaurant_01": "Mustafa Fatemi", "restaurant_02": "Glenov Brankovic", "restaurant_03": "Glenov Brankovic", "restaurant_04": "Jason Leung", "restaurant_05": "Brands&People", "restaurant_06": "Antonio Araujo", "market_01": "Declan Sun", "salon_01": "Waves Barbershop", "salon_02": "Waves Barbershop", "salon_03": "Mustafa Sheikhmouss", "salon_04": "Mustafa Sheikhmouss", "salon_05": "Giorgio Trovato", "salon_06": "Giorgio Trovato", "boutique_01": "Cheung Yin", "fitness_01": "eran design", "fitness_02": "eran design", "fitness_03": "eran design", "fitness_04": "eran design", "fitness_05": "eran design", "fitness_06": "Aalo Lens", "fitness_07": "Aalo Lens", "fitness_08": "Aalo Lens", "fitness_09": "Jakub Zerdzicki", "clinic_01": "Kari Bjorn Photography", "clinic_02": "Kari Bjorn Photography", "clinic_03": "Benyamin Bohlouli", "clinic_04": "Irshad Pathan", "clinic_05": "Birk Enwald", "showroom_01": "Anton Borzenkov", "showroom_02": "Albero Furniture Bratislava", "showroom_03": "Declan Sun", "showroom_04": "Priyanka Chechi", "showroom_05": "Albero Furniture Bratislava", "showroom_06": "Neon Wang", "showroom_07": "Cheung Yin", "showroom_08": "Jason Leung" },
   concepts: {
     "O-7": {
       anchor: "concept-O-7", units: ["O-7"], m2: 257.7, seats: 26, seatsNote: "24 ღია + 1 მენეჯერი + 1 რეცეფცია",
@@ -385,6 +817,12 @@ svg text{font-family:"Noto Sans Georgian",sans-serif}
 .rmain img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;display:block}.rmain.miss img{display:none}
 .rthumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px}.rt:nth-child(n+5){display:none}
 .rt img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:4px;display:block;cursor:zoom-in}
+.rmain{position:relative}.rt{position:relative}
+.abadge{position:absolute;top:6px;left:6px;z-index:2;background:rgba(20,20,22,.78);color:#fff;font-size:10px;line-height:1;padding:3px 6px;border-radius:3px;letter-spacing:.02em;pointer-events:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.rt .abadge{top:3px;left:3px;font-size:8px;padding:2px 4px}
+.rcap{position:absolute;left:0;right:0;bottom:0;padding:14px 8px 5px;font-size:10.5px;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.55));pointer-events:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.rmain.miss .rcap{position:static;background:none;color:var(--muted,#777);padding:40% 0 0;text-align:center}
+
 .ubtn{display:flex;gap:8px;flex-wrap:wrap;margin-top:2px}
 .ub{all:unset;cursor:pointer;font-size:12px;font-weight:600;padding:6px 13px;border:1px solid var(--line);border-radius:99px;color:var(--ink);font-family:inherit}
 .ub:hover{border-color:var(--ink)}.ub.offer{background:var(--black);color:#fff;border-color:var(--black)}
@@ -1351,10 +1789,19 @@ window.rFb = img => { const fb = (img.dataset.fb || "").split("|").filter(Boolea
   if (!fb.length){ img.closest("figure").classList.add("miss"); return; } img.dataset.fb = fb.slice(1).join("|"); img.src = fb[0]; };
 window.rDedupe = img => { const box = img.closest(".ub4"); if (!box) return; const t = box.querySelector(`.rt img[src="${img.getAttribute("src")}"]`); if (t) t.parentNode.remove();
   const th = box.querySelector(`.rt img[src="${img.getAttribute("src")}"]`); img.dataset.lb = (th && th.alt) || img.dataset.lb; };
+const RTYPE = { office_open: "ღია სამუშაო სივრცე", office_meeting: "შეხვედრის ოთახი", office_reception: "რეცეფცია", office_kitchen_lounge: "სამზარეულო / ლაუნჯი", office_aerial_dollhouse: "აქსონომეტრიული ჭრილი", office_stair: "შიდა კიბე / ატრიუმი", cafe_restaurant: "კაფე / რესტორანი", market: "მარკეტი", salon: "სალონი / ბარბერი", retail: "მაღაზია / შოურუმი", health: "კლინიკა / სტომატოლოგია", fitness: "ფიტნესი / სტუდია" };
+function interiorsFor(pid){ return (DATA.renders || {})[pid] || []; }
+function rCap(x){
+  const t = RTYPE[x.type] || "";
+  if (x.origin === "analog"){ const k = x.src.split("/").pop().replace(/\.[^.]+$/, ""), a = (DATA.analogCredits || {})[k]; return { cap: `საილუსტრაციო ანალოგი · ${t}`, lb: `${t} · საილუსტრაციო ანალოგი${a ? ` · ფოტო: ${a} / Unsplash` : ""}` }; }
+  if (x.origin === "similar") return { cap: `მსგავსი ფართის მაგალითი · ${x.unit || ""} · ${t}`, lb: `${t} · მსგავსი ფართის მაგალითი (${x.unit || ""} სანიმუშო მოწყობა)` };
+  return { cap: `${t}${x.unit ? ` · ${x.unit} სანიმუშო მოწყობა` : ""}`, lb: `${t}${x.unit ? ` · ${x.unit} სანიმუშო მოწყობა` : ""}` };
+}
 function renderBlock(list, gal){
-  const [m, ...rest] = list;
-  return `<div class="ub4"><div class="blab">რენდერი</div><figure class="rmain"><img class="lbable" src="${m[0]}" alt="${m[1]}" data-lb="${m[1]}" data-gal="${gal}" data-fb="${rest.map(x => x[0]).join("|")}" onerror="rFb(this)" onload="rDedupe(this)"></figure>
-    <div class="rthumbs">${rest.map(x => `<span class="rt"><img class="lbable" src="${x[0]}" alt="${x[1]}" data-lb="${x[1]}" data-gal="${gal}" loading="lazy" onerror="this.parentNode.remove()"></span>`).join("")}</div></div>`;
+  if (!list.length) return `<div class="ub4"><div class="blab">რენდერი</div><figure class="rmain miss"><figcaption class="rcap">ინტერიერი მზადდება</figcaption></figure></div>`;
+  const [m, ...rest] = list, mc = rCap(m), badge = x => x.origin === "analog" ? `<span class="abadge">ანალოგი</span>` : "";
+  return `<div class="ub4"><div class="blab">რენდერი</div><figure class="rmain${m.origin === "analog" ? " is-an" : ""}"><img class="lbable" src="${m.src}" alt="${mc.cap}" data-lb="${mc.lb}" data-gal="${gal}" onerror="this.closest('figure').classList.add('miss')">${badge(m)}<figcaption class="rcap">${mc.cap}</figcaption></figure>
+    <div class="rthumbs">${rest.map(x => { const c = rCap(x); return `<span class="rt">${badge(x)}<img class="lbable" src="${x.src}" alt="${c.cap}" data-lb="${c.lb}" data-gal="${gal}" loading="lazy" onerror="this.parentNode.remove()"></span>`; }).join("")}</div></div>`;
 }
 function unitDraw(id){ const cc = CN[id];
   return { inner: `<div class="dv dv-a"><img class="lbable" src="images/arch/units/${id}.svg" alt="${id} — სამშენებლო ნახაზი" data-lb="${id} · სამშენებლო ნახაზი · ${PLNOTE}" data-gal="d-${id}" onerror="drwFail(this)"></div>${cc ? `<div class="dv dv-c"><img class="lbable" src="${cc.plan}" alt="${id} — სანიმუშო გეგმა" data-lb="${id} · სანიმუშო გეგმა" data-gal="d-${id}" onerror="drwFail(this)"></div>` : ""}`, sw: !!cc }; }
@@ -1457,7 +1904,7 @@ for (const u of comm){
     </div>`;
   H += page(uLayout({ code: u.id, level: "±0.00", m2: u.m2, ids: [u.id], draw: unitDraw(u.id),
     figs: [["ფართი", fmt(u.m2) + " მ²"], ["ვიტრინა", fmt(fr, 1) + " მ"], ["ტერასა", u.terrace ? fmt(u.terrace.m2) + " მ²" : "—"], ["პროფილი", P[main].short]],
-    renders: rendersFor([u.id], null), gal: "u-" + u.id, details: old }),
+    renders: interiorsFor(u.id), gal: "u-" + u.id, details: old }),
     { id: "u-" + u.id, sec: "commercial", foot: "კომერციული · " + u.id, cls: "upage flow show-fit" });
 }
 
@@ -1481,7 +1928,7 @@ for (const c of DATA.combos.commercial){
     <div class="halfl">სამშენებლო ნახაზები · ${PLNOTE} · ${PLDATE}</div>${drawRow(c.units, 172)}`;
   H += page(uLayout({ code: c.id, level: "±0.00", name: c.name, m2: a, ids: c.units, draw: comboDraw({ ...c, type: "mixed" }),
     figs: [["ჯამური ფართი", fmt(a) + " მ²"], ["ფართები", c.units.join(" + ")], ["ვიტრინა", fmt(fr, 1) + " მ"], ["პროფილი", P[c.use].short]],
-    renders: rendersFor(c.units, null), gal: "o-" + c.id, d3: ["building", c.id], details: old }),
+    renders: interiorsFor(c.id), gal: "o-" + c.id, d3: ["building", c.id], details: old }),
     { id: "o-" + c.id, sec: "commercial", foot: "კომერციული კომბინაციები · " + c.id, cls: "upage flow" });
 }
 
@@ -1549,7 +1996,7 @@ for (const u of offices){
     figs: [["ფართი", fmt(u.m2) + " მ²"], ["სამუშაო ადგილი", cn ? String(cn.seats) : "≈ " + lay.tot.desks],
            ["შეხვედრის ოთახი", cn ? `${cn.meeting.split("+").length} (${cn.meeting} ადგ.)` : String(lay.tot.meet)],
            ["ტერასა / ბირთვი", `${u.terrace ? u.terrace.m2 + " მ²" : "—"} · ${u.cores.join(" · ")}`]],
-    renders: rendersFor([u.id], cn), gal: "u-" + u.id, details: old }),
+    renders: interiorsFor(u.id), gal: "u-" + u.id, details: old }),
     { id: "u-" + u.id, sec: "offices", foot: "ოფისები · " + u.id, cls: "upage flow show-fit" });
   if (CN[u.id]){
     H += cPlanPage(u.id, `C · ოფისი ${u.id} · ${LV[u.floor]} · სანიმუშო მოწყობა`, `${u.id} — სანიმუშო გეგმა`, `ოფისები · ${u.id} · სანიმუშო მოწყობა`, "offices");
@@ -1582,7 +2029,7 @@ for (const c of OC){
   const cc = conceptForCombo(c.id), a = sum(c.units);
   H += page(uLayout({ code: c.id, level: floorsOf(c), name: c.name, m2: a, ids: c.units, draw: comboDraw(c), pdf: cc && cc.pdf,
     figs: [["ჯამური ფართი", fmt(a) + " მ²"], ["ფართები", c.units.join(" + ")], ["თანამშრომელი", cc ? String(cc.seats) : head(a)], ["ბირთვი", coresOf(c)]],
-    renders: rendersFor(c.units, cc), gal: "o-" + c.id, d3: [c.type === "stack" || c.type === "block" ? "combo" : "building", c.id], details: comboOld(c) }),
+    renders: interiorsFor(c.id), gal: "o-" + c.id, d3: [c.type === "stack" || c.type === "block" ? "combo" : "building", c.id], details: comboOld(c) }),
     { id: "o-" + c.id, sec: "combos", foot: "კომბინაციები · " + c.id, cls: "upage flow" });
 }
 
